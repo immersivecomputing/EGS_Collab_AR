@@ -79,14 +79,16 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 	  }
       //arObject.addNode(flower);
 
-      let reticle;
-      loader.load('media/gltf/reticle/reticle.gltf', function ( gltf ) {
-			reticle = gltf.scene;
-			scene.addNode(reticle);
-			reticle.visible = false;
-		}, undefined, function ( error ) {
-			console.error( error );
-		} );
+      let reticle = new Node();
+      reticle.visible = false;
+      scene.addNode(reticle);
+      //loader.load('media/gltf/reticle/reticle.gltf', function ( gltf ) {
+		//	reticle = gltf.scene;
+		//	scene.addNode(reticle);
+		//	reticle.visible = false;
+		//}, undefined, function ( error ) {
+		//	console.error( error );
+		//} );
 
       // Having a really simple drop shadow underneath an object helps ground
       // it in the world without adding much complexity.
