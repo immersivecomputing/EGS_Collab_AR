@@ -1,0 +1,7234 @@
+{
+  "accessors": [
+    {
+      "bufferView": 0,
+      "componentType": 5126,
+      "count": 528416,
+      "type": "VEC3",
+      "max": [
+        4183.2998046875,
+        -2465.85009765625,
+        1135.300048828125
+      ],
+      "min": [
+        3911.570068359375,
+        -3092.39990234375,
+        958.8759765625
+      ]
+    },
+    {
+      "bufferView": 1,
+      "componentType": 5126,
+      "count": 528416,
+      "type": "VEC3",
+      "max": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "min": [
+        -1.0,
+        -1.0,
+        -1.0
+      ]
+    },
+    {
+      "bufferView": 2,
+      "componentType": 5126,
+      "count": 528416,
+      "type": "VEC4",
+      "max": [
+        -1.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "min": [
+        -1.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    },
+    {
+      "bufferView": 3,
+      "componentType": 5125,
+      "count": 534756,
+      "type": "SCALAR",
+      "max": [
+        528415.0
+      ],
+      "min": [
+        0.0
+      ]
+    },
+    {
+      "bufferView": 4,
+      "componentType": 5126,
+      "count": 515,
+      "type": "VEC3",
+      "max": [
+        0.5,
+        0.5,
+        0.5
+      ],
+      "min": [
+        -0.5,
+        -0.5,
+        -0.5
+      ]
+    },
+    {
+      "bufferView": 5,
+      "componentType": 5126,
+      "count": 515,
+      "type": "VEC3",
+      "max": [
+        0.99997496604919434,
+        1.0,
+        0.9999769926071167
+      ],
+      "min": [
+        -0.99997496604919434,
+        -1.0,
+        -0.99997353553771973
+      ]
+    },
+    {
+      "bufferView": 6,
+      "componentType": 5126,
+      "count": 515,
+      "type": "VEC4",
+      "max": [
+        1.0,
+        0.056131001561880112,
+        1.0,
+        1.0
+      ],
+      "min": [
+        -1.0,
+        -0.065983392298221588,
+        -1.0,
+        -1.0
+      ]
+    },
+    {
+      "bufferView": 7,
+      "componentType": 5126,
+      "count": 515,
+      "type": "VEC2",
+      "max": [
+        0.99833369255065918,
+        0.98237103223800659
+      ],
+      "min": [
+        -0.00092136859893798828,
+        0.024108767509460449
+      ]
+    },
+    {
+      "bufferView": 8,
+      "componentType": 5126,
+      "count": 515,
+      "type": "VEC2",
+      "max": [
+        1.0000003576278687,
+        1.0
+      ],
+      "min": [
+        0.0,
+        0.34614646434783936
+      ]
+    },
+    {
+      "bufferView": 9,
+      "componentType": 5123,
+      "count": 2304,
+      "type": "SCALAR",
+      "max": [
+        514.0
+      ],
+      "min": [
+        0.0
+      ]
+    }
+  ],
+  "asset": {
+    "version": "2.0"
+  },
+  "buffers": [
+    {
+      "uri": "MasterParent.bin",
+      "byteLength": 23309112
+    }
+  ],
+  "bufferViews": [
+    {
+      "buffer": 0,
+      "byteLength": 6340992
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 6340992,
+      "byteLength": 6340992
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 12681984,
+      "byteLength": 8454656
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 21136640,
+      "byteLength": 2139024
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 23275664,
+      "byteLength": 6180
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 23281844,
+      "byteLength": 6180
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 23288024,
+      "byteLength": 8240
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 23296264,
+      "byteLength": 4120
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 23300384,
+      "byteLength": 4120
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 23304504,
+      "byteLength": 4608
+    }
+  ],
+  "materials": [
+    {
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [
+          0.9063317,
+          0.9063317,
+          0.9063317,
+          1.0
+        ],
+        "metallicFactor": 0.0,
+        "roughnessFactor": 0.0
+      },
+      "name": "defaultMat"
+    },
+    {
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [
+          0.7169812,
+          0.07102172,
+          0.07102172,
+          1.0
+        ],
+        "metallicFactor": 0.0,
+        "roughnessFactor": 0.5
+      },
+      "name": "M_Electrode"
+    },
+    {
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [
+          0.07058824,
+          0.2078285,
+          0.7176471,
+          1.0
+        ],
+        "metallicFactor": 0.0,
+        "roughnessFactor": 0.5
+      },
+      "name": "M_BoreholeStart"
+    },
+    {
+      "pbrMetallicRoughness": {
+        "metallicFactor": 0.0,
+        "roughnessFactor": 0.5
+      },
+      "name": "M_BoreholePoint"
+    },
+    {
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [
+          0.137370959,
+          0.5943396,
+          0.1458831,
+          1.0
+        ],
+        "metallicFactor": 0.0,
+        "roughnessFactor": 0.5
+      },
+      "name": "M_BoreholePointCart"
+    }
+  ],
+  "meshes": [
+    {
+      "primitives": [
+        {
+          "attributes": {
+            "POSITION": 0,
+            "NORMAL": 1,
+            "TANGENT": 2
+          },
+          "indices": 3,
+          "material": 0
+        }
+      ],
+      "name": "Boreholes"
+    },
+    {
+      "primitives": [
+        {
+          "attributes": {
+            "POSITION": 4,
+            "NORMAL": 5,
+            "TANGENT": 6,
+            "TEXCOORD_0": 7,
+            "TEXCOORD_1": 8
+          },
+          "indices": 9,
+          "material": 1
+        }
+      ],
+      "name": "Sphere"
+    },
+    {
+      "primitives": [
+        {
+          "attributes": {
+            "POSITION": 4,
+            "NORMAL": 5,
+            "TANGENT": 6,
+            "TEXCOORD_0": 7,
+            "TEXCOORD_1": 8
+          },
+          "indices": 9,
+          "material": 2
+        }
+      ],
+      "name": "Sphere"
+    },
+    {
+      "primitives": [
+        {
+          "attributes": {
+            "POSITION": 4,
+            "NORMAL": 5,
+            "TANGENT": 6,
+            "TEXCOORD_0": 7,
+            "TEXCOORD_1": 8
+          },
+          "indices": 9,
+          "material": 3
+        }
+      ],
+      "name": "Sphere"
+    },
+    {
+      "primitives": [
+        {
+          "attributes": {
+            "POSITION": 4,
+            "NORMAL": 5,
+            "TANGENT": 6,
+            "TEXCOORD_0": 7,
+            "TEXCOORD_1": 8
+          },
+          "indices": 9,
+          "material": 4
+        }
+      ],
+      "name": "Sphere"
+    }
+  ],
+  "nodes": [
+    {
+      "children": [
+        1,
+        258,
+        259
+      ],
+      "rotation": [
+        -0.7071068,
+        0.0,
+        0.0,
+        0.7071068
+      ],
+      "scale": [
+        0.01,
+        0.01,
+        0.01
+      ],
+      "name": "MasterParent"
+    },
+    {
+      "children": [
+        2,
+        4,
+        6,
+        8,
+        10,
+        12,
+        14,
+        16,
+        18,
+        20,
+        22,
+        24,
+        26,
+        28,
+        30,
+        32,
+        34,
+        36,
+        38,
+        40,
+        42,
+        44,
+        46,
+        48,
+        50,
+        52,
+        54,
+        56,
+        58,
+        60,
+        62,
+        64,
+        66,
+        68,
+        70,
+        72,
+        74,
+        76,
+        78,
+        80,
+        82,
+        84,
+        86,
+        88,
+        90,
+        92,
+        94,
+        96,
+        98,
+        100,
+        102,
+        104,
+        106,
+        108,
+        110,
+        112,
+        114,
+        116,
+        118,
+        120,
+        122,
+        124,
+        126,
+        128,
+        130,
+        132,
+        134,
+        136,
+        138,
+        140,
+        142,
+        144,
+        146,
+        148,
+        150,
+        152,
+        154,
+        156,
+        158,
+        160,
+        162,
+        164,
+        166,
+        168,
+        170,
+        172,
+        174,
+        176,
+        178,
+        180,
+        182,
+        184,
+        186,
+        188,
+        190,
+        192,
+        194,
+        196,
+        198,
+        200,
+        202,
+        204,
+        206,
+        208,
+        210,
+        212,
+        214,
+        216,
+        218,
+        220,
+        222,
+        224,
+        226,
+        228,
+        230,
+        232,
+        234,
+        236,
+        238,
+        240,
+        242,
+        244,
+        246,
+        248,
+        250,
+        252,
+        254,
+        256
+      ],
+      "mesh": 0,
+      "translation": [
+        -4047.435,
+        2779.125,
+        -1047.088
+      ],
+      "name": "Boreholes"
+    },
+    {
+      "children": [
+        3
+      ],
+      "translation": [
+        4121.72,
+        -2945.38,
+        1123.06
+      ],
+      "name": "P_Electrode(Clone)"
+    },
+    {
+      "mesh": 1,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        5
+      ],
+      "translation": [
+        4112.939,
+        -2940.94,
+        1123.30359
+      ],
+      "name": "P_Electrode(Clone)"
+    },
+    {
+      "mesh": 1,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        7
+      ],
+      "translation": [
+        4104.158,
+        -2936.5,
+        1123.54724
+      ],
+      "name": "P_Electrode(Clone)"
+    },
+    {
+      "mesh": 1,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        9
+      ],
+      "translation": [
+        4095.37744,
+        -2932.06,
+        1123.79089
+      ],
+      "name": "P_Electrode(Clone)"
+    },
+    {
+      "mesh": 1,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        11
+      ],
+      "translation": [
+        4086.59668,
+        -2927.62,
+        1124.03455
+      ],
+      "name": "P_Electrode(Clone)"
+    },
+    {
+      "mesh": 1,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        13
+      ],
+      "translation": [
+        4077.816,
+        -2923.18018,
+        1124.27808
+      ],
+      "name": "P_Electrode(Clone)"
+    },
+    {
+      "mesh": 1,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        15
+      ],
+      "translation": [
+        4069.03516,
+        -2918.74023,
+        1124.52173
+      ],
+      "name": "P_Electrode(Clone)"
+    },
+    {
+      "mesh": 1,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        17
+      ],
+      "translation": [
+        4060.25439,
+        -2914.30029,
+        1124.76538
+      ],
+      "name": "P_Electrode(Clone)"
+    },
+    {
+      "mesh": 1,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        19
+      ],
+      "translation": [
+        4051.47339,
+        -2909.86035,
+        1125.00916
+      ],
+      "name": "P_Electrode(Clone)"
+    },
+    {
+      "mesh": 1,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        21
+      ],
+      "translation": [
+        4042.69263,
+        -2905.42041,
+        1125.25256
+      ],
+      "name": "P_Electrode(Clone)"
+    },
+    {
+      "mesh": 1,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        23
+      ],
+      "translation": [
+        4033.91187,
+        -2900.98047,
+        1125.49622
+      ],
+      "name": "P_Electrode(Clone)"
+    },
+    {
+      "mesh": 1,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        25
+      ],
+      "translation": [
+        4025.131,
+        -2896.54053,
+        1125.73987
+      ],
+      "name": "P_Electrode(Clone)"
+    },
+    {
+      "mesh": 1,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        27
+      ],
+      "translation": [
+        4016.35034,
+        -2892.10059,
+        1125.98352
+      ],
+      "name": "P_Electrode(Clone)"
+    },
+    {
+      "mesh": 1,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        29
+      ],
+      "translation": [
+        4007.56934,
+        -2887.66064,
+        1126.227
+      ],
+      "name": "P_Electrode(Clone)"
+    },
+    {
+      "mesh": 1,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        31
+      ],
+      "translation": [
+        3998.78857,
+        -2883.2207,
+        1126.4707
+      ],
+      "name": "P_Electrode(Clone)"
+    },
+    {
+      "mesh": 1,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        33
+      ],
+      "translation": [
+        3990.00781,
+        -2878.78076,
+        1126.71436
+      ],
+      "name": "P_Electrode(Clone)"
+    },
+    {
+      "mesh": 1,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        35
+      ],
+      "translation": [
+        4085.02,
+        -2943.6,
+        1021.96
+      ],
+      "name": "P_Electrode(Clone)"
+    },
+    {
+      "mesh": 1,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        37
+      ],
+      "translation": [
+        4078.24,
+        -2939.28955,
+        1027.64575
+      ],
+      "name": "P_Electrode(Clone)"
+    },
+    {
+      "mesh": 1,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        39
+      ],
+      "translation": [
+        4071.46021,
+        -2934.97925,
+        1033.33167
+      ],
+      "name": "P_Electrode(Clone)"
+    },
+    {
+      "mesh": 1,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        41
+      ],
+      "translation": [
+        4064.68018,
+        -2930.669,
+        1039.01746
+      ],
+      "name": "P_Electrode(Clone)"
+    },
+    {
+      "mesh": 1,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        43
+      ],
+      "translation": [
+        4057.90015,
+        -2926.35864,
+        1044.70325
+      ],
+      "name": "P_Electrode(Clone)"
+    },
+    {
+      "mesh": 1,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        45
+      ],
+      "translation": [
+        4051.12,
+        -2922.04834,
+        1050.389
+      ],
+      "name": "P_Electrode(Clone)"
+    },
+    {
+      "mesh": 1,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        47
+      ],
+      "translation": [
+        4044.34033,
+        -2917.738,
+        1056.07483
+      ],
+      "name": "P_Electrode(Clone)"
+    },
+    {
+      "mesh": 1,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        49
+      ],
+      "translation": [
+        4037.5603,
+        -2913.42773,
+        1061.76062
+      ],
+      "name": "P_Electrode(Clone)"
+    },
+    {
+      "mesh": 1,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        51
+      ],
+      "translation": [
+        4030.78027,
+        -2909.11743,
+        1067.44653
+      ],
+      "name": "P_Electrode(Clone)"
+    },
+    {
+      "mesh": 1,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        53
+      ],
+      "translation": [
+        4024.00049,
+        -2904.807,
+        1073.13232
+      ],
+      "name": "P_Electrode(Clone)"
+    },
+    {
+      "mesh": 1,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        55
+      ],
+      "translation": [
+        4017.22046,
+        -2900.49658,
+        1078.81812
+      ],
+      "name": "P_Electrode(Clone)"
+    },
+    {
+      "mesh": 1,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        57
+      ],
+      "translation": [
+        4010.44043,
+        -2896.18628,
+        1084.50391
+      ],
+      "name": "P_Electrode(Clone)"
+    },
+    {
+      "mesh": 1,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        59
+      ],
+      "translation": [
+        4003.66064,
+        -2891.876,
+        1090.1897
+      ],
+      "name": "P_Electrode(Clone)"
+    },
+    {
+      "mesh": 1,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        61
+      ],
+      "translation": [
+        3996.88062,
+        -2887.56567,
+        1095.87549
+      ],
+      "name": "P_Electrode(Clone)"
+    },
+    {
+      "mesh": 1,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        63
+      ],
+      "translation": [
+        3990.10059,
+        -2883.25537,
+        1101.5614
+      ],
+      "name": "P_Electrode(Clone)"
+    },
+    {
+      "mesh": 1,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        65
+      ],
+      "translation": [
+        3983.3208,
+        -2878.945,
+        1107.24719
+      ],
+      "name": "P_Electrode(Clone)"
+    },
+    {
+      "mesh": 1,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        67
+      ],
+      "translation": [
+        4183.05,
+        -2866.28,
+        1097.59
+      ],
+      "name": "P_Electrode(Clone)"
+    },
+    {
+      "mesh": 1,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        69
+      ],
+      "translation": [
+        4173.49658,
+        -2864.43921,
+        1099.08
+      ],
+      "name": "P_Electrode(Clone)"
+    },
+    {
+      "mesh": 1,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        71
+      ],
+      "translation": [
+        4163.94336,
+        -2862.59839,
+        1100.56982
+      ],
+      "name": "P_Electrode(Clone)"
+    },
+    {
+      "mesh": 1,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        73
+      ],
+      "translation": [
+        4154.39,
+        -2860.75757,
+        1102.05969
+      ],
+      "name": "P_Electrode(Clone)"
+    },
+    {
+      "mesh": 1,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        75
+      ],
+      "translation": [
+        4144.83643,
+        -2858.91675,
+        1103.54956
+      ],
+      "name": "P_Electrode(Clone)"
+    },
+    {
+      "mesh": 1,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        77
+      ],
+      "translation": [
+        4135.283,
+        -2857.076,
+        1105.03955
+      ],
+      "name": "P_Electrode(Clone)"
+    },
+    {
+      "mesh": 1,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        79
+      ],
+      "translation": [
+        4125.73,
+        -2855.235,
+        1106.52942
+      ],
+      "name": "P_Electrode(Clone)"
+    },
+    {
+      "mesh": 1,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        81
+      ],
+      "translation": [
+        4116.17627,
+        -2853.39453,
+        1108.01929
+      ],
+      "name": "P_Electrode(Clone)"
+    },
+    {
+      "mesh": 1,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        83
+      ],
+      "translation": [
+        4106.623,
+        -2851.55371,
+        1109.50928
+      ],
+      "name": "P_Electrode(Clone)"
+    },
+    {
+      "mesh": 1,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        85
+      ],
+      "translation": [
+        4097.07,
+        -2849.713,
+        1110.99915
+      ],
+      "name": "P_Electrode(Clone)"
+    },
+    {
+      "mesh": 1,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        87
+      ],
+      "translation": [
+        4087.51636,
+        -2847.872,
+        1112.489
+      ],
+      "name": "P_Electrode(Clone)"
+    },
+    {
+      "mesh": 1,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        89
+      ],
+      "translation": [
+        4077.963,
+        -2846.03125,
+        1113.979
+      ],
+      "name": "P_Electrode(Clone)"
+    },
+    {
+      "mesh": 1,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        91
+      ],
+      "translation": [
+        4068.40967,
+        -2844.19043,
+        1115.46887
+      ],
+      "name": "P_Electrode(Clone)"
+    },
+    {
+      "mesh": 1,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        93
+      ],
+      "translation": [
+        4058.8562,
+        -2842.34961,
+        1116.95874
+      ],
+      "name": "P_Electrode(Clone)"
+    },
+    {
+      "mesh": 1,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        95
+      ],
+      "translation": [
+        4049.30273,
+        -2840.50879,
+        1118.44873
+      ],
+      "name": "P_Electrode(Clone)"
+    },
+    {
+      "mesh": 1,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        97
+      ],
+      "translation": [
+        4039.74951,
+        -2838.668,
+        1119.9386
+      ],
+      "name": "P_Electrode(Clone)"
+    },
+    {
+      "mesh": 1,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        99
+      ],
+      "translation": [
+        4143.17,
+        -2857.68,
+        1003.61
+      ],
+      "name": "P_Electrode(Clone)"
+    },
+    {
+      "mesh": 1,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        101
+      ],
+      "translation": [
+        4135.625,
+        -2856.298,
+        1009.77728
+      ],
+      "name": "P_Electrode(Clone)"
+    },
+    {
+      "mesh": 1,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        103
+      ],
+      "translation": [
+        4128.07959,
+        -2854.916,
+        1015.94458
+      ],
+      "name": "P_Electrode(Clone)"
+    },
+    {
+      "mesh": 1,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        105
+      ],
+      "translation": [
+        4120.53467,
+        -2853.53418,
+        1022.11188
+      ],
+      "name": "P_Electrode(Clone)"
+    },
+    {
+      "mesh": 1,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        107
+      ],
+      "translation": [
+        4112.98926,
+        -2852.15234,
+        1028.27917
+      ],
+      "name": "P_Electrode(Clone)"
+    },
+    {
+      "mesh": 1,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        109
+      ],
+      "translation": [
+        4105.444,
+        -2850.77026,
+        1034.44653
+      ],
+      "name": "P_Electrode(Clone)"
+    },
+    {
+      "mesh": 1,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        111
+      ],
+      "translation": [
+        4097.899,
+        -2849.38843,
+        1040.61377
+      ],
+      "name": "P_Electrode(Clone)"
+    },
+    {
+      "mesh": 1,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        113
+      ],
+      "translation": [
+        4090.35376,
+        -2848.00635,
+        1046.78113
+      ],
+      "name": "P_Electrode(Clone)"
+    },
+    {
+      "mesh": 1,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        115
+      ],
+      "translation": [
+        4082.80859,
+        -2846.62451,
+        1052.94836
+      ],
+      "name": "P_Electrode(Clone)"
+    },
+    {
+      "mesh": 1,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        117
+      ],
+      "translation": [
+        4075.26343,
+        -2845.24243,
+        1059.11572
+      ],
+      "name": "P_Electrode(Clone)"
+    },
+    {
+      "mesh": 1,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        119
+      ],
+      "translation": [
+        4067.718,
+        -2843.8606,
+        1065.283
+      ],
+      "name": "P_Electrode(Clone)"
+    },
+    {
+      "mesh": 1,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        121
+      ],
+      "translation": [
+        4060.17285,
+        -2842.47876,
+        1071.45032
+      ],
+      "name": "P_Electrode(Clone)"
+    },
+    {
+      "mesh": 1,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        123
+      ],
+      "translation": [
+        4052.62769,
+        -2841.09668,
+        1077.61755
+      ],
+      "name": "P_Electrode(Clone)"
+    },
+    {
+      "mesh": 1,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        125
+      ],
+      "translation": [
+        4045.08252,
+        -2839.71484,
+        1083.78491
+      ],
+      "name": "P_Electrode(Clone)"
+    },
+    {
+      "mesh": 1,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        127
+      ],
+      "translation": [
+        4037.53735,
+        -2838.33276,
+        1089.95215
+      ],
+      "name": "P_Electrode(Clone)"
+    },
+    {
+      "mesh": 1,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        129
+      ],
+      "translation": [
+        4029.99219,
+        -2836.951,
+        1096.11951
+      ],
+      "name": "P_Electrode(Clone)"
+    },
+    {
+      "mesh": 1,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        131
+      ],
+      "translation": [
+        4179.91,
+        -2865.77,
+        1049.89
+      ],
+      "name": "P_Electrode(Clone)"
+    },
+    {
+      "mesh": 1,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        133
+      ],
+      "translation": [
+        4171.93457,
+        -2870.81519,
+        1052.6853
+      ],
+      "name": "P_Electrode(Clone)"
+    },
+    {
+      "mesh": 1,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        135
+      ],
+      "translation": [
+        4163.95947,
+        -2875.8606,
+        1055.48047
+      ],
+      "name": "P_Electrode(Clone)"
+    },
+    {
+      "mesh": 1,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        137
+      ],
+      "translation": [
+        4155.984,
+        -2880.90576,
+        1058.27576
+      ],
+      "name": "P_Electrode(Clone)"
+    },
+    {
+      "mesh": 1,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        139
+      ],
+      "translation": [
+        4148.0083,
+        -2885.95117,
+        1061.071
+      ],
+      "name": "P_Electrode(Clone)"
+    },
+    {
+      "mesh": 1,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        141
+      ],
+      "translation": [
+        4140.033,
+        -2890.99658,
+        1063.86633
+      ],
+      "name": "P_Electrode(Clone)"
+    },
+    {
+      "mesh": 1,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        143
+      ],
+      "translation": [
+        4132.05762,
+        -2896.04175,
+        1066.66162
+      ],
+      "name": "P_Electrode(Clone)"
+    },
+    {
+      "mesh": 1,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        145
+      ],
+      "translation": [
+        4124.08252,
+        -2901.08716,
+        1069.45691
+      ],
+      "name": "P_Electrode(Clone)"
+    },
+    {
+      "mesh": 1,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        147
+      ],
+      "translation": [
+        4116.107,
+        -2906.13232,
+        1072.25208
+      ],
+      "name": "P_Electrode(Clone)"
+    },
+    {
+      "mesh": 1,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        149
+      ],
+      "translation": [
+        4108.13135,
+        -2911.17773,
+        1075.04736
+      ],
+      "name": "P_Electrode(Clone)"
+    },
+    {
+      "mesh": 1,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        151
+      ],
+      "translation": [
+        4100.15625,
+        -2916.223,
+        1077.84265
+      ],
+      "name": "P_Electrode(Clone)"
+    },
+    {
+      "mesh": 1,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        153
+      ],
+      "translation": [
+        4092.181,
+        -2921.26831,
+        1080.638
+      ],
+      "name": "P_Electrode(Clone)"
+    },
+    {
+      "mesh": 1,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        155
+      ],
+      "translation": [
+        4084.20532,
+        -2926.31348,
+        1083.43323
+      ],
+      "name": "P_Electrode(Clone)"
+    },
+    {
+      "mesh": 1,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        157
+      ],
+      "translation": [
+        4076.23,
+        -2931.359,
+        1086.22839
+      ],
+      "name": "P_Electrode(Clone)"
+    },
+    {
+      "mesh": 1,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        159
+      ],
+      "translation": [
+        4068.25464,
+        -2936.404,
+        1089.02368
+      ],
+      "name": "P_Electrode(Clone)"
+    },
+    {
+      "mesh": 1,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        161
+      ],
+      "translation": [
+        4060.2793,
+        -2941.44946,
+        1091.819
+      ],
+      "name": "P_Electrode(Clone)"
+    },
+    {
+      "mesh": 1,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        163
+      ],
+      "translation": [
+        4159.39,
+        -2846.54,
+        1093.15
+      ],
+      "name": "P_Electrode(Clone)"
+    },
+    {
+      "mesh": 1,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        165
+      ],
+      "translation": [
+        4151.74658,
+        -2852.603,
+        1094.45032
+      ],
+      "name": "P_Electrode(Clone)"
+    },
+    {
+      "mesh": 1,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        167
+      ],
+      "translation": [
+        4144.103,
+        -2858.66626,
+        1095.75061
+      ],
+      "name": "P_Electrode(Clone)"
+    },
+    {
+      "mesh": 1,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        169
+      ],
+      "translation": [
+        4136.45947,
+        -2864.72925,
+        1097.0509
+      ],
+      "name": "P_Electrode(Clone)"
+    },
+    {
+      "mesh": 1,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        171
+      ],
+      "translation": [
+        4128.816,
+        -2870.79248,
+        1098.3512
+      ],
+      "name": "P_Electrode(Clone)"
+    },
+    {
+      "mesh": 1,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        173
+      ],
+      "translation": [
+        4121.17236,
+        -2876.85547,
+        1099.65149
+      ],
+      "name": "P_Electrode(Clone)"
+    },
+    {
+      "mesh": 1,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        175
+      ],
+      "translation": [
+        4113.529,
+        -2882.9187,
+        1100.9519
+      ],
+      "name": "P_Electrode(Clone)"
+    },
+    {
+      "mesh": 1,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        177
+      ],
+      "translation": [
+        4105.88574,
+        -2888.98169,
+        1102.2522
+      ],
+      "name": "P_Electrode(Clone)"
+    },
+    {
+      "mesh": 1,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        179
+      ],
+      "translation": [
+        4098.242,
+        -2895.045,
+        1103.55249
+      ],
+      "name": "P_Electrode(Clone)"
+    },
+    {
+      "mesh": 1,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        181
+      ],
+      "translation": [
+        4090.59863,
+        -2901.10815,
+        1104.85278
+      ],
+      "name": "P_Electrode(Clone)"
+    },
+    {
+      "mesh": 1,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        183
+      ],
+      "translation": [
+        4082.955,
+        -2907.17114,
+        1106.15308
+      ],
+      "name": "P_Electrode(Clone)"
+    },
+    {
+      "mesh": 1,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        185
+      ],
+      "translation": [
+        4075.31152,
+        -2913.23438,
+        1107.45337
+      ],
+      "name": "P_Electrode(Clone)"
+    },
+    {
+      "mesh": 1,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        187
+      ],
+      "translation": [
+        4067.668,
+        -2919.29736,
+        1108.75366
+      ],
+      "name": "P_Electrode(Clone)"
+    },
+    {
+      "mesh": 1,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        189
+      ],
+      "translation": [
+        4060.02466,
+        -2925.3606,
+        1110.054
+      ],
+      "name": "P_Electrode(Clone)"
+    },
+    {
+      "mesh": 1,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        191
+      ],
+      "translation": [
+        4052.381,
+        -2931.42358,
+        1111.35437
+      ],
+      "name": "P_Electrode(Clone)"
+    },
+    {
+      "mesh": 1,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        193
+      ],
+      "translation": [
+        4044.73755,
+        -2937.48682,
+        1112.65466
+      ],
+      "name": "P_Electrode(Clone)"
+    },
+    {
+      "mesh": 1,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        195
+      ],
+      "translation": [
+        4126.55,
+        -2817.42,
+        1069.24
+      ],
+      "name": "P_Electrode(Clone)"
+    },
+    {
+      "mesh": 1,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        197
+      ],
+      "translation": [
+        4120.08936,
+        -2824.49561,
+        1071.49121
+      ],
+      "name": "P_Electrode(Clone)"
+    },
+    {
+      "mesh": 1,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        199
+      ],
+      "translation": [
+        4113.62842,
+        -2831.57153,
+        1073.74243
+      ],
+      "name": "P_Electrode(Clone)"
+    },
+    {
+      "mesh": 1,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        201
+      ],
+      "translation": [
+        4107.16748,
+        -2838.64722,
+        1075.99365
+      ],
+      "name": "P_Electrode(Clone)"
+    },
+    {
+      "mesh": 1,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        203
+      ],
+      "translation": [
+        4100.707,
+        -2845.723,
+        1078.24487
+      ],
+      "name": "P_Electrode(Clone)"
+    },
+    {
+      "mesh": 1,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        205
+      ],
+      "translation": [
+        4094.246,
+        -2852.79858,
+        1080.49609
+      ],
+      "name": "P_Electrode(Clone)"
+    },
+    {
+      "mesh": 1,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        207
+      ],
+      "translation": [
+        4087.7854,
+        -2859.87427,
+        1082.74731
+      ],
+      "name": "P_Electrode(Clone)"
+    },
+    {
+      "mesh": 1,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        209
+      ],
+      "translation": [
+        4081.32471,
+        -2866.95,
+        1084.99854
+      ],
+      "name": "P_Electrode(Clone)"
+    },
+    {
+      "mesh": 1,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        211
+      ],
+      "translation": [
+        4074.86377,
+        -2874.02563,
+        1087.24976
+      ],
+      "name": "P_Electrode(Clone)"
+    },
+    {
+      "mesh": 1,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        213
+      ],
+      "translation": [
+        4068.403,
+        -2881.10132,
+        1089.501
+      ],
+      "name": "P_Electrode(Clone)"
+    },
+    {
+      "mesh": 1,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        215
+      ],
+      "translation": [
+        4061.94238,
+        -2888.177,
+        1091.7522
+      ],
+      "name": "P_Electrode(Clone)"
+    },
+    {
+      "mesh": 1,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        217
+      ],
+      "translation": [
+        4055.48145,
+        -2895.25269,
+        1094.00342
+      ],
+      "name": "P_Electrode(Clone)"
+    },
+    {
+      "mesh": 1,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        219
+      ],
+      "translation": [
+        4049.02075,
+        -2902.32861,
+        1096.25464
+      ],
+      "name": "P_Electrode(Clone)"
+    },
+    {
+      "mesh": 1,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        221
+      ],
+      "translation": [
+        4042.56,
+        -2909.4043,
+        1098.50586
+      ],
+      "name": "P_Electrode(Clone)"
+    },
+    {
+      "mesh": 1,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        223
+      ],
+      "translation": [
+        4036.099,
+        -2916.48,
+        1100.75708
+      ],
+      "name": "P_Electrode(Clone)"
+    },
+    {
+      "mesh": 1,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        225
+      ],
+      "translation": [
+        4029.63843,
+        -2923.55566,
+        1103.0083
+      ],
+      "name": "P_Electrode(Clone)"
+    },
+    {
+      "mesh": 1,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        227
+      ],
+      "translation": [
+        4134.12,
+        -2843.83,
+        1029.89
+      ],
+      "name": "P_Electrode(Clone)"
+    },
+    {
+      "mesh": 1,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        229
+      ],
+      "translation": [
+        4127.33,
+        -2849.878,
+        1033.65735
+      ],
+      "name": "P_Electrode(Clone)"
+    },
+    {
+      "mesh": 1,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        231
+      ],
+      "translation": [
+        4120.54,
+        -2855.926,
+        1037.4248
+      ],
+      "name": "P_Electrode(Clone)"
+    },
+    {
+      "mesh": 1,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        233
+      ],
+      "translation": [
+        4113.75,
+        -2861.97388,
+        1041.19214
+      ],
+      "name": "P_Electrode(Clone)"
+    },
+    {
+      "mesh": 1,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        235
+      ],
+      "translation": [
+        4106.96,
+        -2868.022,
+        1044.95959
+      ],
+      "name": "P_Electrode(Clone)"
+    },
+    {
+      "mesh": 1,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        237
+      ],
+      "translation": [
+        4100.17,
+        -2874.06982,
+        1048.72693
+      ],
+      "name": "P_Electrode(Clone)"
+    },
+    {
+      "mesh": 1,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        239
+      ],
+      "translation": [
+        4093.38013,
+        -2880.11768,
+        1052.49438
+      ],
+      "name": "P_Electrode(Clone)"
+    },
+    {
+      "mesh": 1,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        241
+      ],
+      "translation": [
+        4086.59,
+        -2886.16577,
+        1056.26172
+      ],
+      "name": "P_Electrode(Clone)"
+    },
+    {
+      "mesh": 1,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        243
+      ],
+      "translation": [
+        4079.8,
+        -2892.21362,
+        1060.02917
+      ],
+      "name": "P_Electrode(Clone)"
+    },
+    {
+      "mesh": 1,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        245
+      ],
+      "translation": [
+        4073.01,
+        -2898.26172,
+        1063.79651
+      ],
+      "name": "P_Electrode(Clone)"
+    },
+    {
+      "mesh": 1,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        247
+      ],
+      "translation": [
+        4066.22,
+        -2904.30957,
+        1067.564
+      ],
+      "name": "P_Electrode(Clone)"
+    },
+    {
+      "mesh": 1,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        249
+      ],
+      "translation": [
+        4059.43,
+        -2910.35767,
+        1071.3313
+      ],
+      "name": "P_Electrode(Clone)"
+    },
+    {
+      "mesh": 1,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        251
+      ],
+      "translation": [
+        4052.64014,
+        -2916.40552,
+        1075.09875
+      ],
+      "name": "P_Electrode(Clone)"
+    },
+    {
+      "mesh": 1,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        253
+      ],
+      "translation": [
+        4045.85,
+        -2922.45361,
+        1078.86621
+      ],
+      "name": "P_Electrode(Clone)"
+    },
+    {
+      "mesh": 1,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        255
+      ],
+      "translation": [
+        4039.06,
+        -2928.50146,
+        1082.63354
+      ],
+      "name": "P_Electrode(Clone)"
+    },
+    {
+      "mesh": 1,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        257
+      ],
+      "translation": [
+        4032.27,
+        -2934.54956,
+        1086.401
+      ],
+      "name": "P_Electrode(Clone)"
+    },
+    {
+      "mesh": 1,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "translation": [
+        -4047.435,
+        2779.125,
+        -1047.088
+      ],
+      "name": "Electrodes"
+    },
+    {
+      "children": [
+        260,
+        314,
+        428,
+        514,
+        596,
+        662,
+        664,
+        666,
+        668
+      ],
+      "translation": [
+        -4047.435,
+        2779.12573,
+        -1047.08826
+      ],
+      "name": "BoreholeStartingPoints"
+    },
+    {
+      "children": [
+        261,
+        262,
+        264,
+        266,
+        268,
+        270,
+        272,
+        274,
+        276,
+        278,
+        280,
+        282,
+        284,
+        286,
+        288,
+        290,
+        292,
+        294,
+        296,
+        298,
+        300,
+        302,
+        304,
+        306,
+        308,
+        310,
+        312
+      ],
+      "translation": [
+        3961.6,
+        -2997.3,
+        1125.2
+      ],
+      "name": "E2_TL"
+    },
+    {
+      "mesh": 2,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        263
+      ],
+      "name": "P_BoreholePoint(Clone)"
+    },
+    {
+      "mesh": 3,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        265
+      ],
+      "name": "P_BoreholePointCart(Clone)"
+    },
+    {
+      "mesh": 4,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        267
+      ],
+      "name": "P_BoreholePoint(Clone)"
+    },
+    {
+      "mesh": 3,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        269
+      ],
+      "name": "P_BoreholePointCart(Clone)"
+    },
+    {
+      "mesh": 4,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        271
+      ],
+      "name": "P_BoreholePoint(Clone)"
+    },
+    {
+      "mesh": 3,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        273
+      ],
+      "translation": [
+        49.28369,
+        35.5837631,
+        -24.7078533
+      ],
+      "name": "P_BoreholePointCart(Clone)"
+    },
+    {
+      "mesh": 4,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        275
+      ],
+      "translation": [
+        49.0984268,
+        35.5528221,
+        -25.1167984
+      ],
+      "name": "P_BoreholePoint(Clone)"
+    },
+    {
+      "mesh": 3,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        277
+      ],
+      "translation": [
+        98.9319839,
+        72.38075,
+        -46.8588028
+      ],
+      "name": "P_BoreholePointCart(Clone)"
+    },
+    {
+      "mesh": 4,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        279
+      ],
+      "translation": [
+        98.4770355,
+        71.43733,
+        -49.187664
+      ],
+      "name": "P_BoreholePoint(Clone)"
+    },
+    {
+      "mesh": 3,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        281
+      ],
+      "translation": [
+        148.7722,
+        110.689552,
+        -66.06614
+      ],
+      "name": "P_BoreholePointCart(Clone)"
+    },
+    {
+      "mesh": 4,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        283
+      ],
+      "translation": [
+        148.009842,
+        107.978676,
+        -71.91733
+      ],
+      "name": "P_BoreholePoint(Clone)"
+    },
+    {
+      "mesh": 3,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        285
+      ],
+      "translation": [
+        183.9798,
+        137.084366,
+        -77.97221
+      ],
+      "name": "P_BoreholePointCart(Clone)"
+    },
+    {
+      "mesh": 4,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        287
+      ],
+      "translation": [
+        182.457016,
+        133.624008,
+        -86.86352
+      ],
+      "name": "P_BoreholePoint(Clone)"
+    },
+    {
+      "mesh": 3,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        289
+      ],
+      "translation": [
+        184.001617,
+        137.100616,
+        -77.89212
+      ],
+      "name": "P_BoreholePointCart(Clone)"
+    },
+    {
+      "mesh": 4,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        291
+      ],
+      "translation": [
+        182.457016,
+        133.624008,
+        -86.86352
+      ],
+      "name": "P_BoreholePoint(Clone)"
+    },
+    {
+      "mesh": 3,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        293
+      ],
+      "translation": [
+        148.7971,
+        110.3454,
+        -66.5837
+      ],
+      "name": "P_BoreholePointCart(Clone)"
+    },
+    {
+      "mesh": 4,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        295
+      ],
+      "translation": [
+        148.006561,
+        108.015747,
+        -71.86155
+      ],
+      "name": "P_BoreholePoint(Clone)"
+    },
+    {
+      "mesh": 3,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        297
+      ],
+      "translation": [
+        98.96076,
+        72.21635,
+        -47.0512962
+      ],
+      "name": "P_BoreholePointCart(Clone)"
+    },
+    {
+      "mesh": 4,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        299
+      ],
+      "translation": [
+        98.4649,
+        71.57021,
+        -48.99836
+      ],
+      "name": "P_BoreholePoint(Clone)"
+    },
+    {
+      "mesh": 3,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        301
+      ],
+      "translation": [
+        49.23559,
+        35.5098267,
+        -24.9092941
+      ],
+      "name": "P_BoreholePointCart(Clone)"
+    },
+    {
+      "mesh": 4,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        303
+      ],
+      "translation": [
+        49.10269,
+        35.7624664,
+        -24.7798557
+      ],
+      "name": "P_BoreholePoint(Clone)"
+    },
+    {
+      "mesh": 3,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        305
+      ],
+      "name": "P_BoreholePointCart(Clone)"
+    },
+    {
+      "mesh": 4,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        307
+      ],
+      "translation": [
+        0.0144356955,
+        0.296587944,
+        0.4796588
+      ],
+      "name": "P_BoreholePoint(Clone)"
+    },
+    {
+      "mesh": 3,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        309
+      ],
+      "name": "P_BoreholePointCart(Clone)"
+    },
+    {
+      "mesh": 4,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        311
+      ],
+      "translation": [
+        0.0144356955,
+        0.296587944,
+        0.4796588
+      ],
+      "name": "P_BoreholePoint(Clone)"
+    },
+    {
+      "mesh": 3,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        313
+      ],
+      "name": "P_BoreholePointCart(Clone)"
+    },
+    {
+      "mesh": 4,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        315,
+        316,
+        318,
+        320,
+        322,
+        324,
+        326,
+        328,
+        330,
+        332,
+        334,
+        336,
+        338,
+        340,
+        342,
+        344,
+        346,
+        348,
+        350,
+        352,
+        354,
+        356,
+        358,
+        360,
+        362,
+        364,
+        366,
+        368,
+        370,
+        372,
+        374,
+        376,
+        378,
+        380,
+        382,
+        384,
+        386,
+        388,
+        390,
+        392,
+        394,
+        396,
+        398,
+        400,
+        402,
+        404,
+        406,
+        408,
+        410,
+        412,
+        414,
+        416,
+        418,
+        420,
+        422,
+        424,
+        426
+      ],
+      "translation": [
+        3962.2,
+        -2997.3,
+        1126.1
+      ],
+      "name": "E2-TN"
+    },
+    {
+      "mesh": 2,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        317
+      ],
+      "name": "P_BoreholePoint(Clone)"
+    },
+    {
+      "mesh": 3,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        319
+      ],
+      "name": "P_BoreholePointCart(Clone)"
+    },
+    {
+      "mesh": 4,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        321
+      ],
+      "name": "P_BoreholePoint(Clone)"
+    },
+    {
+      "mesh": 3,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        323
+      ],
+      "name": "P_BoreholePointCart(Clone)"
+    },
+    {
+      "mesh": 4,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        325
+      ],
+      "name": "P_BoreholePoint(Clone)"
+    },
+    {
+      "mesh": 3,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        327
+      ],
+      "translation": [
+        10.427331,
+        12.0716572,
+        -3.82670021
+      ],
+      "name": "P_BoreholePointCart(Clone)"
+    },
+    {
+      "mesh": 4,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        329
+      ],
+      "translation": [
+        10.4245415,
+        12.0793962,
+        -3.80971146
+      ],
+      "name": "P_BoreholePoint(Clone)"
+    },
+    {
+      "mesh": 3,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        331
+      ],
+      "translation": [
+        20.9127178,
+        24.1678619,
+        -7.41375637
+      ],
+      "name": "P_BoreholePointCart(Clone)"
+    },
+    {
+      "mesh": 4,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        333
+      ],
+      "translation": [
+        20.8664684,
+        24.1571522,
+        -7.5771
+      ],
+      "name": "P_BoreholePoint(Clone)"
+    },
+    {
+      "mesh": 3,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        335
+      ],
+      "translation": [
+        31.3861847,
+        36.3355942,
+        -10.7940645
+      ],
+      "name": "P_BoreholePointCart(Clone)"
+    },
+    {
+      "mesh": 4,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        337
+      ],
+      "translation": [
+        31.3248043,
+        36.2559052,
+        -11.229331
+      ],
+      "name": "P_BoreholePoint(Clone)"
+    },
+    {
+      "mesh": 3,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        339
+      ],
+      "translation": [
+        41.83556,
+        48.5696945,
+        -14.0119381
+      ],
+      "name": "P_BoreholePointCart(Clone)"
+    },
+    {
+      "mesh": 4,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        341
+      ],
+      "translation": [
+        41.7854347,
+        48.3828735,
+        -14.7798557
+      ],
+      "name": "P_BoreholePoint(Clone)"
+    },
+    {
+      "mesh": 3,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        343
+      ],
+      "translation": [
+        52.3662262,
+        60.8169174,
+        -16.92708
+      ],
+      "name": "P_BoreholePointCart(Clone)"
+    },
+    {
+      "mesh": 4,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        345
+      ],
+      "translation": [
+        52.25197,
+        60.5354347,
+        -18.22441
+      ],
+      "name": "P_BoreholePoint(Clone)"
+    },
+    {
+      "mesh": 3,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        347
+      ],
+      "translation": [
+        62.867485,
+        73.0901947,
+        -19.8247871
+      ],
+      "name": "P_BoreholePointCart(Clone)"
+    },
+    {
+      "mesh": 4,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        349
+      ],
+      "translation": [
+        62.7273636,
+        72.70801,
+        -21.5692253
+      ],
+      "name": "P_BoreholePoint(Clone)"
+    },
+    {
+      "mesh": 3,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        351
+      ],
+      "translation": [
+        73.55605,
+        85.3358841,
+        -22.2055054
+      ],
+      "name": "P_BoreholePointCart(Clone)"
+    },
+    {
+      "mesh": 4,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        353
+      ],
+      "translation": [
+        73.22014,
+        84.8946838,
+        -24.8077431
+      ],
+      "name": "P_BoreholePoint(Clone)"
+    },
+    {
+      "mesh": 3,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        355
+      ],
+      "translation": [
+        84.15505,
+        97.6667557,
+        -24.5232239
+      ],
+      "name": "P_BoreholePointCart(Clone)"
+    },
+    {
+      "mesh": 4,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        357
+      ],
+      "translation": [
+        83.7339249,
+        97.09416,
+        -27.927166
+      ],
+      "name": "P_BoreholePoint(Clone)"
+    },
+    {
+      "mesh": 3,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        359
+      ],
+      "translation": [
+        94.73599,
+        109.985336,
+        -26.93019
+      ],
+      "name": "P_BoreholePointCart(Clone)"
+    },
+    {
+      "mesh": 4,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        361
+      ],
+      "translation": [
+        94.257225,
+        109.308075,
+        -30.9557076
+      ],
+      "name": "P_BoreholePoint(Clone)"
+    },
+    {
+      "mesh": 3,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        363
+      ],
+      "translation": [
+        105.187233,
+        122.507523,
+        -28.9366131
+      ],
+      "name": "P_BoreholePointCart(Clone)"
+    },
+    {
+      "mesh": 4,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        365
+      ],
+      "translation": [
+        104.779526,
+        121.544289,
+        -33.8982925
+      ],
+      "name": "P_BoreholePoint(Clone)"
+    },
+    {
+      "mesh": 3,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        367
+      ],
+      "translation": [
+        115.607941,
+        135.072815,
+        -30.8377838
+      ],
+      "name": "P_BoreholePointCart(Clone)"
+    },
+    {
+      "mesh": 4,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        369
+      ],
+      "translation": [
+        115.293968,
+        133.809052,
+        -36.7477036
+      ],
+      "name": "P_BoreholePoint(Clone)"
+    },
+    {
+      "mesh": 3,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        371
+      ],
+      "translation": [
+        126.083389,
+        147.67688,
+        -32.3202438
+      ],
+      "name": "P_BoreholePointCart(Clone)"
+    },
+    {
+      "mesh": 4,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        373
+      ],
+      "translation": [
+        125.8025,
+        146.102036,
+        -39.4960632
+      ],
+      "name": "P_BoreholePoint(Clone)"
+    },
+    {
+      "mesh": 3,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        375
+      ],
+      "translation": [
+        136.598312,
+        160.27562,
+        -33.617672
+      ],
+      "name": "P_BoreholePointCart(Clone)"
+    },
+    {
+      "mesh": 4,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        377
+      ],
+      "translation": [
+        136.309387,
+        158.419952,
+        -42.135498
+      ],
+      "name": "P_BoreholePoint(Clone)"
+    },
+    {
+      "mesh": 3,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        379
+      ],
+      "translation": [
+        147.065567,
+        172.923737,
+        -34.81762
+      ],
+      "name": "P_BoreholePointCart(Clone)"
+    },
+    {
+      "mesh": 4,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        381
+      ],
+      "translation": [
+        146.815628,
+        170.759842,
+        -44.67323
+      ],
+      "name": "P_BoreholePoint(Clone)"
+    },
+    {
+      "mesh": 3,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        383
+      ],
+      "translation": [
+        154.474442,
+        182.40802,
+        -35.3820457
+      ],
+      "name": "P_BoreholePointCart(Clone)"
+    },
+    {
+      "mesh": 4,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        385
+      ],
+      "translation": [
+        154.478012,
+        179.787735,
+        -46.4583321
+      ],
+      "name": "P_BoreholePoint(Clone)"
+    },
+    {
+      "mesh": 3,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        387
+      ],
+      "translation": [
+        154.474442,
+        182.40802,
+        -35.3820457
+      ],
+      "name": "P_BoreholePointCart(Clone)"
+    },
+    {
+      "mesh": 4,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        389
+      ],
+      "translation": [
+        154.478012,
+        179.787735,
+        -46.4583321
+      ],
+      "name": "P_BoreholePoint(Clone)"
+    },
+    {
+      "mesh": 3,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        391
+      ],
+      "translation": [
+        154.474442,
+        182.40802,
+        -35.3820457
+      ],
+      "name": "P_BoreholePointCart(Clone)"
+    },
+    {
+      "mesh": 4,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        393
+      ],
+      "translation": [
+        154.478012,
+        179.787735,
+        -46.4583321
+      ],
+      "name": "P_BoreholePoint(Clone)"
+    },
+    {
+      "mesh": 3,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        395
+      ],
+      "translation": [
+        146.986786,
+        173.014572,
+        -34.6987534
+      ],
+      "name": "P_BoreholePointCart(Clone)"
+    },
+    {
+      "mesh": 4,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        397
+      ],
+      "translation": [
+        146.818573,
+        170.7569,
+        -44.67651
+      ],
+      "name": "P_BoreholePoint(Clone)"
+    },
+    {
+      "mesh": 3,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        399
+      ],
+      "translation": [
+        126.035492,
+        147.725159,
+        -32.28635
+      ],
+      "name": "P_BoreholePointCart(Clone)"
+    },
+    {
+      "mesh": 4,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        401
+      ],
+      "translation": [
+        125.816925,
+        146.08728,
+        -39.5068932
+      ],
+      "name": "P_BoreholePoint(Clone)"
+    },
+    {
+      "mesh": 3,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        403
+      ],
+      "translation": [
+        105.127983,
+        122.525024,
+        -29.07751
+      ],
+      "name": "P_BoreholePointCart(Clone)"
+    },
+    {
+      "mesh": 4,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        405
+      ],
+      "translation": [
+        104.800522,
+        121.523956,
+        -33.90978
+      ],
+      "name": "P_BoreholePoint(Clone)"
+    },
+    {
+      "mesh": 3,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        407
+      ],
+      "translation": [
+        84.1097641,
+        97.68313,
+        -24.613224
+      ],
+      "name": "P_BoreholePointCart(Clone)"
+    },
+    {
+      "mesh": 4,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        409
+      ],
+      "translation": [
+        83.77329,
+        97.06135,
+        -27.9251957
+      ],
+      "name": "P_BoreholePoint(Clone)"
+    },
+    {
+      "mesh": 3,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        411
+      ],
+      "translation": [
+        62.8697433,
+        73.09282,
+        -19.80796
+      ],
+      "name": "P_BoreholePointCart(Clone)"
+    },
+    {
+      "mesh": 4,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        413
+      ],
+      "translation": [
+        62.781826,
+        72.66765,
+        -21.5472431
+      ],
+      "name": "P_BoreholePoint(Clone)"
+    },
+    {
+      "mesh": 3,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        415
+      ],
+      "translation": [
+        41.8588867,
+        48.56249,
+        -13.9671822
+      ],
+      "name": "P_BoreholePointCart(Clone)"
+    },
+    {
+      "mesh": 4,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        417
+      ],
+      "translation": [
+        41.8398972,
+        48.343502,
+        -14.75361
+      ],
+      "name": "P_BoreholePoint(Clone)"
+    },
+    {
+      "mesh": 3,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        419
+      ],
+      "translation": [
+        20.9135628,
+        24.1688385,
+        -7.40817833
+      ],
+      "name": "P_BoreholePointCart(Clone)"
+    },
+    {
+      "mesh": 4,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        421
+      ],
+      "translation": [
+        20.9199486,
+        24.1167984,
+        -7.5567584
+      ],
+      "name": "P_BoreholePoint(Clone)"
+    },
+    {
+      "mesh": 3,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        423
+      ],
+      "name": "P_BoreholePointCart(Clone)"
+    },
+    {
+      "mesh": 4,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        425
+      ],
+      "translation": [
+        0.0423228368,
+        -0.0367454067,
+        0.000328084
+      ],
+      "name": "P_BoreholePoint(Clone)"
+    },
+    {
+      "mesh": 3,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        427
+      ],
+      "name": "P_BoreholePointCart(Clone)"
+    },
+    {
+      "mesh": 4,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        429,
+        430,
+        432,
+        434,
+        436,
+        438,
+        440,
+        442,
+        444,
+        446,
+        448,
+        450,
+        452,
+        454,
+        456,
+        458,
+        460,
+        462,
+        464,
+        466,
+        468,
+        470,
+        472,
+        474,
+        476,
+        478,
+        480,
+        482,
+        484,
+        486,
+        488,
+        490,
+        492,
+        494,
+        496,
+        498,
+        500,
+        502,
+        504,
+        506,
+        508,
+        510,
+        512
+      ],
+      "translation": [
+        3964.2,
+        -2998.7,
+        1126.3
+      ],
+      "name": "E2-TC"
+    },
+    {
+      "mesh": 2,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        431
+      ],
+      "name": "P_BoreholePoint(Clone)"
+    },
+    {
+      "mesh": 3,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        433
+      ],
+      "name": "P_BoreholePointCart(Clone)"
+    },
+    {
+      "mesh": 4,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        435
+      ],
+      "name": "P_BoreholePoint(Clone)"
+    },
+    {
+      "mesh": 3,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        437
+      ],
+      "name": "P_BoreholePointCart(Clone)"
+    },
+    {
+      "mesh": 4,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        439
+      ],
+      "name": "P_BoreholePoint(Clone)"
+    },
+    {
+      "mesh": 3,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        441
+      ],
+      "translation": [
+        23.4199753,
+        21.1096554,
+        -9.070738
+      ],
+      "name": "P_BoreholePointCart(Clone)"
+    },
+    {
+      "mesh": 4,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        443
+      ],
+      "translation": [
+        23.44882,
+        21.0797234,
+        -9.065945
+      ],
+      "name": "P_BoreholePoint(Clone)"
+    },
+    {
+      "mesh": 3,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        445
+      ],
+      "translation": [
+        46.83739,
+        42.4546547,
+        -17.590498
+      ],
+      "name": "P_BoreholePointCart(Clone)"
+    },
+    {
+      "mesh": 4,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        447
+      ],
+      "translation": [
+        46.86844,
+        42.24836,
+        -17.9980316
+      ],
+      "name": "P_BoreholePoint(Clone)"
+    },
+    {
+      "mesh": 3,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        449
+      ],
+      "translation": [
+        70.2057648,
+        63.9944038,
+        -25.7562885
+      ],
+      "name": "P_BoreholePointCart(Clone)"
+    },
+    {
+      "mesh": 4,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        451
+      ],
+      "translation": [
+        70.27986,
+        63.5265732,
+        -26.6889763
+      ],
+      "name": "P_BoreholePoint(Clone)"
+    },
+    {
+      "mesh": 3,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        453
+      ],
+      "translation": [
+        93.76793,
+        85.56189,
+        -33.3015671
+      ],
+      "name": "P_BoreholePointCart(Clone)"
+    },
+    {
+      "mesh": 4,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        455
+      ],
+      "translation": [
+        93.7017746,
+        84.8877945,
+        -35.1450157
+      ],
+      "name": "P_BoreholePoint(Clone)"
+    },
+    {
+      "mesh": 3,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        457
+      ],
+      "translation": [
+        117.388557,
+        107.265633,
+        -40.2962227
+      ],
+      "name": "P_BoreholePointCart(Clone)"
+    },
+    {
+      "mesh": 4,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        459
+      ],
+      "translation": [
+        117.161415,
+        106.310043,
+        -43.3376
+      ],
+      "name": "P_BoreholePoint(Clone)"
+    },
+    {
+      "mesh": 3,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        461
+      ],
+      "translation": [
+        140.713333,
+        129.256622,
+        -47.3556824
+      ],
+      "name": "P_BoreholePointCart(Clone)"
+    },
+    {
+      "mesh": 4,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        463
+      ],
+      "translation": [
+        140.626968,
+        127.807091,
+        -51.3146324
+      ],
+      "name": "P_BoreholePoint(Clone)"
+    },
+    {
+      "mesh": 3,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        465
+      ],
+      "translation": [
+        164.3697,
+        151.3046,
+        -53.2229424
+      ],
+      "name": "P_BoreholePointCart(Clone)"
+    },
+    {
+      "mesh": 4,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        467
+      ],
+      "translation": [
+        164.094162,
+        149.385178,
+        -59.06463
+      ],
+      "name": "P_BoreholePoint(Clone)"
+    },
+    {
+      "mesh": 3,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        469
+      ],
+      "translation": [
+        174.2417,
+        159.831024,
+        -55.10943
+      ],
+      "name": "P_BoreholePointCart(Clone)"
+    },
+    {
+      "mesh": 4,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        471
+      ],
+      "translation": [
+        173.499023,
+        158.028214,
+        -62.0757866
+      ],
+      "name": "P_BoreholePoint(Clone)"
+    },
+    {
+      "mesh": 3,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        473
+      ],
+      "translation": [
+        174.2417,
+        159.831024,
+        -55.10943
+      ],
+      "name": "P_BoreholePointCart(Clone)"
+    },
+    {
+      "mesh": 4,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        475
+      ],
+      "translation": [
+        173.499023,
+        158.028214,
+        -62.0757866
+      ],
+      "name": "P_BoreholePoint(Clone)"
+    },
+    {
+      "mesh": 3,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        477
+      ],
+      "translation": [
+        174.234619,
+        159.824524,
+        -55.1506958
+      ],
+      "name": "P_BoreholePointCart(Clone)"
+    },
+    {
+      "mesh": 4,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        479
+      ],
+      "translation": [
+        173.499023,
+        158.028214,
+        -62.0757866
+      ],
+      "name": "P_BoreholePoint(Clone)"
+    },
+    {
+      "mesh": 3,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        481
+      ],
+      "translation": [
+        164.5808,
+        151.074951,
+        -53.2229424
+      ],
+      "name": "P_BoreholePointCart(Clone)"
+    },
+    {
+      "mesh": 4,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        483
+      ],
+      "translation": [
+        164.087921,
+        149.392059,
+        -59.0643044
+      ],
+      "name": "P_BoreholePoint(Clone)"
+    },
+    {
+      "mesh": 3,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        485
+      ],
+      "translation": [
+        141.039032,
+        128.876633,
+        -47.4223747
+      ],
+      "name": "P_BoreholePointCart(Clone)"
+    },
+    {
+      "mesh": 4,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        487
+      ],
+      "translation": [
+        140.578735,
+        127.860893,
+        -51.3106956
+      ],
+      "name": "P_BoreholePoint(Clone)"
+    },
+    {
+      "mesh": 3,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        489
+      ],
+      "translation": [
+        117.576447,
+        106.986343,
+        -40.4904671
+      ],
+      "name": "P_BoreholePointCart(Clone)"
+    },
+    {
+      "mesh": 4,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        491
+      ],
+      "translation": [
+        117.068565,
+        106.421593,
+        -43.31004
+      ],
+      "name": "P_BoreholePoint(Clone)"
+    },
+    {
+      "mesh": 3,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        493
+      ],
+      "translation": [
+        93.93401,
+        85.35358,
+        -33.3680267
+      ],
+      "name": "P_BoreholePointCart(Clone)"
+    },
+    {
+      "mesh": 4,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        495
+      ],
+      "translation": [
+        93.56922,
+        85.05381,
+        -35.0892372
+      ],
+      "name": "P_BoreholePoint(Clone)"
+    },
+    {
+      "mesh": 3,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        497
+      ],
+      "translation": [
+        70.34859,
+        63.8105736,
+        -25.8225975
+      ],
+      "name": "P_BoreholePointCart(Clone)"
+    },
+    {
+      "mesh": 4,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        499
+      ],
+      "translation": [
+        70.10171,
+        63.75,
+        -26.6148281
+      ],
+      "name": "P_BoreholePoint(Clone)"
+    },
+    {
+      "mesh": 3,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        501
+      ],
+      "translation": [
+        46.9387,
+        42.338028,
+        -17.6015339
+      ],
+      "name": "P_BoreholePointCart(Clone)"
+    },
+    {
+      "mesh": 4,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        503
+      ],
+      "translation": [
+        46.64173,
+        42.530838,
+        -17.91076
+      ],
+      "name": "P_BoreholePoint(Clone)"
+    },
+    {
+      "mesh": 3,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        505
+      ],
+      "translation": [
+        23.4455948,
+        21.0882912,
+        -9.054229
+      ],
+      "name": "P_BoreholePointCart(Clone)"
+    },
+    {
+      "mesh": 4,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        507
+      ],
+      "translation": [
+        23.1843834,
+        21.4028873,
+        -8.980971
+      ],
+      "name": "P_BoreholePoint(Clone)"
+    },
+    {
+      "mesh": 3,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        509
+      ],
+      "name": "P_BoreholePointCart(Clone)"
+    },
+    {
+      "mesh": 4,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        511
+      ],
+      "translation": [
+        -0.285105,
+        0.3704068,
+        0.140748039
+      ],
+      "name": "P_BoreholePoint(Clone)"
+    },
+    {
+      "mesh": 3,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        513
+      ],
+      "name": "P_BoreholePointCart(Clone)"
+    },
+    {
+      "mesh": 4,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        515,
+        516,
+        518,
+        520,
+        522,
+        524,
+        526,
+        528,
+        530,
+        532,
+        534,
+        536,
+        538,
+        540,
+        542,
+        544,
+        546,
+        548,
+        550,
+        552,
+        554,
+        556,
+        558,
+        560,
+        562,
+        564,
+        566,
+        568,
+        570,
+        572,
+        574,
+        576,
+        578,
+        580,
+        582,
+        584,
+        586,
+        588,
+        590,
+        592,
+        594
+      ],
+      "translation": [
+        3964.8,
+        -3000.1,
+        1126.6
+      ],
+      "name": "E2-TU"
+    },
+    {
+      "mesh": 2,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        517
+      ],
+      "name": "P_BoreholePoint(Clone)"
+    },
+    {
+      "mesh": 3,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        519
+      ],
+      "name": "P_BoreholePointCart(Clone)"
+    },
+    {
+      "mesh": 4,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        521
+      ],
+      "name": "P_BoreholePoint(Clone)"
+    },
+    {
+      "mesh": 3,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        523
+      ],
+      "name": "P_BoreholePointCart(Clone)"
+    },
+    {
+      "mesh": 4,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        525
+      ],
+      "name": "P_BoreholePoint(Clone)"
+    },
+    {
+      "mesh": 3,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        527
+      ],
+      "translation": [
+        24.87875,
+        21.06887,
+        -3.67987823
+      ],
+      "name": "P_BoreholePointCart(Clone)"
+    },
+    {
+      "mesh": 4,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        529
+      ],
+      "translation": [
+        24.80315,
+        21.1286087,
+        -3.80577421
+      ],
+      "name": "P_BoreholePoint(Clone)"
+    },
+    {
+      "mesh": 3,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        531
+      ],
+      "translation": [
+        49.82361,
+        42.1788,
+        -6.64238453
+      ],
+      "name": "P_BoreholePointCart(Clone)"
+    },
+    {
+      "mesh": 4,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        533
+      ],
+      "translation": [
+        49.7047234,
+        42.1916,
+        -7.283465
+      ],
+      "name": "P_BoreholePoint(Clone)"
+    },
+    {
+      "mesh": 3,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        535
+      ],
+      "translation": [
+        75.0712357,
+        63.0592537,
+        -8.680995
+      ],
+      "name": "P_BoreholePointCart(Clone)"
+    },
+    {
+      "mesh": 4,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        537
+      ],
+      "translation": [
+        74.67192,
+        63.2545967,
+        -10.4002628
+      ],
+      "name": "P_BoreholePoint(Clone)"
+    },
+    {
+      "mesh": 3,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        539
+      ],
+      "translation": [
+        100.524864,
+        83.78388,
+        -9.862568
+      ],
+      "name": "P_BoreholePointCart(Clone)"
+    },
+    {
+      "mesh": 4,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        541
+      ],
+      "translation": [
+        99.77034,
+        84.25197,
+        -13.0905514
+      ],
+      "name": "P_BoreholePoint(Clone)"
+    },
+    {
+      "mesh": 3,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        543
+      ],
+      "translation": [
+        125.93251,
+        104.58831,
+        -10.586009
+      ],
+      "name": "P_BoreholePointCart(Clone)"
+    },
+    {
+      "mesh": 4,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        545
+      ],
+      "translation": [
+        124.901573,
+        105.183731,
+        -15.3871393
+      ],
+      "name": "P_BoreholePoint(Clone)"
+    },
+    {
+      "mesh": 3,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        547
+      ],
+      "translation": [
+        151.769516,
+        124.931274,
+        -10.4052811
+      ],
+      "name": "P_BoreholePointCart(Clone)"
+    },
+    {
+      "mesh": 4,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        549
+      ],
+      "translation": [
+        150.164047,
+        126.049866,
+        -17.2900257
+      ],
+      "name": "P_BoreholePoint(Clone)"
+    },
+    {
+      "mesh": 3,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        551
+      ],
+      "translation": [
+        177.524033,
+        145.405258,
+        -9.256669
+      ],
+      "name": "P_BoreholePointCart(Clone)"
+    },
+    {
+      "mesh": 4,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        553
+      ],
+      "translation": [
+        175.492126,
+        146.850388,
+        -18.83202
+      ],
+      "name": "P_BoreholePoint(Clone)"
+    },
+    {
+      "mesh": 3,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        555
+      ],
+      "translation": [
+        186.518356,
+        152.500473,
+        -8.497536
+      ],
+      "name": "P_BoreholePointCart(Clone)"
+    },
+    {
+      "mesh": 4,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        557
+      ],
+      "translation": [
+        184.317581,
+        154.068237,
+        -19.25853
+      ],
+      "name": "P_BoreholePoint(Clone)"
+    },
+    {
+      "mesh": 3,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        559
+      ],
+      "translation": [
+        186.518356,
+        152.500473,
+        -8.497536
+      ],
+      "name": "P_BoreholePointCart(Clone)"
+    },
+    {
+      "mesh": 4,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        561
+      ],
+      "translation": [
+        184.317581,
+        154.068237,
+        -19.25853
+      ],
+      "name": "P_BoreholePoint(Clone)"
+    },
+    {
+      "mesh": 3,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        563
+      ],
+      "translation": [
+        177.597641,
+        145.310242,
+        -9.336769
+      ],
+      "name": "P_BoreholePointCart(Clone)"
+    },
+    {
+      "mesh": 4,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        565
+      ],
+      "translation": [
+        175.492126,
+        146.850388,
+        -18.83202
+      ],
+      "name": "P_BoreholePoint(Clone)"
+    },
+    {
+      "mesh": 3,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        567
+      ],
+      "translation": [
+        151.874237,
+        124.795319,
+        -10.5082064
+      ],
+      "name": "P_BoreholePointCart(Clone)"
+    },
+    {
+      "mesh": 4,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        569
+      ],
+      "translation": [
+        150.131226,
+        126.049866,
+        -17.2900257
+      ],
+      "name": "P_BoreholePoint(Clone)"
+    },
+    {
+      "mesh": 3,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        571
+      ],
+      "translation": [
+        126.123016,
+        104.338036,
+        -10.7859974
+      ],
+      "name": "P_BoreholePointCart(Clone)"
+    },
+    {
+      "mesh": 4,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        573
+      ],
+      "translation": [
+        124.868774,
+        105.216537,
+        -15.3215227
+      ],
+      "name": "P_BoreholePoint(Clone)"
+    },
+    {
+      "mesh": 3,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        575
+      ],
+      "translation": [
+        100.681274,
+        83.55752,
+        -10.1822948
+      ],
+      "name": "P_BoreholePointCart(Clone)"
+    },
+    {
+      "mesh": 4,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        577
+      ],
+      "translation": [
+        99.67191,
+        84.35039,
+        -12.9921265
+      ],
+      "name": "P_BoreholePoint(Clone)"
+    },
+    {
+      "mesh": 3,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        579
+      ],
+      "translation": [
+        75.1756744,
+        62.9012146,
+        -8.920528
+      ],
+      "name": "P_BoreholePointCart(Clone)"
+    },
+    {
+      "mesh": 4,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        581
+      ],
+      "translation": [
+        74.57349,
+        63.4186363,
+        -10.23622
+      ],
+      "name": "P_BoreholePoint(Clone)"
+    },
+    {
+      "mesh": 3,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        583
+      ],
+      "translation": [
+        49.88921,
+        42.0701752,
+        -6.836044
+      ],
+      "name": "P_BoreholePointCart(Clone)"
+    },
+    {
+      "mesh": 4,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        585
+      ],
+      "translation": [
+        49.57349,
+        42.42126,
+        -7.020998
+      ],
+      "name": "P_BoreholePoint(Clone)"
+    },
+    {
+      "mesh": 3,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        587
+      ],
+      "translation": [
+        24.9161949,
+        21.0185719,
+        -3.7140162
+      ],
+      "name": "P_BoreholePointCart(Clone)"
+    },
+    {
+      "mesh": 4,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        589
+      ],
+      "translation": [
+        24.6391087,
+        21.391077,
+        -3.44488168
+      ],
+      "name": "P_BoreholePoint(Clone)"
+    },
+    {
+      "mesh": 3,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        591
+      ],
+      "name": "P_BoreholePointCart(Clone)"
+    },
+    {
+      "mesh": 4,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        593
+      ],
+      "translation": [
+        -0.2296588,
+        0.328084,
+        0.393700778
+      ],
+      "name": "P_BoreholePoint(Clone)"
+    },
+    {
+      "mesh": 3,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        595
+      ],
+      "name": "P_BoreholePointCart(Clone)"
+    },
+    {
+      "mesh": 4,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        597,
+        598,
+        600,
+        602,
+        604,
+        606,
+        608,
+        610,
+        612,
+        614,
+        616,
+        618,
+        620,
+        622,
+        624,
+        626,
+        628,
+        630,
+        632,
+        634,
+        636,
+        638,
+        640,
+        642,
+        644,
+        646,
+        648,
+        650,
+        652,
+        654,
+        656,
+        658,
+        660
+      ],
+      "translation": [
+        3965.0,
+        -3001.2,
+        1125.9
+      ],
+      "name": "E2-TS"
+    },
+    {
+      "mesh": 2,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        599
+      ],
+      "name": "P_BoreholePoint(Clone)"
+    },
+    {
+      "mesh": 3,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        601
+      ],
+      "name": "P_BoreholePointCart(Clone)"
+    },
+    {
+      "mesh": 4,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        603
+      ],
+      "name": "P_BoreholePoint(Clone)"
+    },
+    {
+      "mesh": 3,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        605
+      ],
+      "name": "P_BoreholePointCart(Clone)"
+    },
+    {
+      "mesh": 4,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        607
+      ],
+      "name": "P_BoreholePoint(Clone)"
+    },
+    {
+      "mesh": 3,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        609
+      ],
+      "translation": [
+        25.6757832,
+        18.233345,
+        -9.20273
+      ],
+      "name": "P_BoreholePointCart(Clone)"
+    },
+    {
+      "mesh": 4,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        611
+      ],
+      "translation": [
+        25.656168,
+        18.24147,
+        -9.284777
+      ],
+      "name": "P_BoreholePoint(Clone)"
+    },
+    {
+      "mesh": 3,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        613
+      ],
+      "translation": [
+        51.49072,
+        36.565506,
+        -17.8110523
+      ],
+      "name": "P_BoreholePointCart(Clone)"
+    },
+    {
+      "mesh": 4,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        615
+      ],
+      "translation": [
+        51.3451424,
+        36.48294,
+        -18.3398952
+      ],
+      "name": "P_BoreholePoint(Clone)"
+    },
+    {
+      "mesh": 3,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        617
+      ],
+      "translation": [
+        77.571106,
+        55.00475,
+        -25.3913422
+      ],
+      "name": "P_BoreholePointCart(Clone)"
+    },
+    {
+      "mesh": 4,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        619
+      ],
+      "translation": [
+        77.16536,
+        54.7900276,
+        -27.00131
+      ],
+      "name": "P_BoreholePoint(Clone)"
+    },
+    {
+      "mesh": 3,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        621
+      ],
+      "translation": [
+        103.789024,
+        73.56835,
+        -32.2147751
+      ],
+      "name": "P_BoreholePointCart(Clone)"
+    },
+    {
+      "mesh": 4,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        623
+      ],
+      "translation": [
+        103.051178,
+        73.16273,
+        -35.2690277
+      ],
+      "name": "P_BoreholePoint(Clone)"
+    },
+    {
+      "mesh": 3,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        625
+      ],
+      "translation": [
+        130.174744,
+        92.03247,
+        -38.656662
+      ],
+      "name": "P_BoreholePointCart(Clone)"
+    },
+    {
+      "mesh": 4,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        627
+      ],
+      "translation": [
+        129.068237,
+        91.5682449,
+        -43.1758537
+      ],
+      "name": "P_BoreholePoint(Clone)"
+    },
+    {
+      "mesh": 3,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        629
+      ],
+      "translation": [
+        156.980545,
+        110.45063,
+        -43.6789131
+      ],
+      "name": "P_BoreholePointCart(Clone)"
+    },
+    {
+      "mesh": 4,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        631
+      ],
+      "translation": [
+        155.150925,
+        109.973755,
+        -50.6889763
+      ],
+      "name": "P_BoreholePoint(Clone)"
+    },
+    {
+      "mesh": 3,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        633
+      ],
+      "translation": [
+        183.328979,
+        129.516159,
+        -48.5717735
+      ],
+      "name": "P_BoreholePointCart(Clone)"
+    },
+    {
+      "mesh": 4,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        635
+      ],
+      "translation": [
+        181.332031,
+        128.412079,
+        -57.7755928
+      ],
+      "name": "P_BoreholePoint(Clone)"
+    },
+    {
+      "mesh": 3,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        637
+      ],
+      "translation": [
+        205.570679,
+        145.121658,
+        -51.69878
+      ],
+      "name": "P_BoreholePointCart(Clone)"
+    },
+    {
+      "mesh": 4,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        639
+      ],
+      "translation": [
+        203.084,
+        143.799225,
+        -63.4186363
+      ],
+      "name": "P_BoreholePoint(Clone)"
+    },
+    {
+      "mesh": 3,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        641
+      ],
+      "translation": [
+        205.570679,
+        145.121658,
+        -51.69878
+      ],
+      "name": "P_BoreholePointCart(Clone)"
+    },
+    {
+      "mesh": 4,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        643
+      ],
+      "translation": [
+        203.084,
+        143.799225,
+        -63.4186363
+      ],
+      "name": "P_BoreholePoint(Clone)"
+    },
+    {
+      "mesh": 3,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        645
+      ],
+      "translation": [
+        183.2159,
+        129.484192,
+        -49.08094
+      ],
+      "name": "P_BoreholePointCart(Clone)"
+    },
+    {
+      "mesh": 4,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        647
+      ],
+      "translation": [
+        181.332031,
+        128.412079,
+        -57.7427826
+      ],
+      "name": "P_BoreholePoint(Clone)"
+    },
+    {
+      "mesh": 3,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        649
+      ],
+      "translation": [
+        156.828278,
+        110.507233,
+        -44.08082
+      ],
+      "name": "P_BoreholePointCart(Clone)"
+    },
+    {
+      "mesh": 4,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        651
+      ],
+      "translation": [
+        155.183731,
+        109.973755,
+        -50.5905533
+      ],
+      "name": "P_BoreholePoint(Clone)"
+    },
+    {
+      "mesh": 3,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        653
+      ],
+      "translation": [
+        103.720924,
+        73.54727,
+        -32.4811478
+      ],
+      "name": "P_BoreholePointCart(Clone)"
+    },
+    {
+      "mesh": 4,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        655
+      ],
+      "translation": [
+        103.1168,
+        73.16273,
+        -35.10499
+      ],
+      "name": "P_BoreholePoint(Clone)"
+    },
+    {
+      "mesh": 3,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        657
+      ],
+      "translation": [
+        51.4703941,
+        36.52405,
+        -17.954298
+      ],
+      "name": "P_BoreholePointCart(Clone)"
+    },
+    {
+      "mesh": 4,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        659
+      ],
+      "translation": [
+        51.44357,
+        36.5157471,
+        -18.01181
+      ],
+      "name": "P_BoreholePoint(Clone)"
+    },
+    {
+      "mesh": 3,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        661
+      ],
+      "name": "P_BoreholePointCart(Clone)"
+    },
+    {
+      "mesh": 4,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        663
+      ],
+      "translation": [
+        3993.7,
+        -2830.8,
+        1125.0
+      ],
+      "name": "E2-AML"
+    },
+    {
+      "mesh": 2,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        665
+      ],
+      "translation": [
+        3994.2,
+        -2830.2,
+        1126.3
+      ],
+      "name": "E2_AMU"
+    },
+    {
+      "mesh": 2,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        667
+      ],
+      "translation": [
+        3960.9,
+        -2863.6,
+        1126.9
+      ],
+      "name": "E2-DMU"
+    },
+    {
+      "mesh": 2,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    },
+    {
+      "children": [
+        669
+      ],
+      "translation": [
+        3960.9,
+        -2864.2,
+        1125.1
+      ],
+      "name": "E2_DML"
+    },
+    {
+      "mesh": 2,
+      "scale": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "name": "Sphere"
+    }
+  ],
+  "scene": 0,
+  "scenes": [
+    {
+      "nodes": [
+        0
+      ],
+      "name": "MasterParent"
+    }
+  ]
+}
