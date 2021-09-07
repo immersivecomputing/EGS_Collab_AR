@@ -67,8 +67,9 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
       arObject.visible = false;
       scene.addNode(arObject);
 
+	  const loader = new GLTFLoader();
 	  try {
-		  let flower = new GLTFLoader('media/gltf/sunflower/sunflower.gltf', function ( gltf ) {
+		  let flower = loader.load('media/gltf/sunflower/sunflower.gltf', function ( gltf ) {
 				arObject.addNode( gltf.scene );
 			}, undefined, function ( error ) {
 				console.error( error );
@@ -78,7 +79,7 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 	  }
       //arObject.addNode(flower);
 
-      let reticle = new GLTFLoader('media/gltf/reticle/reticle.gltf', function ( gltf ) {
+      let reticle = loader.load('media/gltf/reticle/reticle.gltf', function ( gltf ) {
 			scene.addNode( gltf.scene );
 		}, undefined, function ( error ) {
 			console.error( error );
