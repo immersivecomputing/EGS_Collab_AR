@@ -67,11 +67,15 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
       arObject.visible = false;
       scene.addNode(arObject);
 
-      let flower = new GLTFLoader('media/gltf/sunflower/sunflower.gltf', function ( gltf ) {
-			arObject.addNode( gltf.scene );
-		}, undefined, function ( error ) {
+	  try {
+		  let flower = new GLTFLoader('media/gltf/sunflower/sunflower.gltf', function ( gltf ) {
+				arObject.addNode( gltf.scene );
+			}, undefined, function ( error ) {
+				console.error( error );
+			} );
+	  } catch (error) {
 			console.error( error );
-		} );
+	  }
       //arObject.addNode(flower);
 
       let reticle = new GLTFLoader('media/gltf/reticle/reticle.gltf', function ( gltf ) {
