@@ -79,11 +79,11 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 	  }
       //arObject.addNode(flower);
 
-      let reticle = new Node();
-      reticle.visible = false;
+      let reticle;
       loader.load('media/gltf/reticle/reticle.gltf', function ( gltf ) {
-			reticle.addNode( gltf.scene );
+			reticle = gltf.scene;
 			scene.addNode(reticle);
+			reticle.visible = false;
 		}, undefined, function ( error ) {
 			console.error( error );
 		} );
