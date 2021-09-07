@@ -29,7 +29,7 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
     <link rel='icon' type='image/png' sizes='96x96' href='favicon-96x96.png'>
     <link rel='stylesheet' href='css/common.css'>
 
-    <title>Hit Test</title>
+    <title>EGS Collab Interactive Visualizer</title>
   </head>
   <body>
     <header>
@@ -46,7 +46,7 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
       import {Scene} from './js/render/scenes/scene.js';
       import {Renderer, createWebGLContext} from './js/render/core/renderer.js';
       import {Node} from './js/render/core/node.js';
-      import {Gltf2Node} from './js/render/nodes/gltf2.js';
+	  import {GLTFLoader} from './threejs/examples/jsm/loaders/GLTFLoader.js';
       import {DropShadowNode} from './js/render/nodes/drop-shadow.js';
       import {vec3} from './js/render/math/gl-matrix.js';
       import {Ray} from './js/render/math/ray.js';
@@ -67,12 +67,20 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
       arObject.visible = false;
       scene.addNode(arObject);
 
-      let flower = new Gltf2Node({url: 'media/gltf/sunflower/sunflower.gltf'});
-      arObject.addNode(flower);
+      let flower = new GLTFLoader('media/gltf/sunflower/sunflower.gltf', function ( gltf ) {
+			scene.addNode( gltf.scene );
+		}, undefined, function ( error ) {
+			console.error( error );
+		} );
+      //arObject.addNode(flower);
 
-      let reticle = new Gltf2Node({url: 'media/gltf/reticle/reticle.gltf'});
+      let reticle = new GLTFLoader({url: 'media/gltf/reticle/reticle.gltf', function ( gltf ) {
+			scene.addNode( gltf.scene );
+		}, undefined, function ( error ) {
+			console.error( error );
+		} );
       reticle.visible = false;
-      scene.addNode(reticle);
+      //scene.addNode(reticle);
 
       // Having a really simple drop shadow underneath an object helps ground
       // it in the world without adding much complexity.
