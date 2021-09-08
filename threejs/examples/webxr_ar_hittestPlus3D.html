@@ -73,6 +73,7 @@
 				
 				const loader = new GLTFLoader().setPath( '/EGS_Collab_AR/GLTF/' );
 				loader.load('MasterParent.gltf', function ( gltf ){
+							console.log(gltf);
 							gltf.scene.position.y = 8;
 							loadedModel = gltf.scene;
 							scene.add(gltf.scene);
