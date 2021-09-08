@@ -56,9 +56,9 @@
 				//scene.background = new THREE.Color( 0xbbbbbb );
 				//scene.environment = pmremGenerator.fromScene( environment ).texture;
 				
-				//const light = new THREE.HemisphereLight( 0xffffff, 0xbbbbff, 1 );
-				//light.position.set( 0.5, 1, 0.25 );
-				//scene.add( light );
+				const light = new THREE.HemisphereLight( 0xffffff, 0xbbbbff, 1 );
+				light.position.set( 0.5, 1, 0.25 );
+				scene.add( light );
 				
 
 				const grid = new THREE.GridHelper( 500, 10, 0xffffff, 0xffffff );
