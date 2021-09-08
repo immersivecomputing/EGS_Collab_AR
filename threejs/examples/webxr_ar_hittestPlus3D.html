@@ -63,7 +63,7 @@
 				
 				const loader = new GLTFLoader().setPath( '/EGS_Collab_AR/GLTF/' );
 				loader.load('MasterParent.gltf', function ( gltf ){
-							gltf.scene.position.setFromMatrixPosition( reticle.matrix );
+							gltf.scene.position.y = 8;
 							scene.add(gltf.scene);
 							render();
 						});
