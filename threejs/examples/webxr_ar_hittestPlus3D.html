@@ -36,6 +36,50 @@
 				container = document.createElement( 'div' );
 				document.body.appendChild( container );
 
+				renderer = new THREE.WebGLRenderer( { antialias: true } );
+				renderer.setPixelRatio( window.devicePixelRatio );
+				renderer.setSize( window.innerWidth, window.innerHeight );
+				renderer.toneMapping = THREE.ACESFilmicToneMapping;
+				renderer.toneMappingExposure = 1;
+				renderer.outputEncoding = THREE.sRGBEncoding;
+				container.appendChild( renderer.domElement );
+				
+				camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 1, 2000 );
+				camera.position.set( 0, 100, 0 );
+				
+				const environment = new RoomEnvironment();
+				const pmremGenerator = new THREE.PMREMGenerator( renderer );
+				
+				scene = new THREE.Scene();
+				scene.background = new THREE.Color( 0xbbbbbb );
+				scene.environment = pmremGenerator.fromScene( environment ).texture;
+
+				const grid = new THREE.GridHelper( 500, 10, 0xffffff, 0xffffff );
+				grid.material.opacity = 0.5;
+				grid.material.depthWrite = false;
+				grid.material.transparent = true;
+				scene.add( grid );
+				
+				const loader = new GLTFLoader().setPath( '/EGS_Collab_AR/GLTF/' );
+				loader.load('MasterParent.gltf', function ( gltf ){
+							gltf.scene.position.setFromMatrixPosition( reticle.matrix );
+							scene.add(gltf.scene);
+							render();
+						});
+				
+				const controls = new OrbitControls( camera, renderer.domElement );
+				controls.addEventListener( 'change', render ); // use if there is no animation loop
+				controls.minDistance = 400;
+				controls.maxDistance = 1000;
+				controls.target.set( 10, 90, - 16 );
+				controls.update();
+
+				window.addEventListener( 'resize', onWindowResize );
+				
+					
+				
+				
+				/*
 				scene = new THREE.Scene();
 
 				camera = new THREE.PerspectiveCamera( 70, window.innerWidth / window.innerHeight, 0.01, 20 );
@@ -98,7 +142,7 @@
 				//
 
 				window.addEventListener( 'resize', onWindowResize );
-
+				*/
 			}
 
 			function onWindowResize() {
