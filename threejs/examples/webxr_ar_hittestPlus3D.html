@@ -47,7 +47,7 @@
 				container.appendChild( renderer.domElement );
 				
 				camera = new THREE.PerspectiveCamera( 70, window.innerWidth / window.innerHeight, 0.01, 50 );
-				camera.position.set( 0, 10, 0 );
+				camera.position.set( 0, 15, 0 );
 				
 				const environment = new RoomEnvironment();
 				const pmremGenerator = new THREE.PMREMGenerator( renderer );
@@ -84,7 +84,38 @@
 
 				document.body.appendChild( ARButton.createButton( renderer, { requiredFeatures: [ 'hit-test' ] } ) );
 
+				function onSelect() {
 
+					if ( reticle.visible ) {
+
+						//const material = new THREE.MeshPhongMaterial( { color: 0xffffff * Math.random() } );
+						//const mesh = new THREE.Mesh( geometry, material );
+						//mesh.position.setFromMatrixPosition( reticle.matrix );
+						//mesh.scale.y = Math.random() * 2 + 1;
+						//scene.add( mesh );
+						
+						loader.load('MasterParent.gltf', function ( gltf ){
+							gltf.scene.position.setFromMatrixPosition( reticle.matrix );
+							scene.add(gltf.scene);
+							render();
+						});
+
+					}
+
+				}
+				
+
+				controller = renderer.xr.getController( 0 );
+				controller.addEventListener( 'select', onSelect );
+				scene.add( controller );
+
+				reticle = new THREE.Mesh(
+					new THREE.RingGeometry( 0.15, 0.2, 32 ).rotateX( - Math.PI / 2 ),
+					new THREE.MeshBasicMaterial()
+				);
+				reticle.matrixAutoUpdate = false;
+				reticle.visible = false;
+				scene.add( reticle );
 
 
 				window.addEventListener( 'resize', onWindowResize );
