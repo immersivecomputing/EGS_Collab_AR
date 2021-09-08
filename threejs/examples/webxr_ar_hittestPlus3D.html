@@ -43,10 +43,11 @@
 				renderer.toneMapping = THREE.ACESFilmicToneMapping;
 				renderer.toneMappingExposure = 1;
 				renderer.outputEncoding = THREE.sRGBEncoding;
+				renderer.xr.enabled = true;
 				container.appendChild( renderer.domElement );
 				
-				camera = new THREE.PerspectiveCamera( 70, window.innerWidth / window.innerHeight, 1, 50 );
-				camera.position.set( 0, 20, 0 );
+				camera = new THREE.PerspectiveCamera( 70, window.innerWidth / window.innerHeight, 0.01, 50 );
+				camera.position.set( 0, 10, 0 );
 				
 				const environment = new RoomEnvironment();
 				const pmremGenerator = new THREE.PMREMGenerator( renderer );
@@ -55,9 +56,9 @@
 				scene.background = new THREE.Color( 0xbbbbbb );
 				scene.environment = pmremGenerator.fromScene( environment ).texture;
 				
-				const light = new THREE.HemisphereLight( 0xffffff, 0xbbbbff, 1 );
-				light.position.set( 0.5, 1, 0.25 );
-				scene.add( light );
+				//const light = new THREE.HemisphereLight( 0xffffff, 0xbbbbff, 1 );
+				//light.position.set( 0.5, 1, 0.25 );
+				//scene.add( light );
 				
 
 				const grid = new THREE.GridHelper( 500, 10, 0xffffff, 0xffffff );
