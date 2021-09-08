@@ -45,7 +45,7 @@
 				renderer.outputEncoding = THREE.sRGBEncoding;
 				container.appendChild( renderer.domElement );
 				
-				camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 1, 2000 );
+				camera = new THREE.PerspectiveCamera( 70, window.innerWidth / window.innerHeight, 1, 50 );
 				camera.position.set( 0, 20, 0 );
 				
 				const environment = new RoomEnvironment();
@@ -54,6 +54,11 @@
 				scene = new THREE.Scene();
 				scene.background = new THREE.Color( 0xbbbbbb );
 				scene.environment = pmremGenerator.fromScene( environment ).texture;
+				
+				const light = new THREE.HemisphereLight( 0xffffff, 0xbbbbff, 1 );
+				light.position.set( 0.5, 1, 0.25 );
+				scene.add( light );
+				
 
 				const grid = new THREE.GridHelper( 500, 10, 0xffffff, 0xffffff );
 				grid.material.opacity = 0.5;
@@ -75,9 +80,15 @@
 				controls.target.set( 0, 8, 0 );
 				controls.update();
 
+
+				document.body.appendChild( ARButton.createButton( renderer, { requiredFeatures: [ 'hit-test' ] } ) );
+
+
+
+
 				window.addEventListener( 'resize', onWindowResize );
 				
-					
+				
 				
 				
 				/*
