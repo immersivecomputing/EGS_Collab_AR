@@ -90,8 +90,7 @@
 
 				const params = {
 					enableWind: true,
-					showBall: false,
-					togglePins: togglePins
+					showBall: false
 				};
 
 
@@ -142,7 +141,6 @@
 				const gui = new GUI();
 				gui.add( params, 'enableWind' ).name( 'Enable wind' );
 				gui.add( params, 'showBall' ).name( 'Show ball' );
-				gui.add( params, 'togglePins' ).name( 'Toggle pins' );
 			}
 
 			function onWindowResize() {
