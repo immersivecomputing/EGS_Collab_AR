@@ -31,11 +31,11 @@
 			let hitTestSourceRequested = false;
 
 			const params = {
-					toggleBoreholes: toggleLayer( 'Boreholes' ),
-					toggleElectrodes: toggleLayer( 'Electrodes' ),
-					toggleGyroStartPoints: toggleLayer( 'Gyro_StartingPoints' ),
-					toggleGyroSrikeDipDepth: toggleLayer( 'Gyro_StrikeDipDepthPoints' ),
-					toggleGyroXYZ: toggleLayer( 'Gyro_XYZPoints' )
+                toggleBoreholes: toggleBoreholes,
+                toggleElectrodes: toggleElectrodes,
+                toggleGyroStartPoints: toggleGyroStartPoints,
+                toggleGyroSrikeDipDepth: toggleGyroSrikeDipDepth,
+                toggleGyroXYZ: toggleGyroXYZ
 				};
 
 			init();
@@ -154,19 +154,75 @@
 				renderer.setAnimationLoop( render );
 			}
 			
-			function toggleLayer( layerName ){
-				//loadedModel.traverse( function ( child ) {
-				//	if ( child instanceof THREE.Mesh  ) {
-				//		if(child.name==layerName){
-				//			if(child.visible){
-				//				child.visible = false;
-				//			}else{
-				//				child.visible = true;
-				//			}
-				//		}
-				//	}
-				//});
+			function toggleBoreholes(){
+				loadedModel.traverse( function ( child ) {
+					if ( child instanceof THREE.Mesh  ) {
+						if(child.name=='Boreholes'){
+							if(child.visible){
+								child.visible = false;
+							}else{
+								child.visible = true;
+							}
+						}
+					}
+				});
 			}
+
+            function toggleElectrodes() {
+                loadedModel.traverse(function (child) {
+                    if (child instanceof THREE.Mesh) {
+                        if (child.name == 'Electrodes') {
+                            if (child.visible) {
+                                child.visible = false;
+                            } else {
+                                child.visible = true;
+                            }
+                        }
+                    }
+                });
+			}
+
+            function toggleGyroStartPoints() {
+                loadedModel.traverse(function (child) {
+                    if (child instanceof THREE.Mesh) {
+                        if (child.name == 'Gyro_StartingPoints') {
+                            if (child.visible) {
+                                child.visible = false;
+                            } else {
+                                child.visible = true;
+                            }
+                        }
+                    }
+                });
+			}
+
+            function toggleGyroSrikeDipDepth() {
+                loadedModel.traverse(function (child) {
+                    if (child instanceof THREE.Mesh) {
+                        if (child.name == 'Gyro_StrikeDipDepthPoints') {
+                            if (child.visible) {
+                                child.visible = false;
+                            } else {
+                                child.visible = true;
+                            }
+                        }
+                    }
+                });
+			}
+
+            function toggleGyroXYZ() {
+                loadedModel.traverse(function (child) {
+                    if (child instanceof THREE.Mesh) {
+                        if (child.name == 'Gyro_XYZPoints') {
+                            if (child.visible) {
+                                child.visible = false;
+                            } else {
+                                child.visible = true;
+                            }
+                        }
+                    }
+                });
+            }
 			
 
 			function render( timestamp, frame ) {
