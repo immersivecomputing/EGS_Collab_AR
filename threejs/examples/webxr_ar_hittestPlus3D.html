@@ -155,7 +155,11 @@
 			function animate() {
 
 				renderer.setAnimationLoop( render );
-
+				if ( params.showBoreholes ) {
+					scene.getObjectByName("Boreholes").visible = true;
+				}else{
+					scene.getObjectByName("Boreholes").visible = false;
+				}
 			}
 
 			function render( timestamp, frame ) {
