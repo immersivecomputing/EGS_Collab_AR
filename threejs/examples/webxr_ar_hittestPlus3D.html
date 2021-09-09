@@ -88,6 +88,12 @@
 				controls.target.set( 0, 8, 0 );
 				controls.update();
 
+				const params = {
+					enableWind: true,
+					showBall: false,
+					togglePins: togglePins
+				};
+
 
 				document.body.appendChild( ARButton.createButton( renderer, { requiredFeatures: [ 'hit-test' ] } ) );
 
