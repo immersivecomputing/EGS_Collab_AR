@@ -31,7 +31,11 @@
 			let hitTestSourceRequested = false;
 
 			const params = {
-					toggleBoreholes: toggleBoreholes
+					toggleBoreholes: toggleLayer( 'Boreholes' )
+					toggleElectrodes: toggleLayer( 'Electrodes' )
+					toggleGyroStartPoints: toggleLayer( 'Gyro_StartingPoints' )
+					toggleGyroSrikeDipDepth: toggleLayer( 'Gyro_StrikeDipDepthPoints' )
+					toggleGyroXYZ: toggleLayer( 'Gyro_XYZPoints' )
 				};
 
 			init();
@@ -105,18 +109,7 @@
 						
 						loadedModel.position.setFromMatrixPosition( reticle.matrix );
 						render();
-						
-						//scene.remove(loadedModel);
-						
-						//loader.load('MasterParent.gltf', function ( gltf ){
-						//	gltf.scene.position.setFromMatrixPosition( reticle.matrix );
-						//	loadedModel = gltf.scene;
-						//	scene.add(gltf.scene);
-						//	render();
-						//});
-
 					}
-
 				}
 				
 
@@ -140,6 +133,10 @@
 				
 				const gui = new GUI();
 				gui.add( params, 'toggleBoreholes' ).name( 'Toggle Boreholes' );
+				gui.add( params, 'toggleElectrodes' ).name( 'Toggle Electrodes' );
+				gui.add( params, 'toggleGyroStartPoints' ).name( 'Toggle Gyro Start Points' );
+				gui.add( params, 'toggleGyroSrikeDipDepth' ).name( 'Toggle Gyro S/D/D Points' );
+				gui.add( params, 'toggleGyroXYZ' ).name( 'Toggle Gyro XYZ Points' );
 			}
 
 			function onWindowResize() {
@@ -157,10 +154,10 @@
 				renderer.setAnimationLoop( render );
 			}
 			
-			function toggleBoreholes(){
+			function toggleLayer( layerName ){
 				loadedModel.traverse( function ( child ) {
 					if ( child instanceof THREE.Mesh  ) {
-						if(child.name=='Boreholes'){
+						if(child.name==layerName){
 							if(child.visible){
 								child.visible = false;
 							}else{
@@ -170,6 +167,7 @@
 					}
 				});
 			}
+			
 
 			function render( timestamp, frame ) {
 
