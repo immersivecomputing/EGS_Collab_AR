@@ -159,11 +159,18 @@
 			function animate() {
 
 				renderer.setAnimationLoop( render );
-				if ( params.showBoreholes ) {
-					scene.getObjectByName("Boreholes").visible = true;
-				}else{
-					scene.getObjectByName("Boreholes").visible = false;
-				}
+				
+				loadedModel.traverse( function ( child ) {
+					if ( child instanceof THREE.Mesh  ) {
+						if(child.name=='Boreholes'){
+							if ( params.showBoreholes ) {
+								child.visible = true;
+							}else{
+								child.visible = false;
+							}
+						}
+					}
+				});
 			}
 
 			function render( timestamp, frame ) {
