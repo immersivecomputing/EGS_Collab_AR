@@ -31,7 +31,7 @@
 			let hitTestSourceRequested = false;
 
 			const params = {
-					showBoreholes: true,
+					toggleBoreholes: toggleBoreholes
 				};
 
 			init();
@@ -142,7 +142,7 @@
 				//
 				
 				const gui = new GUI();
-				gui.add( params, 'showBoreholes' ).name( 'Show Boreholes' );
+				gui.add( params, 'toggleBoreholes' ).name( 'Toggle Boreholes' );
 			}
 
 			function onWindowResize() {
@@ -157,17 +157,18 @@
 			//
 
 			function animate() {
-
 				renderer.setAnimationLoop( render );
-				
+			}
+			
+			function toggleBoreholes(){
 				loadedModel.traverse( function ( child ) {
 					if ( child instanceof THREE.Mesh  ) {
 						if(child.name=='Boreholes'){
-							if ( params.showBoreholes ) {
-								child.visible = true;
-							}else{
+							//if ( params.showBoreholes ) {
+							//	child.visible = true;
+							//}else{
 								child.visible = false;
-							}
+							//}
 						}
 					}
 				});
