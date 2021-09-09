@@ -32,6 +32,10 @@
 
 			init();
 			animate();
+			
+			const params = {
+					showBoreholes: true,
+				};
 
 			function init() {
 
@@ -88,9 +92,7 @@
 				controls.target.set( 0, 8, 0 );
 				controls.update();
 
-				const params = {
-					showBoreholes: true,
-				};
+				
 
 
 				document.body.appendChild( ARButton.createButton( renderer, { requiredFeatures: [ 'hit-test' ] } ) );
