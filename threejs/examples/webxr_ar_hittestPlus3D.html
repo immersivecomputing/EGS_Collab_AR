@@ -169,8 +169,8 @@
 			}
 
             function toggleElectrodes() {
-                loadedModel.traverse(function (child) {
-                    if (child instanceof THREE.Mesh) {
+				loadedModel.traverse(function (child) {
+					if (child instanceof THREE.Object3D) {
                         if (child.name == 'Electrodes') {
                             if (child.visible) {
                                 child.visible = false;
@@ -183,8 +183,8 @@
 			}
 
             function toggleGyroStartPoints() {
-                loadedModel.traverse(function (child) {
-                    if (child instanceof THREE.Mesh) {
+				loadedModel.traverse(function (child) {
+					if (child instanceof THREE.Object3D) {
                         if (child.name == 'Gyro_StartingPoints') {
                             if (child.visible) {
                                 child.visible = false;
@@ -197,8 +197,8 @@
 			}
 
             function toggleGyroSrikeDipDepth() {
-                loadedModel.traverse(function (child) {
-                    if (child instanceof THREE.Mesh) {
+				loadedModel.traverse(function (child) {
+					if (child instanceof THREE.Object3D) {
                         if (child.name == 'Gyro_StrikeDipDepthPoints') {
                             if (child.visible) {
                                 child.visible = false;
@@ -212,7 +212,7 @@
 
             function toggleGyroXYZ() {
                 loadedModel.traverse(function (child) {
-                    if (child instanceof THREE.Mesh) {
+                    if (child instanceof THREE.Object3D) {
                         if (child.name == 'Gyro_XYZPoints') {
                             if (child.visible) {
                                 child.visible = false;
