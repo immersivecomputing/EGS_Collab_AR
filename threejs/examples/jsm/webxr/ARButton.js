@@ -77,7 +77,7 @@ class ARButton {
 			button.style.display = '';
 
 			button.style.cursor = 'pointer';
-			button.style.left = 'calc(50% - 50px)';
+			button.style.left = 'calc(10% - 50px)';
 			button.style.width = '100px';
 
 			button.textContent = 'START AR';
