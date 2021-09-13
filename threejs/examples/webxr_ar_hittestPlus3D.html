@@ -33,9 +33,9 @@
 			const params = {
                 toggleBoreholes: true,
                 toggleElectrodes: true,
-                toggleGyroStartPoints: false,
-                toggleGyroSrikeDipDepth: false,
-                toggleGyroXYZ: false
+                toggleGyroStartPoints: true,
+                toggleGyroSrikeDipDepth: true,
+                toggleGyroXYZ: true
 				};
 
 			init();
@@ -198,78 +198,6 @@
 			function animate() {
 				renderer.setAnimationLoop( render );
 			}
-			
-			/*
-			function toggleBoreholes(){
-				loadedModel.traverse( function ( child ) {
-					if ( child instanceof THREE.Mesh  ) {
-						if(child.name=='Boreholes'){
-							if(child.visible){
-								child.visible = false;
-							}else{
-								child.visible = true;
-							}
-						}
-					}
-				});
-			}
-
-            function toggleElectrodes() {
-				loadedModel.traverse(function (child) {
-					if (child instanceof THREE.Object3D) {
-                        if (child.name == 'Electrodes') {
-                            if (child.visible) {
-                                child.visible = false;
-                            } else {
-                                child.visible = true;
-                            }
-                        }
-                    }
-                });
-			}
-
-            function toggleGyroStartPoints() {
-				loadedModel.traverse(function (child) {
-					if (child instanceof THREE.Object3D) {
-                        if (child.name == 'Gyro_StartingPoints') {
-                            if (child.visible) {
-                                child.visible = false;
-                            } else {
-                                child.visible = true;
-                            }
-                        }
-                    }
-                });
-			}
-
-            function toggleGyroSrikeDipDepth() {
-				loadedModel.traverse(function (child) {
-					if (child instanceof THREE.Object3D) {
-                        if (child.name == 'Gyro_StrikeDipDepthPoints') {
-                            if (child.visible) {
-                                child.visible = false;
-                            } else {
-                                child.visible = true;
-                            }
-                        }
-                    }
-                });
-			}
-
-            function toggleGyroXYZ() {
-                loadedModel.traverse(function (child) {
-                    if (child instanceof THREE.Object3D) {
-                        if (child.name == 'Gyro_XYZPoints') {
-                            if (child.visible) {
-                                child.visible = false;
-                            } else {
-                                child.visible = true;
-                            }
-                        }
-                    }
-                });
-            }
-			*/
 
 			function render( timestamp, frame ) {
 
