@@ -77,7 +77,7 @@ class ARButton {
 			button.style.display = '';
 
 			button.style.cursor = 'pointer';
-			button.style.left = 'calc(10% - 50px)';
+			button.style.left = 'calc(50% - 50px)';
 			button.style.width = '100px';
 
 			button.textContent = 'START AR';
@@ -136,7 +136,7 @@ class ARButton {
 		function stylizeElement( element ) {
 
 			element.style.position = 'absolute';
-			element.style.top = '20px';
+			element.style.bottom = '20px';
 			element.style.padding = '12px 6px';
 			element.style.border = '1px solid #fff';
 			element.style.borderRadius = '4px';
@@ -181,7 +181,7 @@ class ARButton {
 
 			}
 
-			message.style.left = 'calc(10% - 90px)';
+			message.style.left = 'calc(50% - 90px)';
 			message.style.width = '180px';
 			message.style.textDecoration = 'none';
 
