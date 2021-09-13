@@ -144,7 +144,7 @@
 				});
 				gui.add(params, 'toggleElectrodes').name('Electrodes').onChange( function (value){
 					loadedModel.traverse( function ( child ) {
-						if ( child instanceof THREE.Mesh  ) {
+						if ( child instanceof THREE.Object3D  ) {
 							if(child.name=='Electrodes'){
 								child.visible = value;
 							}
@@ -154,7 +154,7 @@
 				});
                 gui.add(params, 'toggleGyroStartPoints' ).name( 'Gyro Start Points' ).onChange( function (value){
 					loadedModel.traverse( function ( child ) {
-						if ( child instanceof THREE.Mesh  ) {
+						if ( child instanceof THREE.Object3D  ) {
 							if(child.name=='Gyro_StartingPoints'){
 								child.visible = value;
 							}
@@ -164,7 +164,7 @@
 				});
                 gui.add(params, 'toggleGyroSrikeDipDepth' ).name( 'Gyro Strike/Dip/Depth Points' ).onChange( function (value){
 					loadedModel.traverse( function ( child ) {
-						if ( child instanceof THREE.Mesh  ) {
+						if ( child instanceof THREE.Object3D  ) {
 							if(child.name=='Gyro_StrikeDipDepthPoints'){
 								child.visible = value;
 							}
@@ -174,7 +174,7 @@
 				});
                 gui.add(params, 'toggleGyroXYZ' ).name( 'Gyro XYZ Points' ).onChange( function (value){
 					loadedModel.traverse( function ( child ) {
-						if ( child instanceof THREE.Mesh  ) {
+						if ( child instanceof THREE.Object3D  ) {
 							if(child.name=='Gyro_XYZPoints'){
 								child.visible = value;
 							}
