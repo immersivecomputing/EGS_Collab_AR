@@ -31,11 +31,11 @@
 			let hitTestSourceRequested = false;
 
 			const params = {
-                toggleBoreholes: toggleBoreholes,
-                toggleElectrodes: toggleElectrodes,
-                toggleGyroStartPoints: toggleGyroStartPoints,
-                toggleGyroSrikeDipDepth: toggleGyroSrikeDipDepth,
-                toggleGyroXYZ: toggleGyroXYZ
+                toggleBoreholes: true,
+                toggleElectrodes: true,
+                toggleGyroStartPoints: false,
+                toggleGyroSrikeDipDepth: false,
+                toggleGyroXYZ: false
 				};
 
 			init();
@@ -132,11 +132,56 @@
 				//
 				
 				const gui = new GUI();
-				gui.add(params, 'toggleBoreholes').name('Toggle Boreholes');
-				gui.add(params, 'toggleElectrodes').name('Toggle Electrodes');
-                gui.add(params, 'toggleGyroStartPoints' ).name( 'Toggle Gyro Start Points' );
-                gui.add(params, 'toggleGyroSrikeDipDepth' ).name( 'Toggle Gyro Strike/Dip/Depth Points' );
-                gui.add(params, 'toggleGyroXYZ' ).name( 'Toggle Gyro XYZ Points' );
+				gui.add(params, 'toggleBoreholes').name('Boreholes').onChange( function (value){
+					loadedModel.traverse( function ( child ) {
+						if ( child instanceof THREE.Mesh  ) {
+							if(child.name=='Boreholes'){
+								child.visible = value;
+							}
+						}
+					});
+					render();
+				});
+				gui.add(params, 'toggleElectrodes').name('Electrodes').onChange( function (value){
+					loadedModel.traverse( function ( child ) {
+						if ( child instanceof THREE.Mesh  ) {
+							if(child.name=='Electrodes'){
+								child.visible = value;
+							}
+						}
+					});
+					render();
+				});
+                gui.add(params, 'toggleGyroStartPoints' ).name( 'Gyro Start Points' ).onChange( function (value){
+					loadedModel.traverse( function ( child ) {
+						if ( child instanceof THREE.Mesh  ) {
+							if(child.name=='Gyro_StartingPoints'){
+								child.visible = value;
+							}
+						}
+					});
+					render();
+				});
+                gui.add(params, 'toggleGyroSrikeDipDepth' ).name( 'Gyro Strike/Dip/Depth Points' ).onChange( function (value){
+					loadedModel.traverse( function ( child ) {
+						if ( child instanceof THREE.Mesh  ) {
+							if(child.name=='Gyro_StrikeDipDepthPoints'){
+								child.visible = value;
+							}
+						}
+					});
+					render();
+				});
+                gui.add(params, 'toggleGyroXYZ' ).name( 'Gyro XYZ Points' ).onChange( function (value){
+					loadedModel.traverse( function ( child ) {
+						if ( child instanceof THREE.Mesh  ) {
+							if(child.name=='Gyro_XYZPoints'){
+								child.visible = value;
+							}
+						}
+					});
+					render();
+				});
 			}
 
 			function onWindowResize() {
@@ -154,6 +199,7 @@
 				renderer.setAnimationLoop( render );
 			}
 			
+			/*
 			function toggleBoreholes(){
 				loadedModel.traverse( function ( child ) {
 					if ( child instanceof THREE.Mesh  ) {
@@ -223,7 +269,7 @@
                     }
                 });
             }
-			
+			*/
 
 			function render( timestamp, frame ) {
 
