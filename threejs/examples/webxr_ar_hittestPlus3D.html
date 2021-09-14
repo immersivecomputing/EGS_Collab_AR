@@ -109,6 +109,7 @@
 					if ( reticle.visible ) {
 						
 						loadedModel.position.setFromMatrixPosition( reticle.matrix );
+						loadedModel.scale.set(0.005,0.005,0.005);
 						render();
 					}
 				}
