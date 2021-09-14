@@ -136,7 +136,7 @@
 				const gui = new GUI();
 				gui.add(params, 'toggleTunnel').name('Tunnel').onChange( function (value){
 					loadedModel.traverse( function ( child ) {
-						if ( child instanceof THREE.Mesh  ) {
+						if ( child instanceof THREE.Group  ) {
 							if(child.name=='TunnelOnly'){
 								child.visible = value;
 							}
