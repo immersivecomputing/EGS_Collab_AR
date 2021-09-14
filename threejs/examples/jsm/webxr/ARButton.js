@@ -21,6 +21,7 @@ class ARButton {
 				svg.addEventListener( 'click', function () {
 
 					currentSession.end();
+					location.reload();
 
 				} );
 				overlay.appendChild( svg );
