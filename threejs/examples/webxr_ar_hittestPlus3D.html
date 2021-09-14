@@ -167,7 +167,7 @@
 					render();
 				});
 				const gyroFolder = gui.addFolder( 'Gyro Data' );
-                gyroFolder.add(params, 'toggleGyroStartPoints' ).name( 'Gyro Start Points' ).onChange( function (value){
+                gyroFolder.add(params, 'toggleGyroStartPoints' ).name( 'Start Points' ).onChange( function (value){
 					loadedModel.traverse( function ( child ) {
 						if ( child instanceof THREE.Object3D  ) {
 							if(child.name=='Gyro_StartingPoints'){
@@ -177,7 +177,7 @@
 					});
 					render();
 				});
-                gyroFolder.add(params, 'toggleGyroSrikeDipDepth' ).name( 'Gyro Strike/Dip/Depth Points' ).onChange( function (value){
+                gyroFolder.add(params, 'toggleGyroSrikeDipDepth' ).name( 'Strike/Dip/Depth Points' ).onChange( function (value){
 					loadedModel.traverse( function ( child ) {
 						if ( child instanceof THREE.Object3D  ) {
 							if(child.name=='Gyro_StrikeDipDepthPoints'){
@@ -187,7 +187,7 @@
 					});
 					render();
 				});
-                gyroFolder.add(params, 'toggleGyroXYZ' ).name( 'Gyro XYZ Points' ).onChange( function (value){
+                gyroFolder.add(params, 'toggleGyroXYZ' ).name( 'XYZ Points' ).onChange( function (value){
 					loadedModel.traverse( function ( child ) {
 						if ( child instanceof THREE.Object3D  ) {
 							if(child.name=='Gyro_XYZPoints'){
