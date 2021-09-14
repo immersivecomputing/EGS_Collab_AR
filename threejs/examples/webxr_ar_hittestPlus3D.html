@@ -31,6 +31,7 @@
 			let hitTestSourceRequested = false;
 
 			const params = {
+				toggleTunnel: true,
                 toggleBoreholes: true,
                 toggleElectrodes: true,
                 toggleGyroStartPoints: true,
@@ -83,9 +84,10 @@
 				//scene.add( grid );
 				
 				const loader = new GLTFLoader().setPath( '/EGS_Collab_AR/GLTF/' );
-				loader.load('MasterParent.gltf', function ( gltf ){
+				loader.load('EGS_Collab.gltf', function ( gltf ){
 							console.log(gltf);
-							gltf.scene.position.y = 8;
+							//gltf.scene.position.y = 8;
+							gltf.scene.scale.set(0.01,0.01,0.01) // scale here
 							loadedModel = gltf.scene;
 							scene.add(gltf.scene);
 							render();
@@ -95,7 +97,7 @@
 				controls.addEventListener( 'change', render ); // use if there is no animation loop
 				controls.minDistance = 0.01;
 				controls.maxDistance = 1000;
-				controls.target.set( 0, 8, 0 );
+				controls.target.set( 0, 0, 0 );
 				controls.update();
 
 				
@@ -132,10 +134,20 @@
 				//
 				
 				const gui = new GUI();
+				gui.add(params, 'toggleTunnel').name('Tunnel').onChange( function (value){
+					loadedModel.traverse( function ( child ) {
+						if ( child instanceof THREE.Mesh  ) {
+							if(child.name=='TunnelOnly'){
+								child.visible = value;
+							}
+						}
+					});
+					render();
+				});
 				gui.add(params, 'toggleBoreholes').name('Boreholes').onChange( function (value){
 					loadedModel.traverse( function ( child ) {
 						if ( child instanceof THREE.Mesh  ) {
-							if(child.name=='Boreholes'){
+							if(child.name=='BoreholesOnly'){
 								child.visible = value;
 							}
 						}
