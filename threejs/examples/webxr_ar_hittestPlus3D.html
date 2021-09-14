@@ -32,6 +32,7 @@
 
 			const params = {
 				toggleTunnel: true,
+				toggleGrid: false,
                 toggleBoreholes: true,
                 toggleElectrodes: true,
                 toggleGyroStartPoints: true,
@@ -140,6 +141,10 @@
 							}
 						}
 					});
+					render();
+				});
+				baseFolder.add(params, 'toggleGrid').name('Grid').onChange( function (value){
+					grid.visible = value;
 					render();
 				});
 				const planningFolder = gui.addFolder( 'Planned Positions' );
