@@ -77,11 +77,11 @@
 				scene.add( light );
 				
 
-				//const grid = new THREE.GridHelper( 500, 10, 0xffffff, 0xffffff );
-				//grid.material.opacity = 0.5;
-				//grid.material.depthWrite = false;
-				//grid.material.transparent = true;
-				//scene.add( grid );
+				const grid = new THREE.GridHelper( 50, 0.01, 0xffffff, 0xffffff );
+				grid.material.opacity = 0.5;
+				grid.material.depthWrite = false;
+				grid.material.transparent = true;
+				scene.add( grid );
 				
 				const loader = new GLTFLoader().setPath( '/EGS_Collab_AR/GLTF/' );
 				loader.load('EGS_Collab.gltf', function ( gltf ){
@@ -99,9 +99,6 @@
 				controls.maxDistance = 1000;
 				controls.target.set( 0, 0, 0 );
 				controls.update();
-
-				
-
 
 				document.body.appendChild( ARButton.createButton( renderer, { requiredFeatures: [ 'hit-test' ] } ) );
 
