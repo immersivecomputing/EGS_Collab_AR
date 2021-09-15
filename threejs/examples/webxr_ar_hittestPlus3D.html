@@ -46,7 +46,7 @@
                 toggleGyroStartPoints: true,
                 toggleGyroSrikeDipDepth: true,
                 toggleGyroXYZ: true,
-				textField: "cs_E2-TC.csv",
+				textField: "E2-TC",
 				loadCSV: loadCSV
 				};
 
@@ -214,8 +214,8 @@
 					render();
 				});
 				const importFolder = gui.addFolder( 'Import Gyro Data' );
-				importFolder.add(params, "textField");
-				importFolder.add(params, "loadCSV");
+				importFolder.add(params, "textField").name('Gyro CSV filename');
+				importFolder.add(params, "loadCSV").name('Load CSV');
 				
 				
 				//
@@ -224,11 +224,18 @@
 			}
 			
 			function loadCSV(){
+			
 				const csvloader = new THREE.FileLoader();
+				csvloader.load('/EGS_Collab_AR/csvData/Old_wellhead_coords.csv',
+					function(data){
+						console.log(data);
+					}
+				);
+				
+				
 				csvloader.load(
 					// resource URL
-					'/EGS_Collab_AR/csvData/' + params.textField,
-
+					'/EGS_Collab_AR/csvData/cs_' + params.textField '.csv',
 					// onLoad callback
 					function ( data ) {
 						csvData = csvParse(data);
