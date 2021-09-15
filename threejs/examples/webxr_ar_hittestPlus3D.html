@@ -222,7 +222,7 @@
 						csvData = csvParse(data);
 						let v3array = [];
 						for(let i = 0; i < csvData.length; i++){
-							v3array.push(new THREE.Vector3(csvData[i].Easting, csvData[i].Northing, csvData[i].Elev));
+							v3array.push(new THREE.Vector3(parseFloat(csvData[i].Easting), parseFloat(csvData[i].Northing), parseFloat(csvData[i].Elev)));
 						}
 						boreholeSpline = new THREE.CatmullRomCurve3(v3array);
 	//					boreholeSpline = new THREE.CatmullRomCurve3( [
