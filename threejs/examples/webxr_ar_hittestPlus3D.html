@@ -228,7 +228,7 @@
 				csvloader.load('/EGS_Collab_AR/csvData/Old_wellhead_coords.csv',
 					function(data){
 						csvData = csvParse(data);
-						for(let i = 1; < csvData.length; i++){
+						for(let i = 1; i < csvData.length; i++){
 							if (csvData[i].WellID == params.textField){
 								console.log(csvData.Northing_ft);
 							}
