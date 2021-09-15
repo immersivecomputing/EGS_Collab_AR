@@ -25,6 +25,7 @@
 			let container;
 			let camera, scene, renderer, loadedModel;
 			let controller;
+			let meshSpline;
 
 			let reticle;
 			
@@ -220,10 +221,38 @@
 						let v3array = [];
 						for(let i = 0; i < 20; i++){
 							v3array.push(new THREE.Vector3(csvData[i].Easting, csvData[i].Northing, csvData[i].Elev));
-						}
+						}console.log(v3array);
 						boreholeSpline = new THREE.CatmullRomCurve3(v3array);
 					}
 				);
+			}
+			
+			function addTube(inputtube) {
+
+				if ( meshSpline !== undefined ) {
+
+					scene.remove( meshSpline );
+					meshSpline.geometry.dispose();
+
+				}
+
+				const extrudePath = boreholeSpline;
+
+				tubeGeometry = new THREE.TubeGeometry( extrudePath, 100, 2, 8, true );
+
+				addGeometry( tubeGeometry );
+			}
+			
+			function addGeometry( geometry ) {
+
+				// 3D shape
+
+				meshSpline = new THREE.Mesh( geometry, material );
+				const wireframe = new THREE.Mesh( geometry, wireframeMaterial );
+				meshSpline.add( wireframe );
+
+				scene.add( meshSpline );
+
 			}
 
 			function onWindowResize() {
