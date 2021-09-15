@@ -20,7 +20,6 @@
 			import { OrbitControls } from './jsm/controls/OrbitControls.js';
 			import { RoomEnvironment } from './jsm/environments/RoomEnvironment.js';
 			import { GUI } from './jsm/libs/dat.gui.module.js';
-			import * as jquery from './jquery.csv.js';
 
 			let container;
 			let camera, scene, renderer, loadedModel;
@@ -205,8 +204,18 @@
 				
 				//
 				
-				var data = jquery.csv.toObjects('/EGS_Collab_AR/csvData/cs_E2-TC.csv');
-				
+				const csvloader = new THREE.FileLoader();
+				const csvData = csvloader.load(
+					// resource URL
+					'/EGS_Collab_AR/csvData/cs_E2-TC.csv',
+
+					// onLoad callback
+					//function ( data ) {
+						// output the text to the console
+					//	console.log( data )
+					//}
+				);
+				console.log(csvData);
 			}
 
 			function onWindowResize() {
