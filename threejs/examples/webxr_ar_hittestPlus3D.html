@@ -5,7 +5,6 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 		<link type="text/css" rel="stylesheet" href="main.css">
-		<script src="jquery-csv.js"></script>
 	</head>
 	<body>
 
@@ -21,6 +20,7 @@
 			import { OrbitControls } from './jsm/controls/OrbitControls.js';
 			import { RoomEnvironment } from './jsm/environments/RoomEnvironment.js';
 			import { GUI } from './jsm/libs/dat.gui.module.js';
+			import * as jquery from ./"jquery-csv.js";
 
 			let container;
 			let camera, scene, renderer, loadedModel;
@@ -205,7 +205,7 @@
 				
 				//
 				
-				var data = $.csv.toObjects('/EGS_Collab_AR/csvData/cs_E2-TC.csv');
+				var data = jquery.csv.toObjects('/EGS_Collab_AR/csvData/cs_E2-TC.csv');
 				
 			}
 
