@@ -194,7 +194,7 @@
                 gyroFolder.add(params, 'toggleGyroSrikeDipDepth' ).name( 'Strike/Dip/Depth Points' ).onChange( function (value){
 					loadedModel.traverse( function ( child ) {
 						if ( child instanceof THREE.Object3D  ) {
-							if(child.name=='Gyro_StrikeDipDepthPoints'){
+							if(child.name=='Gyro_XYZPoints'){
 								child.visible = value;
 							}
 						}
@@ -204,7 +204,7 @@
                 gyroFolder.add(params, 'toggleGyroXYZ' ).name( 'XYZ Points' ).onChange( function (value){
 					loadedModel.traverse( function ( child ) {
 						if ( child instanceof THREE.Object3D  ) {
-							if(child.name=='Gyro_XYZPoints'){
+							if(child.name=='Gyro_StrikeDipDepthPoints'){
 								child.visible = value;
 							}
 						}
