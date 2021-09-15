@@ -225,8 +225,8 @@
 						let v3array = [];
 						for(let i = 0; i < csvData.length; i++){
 							let xpos = (parseFloat(csvData[i].Easting) * 3.28084) - 83.2371;
-							let ypos = (parseFloat(csvData[i].Northing) * 3.28084) - 219.575;
-							let zpos = (parseFloat(csvData[i].Elev) * 3.28084) + 79.21207;
+							let ypos = (parseFloat(csvData[i].Northing) * 3.28084) + 79.21207;
+							let zpos = (parseFloat(csvData[i].Elev) * 3.28084) - 219.575;
 							v3array.push(new THREE.Vector3(xpos, ypos, zpos));
 						}
 						boreholeSpline = new THREE.CatmullRomCurve3(v3array);
