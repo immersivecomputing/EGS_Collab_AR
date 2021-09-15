@@ -205,17 +205,17 @@
 				//
 				
 				const csvloader = new THREE.FileLoader();
-				//load a text file and output the result to the console
-				csvloader.load(
+				const csvData = csvloader.load(
 					// resource URL
 					'/EGS_Collab_AR/csvData/cs_E2-TC.csv',
 
 					// onLoad callback
-					function ( data ) {
+					//function ( data ) {
 						// output the text to the console
-						console.log( data )
-					}
+					//	console.log( data )
+					//}
 				);
+				console.log(csvData);
 			}
 
 			function onWindowResize() {
