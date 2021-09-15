@@ -214,7 +214,7 @@
 					render();
 				});
 				const importFolder = gui.addFolder( 'Import Gyro Data' );
-				importFolder.add(params, "textField").name('Gyro CSV filename');
+				importFolder.add(params, "textField").name('File Name');
 				importFolder.add(params, "loadCSV").name('Load CSV');
 				
 				
@@ -224,7 +224,7 @@
 			}
 			
 			function loadCSV(){
-			
+				const csvloader = new THREE.FileLoader();
 				const csvloader = new THREE.FileLoader();
 				csvloader.load('/EGS_Collab_AR/csvData/Old_wellhead_coords.csv',
 					function(data){
@@ -232,10 +232,10 @@
 					}
 				);
 				
-				
 				csvloader.load(
 					// resource URL
-					'/EGS_Collab_AR/csvData/cs_' + params.textField '.csv',
+					'/EGS_Collab_AR/csvData/cs_' + params.textField + '.csv',
+
 					// onLoad callback
 					function ( data ) {
 						csvData = csvParse(data);
