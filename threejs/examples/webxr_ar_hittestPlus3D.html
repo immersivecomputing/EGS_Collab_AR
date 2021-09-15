@@ -230,6 +230,7 @@
 					function(data){
 						csvData = csvParse(data);
 						for(let i = 1; i < csvData.length; i++){
+							console.log(csvData[i].WellID);
 							if (csvData[i].WellID == params.textField){
 								console.log('here');
 								baseNorthing = -2779.125 - parseFloat(csvData[i].Northing_ft);
@@ -237,11 +238,6 @@
 								baseElev = -1047.088 + parseFloat(csvData[i].Elevation_ft);
 							}
 						}
-						
-						console.log(csvData);
-						console.log(baseNorthing);
-						console.log(baseEasting);
-						console.log(baseElev);
 						
 						const dataCsvloader = new THREE.FileLoader();
 						dataCsvloader.load('/EGS_Collab_AR/csvData/cs_' + params.textField + '.csv',
