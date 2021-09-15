@@ -20,12 +20,15 @@
 			import { OrbitControls } from './jsm/controls/OrbitControls.js';
 			import { RoomEnvironment } from './jsm/environments/RoomEnvironment.js';
 			import { GUI } from './jsm/libs/dat.gui.module.js';
+			import {csvParse} from "https://cdn.skypack.dev/d3-dsv@3";
 
 			let container;
 			let camera, scene, renderer, loadedModel;
 			let controller;
 
 			let reticle;
+			
+			let csvData;
 
 			let hitTestSource = null;
 			let hitTestSourceRequested = false;
@@ -205,17 +208,18 @@
 				//
 				
 				const csvloader = new THREE.FileLoader();
-				const csvData = csvloader.load(
+				csvloader.load(
 					// resource URL
 					'/EGS_Collab_AR/csvData/cs_E2-TC.csv',
 
 					// onLoad callback
-					//function ( data ) {
+					function ( data ) {
 						// output the text to the console
-					//	console.log( data )
-					//}
+						console.log( data )
+						csvData = csvParse(data);
+					}
 				);
-				console.log(csvData.responseText);
+				console.log(csvData);
 			}
 
 			function onWindowResize() {
