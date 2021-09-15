@@ -227,7 +227,11 @@
 				const csvloader = new THREE.FileLoader();
 				csvloader.load('/EGS_Collab_AR/csvData/Old_wellhead_coords.csv',
 					function(data){
-						console.log(data);
+						csvData = csvParse(data);
+						console.log(csvData);
+						//for(let i = 1; < csvData.length; i++){
+						//	if (csvData
+						//}
 					}
 				);
 				
