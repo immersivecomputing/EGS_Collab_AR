@@ -5,6 +5,7 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 		<link type="text/css" rel="stylesheet" href="main.css">
+		<script src="jquery-csv.js"></script>
 	</head>
 	<body>
 
@@ -204,18 +205,8 @@
 				
 				//
 				
-				const csvloader = new THREE.FileLoader();
-				const csvData = csvloader.load(
-					// resource URL
-					'/EGS_Collab_AR/csvData/cs_E2-TC.csv',
-
-					// onLoad callback
-					//function ( data ) {
-						// output the text to the console
-					//	console.log( data )
-					//}
-				);
-				console.log(csvData.response);
+				var data = $.csv.toObjects('/EGS_Collab_AR/csvData/cs_E2-TC.csv'):
+				
 			}
 
 			function onWindowResize() {
