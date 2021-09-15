@@ -249,6 +249,7 @@
 									v3array.push(new THREE.Vector3(xpos, ypos, zpos));
 								}
 								boreholeSpline = new THREE.CatmullRomCurve3(v3array);
+								console.log(boreholeSpline);
 								addTube(boreholeSpline);
 							}
 						);
