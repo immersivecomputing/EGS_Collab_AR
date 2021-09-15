@@ -230,7 +230,7 @@
 						csvData = csvParse(data);
 						for(let i = 1; i < csvData.length; i++){
 							if (csvData[i].WellID == params.textField){
-								console.log(csvData.Northing_ft);
+								console.log(csvData[i].Northing_ft);
 							}
 						}
 					}
