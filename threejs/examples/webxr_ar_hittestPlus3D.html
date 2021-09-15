@@ -35,6 +35,8 @@
 			let hitTestSourceRequested = false;
 			
 			let boreholeSpline, tubeGeometry;
+			const material = new THREE.MeshLambertMaterial( { color: 0xff00ff } );
+			const wireframeMaterial = new THREE.MeshBasicMaterial( { color: 0x000000, opacity: 0.3, wireframe: true, transparent: true } );
 
 			const params = {
 				toggleTunnel: true,
