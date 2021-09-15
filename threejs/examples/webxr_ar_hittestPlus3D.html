@@ -214,12 +214,10 @@
 
 					// onLoad callback
 					function ( data ) {
-						// output the text to the console
-						console.log( data )
 						csvData = csvParse(data);
+						console.log(csvData);
 					}
 				);
-				console.log(csvData);
 			}
 
 			function onWindowResize() {
