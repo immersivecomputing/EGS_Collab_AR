@@ -231,9 +231,9 @@
 						csvData = csvParse(data);
 						for(let i = 1; i < csvData.length; i++){
 							if (csvData[i].WellID == params.textField){
-								baseNorthing = -2779.125 - csvData[i].Northing_ft;
-								baseEasting = 4047.435 + csvData[i].Easting_ft;
-								baseElev = -1047.088 + csvData[i].Elevation_ft;
+								baseNorthing = -2779.125 - parseFloat(csvData[i].Northing_ft);
+								baseEasting = 4047.435 + parseFloat(csvData[i].Easting_ft);
+								baseElev = -1047.088 + parseFloat(csvData[i].Elevation_ft);
 							}
 						}
 					}
