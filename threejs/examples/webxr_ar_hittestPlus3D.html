@@ -30,6 +30,7 @@
 			let reticle;
 			
 			let csvData;
+			let baseNorthing, baseEasting, baseElev;
 
 			let hitTestSource = null;
 			let hitTestSourceRequested = false;
@@ -230,7 +231,9 @@
 						csvData = csvParse(data);
 						for(let i = 1; i < csvData.length; i++){
 							if (csvData[i].WellID == params.textField){
-								console.log(csvData[i].Northing_ft);
+								baseNorthing = -2779.125 - csvData[i].Northing_ft;
+								baseEasting = 4047.435 + csvData[i].Easting_ft;
+								baseElev = -1047.088 + csvData[i].Elevation_ft;
 							}
 						}
 					}
@@ -245,9 +248,9 @@
 						csvData = csvParse(data);
 						let v3array = [];
 						for(let i = 0; i < csvData.length; i++){
-							let xpos = (parseFloat(csvData[i].Easting) * 3.28084) - 83.2371;
-							let ypos = (parseFloat(csvData[i].Elev) * 3.28084) + 79.21207;
-							let zpos = (-parseFloat(csvData[i].Northing) * 3.28084) + 219.575;
+							let xpos = (parseFloat(csvData[i].Easting) * 3.28084) - baseEasting;
+							let ypos = (parseFloat(csvData[i].Elev) * 3.28084) + baseElev;
+							let zpos = (-parseFloat(csvData[i].Northing) * 3.28084) + baseNorthing;
 							v3array.push(new THREE.Vector3(xpos, ypos, zpos));
 						}
 						boreholeSpline = new THREE.CatmullRomCurve3(v3array);
