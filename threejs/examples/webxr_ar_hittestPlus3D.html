@@ -97,9 +97,11 @@
 				loader.load('EGS_Collab.gltf', function ( gltf ){
 							console.log(gltf);
 							//gltf.scene.position.y = 8;
-							gltf.scene.scale.set(0.01,0.01,0.01) // scale here
-							loadedModel = gltf.scene;
-							scene.add(gltf.scene);
+							//gltf.scene.scale.set(0.01,0.01,0.01) // scale here
+							//loadedModel = gltf.scene;
+							loadedModel.add(gltf.scene);
+							loadedModel.scale.set(0.01,0.01,0.01)
+							scene.add(loadedModel);
 							render();
 						});
 				
@@ -256,7 +258,7 @@
 				const wireframe = new THREE.Mesh( geometry, wireframeMaterial );
 				meshSpline.add( wireframe );
 
-				scene.add( meshSpline );
+				loadedModel.add( meshSpline );
 
 			}
 
