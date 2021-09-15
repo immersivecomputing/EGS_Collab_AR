@@ -201,6 +201,21 @@
 					});
 					render();
 				});
+				
+				//
+				
+				const loader = new THREE.FileLoader();
+				//load a text file and output the result to the console
+				loader.load(
+					// resource URL
+					'/csvData/cs_E2-TC.csv',
+
+					// onLoad callback
+					function ( data ) {
+						// output the text to the console
+						console.log( data )
+					}
+				);
 			}
 
 			function onWindowResize() {
