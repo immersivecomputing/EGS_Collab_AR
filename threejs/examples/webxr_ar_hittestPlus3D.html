@@ -217,13 +217,11 @@
 					// onLoad callback
 					function ( data ) {
 						csvData = csvParse(data);
-						
-						boreholeSpline = new THREE.CatmullRomCurve3([
-							for(let i = 0; i < 20; i++){
-								console.log(csvData[i].Northing);
-								new THREE.Vector3(csvData[i].Easting, csvData[i].Northing, csvData[i].Elev);
-							}
-						]);
+						let v3array = [];
+						for(let i = 0; i < 20; i++){
+							v3array.push(new THREE.Vector3(csvData[i].Easting, csvData[i].Northing, csvData[i].Elev));
+						}
+						boreholeSpline = new THREE.CatmullRomCurve3(v3array);
 					}
 				);
 			}
