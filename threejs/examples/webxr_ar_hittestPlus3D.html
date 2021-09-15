@@ -237,7 +237,7 @@
 							}
 						}
 						
-						dataCsvloader = new THREE.FileLoader();
+						const dataCsvloader = new THREE.FileLoader();
 						dataCsvloader.load('/EGS_Collab_AR/csvData/cs_' + params.textField + '.csv',
 							function ( data ) {
 								csvData = csvParse(data);
