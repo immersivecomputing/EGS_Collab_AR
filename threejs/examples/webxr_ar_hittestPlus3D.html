@@ -45,7 +45,9 @@
                 toggleElectrodes: true,
                 toggleGyroStartPoints: true,
                 toggleGyroSrikeDipDepth: true,
-                toggleGyroXYZ: true
+                toggleGyroXYZ: true,
+				textField: "Gyro csv file",
+				loadCSV: loadCSV
 				};
 
 			init();
@@ -211,9 +213,17 @@
 					});
 					render();
 				});
+				const importFolder = gui.addFolder( 'Import Gyro Data' );
+				importFolder.add(params, "textField");
+				importFolder.add(params, "loadCSV");
+				
 				
 				//
 				
+				
+			}
+			
+			function loadCSV(){
 				const csvloader = new THREE.FileLoader();
 				csvloader.load(
 					// resource URL
