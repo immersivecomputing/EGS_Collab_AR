@@ -243,7 +243,7 @@
 								csvData = csvParse(data);
 								let v3array = [];
 								for(let i = 0; i < csvData.length; i++){
-									let xpos = (parseFloat(csvData[i].Easting) * 3.28084) + baseEasting;
+									let xpos = (parseFloat(csvData[i].Easting) * 3.28084) - baseEasting;
 									let ypos = (parseFloat(csvData[i].Elev) * 3.28084) + baseElev;
 									let zpos = (-parseFloat(csvData[i].Northing) * 3.28084) + baseNorthing;
 									v3array.push(new THREE.Vector3(xpos, ypos, zpos));
