@@ -46,7 +46,7 @@
                 toggleGyroStartPoints: true,
                 toggleGyroSrikeDipDepth: true,
                 toggleGyroXYZ: true,
-				textField: "Gyro csv file",
+				textField: "cs_E2-TC.csv",
 				loadCSV: loadCSV
 				};
 
@@ -227,7 +227,7 @@
 				const csvloader = new THREE.FileLoader();
 				csvloader.load(
 					// resource URL
-					'/EGS_Collab_AR/csvData/cs_E2-TC.csv',
+					'/EGS_Collab_AR/csvData/' + params.textField,
 
 					// onLoad callback
 					function ( data ) {
