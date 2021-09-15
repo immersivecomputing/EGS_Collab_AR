@@ -236,28 +236,26 @@
 								baseElev = -1047.088 + parseFloat(csvData[i].Elevation_ft);
 							}
 						}
+						
+						dataCsvloader = new THREE.FileLoader();
+						dataCsvloader.load('/EGS_Collab_AR/csvData/cs_' + params.textField + '.csv',
+							function ( data ) {
+								csvData = csvParse(data);
+								let v3array = [];
+								for(let i = 0; i < csvData.length; i++){
+									let xpos = (parseFloat(csvData[i].Easting) * 3.28084) + baseEasting;
+									let ypos = (parseFloat(csvData[i].Elev) * 3.28084) + baseElev;
+									let zpos = (-parseFloat(csvData[i].Northing) * 3.28084) + baseNorthing;
+									v3array.push(new THREE.Vector3(xpos, ypos, zpos));
+								}
+								boreholeSpline = new THREE.CatmullRomCurve3(v3array);
+								addTube(boreholeSpline);
+							}
+						);
 					}
 				);
 				
-				csvloader.load(
-					// resource URL
-					'/EGS_Collab_AR/csvData/cs_' + params.textField + '.csv',
-
-					// onLoad callback
-					function ( data ) {
-						csvData = csvParse(data);
-						let v3array = [];
-						for(let i = 0; i < csvData.length; i++){
-							let xpos = (parseFloat(csvData[i].Easting) * 3.28084) - baseEasting;
-							let ypos = (parseFloat(csvData[i].Elev) * 3.28084) + baseElev;
-							let zpos = (-parseFloat(csvData[i].Northing) * 3.28084) + baseNorthing;
-							v3array.push(new THREE.Vector3(xpos, ypos, zpos));
-						}
-						boreholeSpline = new THREE.CatmullRomCurve3(v3array);
-						
-						addTube(boreholeSpline);
-					}
-				);
+				
 			}
 			
 			function addTube(inputtube) {
