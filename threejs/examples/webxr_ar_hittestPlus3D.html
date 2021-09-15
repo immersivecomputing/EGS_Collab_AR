@@ -237,6 +237,8 @@
 							}
 						}
 						
+						console.log(csvData);
+						
 						const dataCsvloader = new THREE.FileLoader();
 						dataCsvloader.load('/EGS_Collab_AR/csvData/cs_' + params.textField + '.csv',
 							function ( data ) {
@@ -249,8 +251,6 @@
 									v3array.push(new THREE.Vector3(xpos, ypos, zpos));
 								}
 								boreholeSpline = new THREE.CatmullRomCurve3(v3array);
-								console.log(csvData);
-								console.log(boreholeSpline);
 								addTube(boreholeSpline);
 							}
 						);
