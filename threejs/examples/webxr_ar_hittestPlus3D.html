@@ -229,7 +229,7 @@
 				csvloader.load('/EGS_Collab_AR/csvData/Old_wellhead_coords.csv',
 					function(data){
 						csvData = csvParse(data);
-						for(let i = 0; i < csvData.length; i++)(
+						for(let i = 0; i < csvData.length; i++){
 							if (csvData[i].WellID == params.textField){
 								baseNorthing = -2779.125 - parseFloat(csvData[i].Northing_ft);
 								baseEasting = 4047.435 + parseFloat(csvData[i].Easting_ft);
