@@ -39,7 +39,7 @@
 			let boreholeSpline, tubeGeometry;
 			const material = new THREE.MeshLambertMaterial( {
 					side: THREE.DoubleSide,
-					color: 0xff00ff,
+					color: 0xF5F5F5,
 					vertexColors: true} );
 			const wireframeMaterial = new THREE.MeshBasicMaterial( { color: 0x000000, opacity: 0.3, wireframe: true, transparent: true } );
 
@@ -304,7 +304,7 @@
 			
 			function updateColors() {
 
-				lut.setColorMap( 'grayscale' );
+				lut.setColorMap( 'rainbow' );
 
 				lut.setMax( 100 );
 				lut.setMin( -100 );
