@@ -36,7 +36,10 @@
 			let hitTestSourceRequested = false;
 			
 			let boreholeSpline, tubeGeometry;
-			const material = new THREE.MeshLambertMaterial( { color: 0xff00ff } );
+			const material = new THREE.MeshLambertMaterial( {
+					side: THREE.DoubleSide,
+					color: 0xF5F5F5,
+					vertexColors: true} );
 			const wireframeMaterial = new THREE.MeshBasicMaterial( { color: 0x000000, opacity: 0.3, wireframe: true, transparent: true } );
 
 			const params = {
@@ -280,8 +283,8 @@
 				console.log(geometry);
 
 				meshSpline = new THREE.Mesh( geometry, material );
-				const wireframe = new THREE.Mesh( geometry, wireframeMaterial );
-				meshSpline.add( wireframe );
+				//const wireframe = new THREE.Mesh( geometry, wireframeMaterial );
+				//meshSpline.add( wireframe );
 
 				loadedModel.add( meshSpline );
 
