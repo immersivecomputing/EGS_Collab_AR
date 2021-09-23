@@ -21,10 +21,11 @@
 			import { RoomEnvironment } from './jsm/environments/RoomEnvironment.js';
 			import { GUI } from './jsm/libs/dat.gui.module.js';
 			import {csvParse} from "https://cdn.skypack.dev/d3-dsv@3";
+			import { Lut } from './jsm/math/Lut.js';
 
 			let container;
 			let camera, scene, renderer, loadedModel;
-			let controller;
+			let controller, lut;
 			let meshSpline;
 
 			let reticle;
@@ -72,6 +73,8 @@
 				renderer.outputEncoding = THREE.sRGBEncoding;
 				renderer.xr.enabled = true;
 				container.appendChild( renderer.domElement );
+				
+				lut = new Lut();
 				
 				camera = new THREE.PerspectiveCamera( 70, window.innerWidth / window.innerHeight, 0.01, 50 );
 				camera.position.set( 0, 7, 0 );
@@ -292,8 +295,47 @@
 				meshSpline = new THREE.Mesh( geometry, material );
 				//const wireframe = new THREE.Mesh( geometry, wireframeMaterial );
 				//meshSpline.add( wireframe );
+				
+				updateColors();
 
 				loadedModel.add( meshSpline );
+
+			}
+			
+			function updateColors() {
+
+				lut.setColorMap( 'rainbow' );
+
+				lut.setMax( 2000 );
+				lut.setMin( 0 );
+
+				const geometry = meshSpline.geometry;
+				const pressures = geometry.attributes.position;  //this is the data value for each vertex
+				const colors = geometry.attributes.color;
+
+				for ( let i = 0; i < pressures.array.length/3; i ++ ) {
+
+					const colorValue = pressures.array[ i * 3 ];
+
+					const color = lut.getColor( colorValue );
+
+					if ( color === undefined ) {
+
+						console.log( 'Unable to determine color for value:', colorValue );
+
+					} else {
+
+						colors.setXYZ( i, color.r, color.g, color.b );
+
+					}
+
+				}
+
+				colors.needsUpdate = true;
+
+				//const map = sprite.material.map;
+				//lut.updateCanvas( map.image );
+				//map.needsUpdate = true;
 
 			}
 
