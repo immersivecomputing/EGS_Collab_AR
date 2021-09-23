@@ -280,8 +280,15 @@
 			function addGeometry( geometry ) {
 
 				// 3D shape
+				// default color attribute
+				const colors = [];
+				for ( let i = 0, n = geometry.attributes.position.count; i < n; ++ i ) {
+					colors.push( 1, 1, 1 );
+				}
+				
+				geometry.setAttribute( 'color', new THREE.Float32BufferAttribute( colors, 3 ) );
 				console.log(geometry);
-
+				
 				meshSpline = new THREE.Mesh( geometry, material );
 				//const wireframe = new THREE.Mesh( geometry, wireframeMaterial );
 				//meshSpline.add( wireframe );
