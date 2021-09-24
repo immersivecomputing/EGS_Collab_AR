@@ -87,6 +87,10 @@
 				container.appendChild( renderer.domElement );
 				
 				
+				planes = [
+					new THREE.Plane( new THREE.Vector3( 0, - 1, 0 ), 0 )
+				];
+				
 				materialModel = new THREE.MeshStandardMaterial( {
 
 							color: 0xB6D7A8,
@@ -176,9 +180,6 @@
 				loadModel( 'SampleBufferGeometry.json');
 				//
 				
-				planes = [
-					new THREE.Plane( new THREE.Vector3( 0, - 1, 0 ), 0 )
-				];
 				
 				
 				const gui = new GUI();
