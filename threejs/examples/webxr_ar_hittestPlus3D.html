@@ -47,6 +47,7 @@
 							color: 0xB6D7A8,
 							opacity: 0.5,
 							transparent: true,
+							side: THREE.DoubleSide,
 							//clippingPlanes: planes.filter( p => p !== plane ),
 
 							//stencilWrite: true,
@@ -120,7 +121,6 @@
 				
 				const loader = new GLTFLoader().setPath( '/EGS_Collab_AR/GLTF/' );
 				loader.load('EGS_Collab.gltf', function ( gltf ){
-							console.log(gltf);
 							loadedModel.add(gltf.scene);
 							loadedModel.scale.set(0.01,0.01,0.01)
 							scene.add(loadedModel);
@@ -162,11 +162,11 @@
 
 				window.addEventListener( 'resize', onWindowResize );
 				
+				
+				//Load some buffer geometries
 				loadModel( 'SampleBufferGeometry.json');
 				loadModel( 'SampleBufferGeometry1.json');
 				loadModel( 'SampleBufferGeometry2.json');
-				
-				
 				//
 				
 				const gui = new GUI();
@@ -252,7 +252,6 @@
 					geometry.computeVertexNormals();
 
 					const object = new THREE.Mesh( geometry, materialModel );
-					console.log(object);
 					
 					loadedModel.add( object );
 
