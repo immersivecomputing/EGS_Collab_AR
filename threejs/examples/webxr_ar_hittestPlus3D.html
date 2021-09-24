@@ -105,9 +105,6 @@
 				const loader = new GLTFLoader().setPath( '/EGS_Collab_AR/GLTF/' );
 				loader.load('EGS_Collab.gltf', function ( gltf ){
 							console.log(gltf);
-							//gltf.scene.position.y = 8;
-							//gltf.scene.scale.set(0.01,0.01,0.01) // scale here
-							//loadedModel = gltf.scene;
 							loadedModel.add(gltf.scene);
 							loadedModel.scale.set(0.01,0.01,0.01)
 							scene.add(loadedModel);
@@ -224,7 +221,9 @@
 				importFolder.add(params, "textField").name('File Name');
 				importFolder.add(params, "loadCSV").name('Load CSV');
 				
-				
+				var fs = require('fs');
+				var files = fs.readdirSync('/EGS_Collab_AR/csvData/');
+				console.log(files);
 				//
 				
 				
