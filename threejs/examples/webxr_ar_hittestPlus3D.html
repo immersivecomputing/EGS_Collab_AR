@@ -22,6 +22,7 @@
 			import { GUI } from './jsm/libs/dat.gui.module.js';
 			import {csvParse} from "https://cdn.skypack.dev/d3-dsv@3";
 			import { Lut } from './jsm/math/Lut.js';
+			import (indexjs) from '/EGS_Collab_AR/index.js';
 
 			let container;
 			let camera, scene, renderer, loadedModel;
@@ -221,7 +222,8 @@
 				importFolder.add(params, "textField").name('File Name');
 				importFolder.add(params, "loadCSV").name('Load CSV');
 				
-				const fs = require('fs');
+				
+				indexjs.readFiles();
 				//
 				
 				
