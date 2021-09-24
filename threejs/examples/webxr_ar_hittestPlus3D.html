@@ -41,6 +41,22 @@
 					side: THREE.DoubleSide,
 					color: 0xF5F5F5,
 					vertexColors: true} );
+					
+			const materialModel = new THREE.MeshStandardMaterial( {
+
+							color: 0xE91E63,
+							metalness: 0.1,
+							roughness: 0.75,
+							//clippingPlanes: planes.filter( p => p !== plane ),
+
+							//stencilWrite: true,
+							//stencilRef: 0,
+							//stencilFunc: THREE.NotEqualStencilFunc,
+							//stencilFail: THREE.ReplaceStencilOp,
+							//stencilZFail: THREE.ReplaceStencilOp,
+							//stencilZPass: THREE.ReplaceStencilOp,
+
+						} );
 			const wireframeMaterial = new THREE.MeshBasicMaterial( { color: 0x000000, opacity: 0.3, wireframe: true, transparent: true } );
 
 			const params = {
@@ -234,7 +250,7 @@
 					geometry.center();
 					geometry.computeVertexNormals();
 
-					const object = new THREE.Mesh( geometry, material );
+					const object = new THREE.Mesh( geometry, materialModel );
 					console.log(object);
 					
 					loadedModel.add( object );
