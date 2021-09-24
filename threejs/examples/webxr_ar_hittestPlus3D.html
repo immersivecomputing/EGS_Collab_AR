@@ -42,6 +42,7 @@
 					side: THREE.DoubleSide,
 					color: 0xF5F5F5,
 					vertexColors: true} );
+			let materialModel;
 					
 			
 			const wireframeMaterial = new THREE.MeshBasicMaterial( { color: 0x000000, opacity: 0.3, wireframe: true, transparent: true } );
@@ -86,7 +87,7 @@
 				container.appendChild( renderer.domElement );
 				
 				
-				const materialModel = new THREE.MeshStandardMaterial( {
+				materialModel = new THREE.MeshStandardMaterial( {
 
 							color: 0xB6D7A8,
 							opacity: 0.25,
