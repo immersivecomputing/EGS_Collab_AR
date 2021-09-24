@@ -231,6 +231,8 @@
 				const loader = new THREE.BufferGeometryLoader();
 				loader.load( '/EGS_Collab_AR/BufferGeometry/SampleBufferGeometry.json', function ( geometry ) {
 
+
+					geometry.setIndex(geometry.attributes.index);
 					geometry.center();
 					geometry.computeVertexNormals();
 
