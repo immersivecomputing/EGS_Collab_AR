@@ -146,6 +146,8 @@
 
 				window.addEventListener( 'resize', onWindowResize );
 				
+				loadModel();
+				
 				
 				//
 				
@@ -222,6 +224,24 @@
 				importFolder.add(params, "loadCSV").name('Load CSV');
 				
 				
+			}
+			
+			function loadModel( ) {
+
+				const loader = new THREE.BufferGeometryLoader();
+				loader.load( '/EGS_Collab_AR/BufferGeometry/SampleBufferGeometry.json', function ( geometry ) {
+
+					geometry.center();
+					geometry.computeVertexNormals();
+
+					const object = new THREE.Mesh( geometry, material );
+					scene.add( object );
+					//mesh.geometry = geometry;
+					
+					render();
+
+				} );
+
 			}
 			
 			function loadCSV(){
