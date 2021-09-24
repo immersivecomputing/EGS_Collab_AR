@@ -162,7 +162,9 @@
 
 				window.addEventListener( 'resize', onWindowResize );
 				
-				loadModel();
+				loadModel( 'SampleBufferGeometry.json');
+				loadModel( 'SampleBufferGeometry1.json');
+				loadModel( 'SampleBufferGeometry2.json');
 				
 				
 				//
@@ -242,10 +244,10 @@
 				
 			}
 			
-			function loadModel( ) {
+			function loadModel( fileName ) {
 
 				const loader = new THREE.BufferGeometryLoader();
-				loader.load( '/EGS_Collab_AR/BufferGeometry/SampleBufferGeometry.json', function ( geometry ) {
+				loader.load( '/EGS_Collab_AR/BufferGeometry/' + fileName, function ( geometry ) {
 
 					geometry.computeVertexNormals();
 
