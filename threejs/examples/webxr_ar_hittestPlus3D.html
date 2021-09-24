@@ -43,22 +43,7 @@
 					color: 0xF5F5F5,
 					vertexColors: true} );
 					
-			const materialModel = new THREE.MeshStandardMaterial( {
-
-							color: 0xB6D7A8,
-							opacity: 0.25,
-							transparent: true,
-							side: THREE.DoubleSide,
-							clippingPlanes: planes,
-
-							//stencilWrite: true,
-							//stencilRef: 0,
-							//stencilFunc: THREE.NotEqualStencilFunc,
-							//stencilFail: THREE.ReplaceStencilOp,
-							//stencilZFail: THREE.ReplaceStencilOp,
-							//stencilZPass: THREE.ReplaceStencilOp,
-
-						} );
+			
 			const wireframeMaterial = new THREE.MeshBasicMaterial( { color: 0x000000, opacity: 0.3, wireframe: true, transparent: true } );
 
 			const params = {
@@ -100,6 +85,23 @@
 				renderer.localClippingEnabled = true;
 				container.appendChild( renderer.domElement );
 				
+				
+				const materialModel = new THREE.MeshStandardMaterial( {
+
+							color: 0xB6D7A8,
+							opacity: 0.25,
+							transparent: true,
+							side: THREE.DoubleSide,
+							clippingPlanes: planes,
+
+							//stencilWrite: true,
+							//stencilRef: 0,
+							//stencilFunc: THREE.NotEqualStencilFunc,
+							//stencilFail: THREE.ReplaceStencilOp,
+							//stencilZFail: THREE.ReplaceStencilOp,
+							//stencilZPass: THREE.ReplaceStencilOp,
+
+						} );
 				
 				lut = new Lut();
 				
