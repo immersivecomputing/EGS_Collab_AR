@@ -98,6 +98,7 @@
 				renderer.outputEncoding = THREE.sRGBEncoding;
 				renderer.xr.enabled = true;
 				container.appendChild( renderer.domElement );
+				renderer.localClippingEnabled = true;
 				
 				lut = new Lut();
 				
