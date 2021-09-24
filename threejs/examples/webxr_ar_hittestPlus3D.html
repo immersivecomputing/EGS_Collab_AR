@@ -221,9 +221,7 @@
 				importFolder.add(params, "textField").name('File Name');
 				importFolder.add(params, "loadCSV").name('Load CSV');
 				
-				var fs = require('fs');
-				var files = fs.readdirSync('/EGS_Collab_AR/csvData/');
-				console.log(files);
+				
 				//
 				
 				
@@ -289,11 +287,8 @@
 				}
 				
 				geometry.setAttribute( 'color', new THREE.Float32BufferAttribute( colors, 3 ) );
-				console.log(geometry);
 				
 				meshSpline = new THREE.Mesh( geometry, material );
-				//const wireframe = new THREE.Mesh( geometry, wireframeMaterial );
-				//meshSpline.add( wireframe );
 				
 				updateColors();
 
