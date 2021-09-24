@@ -97,8 +97,9 @@
 				renderer.toneMappingExposure = 1;
 				renderer.outputEncoding = THREE.sRGBEncoding;
 				renderer.xr.enabled = true;
-				container.appendChild( renderer.domElement );
 				renderer.localClippingEnabled = true;
+				container.appendChild( renderer.domElement );
+				
 				
 				lut = new Lut();
 				
