@@ -45,10 +45,9 @@
 			const materialModel = new THREE.MeshStandardMaterial( {
 
 							color: 0xB6D7A8,
-							opacity: 0.5,
+							opacity: 0.25,
 							transparent: true,
 							side: THREE.DoubleSide,
-							blending: THREE.AdditiveBlending,
 							//clippingPlanes: planes.filter( p => p !== plane ),
 
 							//stencilWrite: true,
@@ -165,9 +164,10 @@
 				
 				
 				//Load some buffer geometries
-				loadModel( 'SampleBufferGeometry.json');
-				loadModel( 'SampleBufferGeometry1.json');
+				
 				loadModel( 'SampleBufferGeometry2.json');
+				loadModel( 'SampleBufferGeometry1.json');
+				loadModel( 'SampleBufferGeometry.json');
 				//
 				
 				const gui = new GUI();
