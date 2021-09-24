@@ -247,7 +247,6 @@
 				const loader = new THREE.BufferGeometryLoader();
 				loader.load( '/EGS_Collab_AR/BufferGeometry/SampleBufferGeometry.json', function ( geometry ) {
 
-					geometry.center();
 					geometry.computeVertexNormals();
 
 					const object = new THREE.Mesh( geometry, materialModel );
