@@ -235,8 +235,9 @@
 					geometry.computeVertexNormals();
 
 					const object = new THREE.Mesh( geometry, material );
+					console.log(object);
+					
 					scene.add( object );
-					//mesh.geometry = geometry;
 					
 					render();
 
