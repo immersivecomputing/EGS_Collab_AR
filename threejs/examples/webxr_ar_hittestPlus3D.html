@@ -228,7 +228,7 @@
 				const sphmaterial = new THREE.MeshBasicMaterial( { color: 0xff0000 } );
 				sphereInter = new THREE.Mesh( sphgeometry, sphmaterial );
 				sphereInter.visible = false;
-				scene.add( sphereInter );
+				loadedModel.add( sphereInter );
 				raycaster = new THREE.Raycaster();
 				document.addEventListener( 'pointermove', onPointerMove );
 				
