@@ -151,12 +151,7 @@
 							render();
 						});
 				
-				const controls = new OrbitControls( camera, renderer.domElement );
-				controls.addEventListener( 'change', render ); // use if there is no animation loop
-				controls.minDistance = 0.01;
-				controls.maxDistance = 1000;
-				controls.target.set( 0, 0, 0 );
-				controls.update();
+				
 
 				document.body.appendChild( ARButton.createButton( renderer, { requiredFeatures: [ 'hit-test' ] } ) );
 
@@ -253,6 +248,13 @@
 				labelRenderer.domElement.style.position = 'absolute';
 				labelRenderer.domElement.style.top = '0px';
 				document.body.appendChild( labelRenderer.domElement );
+				
+				const controls = new OrbitControls( camera, labelRenderer.domElement );
+				controls.addEventListener( 'change', render ); // use if there is no animation loop
+				controls.minDistance = 0.01;
+				controls.maxDistance = 1000;
+				controls.target.set( 0, 0, 0 );
+				controls.update();
 				
 			}
 			
