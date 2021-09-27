@@ -40,7 +40,7 @@
 			let reticle;
 			let planes;
 			
-			let csvData;
+			let csvData, labelRenderer;
 			let baseNorthing, baseEasting, baseElev;
 
 			let hitTestSource = null;
@@ -248,6 +248,12 @@
 				moonLabel.position.set( 0, 1, 0 );
 				sphereInter.add( moonLabel );
 				
+				labelRenderer = new CSS2DRenderer();
+				labelRenderer.setSize( window.innerWidth, window.innerHeight );
+				labelRenderer.domElement.style.position = 'absolute';
+				labelRenderer.domElement.style.top = '0px';
+				document.body.appendChild( labelRenderer.domElement );
+				
 			}
 			
 			function ToggleValue(value, valueName) {
@@ -390,6 +396,7 @@
 
 				renderer.setSize( window.innerWidth, window.innerHeight );
 
+				labelRenderer.setSize( window.innerWidth, window.innerHeight );
 			}
 			
 			function onPointerMove( event ) {
@@ -474,6 +481,7 @@
 				}
 
 				renderer.render( scene, camera );
+				labelRenderer.render( scene, camera );
 
 			}
 
