@@ -242,6 +242,7 @@
 				const valueLabel = new CSS2DObject( labelDiv );
 				valueLabel.position.set( 0, 1, 0 );
 				sphereInter.add( valueLabel );
+				console.log(sphereInter);
 				sphereInter.visible = false;
 				
 				labelRenderer = new CSS2DRenderer();
@@ -426,6 +427,7 @@
 
 						sphereInter.visible = true;
 						sphereInter.position.copy( loadedModel.worldToLocal(intersects[ 0 ].point) );
+						console.log(loadedModel.worldToLocal(intersects[ 0 ].point);
 						labelDiv.textContent = loadedModel.worldToLocal(intersects[ 0 ].point);
 
 					} else {
