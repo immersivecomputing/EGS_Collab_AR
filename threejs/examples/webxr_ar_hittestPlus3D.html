@@ -134,6 +134,7 @@
 							loadedModel.add(gltf.scene);
 							loadedModel.scale.set(0.01,0.01,0.01)
 							scene.add(loadedModel);
+							ToggleGyroXYZ(false);
 							render();
 						});
 				
@@ -179,8 +180,6 @@
 				loadModel( 'SampleBufferGeometry1.json');
 				loadModel( 'SampleBufferGeometry.json');
 				//
-				ToggleGyroXYZ(false);
-				
 				
 				const gui = new GUI();
 				const baseFolder = gui.addFolder( 'Base Objects' );
