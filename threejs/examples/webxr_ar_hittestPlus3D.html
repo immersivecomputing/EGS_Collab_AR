@@ -227,7 +227,7 @@
 					//params.planeY.constant = planes[ 1 ].constant;
 				//} );
 				
-				const sphgeometry = new THREE.SphereGeometry( 5 );
+				const sphgeometry = new THREE.SphereGeometry( 2.5 );
 				const sphmaterial = new THREE.MeshBasicMaterial( { color: 0xff0000 } );
 				sphereInter = new THREE.Mesh( sphgeometry, sphmaterial );
 				sphereInter.visible = false;
@@ -244,7 +244,6 @@
 				valueLabel.position.set( 0, 1, 0 );
 				valueLabel.visible = false;
 				sphereInter.add( valueLabel );
-				console.log(sphereInter);
 				
 				labelRenderer = new CSS2DRenderer();
 				labelRenderer.setSize( window.innerWidth, window.innerHeight );
@@ -429,8 +428,7 @@
 						sphereInter.visible = true;
 						sphereInter.position.copy( loadedModel.worldToLocal(intersects[ 0 ].point) );
 						valueLabel.visible = true;
-						//labelDiv.textContent = (loadedModel.worldToLocal(intersects[ 0 ].point).x / 100) - 4047.435;
-						labelDiv.textContent = -sphereInter.position.x - 4047.435;
+						labelDiv.textContent = -sphereInter.position.x + 4047.435;
 
 					} else {
 
