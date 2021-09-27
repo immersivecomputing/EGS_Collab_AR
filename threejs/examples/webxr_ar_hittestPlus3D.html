@@ -429,7 +429,7 @@
 						sphereInter.visible = true;
 						sphereInter.position.copy( loadedModel.worldToLocal(intersects[ 0 ].point) );
 						valueLabel.visible = true;
-						labelDiv.textContent = (loadedModel.worldToLocal(intersects[ 0 ].point).x / 100) - 4047.435;
+						labelDiv.textContent = sphereInter.position.x - 4047.435;
 
 					} else {
 
