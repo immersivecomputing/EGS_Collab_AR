@@ -428,7 +428,7 @@
 						sphereInter.visible = true;
 						sphereInter.position.copy( loadedModel.worldToLocal(intersects[ 0 ].point) );
 						console.log(loadedModel.worldToLocal(intersects[ 0 ].point));
-						labelDiv.textContent = loadedModel.worldToLocal(intersects[ 0 ].point);
+						labelDiv.textContent = (loadedModel.worldToLocal(intersects[ 0 ].point).x / 100) - 4047.435;
 
 					} else {
 
