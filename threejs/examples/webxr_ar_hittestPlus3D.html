@@ -392,17 +392,18 @@
 			function render( timestamp, frame ) {
 
 				raycaster.setFromCamera( pointer, camera );
+				if (typeof meshSpline !== 'undefined') {
+					const intersects = raycaster.intersectObject( meshSpline );
+			
+					if ( intersects.length > 0 ) {
 
-				const intersects = raycaster.intersectObject( meshSpline );
+						sphereInter.visible = true;
+						sphereInter.position.copy( intersects[ 0 ].point );
 
-				if ( intersects.length > 0 ) {
+					} else {
 
-					sphereInter.visible = true;
-					sphereInter.position.copy( intersects[ 0 ].point );
-
-				} else {
-
-					sphereInter.visible = false;
+						sphereInter.visible = false;
+					}
 				}
 
 
