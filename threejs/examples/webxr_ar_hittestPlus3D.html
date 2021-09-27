@@ -253,7 +253,7 @@
 				const importFolder = gui.addFolder( 'Import Gyro Data' );
 				importFolder.add(params, "textField").name('File Name');
 				importFolder.add(params, "loadCSV").name('Load CSV');
-				const planeY = gui.addFolder( 'planeY' );
+				const planeY = gui.addFolder( 'Clip Plane Y' );
 				//planeY.add( params.planeY, 'displayHelper' ).onChange( v => planeHelpers[ 1 ].visible = v );
 				planeY.add( params.planeY, 'constant' ).min( -0.5 ).max( 2 ).onChange( d => planes[ 0 ].constant = d );
 				//planeY.add( params.planeY, 'negated' ).onChange( () => {
