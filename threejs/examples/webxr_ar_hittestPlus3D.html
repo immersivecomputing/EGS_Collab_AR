@@ -398,8 +398,7 @@
 					if ( intersects.length > 0 ) {
 
 						sphereInter.visible = true;
-						sphereInter.position.copy( intersects[ 0 ].point );
-						console.log(intersects[0].point);
+						sphereInter.position.copy( loadedModel.worldToLocal(intersects[ 0 ].point) );
 
 					} else {
 
