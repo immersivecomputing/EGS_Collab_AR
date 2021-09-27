@@ -240,14 +240,7 @@
 					render();
 				});
                 gyroFolder.add(params, 'toggleGyroXYZ' ).name( 'XYZ Points' ).onChange( function (value){
-					loadedModel.traverse( function ( child ) {
-						if ( child instanceof THREE.Object3D  ) {
-							if(child.name=='Gyro_StrikeDipDepthPoints'){
-								child.visible = value;
-							}
-						}
-					});
-					render();
+					ToggleValue(value,'Gyro_StrikeDipDepthPoints');
 				});
 				
 				const importFolder = gui.addFolder( 'Import Gyro Data' );
@@ -264,10 +257,10 @@
 				
 			}
 			
-			function ToggleGyroXYZ(value) {
+			function ToggleValue(value, valueName) {
 				loadedModel.traverse( function ( child ) {
 					if ( child instanceof THREE.Object3D  ) {
-						if(child.name=='Gyro_StrikeDipDepthPoints'){
+						if(child.name== valueName){
 							child.visible = value;
 						}
 					}
