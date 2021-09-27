@@ -134,6 +134,10 @@
 							loadedModel.add(gltf.scene);
 							loadedModel.scale.set(0.01,0.01,0.01)
 							scene.add(loadedModel);
+							ToggleValue(false,'BoreholesOnly');
+							ToggleValue(false,'Electrodes');
+							ToggleValue(false,'Gyro_StartingPoints');
+							ToggleValue(false,'Gyro_XYZPoints');
 							ToggleValue(false,'Gyro_StrikeDipDepthPoints');
 							render();
 						});
@@ -184,14 +188,7 @@
 				const gui = new GUI();
 				const baseFolder = gui.addFolder( 'Base Objects' );
 				baseFolder.add(params, 'toggleTunnel').name('Tunnel').onChange( function (value){
-					loadedModel.traverse( function ( child ) {
-						if ( child instanceof THREE.Group  ) {
-							if(child.name=='TunnelOnly'){
-								child.visible = value;
-							}
-						}
-					});
-					render();
+					ToggleValue(value,'TunnelOnly');
 				});
 				baseFolder.add(params, 'toggleGrid').name('Grid').onChange( function (value){
 					grid.visible = value;
@@ -199,45 +196,17 @@
 				});
 				const planningFolder = gui.addFolder( 'Planned Positions' );
 				planningFolder.add(params, 'toggleBoreholes').name('Boreholes').onChange( function (value){
-					loadedModel.traverse( function ( child ) {
-						if ( child instanceof THREE.Mesh  ) {
-							if(child.name=='BoreholesOnly'){
-								child.visible = value;
-							}
-						}
-					});
-					render();
+					ToggleValue(value,'BoreholesOnly');
 				});
 				planningFolder.add(params, 'toggleElectrodes').name('Electrodes').onChange( function (value){
-					loadedModel.traverse( function ( child ) {
-						if ( child instanceof THREE.Object3D  ) {
-							if(child.name=='Electrodes'){
-								child.visible = value;
-							}
-						}
-					});
-					render();
+					ToggleValue(value,'Electrodes');
 				});
 				const gyroFolder = gui.addFolder( 'Gyro Data' );
                 gyroFolder.add(params, 'toggleGyroStartPoints' ).name( 'Start Points' ).onChange( function (value){
-					loadedModel.traverse( function ( child ) {
-						if ( child instanceof THREE.Object3D  ) {
-							if(child.name=='Gyro_StartingPoints'){
-								child.visible = value;
-							}
-						}
-					});
-					render();
+					ToggleValue(value,'Gyro_StartingPoints');
 				});
                 gyroFolder.add(params, 'toggleGyroSrikeDipDepth' ).name( 'Strike/Dip/Depth Points' ).onChange( function (value){
-					loadedModel.traverse( function ( child ) {
-						if ( child instanceof THREE.Object3D  ) {
-							if(child.name=='Gyro_XYZPoints'){
-								child.visible = value;
-							}
-						}
-					});
-					render();
+					ToggleValue(value,'Gyro_XYZPoints');
 				});
                 gyroFolder.add(params, 'toggleGyroXYZ' ).name( 'XYZ Points' ).onChange( function (value){
 					ToggleValue(value,'Gyro_StrikeDipDepthPoints');
