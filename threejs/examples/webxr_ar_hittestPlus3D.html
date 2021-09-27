@@ -27,7 +27,8 @@
 			let camera, scene, renderer, loadedModel;
 			let controller, lut;
 			let meshSpline, raycaster, sphereInter;
-
+			const pointer = new THREE.Vector2();
+			
 			let reticle;
 			let planes;
 			
@@ -229,6 +230,7 @@
 				sphereInter.visible = false;
 				scene.add( sphereInter );
 				raycaster = new THREE.Raycaster();
+				document.addEventListener( 'pointermove', onPointerMove );
 				
 			}
 			
@@ -371,6 +373,13 @@
 				camera.updateProjectionMatrix();
 
 				renderer.setSize( window.innerWidth, window.innerHeight );
+
+			}
+			
+			function onPointerMove( event ) {
+
+				pointer.x = ( event.clientX / window.innerWidth ) * 2 - 1;
+				pointer.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
 
 			}
 
