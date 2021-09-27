@@ -26,7 +26,7 @@
 			let container;
 			let camera, scene, renderer, loadedModel;
 			let controller, lut;
-			let meshSpline;
+			let meshSpline, raycaster, sphereInter;
 
 			let reticle;
 			let planes;
@@ -223,6 +223,12 @@
 					//params.planeY.constant = planes[ 1 ].constant;
 				//} );
 				
+				const sphgeometry = new THREE.SphereGeometry( 5 );
+				const sphmaterial = new THREE.MeshBasicMaterial( { color: 0xff0000 } );
+				sphereInter = new THREE.Mesh( sphgeometry, sphmaterial );
+				sphereInter.visible = false;
+				scene.add( sphereInter );
+				raycaster = new THREE.Raycaster();
 				
 			}
 			
@@ -375,6 +381,21 @@
 			}
 
 			function render( timestamp, frame ) {
+
+				raycaster.setFromCamera( pointer, camera );
+
+				const intersects = raycaster.intersectObject( meshSpline );
+
+				if ( intersects.length > 0 ) {
+
+					sphereInter.visible = true;
+					sphereInter.position.copy( intersects[ 0 ].point );
+
+				} else {
+
+					sphereInter.visible = false;
+				}
+
 
 				if ( frame ) {
 
