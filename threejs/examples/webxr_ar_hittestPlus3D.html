@@ -240,17 +240,16 @@
 					});
 					render();
 				});
-                //gyroFolder.add(params, 'toggleGyroXYZ' ).name( 'XYZ Points' ).onChange( function (value){
-				//	loadedModel.traverse( function ( child ) {
-				//		if ( child instanceof THREE.Object3D  ) {
-				//			if(child.name=='Gyro_StrikeDipDepthPoints'){
-				//				child.visible = value;
-				//			}
-				//		}
-				//	});
-				//	render();
-				//});
-				gyroFolder.add(params, 'toggleGyroXYZ' ).name( 'XYZ Points' ).onChange( ToggleGyroXYZ(value));
+                gyroFolder.add(params, 'toggleGyroXYZ' ).name( 'XYZ Points' ).onChange( function (value){
+					loadedModel.traverse( function ( child ) {
+						if ( child instanceof THREE.Object3D  ) {
+							if(child.name=='Gyro_StrikeDipDepthPoints'){
+								child.visible = value;
+							}
+						}
+					});
+					render();
+				});
 				
 				const importFolder = gui.addFolder( 'Import Gyro Data' );
 				importFolder.add(params, "textField").name('File Name');
