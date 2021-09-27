@@ -91,7 +91,7 @@
 					new THREE.Plane( new THREE.Vector3( 0, - 1, 0 ), 0 )
 				];
 				
-				materialModel = new THREE.MeshPhongMaterial( {
+				materialModel = new THREE.MeshLambertMaterial( {
 
 							color: 0xB6D7A8,
 							opacity: 0.25,
@@ -117,8 +117,8 @@
 				scene.background = null;
 				scene.environment = null;
 				
-				const light = new THREE.HemisphereLight( 0xffffff, 0xbbbbff, 1 );
-				light.position.set( 0.5, 1, 0.25 );
+				const light = new THREE.HemisphereLight( 0xffffff, 0x080808, 1.5 );
+				light.position.set( -1.25, 1, 1.25 );
 				scene.add( light );
 				
 
