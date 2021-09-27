@@ -427,8 +427,9 @@
 
 						sphereInter.visible = true;
 						sphereInter.position.copy( loadedModel.worldToLocal(intersects[ 0 ].point) );
+						sphereInter.material.color = lut.getColor( -sphereInter.position.x );
 						valueLabel.visible = true;
-						labelDiv.textContent = -sphereInter.position.x + 4047.435;
+						labelDiv.textContent = -sphereInter.position.x - 4047.435;
 
 					} else {
 
