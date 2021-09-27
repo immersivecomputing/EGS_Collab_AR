@@ -59,7 +59,7 @@
 				loadCSV: loadCSV,
 				planeY: {
 
-					constant: 0,
+					constant: -0.5,
 					//negated: false,
 					//displayHelper: false
 
@@ -255,7 +255,7 @@
 				importFolder.add(params, "loadCSV").name('Load CSV');
 				const planeY = gui.addFolder( 'planeY' );
 				//planeY.add( params.planeY, 'displayHelper' ).onChange( v => planeHelpers[ 1 ].visible = v );
-				planeY.add( params.planeY, 'constant' ).min( -0.5 ).max( 2 ).onChange( d => planes[ -0.5 ].constant = d );
+				planeY.add( params.planeY, 'constant' ).min( -0.5 ).max( 2 ).onChange( d => planes[ 0 ].constant = d );
 				//planeY.add( params.planeY, 'negated' ).onChange( () => {
 					//planes[ 1 ].negate();
 					//params.planeY.constant = planes[ 1 ].constant;
