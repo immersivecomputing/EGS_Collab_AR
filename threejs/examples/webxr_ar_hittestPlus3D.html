@@ -40,7 +40,7 @@
 			let reticle;
 			let planes;
 			
-			let csvData, labelRenderer, labelDiv;
+			let csvData, labelRenderer, labelDiv, valueLabel;
 			let baseNorthing, baseEasting, baseElev;
 
 			let hitTestSource = null;
@@ -230,6 +230,7 @@
 				const sphgeometry = new THREE.SphereGeometry( 5 );
 				const sphmaterial = new THREE.MeshBasicMaterial( { color: 0xff0000 } );
 				sphereInter = new THREE.Mesh( sphgeometry, sphmaterial );
+				sphereInter.visible = false;
 				
 				loadedModel.add( sphereInter );
 				raycaster = new THREE.Raycaster();
@@ -239,11 +240,11 @@
 				labelDiv.className = 'label';
 				labelDiv.textContent = '-';
 				labelDiv.style.marginTop = '-1em';
-				const valueLabel = new CSS2DObject( labelDiv );
+				valueLabel = new CSS2DObject( labelDiv );
 				valueLabel.position.set( 0, 1, 0 );
+				valueLabel.visible = false;
 				sphereInter.add( valueLabel );
 				console.log(sphereInter);
-				sphereInter.visible = false;
 				
 				labelRenderer = new CSS2DRenderer();
 				labelRenderer.setSize( window.innerWidth, window.innerHeight );
@@ -427,12 +428,13 @@
 
 						sphereInter.visible = true;
 						sphereInter.position.copy( loadedModel.worldToLocal(intersects[ 0 ].point) );
-						console.log(loadedModel.worldToLocal(intersects[ 0 ].point));
+						valueLabel.visibile = true;
 						labelDiv.textContent = (loadedModel.worldToLocal(intersects[ 0 ].point).x / 100) - 4047.435;
 
 					} else {
 
 						sphereInter.visible = false;
+						valueLabel.visibile = false;
 					}
 				}
 
