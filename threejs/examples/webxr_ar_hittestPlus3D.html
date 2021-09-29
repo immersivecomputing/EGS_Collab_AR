@@ -376,9 +376,9 @@
 					if(i>0 && i%9 === 0){
 						const dist = new_v3array.distanceTo(v3array);
 						//console.log(dist);
-						//depth.push(dist, dist, dist, dist, dist, dist, dist, dist, dist);
+						depth.push(dist, dist, dist, dist, dist, dist, dist, dist, dist);
 						v3array = new_v3array;
-					}else{
+					}else if (i==0) {
 					    //console.log(0)
 						depth.push(0, 0, 0 ,0 ,0 ,0, 0, 0, 0);
 						v3array = new_v3array;
