@@ -350,7 +350,7 @@
 				geometry.setAttribute( 'color', new THREE.Float32BufferAttribute( colors, 3 ) );
 				
 				meshSpline = new THREE.Mesh( geometry, material );
-				console.log(meshSpline.geometry.attribute.position);
+				console.log(meshSpline.geometry.attributes.position);
 				updateColors();
 
 				loadedModel.add( meshSpline );
