@@ -340,6 +340,7 @@
 						let valueCsvData = csvParse(data);
 						for(let i = 0; i < valueCsvData.length; i++){
 							linePositions.push(inputTube.getPoint(parseFloat(valueCsvData[i].Depth) / boreholeDepth));
+							console.log( parseFloat(valueCsvData[i].PVelocity) );
 							lineColors.push(lut.getColor( parseFloat(valueCsvData[i].PVelocity) ));
 						}
 						console.log(lineColors);
