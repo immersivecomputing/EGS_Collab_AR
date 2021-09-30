@@ -330,8 +330,8 @@
 				dataCsvloader.load('/EGS_Collab_AR/csvData/E2-AMU_FWS.csv',
 					function ( data ) {
 						let valueCsvData = csvParse(data);
-						//console.log(valueCsvData);
 						for(let i = 0; i < valueCsvData.length; i++){
+						    console.log(parseFloat(valueCsvData[i].Depth) / boreholeDepth);
 							console.log(inputTube.getPoint(parseFloat(valueCsvData[i].Depth) / boreholeDepth));
 						}
 					}
