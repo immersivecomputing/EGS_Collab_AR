@@ -287,6 +287,8 @@
 
 			}
 			
+			let boreholeDepth;
+			
 			function loadCSV(){
 				const csvloader = new THREE.FileLoader();
 				csvloader.load('/EGS_Collab_AR/csvData/Old_wellhead_coords.csv',
@@ -311,17 +313,29 @@
 										let ypos = (parseFloat(csvData[i-1].Elev) * 3.28084) + baseElev;
 										let zpos = (-parseFloat(csvData[i-1].Northing) * 3.28084) + baseNorthing;
 										v3array.push(new THREE.Vector3(xpos, ypos, zpos));
+										boreholeDepth = csvData[i].Depth;
 									}
 								}
 								boreholeSpline = new THREE.CatmullRomCurve3(v3array);
-								console.log(boreholeSpline.getPoint(0.5));
+								addLine(boreholeSpline);
 								addTube(boreholeSpline);
 							}
 						);
 					}
 				);
-				
-				
+			}
+			
+			function addLine(inputTube){
+				const dataCsvloader = new THREE.FileLoader();
+				dataCsvloader.load('/EGS_Collab_AR/csvData/cs_' + params.textField + '.csv',
+					function ( data ) {
+						let valueCsvData = csvParse(data);
+						for(let i = 0; i < valueCsvData.length; i++){
+							console.log(inputTube.getPoint(parseFloat(valueCsvData.Depth[i]) / boreholeDepth));
+						}
+					}
+				)
+					
 			}
 			
 			function addTube(inputtube) {
