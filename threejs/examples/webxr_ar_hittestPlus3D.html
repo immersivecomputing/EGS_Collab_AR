@@ -330,8 +330,9 @@
 				dataCsvloader.load('/EGS_Collab_AR/csvData/cs_' + params.textField + '.csv',
 					function ( data ) {
 						let valueCsvData = csvParse(data);
+						//console.log(valueCsvData);
 						for(let i = 0; i < valueCsvData.length; i++){
-							console.log(inputTube.getPoint(parseFloat(valueCsvData.Depth[i]) / boreholeDepth));
+							console.log(inputTube.getPoint(parseFloat(valueCsvData[i].Depth) / boreholeDepth));
 						}
 					}
 				)
