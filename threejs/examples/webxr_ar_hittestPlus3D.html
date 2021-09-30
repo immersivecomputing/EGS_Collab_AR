@@ -356,6 +356,17 @@
 
 			}
 			
+			function closest(arr, closestTo){
+				
+				var closest = Math.max.apply(null, arr);
+
+				for(var i = 0; i < arr.length; i++){
+					if(arr[i] >= closestTo && arr[i] < closest) closest = arr[i];
+				}
+
+				return closest;
+			}
+			
 			function updateColors() {
 
 				lut.setColorMap( 'blackbody' );
@@ -369,38 +380,43 @@
 				let depth = [];
 				let v3array = [];
 				let dist = 0;
+				
+				const valueCsvloader = new THREE.FileLoader();
+				valueCsvloader.load('/EGS_Collab_AR/csvData/E2-AMU_FWS.csv', function(data){
+				
+					let valueCsvData = csvParse(data);
 
-				for ( let i = 0; i < pressures.array.length/3; i ++ ) {
-					let new_v3array = [];
-					new_v3array = new THREE.Vector3(pressures.array[ i * 3 ], pressures.array[ (i * 3) + 1], pressures.array[ (i * 3)  + 2]);
-					
-					if(i>0 && i%9 === 0){
-						dist += new_v3array.distanceTo(v3array);
-						depth.push(dist, dist, dist, dist, dist, dist, dist, dist, dist);
-						v3array = new_v3array;
-					}else if (i==0) {
-						depth.push(0, 0, 0 ,0 ,0 ,0, 0, 0, 0);
-						v3array = new_v3array;
+					for ( let i = 0; i < pressures.array.length/3; i ++ ) {
+						let new_v3array = [];
+						new_v3array = new THREE.Vector3(pressures.array[ i * 3 ], pressures.array[ (i * 3) + 1], pressures.array[ (i * 3)  + 2]);
+						
+						if(i>0 && i%9 === 0){
+							dist += new_v3array.distanceTo(v3array);
+							depth.push(dist, dist, dist, dist, dist, dist, dist, dist, dist);
+							v3array = new_v3array;
+						}else if (i==0) {
+							depth.push(0, 0, 0 ,0 ,0 ,0, 0, 0, 0);
+							v3array = new_v3array;
+						}
+						
+						const colorValue = pressures.array[ i * 3 ];
+
+						const color = lut.getColor( colorValue );
+
+						if ( color === undefined ) {
+
+							console.log( 'Unable to determine color for value:', colorValue );
+
+						} else {
+
+							colors.setXYZ( i, color.r, color.g, color.b );
+
+						}
+
 					}
-					
-					const colorValue = pressures.array[ i * 3 ];
-
-					const color = lut.getColor( colorValue );
-
-					if ( color === undefined ) {
-
-						console.log( 'Unable to determine color for value:', colorValue );
-
-					} else {
-
-						colors.setXYZ( i, color.r, color.g, color.b );
-
-					}
-
+					console.log(depth);
+					colors.needsUpdate = true;
 				}
-				console.log(depth);
-				colors.needsUpdate = true;
-
 				//const map = sprite.material.map;
 				//lut.updateCanvas( map.image );
 				//map.needsUpdate = true;
