@@ -375,7 +375,7 @@
 					new_v3array = new THREE.Vector3(pressures.array[ i * 3 ], pressures.array[ (i * 3) + 1], pressures.array[ (i * 3)  + 2]);
 					
 					if(i>0 && i%9 === 0){
-						dist = dist + new_v3array.distanceTo(v3array);
+						dist += new_v3array.distanceTo(v3array);
 						depth.push(dist, dist, dist, dist, dist, dist, dist, dist, dist);
 						v3array = new_v3array;
 					}else if (i==0) {
