@@ -383,7 +383,7 @@
 				
 				const valueCsvloader = new THREE.FileLoader();
 				valueCsvloader.load('/EGS_Collab_AR/csvData/E2-AMU_FWS.csv', function(data){
-				
+					console.log(data);
 					let valueCsvData = csvParse(data);
 
 					for ( let i = 0; i < pressures.array.length/3; i ++ ) {
