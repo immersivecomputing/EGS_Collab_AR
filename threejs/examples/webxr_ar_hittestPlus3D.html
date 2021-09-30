@@ -30,6 +30,9 @@
 			import {csvParse} from "https://cdn.skypack.dev/d3-dsv@3";
 			import { Lut } from './jsm/math/Lut.js';
 			import { CSS2DRenderer, CSS2DObject } from './jsm/renderers/CSS2DRenderer.js';
+			import { Line2 } from './jsm/lines/Line2.js';
+			import { LineMaterial } from './jsm/lines/LineMaterial.js';
+			import { LineGeometry } from './jsm/lines/LineGeometry.js';
 
 			let container;
 			let camera, scene, renderer, loadedModel;
@@ -324,13 +327,12 @@
 					}
 				);
 			}
-			const linePositions = [];
-			const lineColors = [];
+			
 			
 			function addLine(inputTube){
 				lut.setColorMap( 'blackbody' );
 
-				lut.setMax( 10 );
+				lut.setMax( 10000 );
 				lut.setMin( 0 );
 			
 			
@@ -338,15 +340,39 @@
 				dataCsvloader.load('/EGS_Collab_AR/csvData/E2-AMU_FWS.csv',
 					function ( data ) {
 						let valueCsvData = csvParse(data);
+						const linePositions = [];
+						const lineColors = [];
 						for(let i = 0; i < valueCsvData.length; i++){
 							linePositions.push(inputTube.getPoint(parseFloat(valueCsvData[i].Depth) / boreholeDepth));
-							console.log( parseFloat(valueCsvData[i].PVelocity) );
 							lineColors.push(lut.getColor( parseFloat(valueCsvData[i].PVelocity) ));
 						}
-						console.log(lineColors);
+						plotLine(linePositions, lineColors);
 					}
 				)
 					
+			}
+			
+			function plotLine(lpos, lcol){
+				const lgeometry = new LineGeometry();
+				lgeometry.setPositions( lpos );
+				lgeometry.setColors( lcol );
+
+				let matLine = new LineMaterial( {
+
+					color: 0xffffff,
+					linewidth: 5, // in world units with size attenuation, pixels otherwise
+					vertexColors: true,
+					
+					//resolution:  // to be set by renderer, eventually
+					dashed: false,
+					alphaToCoverage: true,
+
+				} );
+
+				let line = new Line2( lgeometry, matLine );
+				line.computeLineDistances();
+				line.scale.set( 1, 1, 1 );
+				loadedModel.add( line );
 			}
 			
 			function addTube(inputtube) {
