@@ -27,7 +27,7 @@ class LineGeometry extends LineSegmentsGeometry {
 			points[ 2 * i + 5 ] = array[ i + 5 ];
 
 		}
-
+		console.log(points);
 		super.setPositions( points );
 
 		return this;
