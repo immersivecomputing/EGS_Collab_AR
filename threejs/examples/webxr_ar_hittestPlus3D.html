@@ -427,7 +427,7 @@
 				lut.setMin( 5555 );
 				
 				let color;
-				const texData = [];
+				const texData = new Uint8Array[3 * 1115];
 				
 				const dataCsvloader = new THREE.FileLoader();
 				dataCsvloader.load('/EGS_Collab_AR/csvData/E2-AMU_FWS.csv',
@@ -435,8 +435,11 @@
 						let valueCsvData = csvParse(data);
 						const lineColors = [];
 						for(let i = 0; i < valueCsvData.length; i++){
+						const string = i * 3;
 							color = lut.getColor( parseFloat(valueCsvData[i].PVelocity) );
-							texData.push(color.r, color.g, color.b);
+							texData[stride] = Math.floor(color.r * 255);
+							texData[stride + 1] = Math.floor(color.g * 255);
+							texData[stride + 2] = Math.floor(color.b * 255);
 						}
 						
 						const texture = new THREE.DataTexture( texData, valueCsvData.length, 1, THREE.RGBFormat );
