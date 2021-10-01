@@ -16,7 +16,6 @@ class LineGeometry extends LineSegmentsGeometry {
 		var length = array.length - 3;
 		var points = new Float32Array( 2 * length );
 		
-		console.log(array);
 		for ( var i = 0; i < length; i += 3 ) {
 
 			points[ 2 * i ] = array[ i ];
