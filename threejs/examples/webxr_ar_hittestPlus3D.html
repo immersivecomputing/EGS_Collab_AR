@@ -335,6 +335,9 @@
 
 				lut.setMax( 10000 );
 				lut.setMin( 0 );
+				
+				const point = new THREE.Vector3();
+				const color = new THREE.Color();
 			
 			
 				const dataCsvloader = new THREE.FileLoader();
@@ -344,8 +347,10 @@
 						const linePositions = [];
 						const lineColors = [];
 						for(let i = 0; i < valueCsvData.length; i++){
-							linePositions.push(inputTube.getPoint(parseFloat(valueCsvData[i].Depth) / boreholeDepth));
-							lineColors.push(lut.getColor( parseFloat(valueCsvData[i].PVelocity) ));
+							point = inputTube.getPoint(parseFloat(valueCsvData[i].Depth) / boreholeDepth)
+							linePositions.push(point.x, point.y, point.z);
+							color = lut.getColor( parseFloat(valueCsvData[i].PVelocity) );
+							lineColors.push(color.r, color.g, color.b);
 						}
 						plotLine(linePositions, lineColors);
 					}
