@@ -13,6 +13,7 @@ function getText(){
 		if (request.readyState === 4 && request.status === 200) {
 			var type = request.getResponseHeader('Content-Type');
 			if (type.indexOf("text") !== 1) {
+				console.log(request.responseText);
 				return request.responseText;
 			}
 		}
