@@ -21,4 +21,6 @@ class ControlPosition {
 	
 }
 
-export(ControlPosition);
+ControlPosition.prototype.isControlPosition = true;
+
+export ( ControlPosition );
