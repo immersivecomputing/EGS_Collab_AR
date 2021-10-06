@@ -5,7 +5,7 @@ class ControlPosition {
 		console.log(positionAlongBorehole);
 	}
 	
-	function getText(){
+	getText(){
 		var request = new XMLHttpRequest();
 		request.open('GET', 'https://raw.githubusercontent.com/immersivecomputing/EGS_Collab_AR/main/TextFile/Position.txt', true);
 		request.send(null);
