@@ -443,9 +443,6 @@
 						}
 						
 						const texture = new THREE.DataTexture( texData, valueCsvData.length, 1, THREE.RGBFormat );
-						console.log(texture);
-						console.log(meshSpline);
-						console.log(material);
 						material.map = texture;
 						material.needsUpdate = true;
 					}
