@@ -18,7 +18,7 @@ function getText(meshSpline){
 				var sec = today.getSeconds();
 				var increment = (sec/60);
 
-				//console.log(increment);
+				console.log(increment);
 				
 				var position = meshSpline.geometry.parameters.path.getPoint(increment);
 				realtimeObject.position = position;
