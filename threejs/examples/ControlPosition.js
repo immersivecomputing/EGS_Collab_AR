@@ -4,7 +4,7 @@ function ControlPosition(meshSpline, realtimeObject){
 	getText(meshSpline, realtimeObject);
 }
 
-function getText(meshSpline){
+function getText(meshSpline, realtimeObject){
 	var request = new XMLHttpRequest();
 	request.open('GET', 'https://raw.githubusercontent.com/immersivecomputing/EGS_Collab_AR/main/TextFile/Position.txt', true);
 	request.send(null);
