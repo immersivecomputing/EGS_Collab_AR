@@ -2,6 +2,7 @@
 
 function ControlPosition(){
 	let positionAlongBorehole = getText();
+	return positionAlongBorehole;
 }
 
 function getText(){
@@ -12,8 +13,16 @@ function getText(){
 		if (request.readyState === 4 && request.status === 200) {
 			var type = request.getResponseHeader('Content-Type');
 			if (type.indexOf("text") !== 1) {
-				console.log(request.responseText);
-				return request.responseText;
+				
+				//Just for testing
+				var today = new Date();
+				var min = today.getMinutes();
+				var increment = (min/10) % 1.0;
+
+				//console.log(increment);
+				return increment;
+
+				//return request.responseText;
 			}
 		}
 	}
