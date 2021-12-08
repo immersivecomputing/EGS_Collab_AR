@@ -18,10 +18,14 @@ function getText(meshSpline, realtimeObject){
 				var sec = today.getSeconds();
 				var increment = (sec/60);
 
-				console.log(increment);
+				
 				
 				var position = meshSpline.geometry.parameters.path.getPoint(increment);
+
+				console.log(position);
 				realtimeObject.position.set(position);
+				console.log(realtimeObject.position);
+				console.log(realtimeObject.getWorldPosition);
 
 			}
 		}
