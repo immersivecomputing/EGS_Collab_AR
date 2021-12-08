@@ -23,7 +23,7 @@ function getText(meshSpline, realtimeObject){
 				var position = meshSpline.geometry.parameters.path.getPoint(increment);
 
 				console.log(position);
-				realtimeObject.position.set(position);
+				realtimeObject.position.set(position.x, position.y, position.z);
 				console.log(realtimeObject.position);
 				console.log(realtimeObject.getWorldPosition);
 
