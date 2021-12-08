@@ -77,7 +77,8 @@
 					//negated: false,
 					//displayHelper: false
 
-				}
+				},
+				toggleRealtime: false
 				};
 
 			init();
@@ -231,6 +232,9 @@
 					//planes[ 1 ].negate();
 					//params.planeY.constant = planes[ 1 ].constant;
 				//} );
+
+				const realtimeFolder = gui.addFolder('Realtime Data');
+				realtimeFolder.add(params, 'toggleRealtime').name('Device current position');
 				
 				const sphgeometry = new THREE.SphereGeometry( 2.5 );
 				const sphmaterial = new THREE.MeshBasicMaterial( { color: 0xff0000 } );
@@ -591,8 +595,10 @@
 				renderer.render( scene, camera );
 				labelRenderer.render( scene, camera );
 
+				if	(params.toggleRealtime){
+					ControlPosition();
+				}
 				
-				//ControlPosition();
 
 			}
 
