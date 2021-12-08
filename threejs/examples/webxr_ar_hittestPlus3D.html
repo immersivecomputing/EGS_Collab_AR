@@ -47,6 +47,7 @@
 			
 			let csvData, labelRenderer, labelDiv, valueLabel;
 			let baseNorthing, baseEasting, baseElev;
+			let realtimeObject;
 
 			let hitTestSource = null;
 			let hitTestSourceRequested = false;
@@ -269,6 +270,14 @@
 				
 				
 			}
+
+			function GenerateRealtimeObject(){
+				const geometry = new THREE.BoxGeometry( 1, 1, 1 );
+				const material = new THREE.MeshBasicMaterial( {color: 0x00ff00} );
+				realtimeObject = new THREE.Mesh( geometry, material );
+				scene.add( realtimeObject );
+			}
+
 			
 			function ToggleValue(value, valueName) {
 				loadedModel.traverse( function ( child ) {
@@ -420,8 +429,6 @@
 				
 				meshSpline = new THREE.Mesh( geometry, material );
 				
-
-				console.log(meshSpline.geometry.parameters.path.getPoint(0.5));
 				//updateColors();
 				addTexture();
 
@@ -599,7 +606,7 @@
 				labelRenderer.render( scene, camera );
 
 				if	(params.toggleRealtime){
-					ControlPosition();
+					ControlPosition(meshSpline);
 				}
 				
 

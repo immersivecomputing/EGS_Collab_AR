@@ -1,11 +1,10 @@
 
 
-function ControlPosition(){
-	let positionAlongBorehole = getText();
-	
+function ControlPosition(meshSpline, realtimeObject){
+	getText(meshSpline, realtimeObject);
 }
 
-function getText(){
+function getText(meshSpline){
 	var request = new XMLHttpRequest();
 	request.open('GET', 'https://raw.githubusercontent.com/immersivecomputing/EGS_Collab_AR/main/TextFile/Position.txt', true);
 	request.send(null);
@@ -16,13 +15,14 @@ function getText(){
 				
 				//Just for testing
 				var today = new Date();
-				var min = today.getMinutes();
-				var increment = (min/10) % 1.0;
+				var sec = today.getSeconds();
+				var increment = (sec/60);
 
-				console.log(increment);
-				return increment;
+				//console.log(increment);
+				
+				var position = meshSpline.geometry.parameters.path.getPoint(increment);
+				realtimeObject.position = position;
 
-				//return request.responseText;
 			}
 		}
 	}
