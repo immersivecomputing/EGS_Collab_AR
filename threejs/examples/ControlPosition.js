@@ -2,7 +2,7 @@
 
 function ControlPosition(){
 	let positionAlongBorehole = getText();
-	return positionAlongBorehole;
+	console.log(positionAlongBorehole);
 }
 
 function getText(){
