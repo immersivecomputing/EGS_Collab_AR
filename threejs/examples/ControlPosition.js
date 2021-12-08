@@ -2,7 +2,7 @@
 
 function ControlPosition(){
 	let positionAlongBorehole = getText();
-	console.log(positionAlongBorehole);
+	
 }
 
 function getText(){
@@ -19,7 +19,7 @@ function getText(){
 				var min = today.getMinutes();
 				var increment = (min/10) % 1.0;
 
-				//console.log(increment);
+				console.log(increment);
 				return increment;
 
 				//return request.responseText;
