@@ -121,11 +121,24 @@
 				
 				camera = new THREE.PerspectiveCamera( 70, window.innerWidth / window.innerHeight, 0.01, 50 );
 				camera.position.set( 0, 7, 0 );
+
+				orthoCamera = new THREE.OrthographicCamera( - 1, 1, 1, - 1, 1, 2 );
+				orthoCamera.position.set( 0.5, 0, 1 );
 				
 				const environment = new RoomEnvironment();
 				const pmremGenerator = new THREE.PMREMGenerator( renderer );
 				
 				scene = new THREE.Scene();
+				scene.add(camera);
+				uiScene = new THREE.Scene();
+
+				sprite = new THREE.Sprite( new THREE.SpriteMaterial( {
+					map: new THREE.CanvasTexture( lut.createCanvas() )
+				} ) );
+				sprite.scale.x = 0.125;
+				uiScene.add( sprite );
+
+
 				loadedModel = new THREE.Group();
 				//scene.background = new THREE.Color( 0xbbbbbb );
 				//scene.environment = pmremGenerator.fromScene( environment ).texture;
@@ -605,6 +618,7 @@
 
 				renderer.render( scene, camera );
 				labelRenderer.render( scene, camera );
+				renderer.render( uiScene, orthoCamera );
 
 				if	(params.toggleRealtime){
 					realtimeObject.visible = true;
