@@ -119,8 +119,14 @@
 				
 				lut = new Lut();
 				
+				scene = new THREE.Scene();
+				
+				uiScene = new THREE.Scene();
+
 				camera = new THREE.PerspectiveCamera( 70, window.innerWidth / window.innerHeight, 0.01, 50 );
 				camera.position.set( 0, 7, 0 );
+				scene.add(camera);
+
 
 				orthoCamera = new THREE.OrthographicCamera( - 1, 1, 1, - 1, 1, 2 );
 				orthoCamera.position.set( 0.5, 0, 1 );
@@ -128,9 +134,7 @@
 				const environment = new RoomEnvironment();
 				const pmremGenerator = new THREE.PMREMGenerator( renderer );
 				
-				scene = new THREE.Scene();
-				scene.add(camera);
-				uiScene = new THREE.Scene();
+				
 
 				sprite = new THREE.Sprite( new THREE.SpriteMaterial( {
 					map: new THREE.CanvasTexture( lut.createCanvas() )
@@ -616,6 +620,7 @@
 
 				}
 
+				renderer.clear();
 				renderer.render( scene, camera );
 				labelRenderer.render( scene, camera );
 				renderer.render( uiScene, orthoCamera );
