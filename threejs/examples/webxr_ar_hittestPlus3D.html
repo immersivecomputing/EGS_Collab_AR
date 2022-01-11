@@ -142,6 +142,7 @@
 				} ) );
 				sprite.scale.x = 0.125;
 				uiScene.add( sprite );
+				sprite.visible = false;
 
 
 				loadedModel = new THREE.Group();
@@ -480,6 +481,8 @@
 						const texture = new THREE.DataTexture( texData, valueCsvData.length, 1, THREE.RGBFormat );
 						material.map = texture;
 						material.needsUpdate = true;
+
+						sprite.visible = true;
 					}
 				)
 				
