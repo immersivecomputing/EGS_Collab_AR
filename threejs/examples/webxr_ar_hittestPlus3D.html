@@ -616,7 +616,7 @@
 				  	const intersects = raycaster.intersectObject( loadedLine );
 			
 					if ( intersects.length > 0 ) {
-						console.log(intersects[0].face);
+						console.log(intersects[0]);
 
 						sphereInter.visible = true;
 						sphereInter.position.copy( loadedModel.worldToLocal(intersects[ 0 ].point) );
