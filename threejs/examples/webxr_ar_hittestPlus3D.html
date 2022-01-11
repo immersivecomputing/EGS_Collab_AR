@@ -479,7 +479,7 @@
 						for(let i = 0; i < valueCsvData.length; i++){
 							var newVal = parseFloat(valueCsvData[i].PVelocity);
 							if (newVal > valMax){ valMax = newVal; }
-							if (newVal < valMin){ valMin = newVal; }
+							if (newVal < valMin && newVal > 0){ valMin = newVal; }
 						}
 
 						lut.setMax( valMax );
