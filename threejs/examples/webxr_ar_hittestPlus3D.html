@@ -469,6 +469,9 @@
 				dataCsvloader.load('/EGS_Collab_AR/csvData/E2-AMU_FWS.csv',
 					function ( data ) {
 						let valueCsvData = csvParse(data);
+
+						console.log(valueCsvData);
+
 						const lineColors = [];
 						for(let i = 0; i < valueCsvData.length; i++){
 						    const stride = i * 3;
