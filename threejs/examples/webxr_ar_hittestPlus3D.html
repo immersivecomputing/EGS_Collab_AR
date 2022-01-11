@@ -35,6 +35,7 @@
 			import { LineMaterial } from './jsm/lines/LineMaterial.js';
 			import { LineGeometry } from './jsm/lines/LineGeometry.js';
 			import { ControlPosition } from './ControlPosition.js';
+			import { FontLoader } from './jsm/loaders/FontLoader.js';
 
 			let container;
 			let camera, scene, renderer, loadedModel, orthoCamera, uiScene;
@@ -142,6 +143,7 @@
 				} ) );
 				sprite.scale.x = 0.125;
 				uiScene.add( sprite );
+				createAxisText(0,0,0,'cmin', 'cmin')
 				sprite.visible = false;
 
 
@@ -509,43 +511,32 @@
 				map.needsUpdate = true;
 			}
 			
-			
-			function updateColors() {
+			function createAxisText(x,y,z, axisName, label) {
 
-				lut.setColorMap( 'blackbody' );
+				const loader = new FontLoader();
+				loader.load('fonts/helvetiker_regular.typeface.json', function (response) {
 
-				lut.setMax( 100 );
-				lut.setMin( -100 );
+					var font = response;
 
-				const geometry = meshSpline.geometry;
-				const pressures = geometry.attributes.position;  //this is the data value for each vertex
-				const colors = geometry.attributes.color;
-				
-				
-					
+					var textGeo = new THREE.TextGeometry(label, {
+						size: 5,
+						height: 0.1,
+						curveSegments: 6,
+						font: font
+					});
 
-					for ( let i = 0; i < pressures.array.length/3; i ++ ) {
-						
-						
-						const colorValue = pressures.array[ i * 3 ];
+					var color = new THREE.Color();
+					color.setRGB(255, 250, 250);
+					var textMaterial = new THREE.MeshBasicMaterial({ color: color });
+					var axisLabel = new THREE.Mesh(textGeo, textMaterial);
 
-						const color = lut.getColor( colorValue );
+					axisLabel.position.x = x;
+					axisLabel.position.y = y;
+					axisLabel.position.z = z;
+					axisLabel.name = axisName;
 
-						if ( color === undefined ) {
-
-							console.log( 'Unable to determine color for value:', colorValue );
-
-						} else {
-
-							colors.setXYZ( i, color.r, color.g, color.b );
-
-						}
-
-					}
-					colors.needsUpdate = true;
-				
-				
-				//map.needsUpdate = true;
+					uiScene.add(axisLabel);
+				});
 
 			}
 
