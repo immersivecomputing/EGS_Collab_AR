@@ -143,8 +143,8 @@
 				} ) );
 				sprite.scale.x = 0.125;
 				uiScene.add( sprite );
-				createAxisText(0.125,-0.5,0,'cmin', 'cmin')
-				createAxisText(0.125,0.5,0,'cmax', 'cmax')
+				createAxisText(0.1,-0.5,0,'cmin', 'cmin')
+				createAxisText(0.1,0.5,0,'cmax', 'cmax')
 				sprite.visible = false;
 
 
@@ -520,7 +520,7 @@
 					var font = response;
 
 					var textGeo = new THREE.TextGeometry(label, {
-						size: 0.05,
+						size: 0.025,
 						height: 0.001,
 						curveSegments: 6,
 						font: font
@@ -537,7 +537,9 @@
 					axisLabel.name = axisName;
 
 					//axisLabel.lookAt(orthoCamera.position);
-					uiScene.add(axisLabel);
+					//uiScene.add(axisLabel);
+
+					sprite.attach(axisLabel);
 				});
 			}
 
