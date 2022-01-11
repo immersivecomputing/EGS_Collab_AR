@@ -520,7 +520,7 @@
 
 					var textGeo = new THREE.TextGeometry(label, {
 						size: 0.1,
-						height: 0.1,
+						height: 0.001,
 						curveSegments: 6,
 						font: font
 					});
@@ -533,7 +533,7 @@
 					axisLabel.position.x = x;
 					axisLabel.position.y = y;
 					axisLabel.position.z = z;
-					axisLabel.rotation.y = 1.5708;
+					axisLabel.rotation.y = 0.1;
 					axisLabel.name = axisName;
 
 					//axisLabel.lookAt(orthoCamera.position);
