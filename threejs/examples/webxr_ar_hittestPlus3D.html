@@ -488,6 +488,9 @@
 						lut.setMax( valMax );
 						lut.setMin( valMin );
 
+						updateAxisText('cmin', valMin);
+						updateAxisText('cmax', valMax);
+
 						for(let i = 0; i < valueCsvData.length; i++){
 						    const stride = i * 3;
 							
@@ -540,6 +543,27 @@
 					//uiScene.add(axisLabel);
 
 					sprite.attach(axisLabel);
+				});
+			}
+
+			function updateAxisText(axisName, newText){
+				const loader = new FontLoader();
+				loader.load('fonts/helvetiker_regular.typeface.json', function (response) {
+					var font = response;
+
+					var textGeo = new THREE.TextGeometry(label, {
+						size: 0.025,
+						height: 0.001,
+						curveSegments: 6,
+						font: font
+					});
+
+					// var color = new THREE.Color();
+					// color.setRGB(255, 250, 250);
+					// var textMaterial = new THREE.MeshBasicMaterial({ color: color });
+
+					let labelObject = sprite.getObjectByName(axisName);
+					labelObject.geometry = textGeo;
 				});
 			}
 
