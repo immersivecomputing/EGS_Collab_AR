@@ -366,8 +366,8 @@
 									}
 								}
 								boreholeSpline = new THREE.CatmullRomCurve3(v3array);
-								//addLine(boreholeSpline);
-								addTube(boreholeSpline);
+								addLine(boreholeSpline);
+								//addTube(boreholeSpline);
 							}
 						);
 					}
@@ -610,10 +610,10 @@
 			function render( timestamp, frame ) {
 
 				raycaster.setFromCamera( pointer, camera );
-				if (typeof meshSpline !== 'undefined') {
-					const intersects = raycaster.intersectObject( meshSpline );
-				//if (typeof loadedLine !== 'undefined') {
-				//  	const intersects = raycaster.intersectObject( loadedLine );
+				//if (typeof meshSpline !== 'undefined') {
+				//	const intersects = raycaster.intersectObject( meshSpline );
+				if (typeof loadedLine !== 'undefined') {
+				  	const intersects = raycaster.intersectObject( loadedLine );
 			
 					if ( intersects.length > 0 ) {
 						console.log(intersects[0].face);
