@@ -551,7 +551,7 @@
 				loader.load('fonts/helvetiker_regular.typeface.json', function (response) {
 					var font = response;
 
-					var textGeo = new THREE.TextGeometry(newText, {
+					var textGeo = new THREE.TextGeometry(newText.toFixed(3), {
 						size: 0.025,
 						height: 0.001,
 						curveSegments: 6,
