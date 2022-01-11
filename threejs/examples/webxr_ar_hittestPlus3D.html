@@ -535,10 +535,10 @@
 					axisLabel.position.z = z;
 					axisLabel.name = axisName;
 
-					scene.add(axisLabel);
+					axisLabel.lookAt(orthoCamera.position);
+					uiScene.add(axisLabel);
 					console.log(axisLabel);
 				});
-
 			}
 
 			function onWindowResize() {
