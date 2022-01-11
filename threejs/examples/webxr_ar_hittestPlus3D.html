@@ -483,6 +483,8 @@
 					}
 				)
 				
+				const map = sprite.material.map;
+				lut.updateCanvas( map.image );
 			}
 			
 			
@@ -520,8 +522,7 @@
 					}
 					colors.needsUpdate = true;
 				
-				const map = sprite.material.map;
-				lut.updateCanvas( map.image );
+				
 				//map.needsUpdate = true;
 
 			}
