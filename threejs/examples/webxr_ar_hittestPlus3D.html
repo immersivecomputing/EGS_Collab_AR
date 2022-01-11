@@ -351,7 +351,11 @@
 								let v3array = [];
 								for(let i = 1; i < csvData.length; i++){
 									if(parseFloat(csvData[i].Depth) >= parseFloat(csvData[i-1].Depth)){
-										if(parseFloat(csvData[i].Depth) != 0 && parseFloat(csvData[i-1].Depth) != 0)
+										if(parseFloat(csvData[i].Depth) == 0 && parseFloat(csvData[i-1].Depth) == 0)
+										{
+											continue;
+										}
+										else
 										{
 											let xpos = (parseFloat(csvData[i-1].Easting) * 3.28084) - baseEasting;
 											let ypos = (parseFloat(csvData[i-1].Elev) * 3.28084) + baseElev;
