@@ -40,7 +40,7 @@
 			let container;
 			let camera, scene, renderer, loadedModel, orthoCamera, uiScene;
 			let controller, lut;
-			let meshSpline, raycaster, sphereInter, sprite;
+			let meshSpline, raycaster, sphereInter, sprite, loadedLine;
 			const pointer = new THREE.Vector2();
 			
 			let reticle;
@@ -438,8 +438,8 @@
 
 				} );
 
-				let line = new Line2( lgeometry, matLine );
-				loadedModel.add( line );
+				loadedLine = new Line2( lgeometry, matLine );
+				loadedModel.add( loadedLine );
 
 				sprite.visible = true;
 
@@ -612,14 +612,15 @@
 				raycaster.setFromCamera( pointer, camera );
 				//if (typeof meshSpline !== 'undefined') {
 				//	const intersects = raycaster.intersectObject( meshSpline );
-				if (typeof line !== 'undefined') {
-				  	const intersects = raycaster.intersectObject( line );
+				if (typeof loadedLine !== 'undefined') {
+				  	const intersects = raycaster.intersectObject( loadedLine );
 			
 					if ( intersects.length > 0 ) {
 						console.log(intersects[0]);
 
 						sphereInter.visible = true;
 						sphereInter.position.copy( loadedModel.worldToLocal(intersects[ 0 ].point) );
+						
 						sphereInter.material.color = lut.getColor( sphereInter.position.x );
 						valueLabel.visible = true;
 						labelDiv.textContent = -sphereInter.position.x - 4047.435;
