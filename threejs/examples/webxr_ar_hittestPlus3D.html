@@ -350,7 +350,7 @@
 								csvData = csvParse(data);
 								let v3array = [];
 								for(let i = 1; i < csvData.length; i++){
-									if(parseFloat(csvData[i].Depth) >= parseFloat(csvData[i-1].Depth)){
+									if(parseFloat(csvData[i].Depth) > parseFloat(csvData[i-1].Depth)){
 										let xpos = (parseFloat(csvData[i-1].Easting) * 3.28084) - baseEasting;
 										let ypos = (parseFloat(csvData[i-1].Elev) * 3.28084) + baseElev;
 										let zpos = (-parseFloat(csvData[i-1].Northing) * 3.28084) + baseNorthing;
@@ -461,9 +461,6 @@
 			
 			function addTexture(){
 				lut.setColorMap( 'blackbody' );
-
-				//lut.setMax( 7576 );
-				//lut.setMin( 5555 );
 				
 				let color;
 
@@ -539,9 +536,6 @@
 					axisLabel.position.z = -0.05;
 					axisLabel.name = axisName;
 
-					//axisLabel.lookAt(orthoCamera.position);
-					//uiScene.add(axisLabel);
-
 					sprite.attach(axisLabel);
 				});
 			}
@@ -551,16 +545,12 @@
 				loader.load('fonts/helvetiker_regular.typeface.json', function (response) {
 					var font = response;
 
-					var textGeo = new THREE.TextGeometry(newText.toFixed(3), {
+					var textGeo = new THREE.TextGeometry(newText.toFixed(2), {
 						size: 0.025,
 						height: 0.001,
 						curveSegments: 6,
 						font: font
 					});
-
-					// var color = new THREE.Color();
-					// color.setRGB(255, 250, 250);
-					// var textMaterial = new THREE.MeshBasicMaterial({ color: color });
 
 					let labelObject = sprite.getObjectByName(axisName);
 					labelObject.geometry = textGeo;
