@@ -405,29 +405,29 @@
 					
 			// }
 			
-			function plotLine(lpos, lcol){
-				const lgeometry = new LineGeometry();
-				console.log(lpos);
-				lgeometry.setPositions( lpos );
-				lgeometry.setColors( lcol );
+			// function plotLine(lpos, lcol){
+			// 	const lgeometry = new LineGeometry();
+			// 	console.log(lpos);
+			// 	lgeometry.setPositions( lpos );
+			// 	lgeometry.setColors( lcol );
 
-				let matLine = new LineMaterial( {
+			// 	let matLine = new LineMaterial( {
 
-					color: 0xffffff,
-					linewidth: 0.01, // in world units with size attenuation, pixels otherwise
-					vertexColors: true,
+			// 		color: 0xffffff,
+			// 		linewidth: 0.01, // in world units with size attenuation, pixels otherwise
+			// 		vertexColors: true,
 					
-					//resolution:  // to be set by renderer, eventually
-					dashed: false,
-					alphaToCoverage: true,
+			// 		//resolution:  // to be set by renderer, eventually
+			// 		dashed: false,
+			// 		alphaToCoverage: true,
 
-				} );
+			// 	} );
 
-				let line = new Line2( lgeometry, matLine );
-				//line.computeLineDistances();
-				//line.scale.set( 1, 1, 1 );
-				loadedModel.add( line );
-			}
+			// 	let line = new Line2( lgeometry, matLine );
+			// 	//line.computeLineDistances();
+			// 	//line.scale.set( 1, 1, 1 );
+			// 	loadedModel.add( line );
+			// }
 			//
 			
 			
@@ -595,7 +595,7 @@
 					const intersects = raycaster.intersectObject( meshSpline );
 			
 					if ( intersects.length > 0 ) {
-						consoloe.log(intersects[0]);
+						console.log(intersects[0]);
 
 						sphereInter.visible = true;
 						sphereInter.position.copy( loadedModel.worldToLocal(intersects[ 0 ].point) );
