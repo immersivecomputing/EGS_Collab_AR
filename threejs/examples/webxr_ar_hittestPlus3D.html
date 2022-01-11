@@ -100,6 +100,7 @@
 				renderer.outputEncoding = THREE.sRGBEncoding;
 				renderer.xr.enabled = true;
 				renderer.localClippingEnabled = true;
+				renderer.autoClear = false;
 				container.appendChild( renderer.domElement );
 				
 				
@@ -621,9 +622,9 @@
 				}
 
 				renderer.clear();
-				renderer.render( uiScene, orthoCamera );
 				renderer.render( scene, camera );
 				labelRenderer.render( scene, camera );
+				renderer.render( uiScene, orthoCamera );
 				
 
 				if	(params.toggleRealtime){
