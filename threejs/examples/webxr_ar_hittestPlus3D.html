@@ -377,33 +377,33 @@
 			
 			
 			//TEST part of script for line rendering of data
-			function addLine(inputTube){
-				lut.setColorMap( 'blackbody' );
+			// function addLine(inputTube){
+			// 	lut.setColorMap( 'blackbody' );
 
-				lut.setMax( 7576 );
-				lut.setMin( 5555 );
+			// 	lut.setMax( 7576 );
+			// 	lut.setMin( 5555 );
 				
-				const point = new THREE.Vector3();
-				let color;
+			// 	const point = new THREE.Vector3();
+			// 	let color;
 			
 			
-				const dataCsvloader = new THREE.FileLoader();
-				dataCsvloader.load('/EGS_Collab_AR/csvData/E2-AMU_FWS.csv',
-					function ( data ) {
-						let valueCsvData = csvParse(data);
-						const linePositions = [];
-						const lineColors = [];
-						for(let i = 0; i < valueCsvData.length; i++){
-							inputTube.getPoint(parseFloat(valueCsvData[i].Depth) / boreholeDepth, point)
-							linePositions.push(point.x, point.y, point.z);
-							color = lut.getColor( parseFloat(valueCsvData[i].PVelocity) );
-							lineColors.push(color.r, color.g, color.b);
-						}
-						plotLine(linePositions, lineColors);
-					}
-				)
+			// 	const dataCsvloader = new THREE.FileLoader();
+			// 	dataCsvloader.load('/EGS_Collab_AR/csvData/E2-AMU_FWS.csv',
+			// 		function ( data ) {
+			// 			let valueCsvData = csvParse(data);
+			// 			const linePositions = [];
+			// 			const lineColors = [];
+			// 			for(let i = 0; i < valueCsvData.length; i++){
+			// 				inputTube.getPoint(parseFloat(valueCsvData[i].Depth) / boreholeDepth, point)
+			// 				linePositions.push(point.x, point.y, point.z);
+			// 				color = lut.getColor( parseFloat(valueCsvData[i].PVelocity) );
+			// 				lineColors.push(color.r, color.g, color.b);
+			// 			}
+			// 			plotLine(linePositions, lineColors);
+			// 		}
+			// 	)
 					
-			}
+			// }
 			
 			function plotLine(lpos, lcol){
 				const lgeometry = new LineGeometry();
@@ -595,6 +595,7 @@
 					const intersects = raycaster.intersectObject( meshSpline );
 			
 					if ( intersects.length > 0 ) {
+						consoloe.log(intersects[0]);
 
 						sphereInter.visible = true;
 						sphereInter.position.copy( loadedModel.worldToLocal(intersects[ 0 ].point) );
