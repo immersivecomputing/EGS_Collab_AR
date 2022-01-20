@@ -517,8 +517,8 @@
 						let minDepth = valueCsvData[0].Depth;
 						let maxDepth = valueCsvData[valueCsvData.length-1].Depth;
 
-						console.log(minDepth);
-						console.log(maxDepth);
+						console.log(minDepth / boreholeDepth);
+						console.log(maxDepth / boreholeDepth);
 
 						for(let i = 0; i < valueCsvData.length; i++){
 							var newVal = parseFloat(valueCsvData[i].PVelocity);
