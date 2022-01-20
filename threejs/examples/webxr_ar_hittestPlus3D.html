@@ -559,8 +559,8 @@
 						}
 						
 						const texture = new THREE.DataTexture( texData, valueCsvData.length, 1, THREE.RGBFormat );
-						material.map = texture;
-						material.needsUpdate = true;
+						textureMaterial.map = texture;
+						textureMaterial.needsUpdate = true;
 
 						sprite.visible = true;
 						
