@@ -514,6 +514,12 @@
 
 						const lineColors = [];
 
+						let minDepth = valueCsvData[0].Depth;
+						let maxDepth = valueCsvData[valueCsvData.length-1].Depth;
+
+						console.log(minDepth);
+						console.log(maxDepth);
+
 						for(let i = 0; i < valueCsvData.length; i++){
 							var newVal = parseFloat(valueCsvData[i].PVelocity);
 							if (newVal > valMax){ valMax = newVal; }
