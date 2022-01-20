@@ -523,10 +523,13 @@
 
 						for(let i = nminDepth; i <= nmaxDepth; i+= increment)
 						{
-							console.log(i);
 							boreholeTexturePos.push(boreholeSpline.getPointAt(i));
 						}
-						console.log(boreholeTexturePos);
+
+						let textureSpline = new THREE.CatmullRomCurve3(boreholeTexturePos);
+						let textureTubeGeometry = new THREE.TubeGeometry( textureSpline, 100, 0.5, 8, false );
+						let textureMeshSpline = new THREE.Mesh( textureTubeGeometry, material );
+						loadedModel.add( meshSpline );
 
 						for(let i = 0; i < valueCsvData.length; i++){
 							var newVal = parseFloat(valueCsvData[i].PVelocity);
