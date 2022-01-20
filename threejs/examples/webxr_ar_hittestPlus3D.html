@@ -526,9 +526,14 @@
 							boreholeTexturePos.push(boreholeSpline.getPointAt(i));
 						}
 
+						const material = new THREE.MeshLambertMaterial( {
+							side: THREE.DoubleSide,
+							color: 0xF5F5F5,
+							vertexColors: true} );
+
 						let textureSpline = new THREE.CatmullRomCurve3(boreholeTexturePos);
 						let textureTubeGeometry = new THREE.TubeGeometry( textureSpline, 100, 0.5, 8, false );
-						let textureMeshSpline = new THREE.Mesh( textureTubeGeometry, material );
+						let textureMeshSpline = new THREE.Mesh( textureTubeGeometry, textureMaterial );
 						
 
 						for(let i = 0; i < valueCsvData.length; i++){
@@ -555,11 +560,11 @@
 						}
 						
 						const texture = new THREE.DataTexture( texData, valueCsvData.length, 1, THREE.RGBFormat );
-						//material.map = texture;
-						//material.needsUpdate = true;
+						material.map = texture;
+						material.needsUpdate = true;
 
 						sprite.visible = true;
-						console.log(textureMeshSpline.material);
+						
 						loadedModel.add( textureMeshSpline );
 					}
 				)
