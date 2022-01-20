@@ -527,9 +527,9 @@
 						}
 
 						let textureSpline = new THREE.CatmullRomCurve3(boreholeTexturePos);
-						let textureTubeGeometry = new THREE.TubeGeometry( textureSpline, 100, 0.5, 8, false );
+						let textureTubeGeometry = new THREE.TubeGeometry( textureSpline, 100, 0.75, 8, false );
 						let textureMeshSpline = new THREE.Mesh( textureTubeGeometry, material );
-						loadedModel.add( meshSpline );
+						loadedModel.add( textureMeshSpline );
 
 						for(let i = 0; i < valueCsvData.length; i++){
 							var newVal = parseFloat(valueCsvData[i].PVelocity);
