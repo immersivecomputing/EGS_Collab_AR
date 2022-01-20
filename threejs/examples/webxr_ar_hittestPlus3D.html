@@ -518,16 +518,15 @@
 						let maxDepth = valueCsvData[valueCsvData.length-1].Depth;
 						let nminDepth = minDepth / boreholeDepth;
 						let nmaxDepth = maxDepth / boreholeDepth
-						let minPos = boreholeSpline.getPointAt(nminDepth);
-						let maxPos = boreholeSpline.getPointAt(nmaxDepth);
+						let increment = (nmaxDepth - nminDepth) / 10;
+						const boreholeTexturePos = [];
 
-						console.log(minDepth);
-						console.log(maxDepth);
-						console.log(boreholeDepth);
-						console.log(minDepth / boreholeDepth);
-						console.log(maxDepth / boreholeDepth);
-						console.log(minPos);
-						console.log(maxPos);
+						for(let i = nminDepth; i <= nmaxDepth; i+= increment)
+						{
+							console.log(i);
+							boreholeTexturePos.push(boreholeSpline.getPointAt(i));
+						}
+						console.log(boreholeTexturePos);
 
 						for(let i = 0; i < valueCsvData.length; i++){
 							var newVal = parseFloat(valueCsvData[i].PVelocity);
