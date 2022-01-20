@@ -137,7 +137,7 @@
 
 
 				orthoCamera = new THREE.OrthographicCamera( - 1, 1, 1, - 1, 1, 2 );
-				orthoCamera.position.set( 0.75, 0, 1.5 );
+				orthoCamera.position.set( 0.75, -0.5, 10 );
 				
 				const environment = new RoomEnvironment();
 				const pmremGenerator = new THREE.PMREMGenerator( renderer );
@@ -484,7 +484,7 @@
 				// default color attribute
 				const colors = [];
 				for ( let i = 0, n = geometry.attributes.position.count; i < n; ++ i ) {
-					colors.push( 1, 1, 1 );
+					colors.push( 0.5, 0.5, 0.5 );
 				}
 				
 				geometry.setAttribute( 'color', new THREE.Float32BufferAttribute( colors, 3 ) );
