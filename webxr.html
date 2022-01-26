@@ -604,7 +604,7 @@
 
 			function updateAxisText(axisName, newText){
 				const loader = new FontLoader();
-				loader.load('/threejs/examples/fonts/helvetiker_regular.typeface.json', function (response) {
+				loader.load('./threejs/examples/fonts/helvetiker_regular.typeface.json', function (response) {
 					var font = response;
 
 					var textGeo = new THREE.TextGeometry(newText.toFixed(2), {
