@@ -10,7 +10,7 @@
 ![QR_Android](https://immersivecomputing.github.io/EGS_Collab_AR/media/QR_android.png)
 
 ### Interactive Model
-[Interactive 3D viewer (Any platform)](https://immersivecomputing.github.io/EGS_Collab_AR/threejs/examples/webxr_ar_hittestPlus3D.html)
+[Interactive 3D viewer (Any platform)](https://immersivecomputing.github.io/EGS_Collab_AR/webxr.html)
 <br />To follow the AR link you will either need to be using Chrome on Android, or [Mozilla's WebXR Viewer app](https://apps.apple.com/us/app/webxr-viewer/id1295998056) on iOS.
 
 ![QR_Interactive](https://immersivecomputing.github.io/EGS_Collab_AR/media/QR_interactive.png)
