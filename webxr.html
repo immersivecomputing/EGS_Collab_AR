@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>EGS Collab AR</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+		<link type="text/css" rel="stylesheet" href="main.css">
+		<style>
+		.label {
+				color: #FFF;
+				font-family: sans-serif;
+				padding: 2px;
+				background: rgba( 0, 0, 0, .6 );
+			}
+		</style>
+	</head>
+	<body>
+
+		<div id="info">
+			<a href="https://threejs.org" target="_blank" rel="noopener">EGS Collab</a> AR <br/>
+		</div>
+		<script type="module">
+
+			import * as THREE from './threejs/build/three.module.js';
+			import { ARButton } from './threejs/examples/jsm/webxr/ARButton.js';
+			import { GLTFLoader } from './threejs/examples/jsm/loaders/GLTFLoader.js';
+			import { OrbitControls } from './threejs/examples/jsm/controls/OrbitControls.js';
+			import { RoomEnvironment } from './threejs/examples/jsm/environments/RoomEnvironment.js';
+			import { GUI } from './threejs/examples/jsm/libs/dat.gui.module.js';
+			//import {csvParse} from "https://cdn.skypack.dev/d3-dsv@3";
+			import {csvParse} from "https://cdn.skypack.dev/-/d3-dsv@v3.0.1-u1xCRjaLJc0qqv1Z5ERe/dist=es2020,mode=imports/optimized/d3-dsv.js";
+			import { Lut } from './threejs/examples/jsm/math/Lut.js';
+			import { CSS2DRenderer, CSS2DObject } from './threejs/examples/jsm/renderers/CSS2DRenderer.js';
+			import { Line2 } from './threejs/examples/jsm/lines/Line2.js';
+			import { LineMaterial } from './threejs/examples/jsm/lines/LineMaterial.js';
+			import { LineGeometry } from './threejs/examples/jsm/lines/LineGeometry.js';
+			import { ControlPosition } from './threejs/examples/ControlPosition.js';
+			import { FontLoader } from './threejs/examples/jsm/loaders/FontLoader.js';
+
+			let container;
+			let camera, scene, renderer, loadedModel, orthoCamera, uiScene;
+			let controller, lut, rtTexture;
+			let meshSpline, raycaster, sphereInter, sprite, loadedLine;
+			const pointer = new THREE.Vector2();
+			
+			let reticle;
+			let planes;
+			
+			let mouseX = 0, mouseY = 0;
+
+			let csvData, labelRenderer, labelDiv, valueLabel;
+			let baseNorthing, baseEasting, baseElev;
+			let realtimeObject;
+
+			let hitTestSource = null;
+			let hitTestSourceRequested = false;
+			
+			let boreholeSpline, tubeGeometry;
+			const material = new THREE.MeshLambertMaterial( {
+					side: THREE.DoubleSide,
+					color: 0xF5F5F5,
+					vertexColors: true} );
+			let materialModel;
+					
+			const windowHalfX = window.innerWidth / 2;
+			const windowHalfY = window.innerHeight / 2;
+			
+			const wireframeMaterial = new THREE.MeshBasicMaterial( { color: 0x000000, opacity: 0.3, wireframe: true, transparent: true } );
+
+			const params = {
+				toggleTunnel: true,
+				toggleGrid: false,
+                toggleBoreholes: false,
+                toggleElectrodes: false,
+                toggleGyroStartPoints: false,
+                toggleGyroSrikeDipDepth: false,
+                toggleGyroXYZ: false,
+				textField: "E2-TC",
+				loadCSV: loadCSV,
+				planeY: {
+
+					constant: -0.5,
+					//negated: false,
+					//displayHelper: false
+
+				},
+				toggleRealtime: false
+				};
+
+			init();
+			animate();
+			
+			
+
+			function init() {
+
+				container = document.createElement( 'div' );
+				document.body.appendChild( container );
+
+				renderer = new THREE.WebGLRenderer( { antialias: true, alpha: true } );
+				renderer.setPixelRatio( window.devicePixelRatio );
+				renderer.setSize( window.innerWidth, window.innerHeight );
+				renderer.toneMapping = THREE.ACESFilmicToneMapping;
+				renderer.toneMappingExposure = 1;
+				renderer.outputEncoding = THREE.sRGBEncoding;
+				renderer.xr.enabled = true;
+				renderer.localClippingEnabled = true;
+				renderer.autoClear = false;
+				container.appendChild( renderer.domElement );
+
+				rtTexture = new THREE.WebGLRenderTarget( window.innerWidth, window.innerHeight, { minFilter: THREE.LinearFilter, magFilter: THREE.NearestFilter, format: THREE.RGBAFormat, type: THREE.FloatType } );
+				
+				
+				planes = [
+					new THREE.Plane( new THREE.Vector3( 0, - 1, 0 ), -0.5 )
+				];
+				
+				materialModel = new THREE.MeshLambertMaterial( {
+
+							color: 0xB6D7A8,
+							opacity: 0.25,
+							transparent: true,
+							side: THREE.DoubleSide,
+							clippingPlanes: planes,
+
+						} );
+				
+				lut = new Lut();
+				
+				scene = new THREE.Scene();
+				
+				uiScene = new THREE.Scene();
+
+				camera = new THREE.PerspectiveCamera( 70, window.innerWidth / window.innerHeight, 0.01, 50 );
+				camera.position.set( 0, 7, 0 );
+				scene.add(camera);
+
+
+				orthoCamera = new THREE.OrthographicCamera( - 1, 1, 1, - 1, 1, 20 );
+				orthoCamera.position.set( 0.75, 0.5, 10 );
+				
+				const environment = new RoomEnvironment();
+				const pmremGenerator = new THREE.PMREMGenerator( renderer );
+				
+				
+
+				sprite = new THREE.Sprite( new THREE.SpriteMaterial( {
+					map: new THREE.CanvasTexture( lut.createCanvas() )
+				} ) );
+				sprite.scale.x = 0.0625;
+				sprite.scale.y = 0.5;
+				uiScene.add( sprite );
+				createAxisText(0.05,-0.25,0,'cmin', 'cmin')
+				createAxisText(0.05,0.25,0,'cmax', 'cmax')
+				sprite.visible = false;
+
+
+				loadedModel = new THREE.Group();
+				//scene.background = new THREE.Color( 0xbbbbbb );
+				//scene.environment = pmremGenerator.fromScene( environment ).texture;
+				
+				scene.background = null;
+				scene.environment = null;
+				
+				const light = new THREE.HemisphereLight( 0xffffff, 0x080808, 1.5 );
+				light.position.set( -1.25, 1, 1.25 );
+				scene.add( light );
+				
+
+				const grid = new THREE.GridHelper( 10, 100, 0xffffff, 0xffffff );
+				grid.material.opacity = 0.5;
+				grid.material.depthWrite = false;
+				grid.material.transparent = true;
+				grid.visible = false;
+				scene.add( grid );
+				
+				const loader = new GLTFLoader().setPath( '/EGS_Collab_AR/GLTF/' );
+				loader.load('EGS_Collab.gltf', function ( gltf ){
+							loadedModel.add(gltf.scene);
+							loadedModel.scale.set(0.01,0.01,0.01)
+							scene.add(loadedModel);
+							ToggleValue(false,'BoreholesOnly');
+							ToggleValue(false,'Electrodes');
+							ToggleValue(false,'Gyro_StartingPoints');
+							ToggleValue(false,'Gyro_XYZPoints');
+							ToggleValue(false,'Gyro_StrikeDipDepthPoints');
+							render();
+						});
+				
+				
+
+				document.body.appendChild( ARButton.createButton( renderer, { requiredFeatures: [ 'hit-test' ] } ) );
+
+				function onSelect() {
+
+					if ( reticle.visible ) {
+						
+						loadedModel.position.setFromMatrixPosition( reticle.matrix );
+						loadedModel.scale.set(0.005,0.005,0.005);
+						render();
+					}
+				}
+				
+
+				controller = renderer.xr.getController( 0 );
+				controller.addEventListener( 'select', onSelect );
+				scene.add( controller );
+
+				reticle = new THREE.Mesh(
+					new THREE.RingGeometry( 0.15, 0.2, 32 ).rotateX( - Math.PI / 2 ),
+					new THREE.MeshBasicMaterial()
+				);
+				reticle.matrixAutoUpdate = false;
+				reticle.visible = false;
+				scene.add( reticle );
+
+
+				window.addEventListener( 'resize', onWindowResize );
+				
+				
+				//Load some buffer geometries
+				
+				loadModel( 'SampleBufferGeometry2.json');
+				loadModel( 'SampleBufferGeometry1.json');
+				loadModel( 'SampleBufferGeometry.json');
+				//
+				
+				const gui = new GUI();
+				const baseFolder = gui.addFolder( 'Base Objects' );
+				baseFolder.add(params, 'toggleTunnel').name('Tunnel').onChange( function (value){
+					ToggleValue(value,'TunnelOnly');
+				});
+				baseFolder.add(params, 'toggleGrid').name('Grid').onChange( function (value){
+					grid.visible = value;
+					render();
+				});
+				const planningFolder = gui.addFolder( 'Planned Positions' );
+				planningFolder.add(params, 'toggleBoreholes').name('Boreholes').onChange( function (value){
+					ToggleValue(value,'BoreholesOnly');
+				});
+				planningFolder.add(params, 'toggleElectrodes').name('Electrodes').onChange( function (value){
+					ToggleValue(value,'Electrodes');
+				});
+				const gyroFolder = gui.addFolder( 'Gyro Data' );
+                gyroFolder.add(params, 'toggleGyroStartPoints' ).name( 'Start Points' ).onChange( function (value){
+					ToggleValue(value,'Gyro_StartingPoints');
+				});
+                gyroFolder.add(params, 'toggleGyroSrikeDipDepth' ).name( 'Strike/Dip/Depth Points' ).onChange( function (value){
+					ToggleValue(value,'Gyro_XYZPoints');
+				});
+                gyroFolder.add(params, 'toggleGyroXYZ' ).name( 'XYZ Points' ).onChange( function (value){
+					ToggleValue(value,'Gyro_StrikeDipDepthPoints');
+				});
+				
+				const importFolder = gui.addFolder( 'Import Gyro Data' );
+				importFolder.add(params, "textField").name('File Name');
+				importFolder.add(params, "loadCSV").name('Load CSV');
+				const planeY = gui.addFolder( 'Clip Plane Y' );
+				//planeY.add( params.planeY, 'displayHelper' ).onChange( v => planeHelpers[ 1 ].visible = v );
+				planeY.add( params.planeY, 'constant' ).min( -0.5 ).max( 2 ).onChange( d => planes[ 0 ].constant = d );
+				//planeY.add( params.planeY, 'negated' ).onChange( () => {
+					//planes[ 1 ].negate();
+					//params.planeY.constant = planes[ 1 ].constant;
+				//} );
+
+				const realtimeFolder = gui.addFolder('Realtime Data');
+				realtimeFolder.add(params, 'toggleRealtime').name('Device current position');
+				
+				const sphgeometry = new THREE.SphereGeometry( 2.5 );
+				const sphmaterial = new THREE.MeshBasicMaterial( { color: 0xff0000 } );
+				sphereInter = new THREE.Mesh( sphgeometry, sphmaterial );
+				sphereInter.visible = false;
+				
+				loadedModel.add( sphereInter );
+				raycaster = new THREE.Raycaster();
+				document.addEventListener( 'pointermove', onPointerMove );
+				
+				labelDiv = document.createElement( 'div' );
+				labelDiv.className = 'label';
+				labelDiv.textContent = '-';
+				labelDiv.style.marginTop = '-1em';
+				valueLabel = new CSS2DObject( labelDiv );
+				valueLabel.position.set( 0, 1, 0 );
+				valueLabel.visible = false;
+				sphereInter.add( valueLabel );
+				
+				labelRenderer = new CSS2DRenderer();
+				labelRenderer.setSize( window.innerWidth, window.innerHeight );
+				labelRenderer.domElement.style.position = 'absolute';
+				labelRenderer.domElement.style.top = '0px';
+				document.body.appendChild( labelRenderer.domElement );
+				
+				const controls = new OrbitControls( camera, labelRenderer.domElement );
+				controls.addEventListener( 'change', render ); // use if there is no animation loop
+				controls.minDistance = 0.01;
+				controls.maxDistance = 1000;
+				controls.target.set( 0, 0, 0 );
+				controls.update();
+				
+				GenerateRealtimeObject();
+
+				document.addEventListener( 'mousemove', onDocumentMouseMove );
+
+			}
+			function onDocumentMouseMove( event ) {
+				mouseX = ( event.clientX - windowHalfX );
+				mouseY = ( event.clientY - windowHalfY );
+			}
+
+			function GenerateRealtimeObject(){
+				const geometry = new THREE.BoxGeometry( 5, 5, 5 );
+				const material = new THREE.MeshBasicMaterial( {color: 0x44ACD6} );
+				realtimeObject = new THREE.Mesh( geometry, material );
+				realtimeObject.visible = false;
+				loadedModel.add( realtimeObject );
+			}
+
+			
+			function ToggleValue(value, valueName) {
+				loadedModel.traverse( function ( child ) {
+					if ( child instanceof THREE.Object3D  ) {
+						if(child.name== valueName){
+							child.visible = value;
+						}
+					}
+				});
+				render();
+			}
+			
+			
+			function loadModel( fileName ) {
+
+				const loader = new THREE.BufferGeometryLoader();
+				loader.load( '/EGS_Collab_AR/BufferGeometry/' + fileName, function ( geometry ) {
+
+					geometry.computeVertexNormals();
+
+					const object = new THREE.Mesh( geometry, materialModel );
+					
+					loadedModel.add( object );
+
+				} );
+
+			}
+			
+			let boreholeDepth;
+			
+			function loadCSV(){
+				const csvloader = new THREE.FileLoader();
+				csvloader.load('/EGS_Collab_AR/csvData/Old_wellhead_coords.csv',
+					function(data){
+						csvData = csvParse(data);
+						for(let i = 0; i < csvData.length; i++){
+							if (csvData[i].WellID == params.textField){
+								baseNorthing = -2779.125 - parseFloat(csvData[i].Northing_ft);
+								baseEasting = 4047.435 + parseFloat(csvData[i].Easting_ft);
+								baseElev = -1047.088 + parseFloat(csvData[i].Elevation_ft);
+							}
+						}
+						
+						const dataCsvloader = new THREE.FileLoader();
+						dataCsvloader.load('/EGS_Collab_AR/csvData/cs_' + params.textField + '.csv',
+							function ( data ) {
+								csvData = csvParse(data);
+								let v3array = [];
+								for(let i = 1; i < csvData.length; i++){
+									if(parseFloat(csvData[i].Depth) >= parseFloat(csvData[i-1].Depth)){
+										if(parseFloat(csvData[i].Depth) == 0 && parseFloat(csvData[i-1].Depth) == 0)
+										{
+											continue;
+										}
+										else
+										{
+											let xpos = (parseFloat(csvData[i-1].Easting) * 3.28084) - baseEasting;
+											let ypos = (parseFloat(csvData[i-1].Elev) * 3.28084) + baseElev;
+											let zpos = (-parseFloat(csvData[i-1].Northing) * 3.28084) + baseNorthing;
+											v3array.push(new THREE.Vector3(xpos, ypos, zpos));
+											boreholeDepth = csvData[i].Depth;
+										}
+									}
+								}
+								boreholeSpline = new THREE.CatmullRomCurve3(v3array);
+								//addLine(boreholeSpline);
+								addTube(boreholeSpline);
+							}
+						);
+					}
+				);
+			}
+			
+			
+			
+			//TEST part of script for line rendering of data
+			function addLine(inputTube){
+				lut.setColorMap( 'blackbody' );
+
+
+				let valMin = 100000;
+				let valMax = -100000;
+				
+				// lut.setMax( 7576 );
+				// lut.setMin( 5555 );
+				
+				const point = new THREE.Vector3();
+				let color;
+			
+			
+				const dataCsvloader = new THREE.FileLoader();
+				dataCsvloader.load('/EGS_Collab_AR/csvData/E2-AMU_FWS.csv',
+					function ( data ) {
+						let valueCsvData = csvParse(data);
+						const linePositions = [];
+						const lineColors = [];
+
+						for(let i = 0; i < valueCsvData.length; i++){
+							var newVal = parseFloat(valueCsvData[i].PVelocity);
+							if (newVal > valMax){ valMax = newVal; }
+							if (newVal < valMin && newVal > 0){ valMin = newVal; }
+						}
+
+						lut.setMax( valMax );
+						lut.setMin( valMin );
+
+						updateAxisText('cmin', valMin);
+						updateAxisText('cmax', valMax);
+
+						for(let i = 0; i < valueCsvData.length; i++){
+							inputTube.getPoint(parseFloat(valueCsvData[i].Depth) / boreholeDepth, point)
+							linePositions.push(point.x, point.y, point.z);
+							color = lut.getColor( parseFloat(valueCsvData[i].PVelocity) );
+							lineColors.push(color.r, color.g, color.b);
+						}
+						plotLine(linePositions, lineColors);
+					}
+				)
+					
+			}
+			
+			function plotLine(lpos, lcol){
+				const lgeometry = new LineGeometry();
+				lgeometry.setPositions( lpos );
+				lgeometry.setColors( lcol );
+
+				let matLine = new LineMaterial( {
+
+					color: 0xffffff,
+					linewidth: 0.01, // in world units with size attenuation, pixels otherwise
+					vertexColors: true,
+					//resolution:  // to be set by renderer, eventually
+					dashed: false,
+					alphaToCoverage: true,
+
+				} );
+
+				loadedLine = new Line2( lgeometry, matLine );
+				loadedModel.add( loadedLine );
+
+				sprite.visible = true;
+
+				const map = sprite.material.map;
+				lut.updateCanvas( map.image );
+				map.needsUpdate = true;
+			}
+			//
+			
+			
+			function addTube(inputtube) {
+
+				if ( meshSpline !== undefined ) {
+
+					scene.remove( meshSpline );
+					meshSpline.geometry.dispose();
+
+				}
+
+				const extrudePath = inputtube;
+
+				tubeGeometry = new THREE.TubeGeometry( extrudePath, 100, 0.5, 8, false );
+				addGeometry( tubeGeometry );
+			}
+			
+			function addGeometry( geometry ) {
+
+				// 3D shape
+				// default color attribute
+				const colors = [];
+				for ( let i = 0, n = geometry.attributes.position.count; i < n; ++ i ) {
+					colors.push( 0.5, 0.5, 0.5 );
+				}
+				
+				geometry.setAttribute( 'color', new THREE.Float32BufferAttribute( colors, 3 ) );
+				
+				meshSpline = new THREE.Mesh( geometry, material );
+				
+				addTexture();
+
+				loadedModel.add( meshSpline );
+
+			}
+			
+			function addTexture(){
+				lut.setColorMap( 'blackbody' );
+				
+				let color;
+
+				let valMin = 100000;
+				let valMax = -100000;
+				
+				
+				const dataCsvloader = new THREE.FileLoader();
+				dataCsvloader.load('/EGS_Collab_AR/csvData/E2-AMU_FWS.csv',
+					function ( data ) {
+						let valueCsvData = csvParse(data);
+						const texData = new Uint8Array(3 * valueCsvData.length);
+
+						const lineColors = [];
+
+						let minDepth = valueCsvData[0].Depth;
+						let maxDepth = valueCsvData[valueCsvData.length-1].Depth;
+						let nminDepth = minDepth / boreholeDepth;
+						let nmaxDepth = maxDepth / boreholeDepth
+						let increment = (nmaxDepth - nminDepth) / 10;
+						const boreholeTexturePos = [];
+
+						for(let i = nminDepth; i <= nmaxDepth; i+= increment)
+						{
+							boreholeTexturePos.push(boreholeSpline.getPointAt(i));
+						}
+
+						const textureMaterial = new THREE.MeshLambertMaterial( {
+							side: THREE.DoubleSide,
+							color: 0xF5F5F5} );
+
+						let textureSpline = new THREE.CatmullRomCurve3(boreholeTexturePos);
+						let textureTubeGeometry = new THREE.TubeGeometry( textureSpline, 100, 0.51, 8, false );
+						let textureMeshSpline = new THREE.Mesh( textureTubeGeometry, textureMaterial );
+						
+
+						for(let i = 0; i < valueCsvData.length; i++){
+							var newVal = parseFloat(valueCsvData[i].PVelocity);
+							if (newVal > valMax){ valMax = newVal; }
+							if (newVal < valMin && newVal > 0){ valMin = newVal; }
+						}
+
+						lut.setMax( valMax );
+						lut.setMin( valMin );
+
+						updateAxisText('cmin', valMin);
+						updateAxisText('cmax', valMax);
+
+						for(let i = 0; i < valueCsvData.length; i++){
+						    const stride = i * 3;
+							
+							var newVal = parseFloat(valueCsvData[i].PVelocity);
+							
+							color = lut.getColor( newVal );
+							texData[stride] = Math.floor(color.r * 255);
+							texData[stride + 1] = Math.floor(color.g * 255);
+							texData[stride + 2] = Math.floor(color.b * 255);
+						}
+						
+						const texture = new THREE.DataTexture( texData, valueCsvData.length, 1, THREE.RGBFormat );
+						textureMaterial.map = texture;
+						textureMaterial.needsUpdate = true;
+
+						sprite.visible = true;
+						
+						loadedModel.add( textureMeshSpline );
+					}
+				)
+				
+				const map = sprite.material.map;
+				lut.updateCanvas( map.image );
+				map.needsUpdate = true;
+			}
+			
+			function createAxisText(x,y,z, axisName, label) {
+
+				const loader = new FontLoader();
+				loader.load('fonts/helvetiker_regular.typeface.json', function (response) {
+
+					var font = response;
+
+					var textGeo = new THREE.TextGeometry(label, {
+						size: 0.025,
+						height: 0.001,
+						curveSegments: 6,
+						font: font
+					});
+
+					var color = new THREE.Color();
+					color.setRGB(255, 250, 250);
+					var textMaterial = new THREE.MeshBasicMaterial({ color: color });
+					var axisLabel = new THREE.Mesh(textGeo, textMaterial);
+
+					axisLabel.position.x = x;
+					axisLabel.position.y = y;
+					axisLabel.position.z = -0.05;
+					axisLabel.name = axisName;
+
+					sprite.attach(axisLabel);
+				});
+			}
+
+			function updateAxisText(axisName, newText){
+				const loader = new FontLoader();
+				loader.load('fonts/helvetiker_regular.typeface.json', function (response) {
+					var font = response;
+
+					var textGeo = new THREE.TextGeometry(newText.toFixed(2), {
+						size: 0.025,
+						height: 0.001,
+						curveSegments: 6,
+						font: font
+					});
+
+					let labelObject = sprite.getObjectByName(axisName);
+					labelObject.geometry = textGeo;
+				});
+			}
+
+			function onWindowResize() {
+
+				camera.aspect = window.innerWidth / window.innerHeight;
+				camera.updateProjectionMatrix();
+
+				renderer.setSize( window.innerWidth, window.innerHeight );
+
+				labelRenderer.setSize( window.innerWidth, window.innerHeight );
+			}
+			
+			function onPointerMove( event ) {
+
+				pointer.x = ( event.clientX / window.innerWidth ) * 2 - 1;
+				pointer.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
+
+			}
+			
+			
+			//
+
+			function animate() {
+				renderer.setAnimationLoop( render );
+			}
+
+			function render( timestamp, frame ) {
+
+				raycaster.setFromCamera( pointer, camera );
+				//if (typeof meshSpline !== 'undefined') {
+				//	const intersects = raycaster.intersectObject( meshSpline );
+				if (typeof loadedLine !== 'undefined') {
+				  	const intersects = raycaster.intersectObject( loadedLine );
+			
+					if ( intersects.length > 0 ) {
+						
+						const read = new Float32Array( 4 );
+						renderer.readRenderTargetPixels( rtTexture, windowHalfX + mouseX, windowHalfY - mouseY, 1, 1, read );
+						console.log(read);
+
+						sphereInter.visible = true;
+						sphereInter.position.copy( loadedModel.worldToLocal(intersects[ 0 ].point) );
+
+						sphereInter.material.color = lut.getColor( sphereInter.position.x );
+						valueLabel.visible = true;
+						labelDiv.textContent = -sphereInter.position.x - 4047.435;
+
+					} else {
+
+						sphereInter.visible = false;
+						valueLabel.visible = false;
+					}
+				}
+
+
+				if ( frame ) {
+
+					const referenceSpace = renderer.xr.getReferenceSpace();
+					const session = renderer.xr.getSession();
+
+					if ( hitTestSourceRequested === false ) {
+
+						session.requestReferenceSpace( 'viewer' ).then( function ( referenceSpace ) {
+
+							session.requestHitTestSource( { space: referenceSpace } ).then( function ( source ) {
+
+								hitTestSource = source;
+
+							} );
+
+						} );
+
+						session.addEventListener( 'end', function () {
+
+							hitTestSourceRequested = false;
+							hitTestSource = null;
+
+						} );
+
+						hitTestSourceRequested = true;
+
+					}
+
+					if ( hitTestSource ) {
+
+						const hitTestResults = frame.getHitTestResults( hitTestSource );
+
+						if ( hitTestResults.length ) {
+
+							const hit = hitTestResults[ 0 ];
+
+							reticle.visible = true;
+							reticle.matrix.fromArray( hit.getPose( referenceSpace ).transform.matrix );
+
+						} else {
+
+							reticle.visible = false;
+
+						}
+
+					}
+
+				}
+				
+
+				
+				renderer.clear();
+				renderer.render( scene, camera );
+				labelRenderer.render( scene, camera );
+				renderer.render( uiScene, orthoCamera );
+
+				if	(params.toggleRealtime){
+					realtimeObject.visible = true;
+					ControlPosition(meshSpline, realtimeObject);
+				}else
+				{
+					realtimeObject.visible = false;
+				}
+				
+
+			}
+
+		</script>
+	</body>
+</html>
