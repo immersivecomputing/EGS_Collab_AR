@@ -70,7 +70,7 @@
 			const params = {
 				toggleTunnel: true,
 				toggleGrid: false,
-                toggleBoreholes: false,
+                toggleBoreholesGyro: false,
                 toggleElectrodes: false,
                 toggleGyroStartPoints: false,
                 toggleGyroSrikeDipDepth: false,
@@ -230,6 +230,9 @@
 				baseFolder.add(params, 'toggleTunnel').name('Tunnel').onChange( function (value){
 					ToggleValue(value,'TunnelOnly');
 				});
+				baseFolder.add(params, 'toggleBoreholesGyro').name('Boreholes').onChange( function (value){
+					ToggleBoreholeGyro(value,'BoreholesGyro');
+				});
 				baseFolder.add(params, 'toggleGrid').name('Grid').onChange( function (value){
 					grid.visible = value;
 					render();
@@ -299,7 +302,7 @@
 				document.addEventListener( 'mousemove', onDocumentMouseMove );
 
 			}
-			
+
 			function onDocumentMouseMove( event ) {
 				mouseX = ( event.clientX - windowHalfX );
 				mouseY = ( event.clientY - windowHalfY );
@@ -323,6 +326,10 @@
 					}
 				});
 				render();
+			}
+
+			function ToggleBoreholesGyro(value, valueName) {
+
 			}
 			
 			
