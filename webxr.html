@@ -424,7 +424,7 @@
 				
 				meshSpline = new THREE.Mesh( geometry, material );
 				meshSpline.name = boreholeName;
-				meshSpline.setAttribute('boreholeDepth', boreholeDepth);
+				meshSpline.boreholeDepth = boreholeDepth;
 				
 				loadedModel.add( meshSpline );
 			}
