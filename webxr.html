@@ -219,14 +219,6 @@
 
 				window.addEventListener( 'resize', onWindowResize );
 				
-				
-				//Load some buffer geometries
-				
-				//loadModel( 'SampleBufferGeometry2.json');
-				//loadModel( 'SampleBufferGeometry1.json');
-				//loadModel( 'SampleBufferGeometry.json');
-				//
-				
 				const gui = new GUI();
 				const baseFolder = gui.addFolder( 'Base Objects' );
 				baseFolder.add(params, 'toggleTunnel').name('Tunnel').onChange( function (value){
@@ -246,31 +238,6 @@
 				});
 				dataFolder.add( params, 'dataType', [ 'FWS', 'Temp.', 'Elec.'] ).name('Data Type:');
 				
-				// const planningFolder = gui.addFolder( 'Planned Positions' );
-				// planningFolder.add(params, 'toggleBoreholes').name('Boreholes').onChange( function (value){
-				//	ToggleValue(value,'BoreholesOnly');
-				// });
-				// planningFolder.add(params, 'toggleElectrodes').name('Electrodes').onChange( function (value){
-				// 	ToggleValue(value,'Electrodes');
-				// });
-				// const gyroFolder = gui.addFolder( 'Gyro Data' );
-                // gyroFolder.add(params, 'toggleGyroStartPoints' ).name( 'Start Points' ).onChange( function (value){
-				// 	ToggleValue(value,'Gyro_StartingPoints');
-				// });
-                // gyroFolder.add(params, 'toggleGyroSrikeDipDepth' ).name( 'Strike/Dip/Depth Points' ).onChange( function (value){
-				// 	ToggleValue(value,'Gyro_XYZPoints');
-				// });
-                // gyroFolder.add(params, 'toggleGyroXYZ' ).name( 'XYZ Points' ).onChange( function (value){
-				// 	ToggleValue(value,'Gyro_StrikeDipDepthPoints');
-				// });
-				
-				//const importFolder = gui.addFolder( 'Import Gyro Data' );
-				//importFolder.add(params, "textField").name('File Name');
-				//importFolder.add(params, "loadCSV").name('Load CSV');
-				
-				// const planeY = gui.addFolder( 'Clip Plane Y' );
-				// planeY.add( params.planeY, 'constant' ).min( -0.5 ).max( 2 ).onChange( d => planes[ 0 ].constant = d );
-
 				const realtimeFolder = gui.addFolder('Realtime Data');
 				realtimeFolder.add(params, 'toggleRealtime').name('Device current position');
 				
@@ -308,6 +275,8 @@
 				GenerateRealtimeObject();
 
 				document.addEventListener( 'mousemove', onDocumentMouseMove );
+
+				console.log(loadedModel);
 
 			}
 
@@ -368,7 +337,7 @@
 			}
 
 			function LoadGyroCSV(fileName) {
-				let baseNorthing, baseEasting, baseElev;
+				let baseNorthing, baseEasting, baseElev, boreholeDepth;
 				const csvloader = new THREE.FileLoader();
 				csvloader.load('/EGS_Collab_AR/csvData/Old_wellhead_coords.csv',
 					function(data){
@@ -403,8 +372,8 @@
 									}
 								}
 								boreholeSpline = new THREE.CatmullRomCurve3(v3array);
-								//addLine(boreholeSpline);
-								addTube(boreholeSpline, fileName);
+								
+								addTube(boreholeSpline, fileName, boreholeDepth);
 							}
 						);
 					}
@@ -427,11 +396,7 @@
 
 			}
 			
-			let boreholeDepth;
-			
-			
-			
-			function addTube(inputtube, boreholeName) {
+			function addTube(inputtube, boreholeName, boreholeDepth) {
 
 				if ( meshSpline !== undefined ) {
 
@@ -443,10 +408,10 @@
 				const extrudePath = inputtube;
 
 				tubeGeometry = new THREE.TubeGeometry( extrudePath, 100, 0.5, 8, false );
-				addGeometry( tubeGeometry, boreholeName );
+				addGeometry( tubeGeometry, boreholeName, boreholeDepth);
 			}
 			
-			function addGeometry( geometry, boreholeName ) {
+			function addGeometry( geometry, boreholeName, boreholeDepth) {
 
 				// 3D shape
 				// default color attribute
@@ -459,11 +424,9 @@
 				
 				meshSpline = new THREE.Mesh( geometry, material );
 				meshSpline.name = boreholeName;
+				meshSpline.setAttribute('boreholeDepth', boreholeDepth);
 				
-				//addTexture();
-
 				loadedModel.add( meshSpline );
-
 			}
 			
 			function addTexture(){
@@ -476,7 +439,7 @@
 				
 				
 				const dataCsvloader = new THREE.FileLoader();
-				dataCsvloader.load('/EGS_Collab_AR/csvData/E2-AMU_FWS.csv',
+				dataCsvloader.load('/EGS_Collab_AR/csvData/fws_E2-AMU.csv',
 					function ( data ) {
 						let valueCsvData = csvParse(data);
 						const texData = new Uint8Array(3 * valueCsvData.length);
