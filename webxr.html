@@ -231,7 +231,7 @@
 					ToggleValue(value,'TunnelOnly');
 				});
 				baseFolder.add(params, 'toggleBoreholesGyro').name('Boreholes').onChange( function (value){
-					ToggleBoreholeGyro(value,'BoreholesGyro');
+					ToggleBoreholesGyro(value,'BoreholesGyro');
 				});
 				baseFolder.add(params, 'toggleGrid').name('Grid').onChange( function (value){
 					grid.visible = value;
@@ -329,7 +329,58 @@
 			}
 
 			function ToggleBoreholesGyro(value, valueName) {
+				LoadGyroCSV('E2-TC');
+				LoadGyroCSV('E2-TU');
+				LoadGyroCSV('E2-TL');
+				LoadGyroCSV('E2-TN');
+				LoadGyroCSV('E2-TS');
+				LoadGyroCSV('E2-AMU');
+				LoadGyroCSV('E2-AMl');
+				LoadGyroCSV('E2-DMU');
+				LoadGyroCSV('E2-DML');
+			}
 
+			function LoadGyroCSV(fileName) {
+				const csvloader = new THREE.FileLoader();
+				csvloader.load('/EGS_Collab_AR/csvData/Old_wellhead_coords.csv',
+					function(data){
+						csvData = csvParse(data);
+						for(let i = 0; i < csvData.length; i++){
+							if (csvData[i].WellID == fileName){
+								baseNorthing = -2779.125 - parseFloat(csvData[i].Northing_ft);
+								baseEasting = 4047.435 + parseFloat(csvData[i].Easting_ft);
+								baseElev = -1047.088 + parseFloat(csvData[i].Elevation_ft);
+							}
+						}
+						
+						const dataCsvloader = new THREE.FileLoader();
+						dataCsvloader.load('/EGS_Collab_AR/csvData/cs_' + fileName + '.csv',
+							function ( data ) {
+								csvData = csvParse(data);
+								let v3array = [];
+								for(let i = 1; i < csvData.length; i++){
+									if(parseFloat(csvData[i].Depth) >= parseFloat(csvData[i-1].Depth)){
+										if(parseFloat(csvData[i].Depth) == 0 && parseFloat(csvData[i-1].Depth) == 0)
+										{
+											continue;
+										}
+										else
+										{
+											let xpos = (parseFloat(csvData[i-1].Easting) * 3.28084) - baseEasting;
+											let ypos = (parseFloat(csvData[i-1].Elev) * 3.28084) + baseElev;
+											let zpos = (-parseFloat(csvData[i-1].Northing) * 3.28084) + baseNorthing;
+											v3array.push(new THREE.Vector3(xpos, ypos, zpos));
+											boreholeDepth = csvData[i].Depth;
+										}
+									}
+								}
+								boreholeSpline = new THREE.CatmullRomCurve3(v3array);
+								//addLine(boreholeSpline);
+								addTube(boreholeSpline);
+							}
+						);
+					}
+				);
 			}
 			
 			
@@ -497,7 +548,7 @@
 				
 				meshSpline = new THREE.Mesh( geometry, material );
 				
-				addTexture();
+				//addTexture();
 
 				loadedModel.add( meshSpline );
 
