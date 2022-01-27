@@ -220,9 +220,9 @@
 				
 				//Load some buffer geometries
 				
-				loadModel( 'SampleBufferGeometry2.json');
-				loadModel( 'SampleBufferGeometry1.json');
-				loadModel( 'SampleBufferGeometry.json');
+				//loadModel( 'SampleBufferGeometry2.json');
+				//loadModel( 'SampleBufferGeometry1.json');
+				//loadModel( 'SampleBufferGeometry.json');
 				//
 				
 				const gui = new GUI();
@@ -234,34 +234,31 @@
 					grid.visible = value;
 					render();
 				});
-				const planningFolder = gui.addFolder( 'Planned Positions' );
-				planningFolder.add(params, 'toggleBoreholes').name('Boreholes').onChange( function (value){
-					ToggleValue(value,'BoreholesOnly');
-				});
-				planningFolder.add(params, 'toggleElectrodes').name('Electrodes').onChange( function (value){
-					ToggleValue(value,'Electrodes');
-				});
-				const gyroFolder = gui.addFolder( 'Gyro Data' );
-                gyroFolder.add(params, 'toggleGyroStartPoints' ).name( 'Start Points' ).onChange( function (value){
-					ToggleValue(value,'Gyro_StartingPoints');
-				});
-                gyroFolder.add(params, 'toggleGyroSrikeDipDepth' ).name( 'Strike/Dip/Depth Points' ).onChange( function (value){
-					ToggleValue(value,'Gyro_XYZPoints');
-				});
-                gyroFolder.add(params, 'toggleGyroXYZ' ).name( 'XYZ Points' ).onChange( function (value){
-					ToggleValue(value,'Gyro_StrikeDipDepthPoints');
-				});
+				
+				// const planningFolder = gui.addFolder( 'Planned Positions' );
+				// planningFolder.add(params, 'toggleBoreholes').name('Boreholes').onChange( function (value){
+				//	ToggleValue(value,'BoreholesOnly');
+				// });
+				// planningFolder.add(params, 'toggleElectrodes').name('Electrodes').onChange( function (value){
+				// 	ToggleValue(value,'Electrodes');
+				// });
+				// const gyroFolder = gui.addFolder( 'Gyro Data' );
+                // gyroFolder.add(params, 'toggleGyroStartPoints' ).name( 'Start Points' ).onChange( function (value){
+				// 	ToggleValue(value,'Gyro_StartingPoints');
+				// });
+                // gyroFolder.add(params, 'toggleGyroSrikeDipDepth' ).name( 'Strike/Dip/Depth Points' ).onChange( function (value){
+				// 	ToggleValue(value,'Gyro_XYZPoints');
+				// });
+                // gyroFolder.add(params, 'toggleGyroXYZ' ).name( 'XYZ Points' ).onChange( function (value){
+				// 	ToggleValue(value,'Gyro_StrikeDipDepthPoints');
+				// });
 				
 				const importFolder = gui.addFolder( 'Import Gyro Data' );
 				importFolder.add(params, "textField").name('File Name');
 				importFolder.add(params, "loadCSV").name('Load CSV');
-				const planeY = gui.addFolder( 'Clip Plane Y' );
-				//planeY.add( params.planeY, 'displayHelper' ).onChange( v => planeHelpers[ 1 ].visible = v );
-				planeY.add( params.planeY, 'constant' ).min( -0.5 ).max( 2 ).onChange( d => planes[ 0 ].constant = d );
-				//planeY.add( params.planeY, 'negated' ).onChange( () => {
-					//planes[ 1 ].negate();
-					//params.planeY.constant = planes[ 1 ].constant;
-				//} );
+				
+				// const planeY = gui.addFolder( 'Clip Plane Y' );
+				// planeY.add( params.planeY, 'constant' ).min( -0.5 ).max( 2 ).onChange( d => planes[ 0 ].constant = d );
 
 				const realtimeFolder = gui.addFolder('Realtime Data');
 				realtimeFolder.add(params, 'toggleRealtime').name('Device current position');
@@ -302,6 +299,7 @@
 				document.addEventListener( 'mousemove', onDocumentMouseMove );
 
 			}
+			
 			function onDocumentMouseMove( event ) {
 				mouseX = ( event.clientX - windowHalfX );
 				mouseY = ( event.clientY - windowHalfY );
