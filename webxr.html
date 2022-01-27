@@ -77,7 +77,8 @@
                 toggleGyroSrikeDipDepth: false,
                 toggleGyroXYZ: false,
 				textField: "E2-TC",
-				showData: "FWS",
+				showData: false,
+				dataType: "FWS",
 				planeY: {
 
 					constant: -0.5,
@@ -240,7 +241,10 @@
 				});
 
 				const dataFolder = gui.addFolder('Data');
-				dataFolder.add( params, 'showData', [ 'FWS', 'Temp.', 'Elec.'] ).name('Show Data:');
+				dataFolder.add( params, 'showData').name('Show Data').onChange(function (value){
+
+				});
+				dataFolder.add( params, 'dataType', [ 'FWS', 'Temp.', 'Elec.'] ).name('Data Type:');
 				
 				// const planningFolder = gui.addFolder( 'Planned Positions' );
 				// planningFolder.add(params, 'toggleBoreholes').name('Boreholes').onChange( function (value){
