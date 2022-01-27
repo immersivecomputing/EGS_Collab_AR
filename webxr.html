@@ -54,6 +54,7 @@
 
 			let hitTestSource = null;
 			let hitTestSourceRequested = false;
+			let boreholesLoaded = false;
 			
 			let boreholeSpline, tubeGeometry;
 			const material = new THREE.MeshLambertMaterial( {
@@ -329,15 +330,34 @@
 			}
 
 			function ToggleBoreholesGyro(value, valueName) {
-				LoadGyroCSV('E2-TC');
-				LoadGyroCSV('E2-TU');
-				LoadGyroCSV('E2-TL');
-				LoadGyroCSV('E2-TN');
-				LoadGyroCSV('E2-TS');
-				LoadGyroCSV('E2-AMU');
-				LoadGyroCSV('E2-AML');
-				LoadGyroCSV('E2-DMU');
-				LoadGyroCSV('E2-DML');
+
+				if (value === true && !boreholesLoaded){
+					LoadGyroCSV('E2-TC');
+					LoadGyroCSV('E2-TU');
+					LoadGyroCSV('E2-TL');
+					LoadGyroCSV('E2-TN');
+					LoadGyroCSV('E2-TS');
+					LoadGyroCSV('E2-AMU');
+					LoadGyroCSV('E2-AML');
+					LoadGyroCSV('E2-DMU');
+					LoadGyroCSV('E2-DML');
+					boreholesLoaded = true;
+				}
+				else if (value === true && boreholesLoaded){
+					loadedModel.traverse( function ( child ){
+						if(child.name == 'E2-TC' || child.name == 'E2-TU' || child.name == 'E2-TL' || child.name == 'E2-TN' || child.name == 'E2-TS' || child.name == 'E2-AMU' || child.name == 'E2-AML' || child.name == 'E2-DMU' || child.name == 'E2-DML'){
+							child.visible = true;
+						}
+					});
+				}
+				else if (value === false){
+					loadedModel.traverse( function ( child ){
+						if(child.name == 'E2-TC' || child.name == 'E2-TU' || child.name == 'E2-TL' || child.name == 'E2-TN' || child.name == 'E2-TS' || child.name == 'E2-AMU' || child.name == 'E2-AML' || child.name == 'E2-DMU' || child.name == 'E2-DML'){
+							child.visible = false;
+						}
+					});
+				}
+				
 			}
 
 			function LoadGyroCSV(fileName) {
@@ -377,7 +397,7 @@
 								}
 								boreholeSpline = new THREE.CatmullRomCurve3(v3array);
 								//addLine(boreholeSpline);
-								addTube(boreholeSpline);
+								addTube(boreholeSpline, fileName);
 							}
 						);
 					}
@@ -402,126 +422,9 @@
 			
 			let boreholeDepth;
 			
-			function loadCSV(){
-				const csvloader = new THREE.FileLoader();
-				csvloader.load('/EGS_Collab_AR/csvData/Old_wellhead_coords.csv',
-					function(data){
-						csvData = csvParse(data);
-						for(let i = 0; i < csvData.length; i++){
-							if (csvData[i].WellID == params.textField){
-								baseNorthing = -2779.125 - parseFloat(csvData[i].Northing_ft);
-								baseEasting = 4047.435 + parseFloat(csvData[i].Easting_ft);
-								baseElev = -1047.088 + parseFloat(csvData[i].Elevation_ft);
-							}
-						}
-						
-						const dataCsvloader = new THREE.FileLoader();
-						dataCsvloader.load('/EGS_Collab_AR/csvData/cs_' + params.textField + '.csv',
-							function ( data ) {
-								csvData = csvParse(data);
-								let v3array = [];
-								for(let i = 1; i < csvData.length; i++){
-									if(parseFloat(csvData[i].Depth) >= parseFloat(csvData[i-1].Depth)){
-										if(parseFloat(csvData[i].Depth) == 0 && parseFloat(csvData[i-1].Depth) == 0)
-										{
-											continue;
-										}
-										else
-										{
-											let xpos = (parseFloat(csvData[i-1].Easting) * 3.28084) - baseEasting;
-											let ypos = (parseFloat(csvData[i-1].Elev) * 3.28084) + baseElev;
-											let zpos = (-parseFloat(csvData[i-1].Northing) * 3.28084) + baseNorthing;
-											v3array.push(new THREE.Vector3(xpos, ypos, zpos));
-											boreholeDepth = csvData[i].Depth;
-										}
-									}
-								}
-								boreholeSpline = new THREE.CatmullRomCurve3(v3array);
-								//addLine(boreholeSpline);
-								addTube(boreholeSpline);
-							}
-						);
-					}
-				);
-			}
 			
 			
-			
-			//TEST part of script for line rendering of data
-			function addLine(inputTube){
-				lut.setColorMap( 'blackbody' );
-
-
-				let valMin = 100000;
-				let valMax = -100000;
-				
-				// lut.setMax( 7576 );
-				// lut.setMin( 5555 );
-				
-				const point = new THREE.Vector3();
-				let color;
-			
-			
-				const dataCsvloader = new THREE.FileLoader();
-				dataCsvloader.load('/EGS_Collab_AR/csvData/E2-AMU_FWS.csv',
-					function ( data ) {
-						let valueCsvData = csvParse(data);
-						const linePositions = [];
-						const lineColors = [];
-
-						for(let i = 0; i < valueCsvData.length; i++){
-							var newVal = parseFloat(valueCsvData[i].PVelocity);
-							if (newVal > valMax){ valMax = newVal; }
-							if (newVal < valMin && newVal > 0){ valMin = newVal; }
-						}
-
-						lut.setMax( valMax );
-						lut.setMin( valMin );
-
-						updateAxisText('cmin', valMin);
-						updateAxisText('cmax', valMax);
-
-						for(let i = 0; i < valueCsvData.length; i++){
-							inputTube.getPoint(parseFloat(valueCsvData[i].Depth) / boreholeDepth, point)
-							linePositions.push(point.x, point.y, point.z);
-							color = lut.getColor( parseFloat(valueCsvData[i].PVelocity) );
-							lineColors.push(color.r, color.g, color.b);
-						}
-						plotLine(linePositions, lineColors);
-					}
-				)
-					
-			}
-			
-			function plotLine(lpos, lcol){
-				const lgeometry = new LineGeometry();
-				lgeometry.setPositions( lpos );
-				lgeometry.setColors( lcol );
-
-				let matLine = new LineMaterial( {
-
-					color: 0xffffff,
-					linewidth: 0.01, // in world units with size attenuation, pixels otherwise
-					vertexColors: true,
-					//resolution:  // to be set by renderer, eventually
-					dashed: false,
-					alphaToCoverage: true,
-
-				} );
-
-				loadedLine = new Line2( lgeometry, matLine );
-				loadedModel.add( loadedLine );
-
-				sprite.visible = true;
-
-				const map = sprite.material.map;
-				lut.updateCanvas( map.image );
-				map.needsUpdate = true;
-			}
-			//
-			
-			
-			function addTube(inputtube) {
+			function addTube(inputtube, boreholeName) {
 
 				if ( meshSpline !== undefined ) {
 
@@ -533,10 +436,10 @@
 				const extrudePath = inputtube;
 
 				tubeGeometry = new THREE.TubeGeometry( extrudePath, 100, 0.5, 8, false );
-				addGeometry( tubeGeometry );
+				addGeometry( tubeGeometry, boreholeName );
 			}
 			
-			function addGeometry( geometry ) {
+			function addGeometry( geometry, boreholeName ) {
 
 				// 3D shape
 				// default color attribute
@@ -548,6 +451,7 @@
 				geometry.setAttribute( 'color', new THREE.Float32BufferAttribute( colors, 3 ) );
 				
 				meshSpline = new THREE.Mesh( geometry, material );
+				meshSpline.name = boreholeName;
 				
 				//addTexture();
 
