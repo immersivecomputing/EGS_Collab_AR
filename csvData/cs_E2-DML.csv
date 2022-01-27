@@ -1,4 +1,4 @@
-Hole#,Depth m,Date,Time,Dip,Azimuth,SAg,Temp,Gx,Gy,Gz,G-Total,Wt,Northing,Easting,Elev,CD,CBrg,DLeg,Quality,SerNum
+Hole#,Depth,Date,Time,Dip,Azimuth,SAg,Temp,Gx,Gy,Gz,G-Total,Wt,Northing,Easting,Elev,CD,CBrg,DLeg,Quality,SerNum
 ms_DMU3,0,29/9/2021,15:49:05,-35.16,122.37,305.97,77.33,-30.7,-816.6,576,999.8,10.651,0,0,0,0,0,0, ,14714
 ms_DMU3,5,29/9/2021,15:56:17,-35.37,122.84,279.59,77.87,195.1,-791.2,579,999.6,10.727,-2.1997,3.4391,-2.8868,4.0824,122.6037,2.6478, ,14714
 ms_DMU3,10,29/9/2021,16:03:11,-35.55,122.22,340.62,77.87,735.5,-343.8,581,998.3,10.709,-4.3895,6.8728,-5.7876,8.1549,122.5658,3.2318, ,14714
