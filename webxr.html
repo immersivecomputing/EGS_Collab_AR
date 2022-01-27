@@ -77,6 +77,7 @@
                 toggleGyroSrikeDipDepth: false,
                 toggleGyroXYZ: false,
 				textField: "E2-TC",
+				showData: "FWS",
 				planeY: {
 
 					constant: -0.5,
@@ -237,6 +238,9 @@
 					grid.visible = value;
 					render();
 				});
+
+				const dataFolder = gui.addFolder('Data');
+				dataFolder.add( params, 'showData', [ 'FWS', 'Temp.', 'Elec.'] ).name('Show Data:');
 				
 				// const planningFolder = gui.addFolder( 'Planned Positions' );
 				// planningFolder.add(params, 'toggleBoreholes').name('Boreholes').onChange( function (value){
