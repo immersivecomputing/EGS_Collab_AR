@@ -460,10 +460,10 @@
 				}
 
 				if (dataType === 'P Velocity'){
-					dataSet = PVelocity;
+					dataSet = 'PVelocity';
 				}
 				else if (dataType === 'S Velocity'){
-					dataSet = SVelocity;
+					dataSet = 'SVelocity';
 				}
 
 				dataCsvloader.load('/EGS_Collab_AR/csvData/' + filePrefix + '_' + boreholeName + '.csv',
@@ -519,7 +519,7 @@
 						for(let i = 0; i < maxDepthIndex + 1; i++){
 						    const stride = i * 3;
 							
-							var newVal = parseFloat(valueCsvData[i].dataSet);
+							var newVal = parseFloat(valueCsvData[i][dataSet]);
 							
 							color = lut.getColor( newVal );
 							texData[stride] = Math.floor(color.r * 255);
