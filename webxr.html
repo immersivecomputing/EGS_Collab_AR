@@ -462,16 +462,19 @@
 
 						let minDepth = valueCsvData[0].Depth;
 						let maxDepth = valueCsvData[valueCsvData.length-1].Depth;
+						
+						if (maxDepth > baseBoreholeObject.boreholeDepth){
+							maxDepth = baseBoreholeObject.boreholeDepth;
+						}
+
 						let nminDepth = minDepth / baseBoreholeObject.boreholeDepth;
 						let nmaxDepth = maxDepth / baseBoreholeObject.boreholeDepth
 						let increment = (nmaxDepth - nminDepth) / 10;
 						let boreholeTexturePos = [];
 						
-						console.log(baseBoreholeObject.name);
-						console.log(baseBoreholeObject.boreholeDepth);
-						console.log(minDepth);
 						console.log(maxDepth);
-						console.log(increment);
+						console.log(nmaxDepth);
+
 
 						for(let i = nminDepth; i <= nmaxDepth; i+= increment)
 						{
@@ -495,9 +498,6 @@
 							if (newVal > valMax){ valMax = newVal; }
 							if (newVal < valMin && newVal > 0){ valMin = newVal; }
 						}
-
-						console.log(valMin);
-						console.log(valMax);
 
 						lut.setMax( valMax );
 						lut.setMin( valMin );
