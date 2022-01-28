@@ -481,7 +481,7 @@
 						let increment = (nmaxDepth - nminDepth) / 10;
 						let boreholeTexturePos = [];
 						
-						for(let i = nminDepth; i <= nmaxDepth; i+= increment)
+						for(let i = nminDepth; i <= (nmaxDepth + (increment * 0.5)); i+= increment)
 						{
 							boreholeTexturePos.push(baseBoreholeObject.geometry.parameters.path.getPointAt(i));
 						}
@@ -495,8 +495,6 @@
 						let textureSpline = new THREE.CatmullRomCurve3(boreholeTexturePos);
 						let textureTubeGeometry = new THREE.TubeGeometry( textureSpline, 100, 0.51, 8, false );
 						let textureMeshSpline = new THREE.Mesh( textureTubeGeometry, textureMaterial );
-						
-						
 
 						lut.setMax( valMax );
 						lut.setMin( valMin );
