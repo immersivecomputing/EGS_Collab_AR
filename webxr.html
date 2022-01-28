@@ -154,7 +154,7 @@
 				uiScene.add( sprite );
 				createAxisText(0.05,-0.25,0,0,0,0,'cmin', 'cmin');
 				createAxisText(0.05,0.25,0,0,0,0,'cmax', 'cmax');
-				createAxisText(-0.1,0,0,0,0,-90,'title','title');
+				createAxisText(-0.1,0,0,0,0,90,'title','title');
 				sprite.visible = false;
 
 
@@ -240,6 +240,7 @@
 					loadedModel.traverse( function ( child ) {
 						if(child.name == params.dataType){
 							child.visible = value;
+							updateAxisText('title',params.dataType + ' m/s');
 							alreadyLoaded = true;
 						}
 					});
@@ -247,6 +248,7 @@
 					if (alreadyLoaded === false){
 						dataGroup = new THREE.Group();
 						dataGroup.name = params.dataType;
+						updateAxisText('title',params.dataType + ' m/s');
 
 						addTexture(params.dataType, 'E2-AMU');
 						addTexture(params.dataType, 'E2-AML');
