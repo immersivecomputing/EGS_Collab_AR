@@ -240,6 +240,7 @@
 					loadedModel.traverse( function ( child ) {
 						if(child.name == params.dataType){
 							child.visible = value;
+							sprite.visible = value;
 							updateAxisText('title',params.dataType + ' m/s');
 							alreadyLoaded = true;
 						}
