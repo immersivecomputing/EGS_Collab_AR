@@ -598,12 +598,21 @@
 				loader.load('./threejs/examples/fonts/helvetiker_regular.typeface.json', function (response) {
 					var font = response;
 
-					var textGeo = new THREE.TextGeometry(newText.toFixed(2), {
-						size: 0.025,
-						height: 0.001,
-						curveSegments: 6,
-						font: font
-					});
+					if (typeof newText == 'string'){
+						var textGeo = new THREE.TextGeometry(newText, {
+							size: 0.025,
+							height: 0.001,
+							curveSegments: 6,
+							font: font
+						});
+					}else{
+						var textGeo = new THREE.TextGeometry(newText.toFixed(2), {
+							size: 0.025,
+							height: 0.001,
+							curveSegments: 6,
+							font: font
+						});
+					}
 
 					let labelObject = sprite.getObjectByName(axisName);
 					labelObject.geometry = textGeo;
