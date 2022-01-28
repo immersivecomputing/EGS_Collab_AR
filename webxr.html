@@ -477,8 +477,10 @@
 						let textureMaterial = new THREE.MeshLambertMaterial( {
 							side: THREE.DoubleSide,
 							color: 0xF5F5F5} );
-
+						
+						console.log(boreholeTexturePos);
 						let textureSpline = new THREE.CatmullRomCurve3(boreholeTexturePos);
+						console.log(textureSpline);
 						let textureTubeGeometry = new THREE.TubeGeometry( textureSpline, 100, 0.51, 8, false );
 						let textureMeshSpline = new THREE.Mesh( textureTubeGeometry, textureMaterial );
 						
