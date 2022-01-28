@@ -235,14 +235,14 @@
 				const dataFolder = gui.addFolder('Data');
 				dataFolder.add( params, 'showData').name('Show Data').onChange(function (value){
 					addTexture('fws', 'E2-AMU');
-					// addTexture('fws', 'E2-AML');
-					// addTexture('fws', 'E2-DMU');
-					// addTexture('fws', 'E2-DML');
-					// addTexture('fws', 'E2-TC');
-					// addTexture('fws', 'E2-TU');
-					// addTexture('fws', 'E2-TL');
-					// addTexture('fws', 'E2-TN');
-					// addTexture('fws', 'E2-TS');
+					addTexture('fws', 'E2-AML');
+					addTexture('fws', 'E2-DMU');
+					addTexture('fws', 'E2-DML');
+					addTexture('fws', 'E2-TC');
+					addTexture('fws', 'E2-TU');
+					addTexture('fws', 'E2-TL');
+					addTexture('fws', 'E2-TN');
+					addTexture('fws', 'E2-TS');
 				});
 				dataFolder.add( params, 'dataType', [ 'FWS', 'Temp.', 'Elec.'] ).name('Data Type:');
 				
@@ -467,11 +467,9 @@
 						let increment = (nmaxDepth - nminDepth) / 10;
 						let boreholeTexturePos = [];
 						
-
+						consol.log(baseBoreholeObject.name);
 						console.log(minDepth);
 						console.log(maxDepth);
-						console.log(nminDepth);
-						console.log(nmaxDepth);
 
 						for(let i = nminDepth; i <= nmaxDepth; i+= increment)
 						{
