@@ -461,7 +461,20 @@
 						let lineColors = [];
 
 						let minDepth = valueCsvData[0].Depth;
-						let maxDepth = valueCsvData[valueCsvData.length-1].Depth;
+
+						let maxDepthIndex;
+						let maxDepth;
+
+						for(let i = 0; i < valueCsvData.length; i++){
+							var newVal = parseFloat(valueCsvData[i].PVelocity);
+							if (newVal > valMax){ valMax = newVal; }
+							if (newVal < valMin && newVal > 0){ valMin = newVal; }
+
+							if (valueCsvData[i].depth <= baseBoreholeObject.boreholeDepth){
+								maxDepthIndex = i;
+								maxDepth = valueCsvData[i].depth;
+							}
+						}
 						
 						if (maxDepth > baseBoreholeObject.boreholeDepth){
 							maxDepth = baseBoreholeObject.boreholeDepth;
@@ -472,13 +485,11 @@
 						let increment = (nmaxDepth - nminDepth) / 10;
 						let boreholeTexturePos = [];
 						
-						console.log(maxDepth);
 						console.log(nmaxDepth);
 
 
 						for(let i = nminDepth; i <= nmaxDepth; i+= increment)
 						{
-							console.log(i);
 							boreholeTexturePos.push(baseBoreholeObject.geometry.parameters.path.getPointAt(i));
 						}
 
@@ -492,12 +503,7 @@
 						let textureTubeGeometry = new THREE.TubeGeometry( textureSpline, 100, 0.51, 8, false );
 						let textureMeshSpline = new THREE.Mesh( textureTubeGeometry, textureMaterial );
 						
-
-						for(let i = 0; i < valueCsvData.length; i++){
-							var newVal = parseFloat(valueCsvData[i].PVelocity);
-							if (newVal > valMax){ valMax = newVal; }
-							if (newVal < valMin && newVal > 0){ valMin = newVal; }
-						}
+						
 
 						lut.setMax( valMax );
 						lut.setMin( valMin );
