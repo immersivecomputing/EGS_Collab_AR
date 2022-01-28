@@ -38,7 +38,7 @@
 			import { FontLoader } from './threejs/examples/jsm/loaders/FontLoader.js';
 
 			let container;
-			let camera, scene, renderer, loadedModel, orthoCamera, uiScene;
+			let camera, scene, renderer, loadedModel, orthoCamera, uiScene, dataGroup;
 			let controller, lut, rtTexture;
 			let meshSpline, raycaster, sphereInter, sprite, loadedLine;
 			const pointer = new THREE.Vector2();
@@ -234,15 +234,31 @@
 
 				const dataFolder = gui.addFolder('Data');
 				dataFolder.add( params, 'showData').name('Show Data').onChange(function (value){
-					addTexture(params.dataType, 'E2-AMU');
-					addTexture(params.dataType, 'E2-AML');
-					addTexture(params.dataType, 'E2-DMU');
-					addTexture(params.dataType, 'E2-DML');
-					addTexture(params.dataType, 'E2-TC');
-					addTexture(params.dataType, 'E2-TU');
-					addTexture(params.dataType, 'E2-TL');
-					addTexture(params.dataType, 'E2-TN');
-					addTexture(params.dataType, 'E2-TS');
+					
+					let alreadyLoaded = false;
+					
+					loadedModel.traverse( function ( child ) {
+						if(child.name == params.dataType){
+							child.visible = value;
+							alreadyLoaded = true;
+						}
+					});
+					
+
+					if (alreadyLoaded = false){
+						dataGroup = new THREE.Group();
+						dataGroup.name = params.dataType;
+
+						addTexture(params.dataType, 'E2-AMU');
+						addTexture(params.dataType, 'E2-AML');
+						addTexture(params.dataType, 'E2-DMU');
+						addTexture(params.dataType, 'E2-DML');
+						addTexture(params.dataType, 'E2-TC');
+						addTexture(params.dataType, 'E2-TU');
+						addTexture(params.dataType, 'E2-TL');
+						addTexture(params.dataType, 'E2-TN');
+						addTexture(params.dataType, 'E2-TS');
+					}
 				});
 				dataFolder.add( params, 'dataType', [ 'P Velocity', 'S Velocity', 'Temp.'] ).name('Data Type:');
 				
@@ -438,6 +454,7 @@
 			}
 			
 			function addTexture(dataType, boreholeName){
+
 				lut.setColorMap( 'blackbody' );
 				
 				let color;
@@ -513,8 +530,8 @@
 						//updateAxisText('cmin', valMin);
 						//updateAxisText('cmax', valMax);
 						lut.setMax( 10000 );
-						lut.setMin( 4000 );
-						updateAxisText('cmin', 4000);
+						lut.setMin( 0 );
+						updateAxisText('cmin', 0);
 						updateAxisText('cmax', 10000);
 
 						for(let i = 0; i < maxDepthIndex + 1; i++){
@@ -534,7 +551,8 @@
 
 						sprite.visible = true;
 						
-						loadedModel.add( textureMeshSpline );
+						dataGroup.add( textureMeshSpline );
+						loadedModel.add(dataGroup);
 					}
 				)
 				
