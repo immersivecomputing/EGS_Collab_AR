@@ -476,16 +476,11 @@
 							}
 						}
 						
-						console.log(maxDepthIndex);
-						console.log(maxDepth);
-
 						let nminDepth = minDepth / baseBoreholeObject.boreholeDepth;
 						let nmaxDepth = maxDepth / baseBoreholeObject.boreholeDepth
 						let increment = (nmaxDepth - nminDepth) / 10;
 						let boreholeTexturePos = [];
 						
-						console.log(nmaxDepth);
-
 						for(let i = nminDepth; i <= nmaxDepth; i+= increment)
 						{
 							boreholeTexturePos.push(baseBoreholeObject.geometry.parameters.path.getPointAt(i));
@@ -509,7 +504,7 @@
 						updateAxisText('cmin', valMin);
 						updateAxisText('cmax', valMax);
 
-						for(let i = 0; i < valueCsvData.length; i++){
+						for(let i = 0; i < maxDepthIndex + 1; i++){
 						    const stride = i * 3;
 							
 							var newVal = parseFloat(valueCsvData[i].PVelocity);
@@ -520,7 +515,7 @@
 							texData[stride + 2] = Math.floor(color.b * 255);
 						}
 						
-						let texture = new THREE.DataTexture( texData, valueCsvData.length, 1, THREE.RGBFormat );
+						let texture = new THREE.DataTexture( texData, maxDepthIndex + 1, 1, THREE.RGBFormat );
 						textureMaterial.map = texture;
 						textureMaterial.needsUpdate = true;
 
