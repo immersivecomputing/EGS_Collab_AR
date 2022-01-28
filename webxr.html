@@ -154,7 +154,7 @@
 				uiScene.add( sprite );
 				createAxisText(0.05,-0.25,0,0,0,0,'cmin', 'cmin');
 				createAxisText(0.05,0.25,0,0,0,0,'cmax', 'cmax');
-				createAxisText(-0.1,0,0,0,-90,0,'title','title');
+				createAxisText(-0.1,0,0,0,0,-90,'title','title');
 				sprite.visible = false;
 
 
@@ -582,9 +582,9 @@
 					axisLabel.position.x = x;
 					axisLabel.position.y = y;
 					axisLabel.position.z = -0.05;
-					axisLabel.rotation.x = rx;
-					axisLabel.rotation.x = ry;
-					axisLabel.rotation.x = rz;
+					axisLabel.rotation.x = rx * (Math.PI / 180);
+					axisLabel.rotation.y = ry * (Math.PI / 180);
+					axisLabel.rotation.z = rz * (Math.PI / 180);
 					axisLabel.name = axisName;
 
 					sprite.attach(axisLabel);
