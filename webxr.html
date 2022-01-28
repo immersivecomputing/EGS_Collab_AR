@@ -470,8 +470,8 @@
 							if (newVal > valMax){ valMax = newVal; }
 							if (newVal < valMin && newVal > 0){ valMin = newVal; }
 
+							console.log(parseFloat(valueCsvData[i].depth) + '    ' + baseBoreholeObject.boreholeDepth);
 							if (parseFloat(valueCsvData[i].depth) <= baseBoreholeObject.boreholeDepth){
-								console.log('here');
 								maxDepthIndex = i;
 								maxDepth = parseFloat(valueCsvData[i].depth);
 							}
