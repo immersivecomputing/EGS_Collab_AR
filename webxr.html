@@ -467,14 +467,14 @@
 						let nminDepth = minDepth / baseBoreholeObject.boreholeDepth;
 						let nmaxDepth = maxDepth / baseBoreholeObject.boreholeDepth
 						let increment = (nmaxDepth - nminDepth) / 10;
-						const boreholeTexturePos = [];
+						let boreholeTexturePos = [];
 
 						for(let i = nminDepth; i <= nmaxDepth; i+= increment)
 						{
 							boreholeTexturePos.push(baseBoreholeObject.geometry.parameters.path.getPointAt(i));
 						}
 
-						const textureMaterial = new THREE.MeshLambertMaterial( {
+						let textureMaterial = new THREE.MeshLambertMaterial( {
 							side: THREE.DoubleSide,
 							color: 0xF5F5F5} );
 
