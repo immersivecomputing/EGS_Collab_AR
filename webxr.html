@@ -454,13 +454,13 @@
 
 				
 
-				const dataCsvloader = new THREE.FileLoader();
+				let dataCsvloader = new THREE.FileLoader();
 				dataCsvloader.load('/EGS_Collab_AR/csvData/' + dataType + '_' + boreholeName + '.csv',
 					function ( data ) {
 						let valueCsvData = csvParse(data);
-						const texData = new Uint8Array(3 * valueCsvData.length);
+						let texData = new Uint8Array(3 * valueCsvData.length);
 
-						const lineColors = [];
+						let lineColors = [];
 
 						let minDepth = valueCsvData[0].Depth;
 						let maxDepth = valueCsvData[valueCsvData.length-1].Depth;
@@ -468,6 +468,11 @@
 						let nmaxDepth = maxDepth / baseBoreholeObject.boreholeDepth
 						let increment = (nmaxDepth - nminDepth) / 10;
 						let boreholeTexturePos = [];
+
+						console.log(nminDepth);
+						console.log(nmaxDepth);
+						console.log(nminDepth);
+						console.log(baseBoreholeObject.geometry.parameters.path);
 
 						for(let i = nminDepth; i <= nmaxDepth; i+= increment)
 						{
@@ -480,7 +485,6 @@
 						
 						console.log(boreholeTexturePos);
 						let textureSpline = new THREE.CatmullRomCurve3(boreholeTexturePos);
-						console.log(textureSpline);
 						let textureTubeGeometry = new THREE.TubeGeometry( textureSpline, 100, 0.51, 8, false );
 						let textureMeshSpline = new THREE.Mesh( textureTubeGeometry, textureMaterial );
 						
@@ -508,7 +512,7 @@
 							texData[stride + 2] = Math.floor(color.b * 255);
 						}
 						
-						const texture = new THREE.DataTexture( texData, valueCsvData.length, 1, THREE.RGBFormat );
+						let texture = new THREE.DataTexture( texData, valueCsvData.length, 1, THREE.RGBFormat );
 						textureMaterial.map = texture;
 						textureMaterial.needsUpdate = true;
 
