@@ -452,8 +452,6 @@
 					}
 				});
 
-				
-
 				let dataCsvloader = new THREE.FileLoader();
 				dataCsvloader.load('/EGS_Collab_AR/csvData/' + dataType + '_' + boreholeName + '.csv',
 					function ( data ) {
@@ -462,17 +460,15 @@
 
 						let lineColors = [];
 
+						console.log(baseBoreholeObject);
+						console.log(valueCsvData);
+
 						let minDepth = valueCsvData[0].Depth;
 						let maxDepth = valueCsvData[valueCsvData.length-1].Depth;
 						let nminDepth = minDepth / baseBoreholeObject.boreholeDepth;
 						let nmaxDepth = maxDepth / baseBoreholeObject.boreholeDepth
 						let increment = (nmaxDepth - nminDepth) / 10;
 						let boreholeTexturePos = [];
-
-						console.log(nminDepth);
-						console.log(nmaxDepth);
-						console.log(nminDepth);
-						console.log(baseBoreholeObject.geometry.parameters.path);
 
 						for(let i = nminDepth; i <= nmaxDepth; i+= increment)
 						{
@@ -483,7 +479,6 @@
 							side: THREE.DoubleSide,
 							color: 0xF5F5F5} );
 						
-						console.log(boreholeTexturePos);
 						let textureSpline = new THREE.CatmullRomCurve3(boreholeTexturePos);
 						let textureTubeGeometry = new THREE.TubeGeometry( textureSpline, 100, 0.51, 8, false );
 						let textureMeshSpline = new THREE.Mesh( textureTubeGeometry, textureMaterial );
