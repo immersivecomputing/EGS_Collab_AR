@@ -476,9 +476,7 @@
 							}
 						}
 						
-						if (maxDepth > baseBoreholeObject.boreholeDepth){
-							maxDepth = baseBoreholeObject.boreholeDepth;
-						}
+						console.log(maxDepth);
 
 						let nminDepth = minDepth / baseBoreholeObject.boreholeDepth;
 						let nmaxDepth = maxDepth / baseBoreholeObject.boreholeDepth
@@ -486,7 +484,6 @@
 						let boreholeTexturePos = [];
 						
 						console.log(nmaxDepth);
-
 
 						for(let i = nminDepth; i <= nmaxDepth; i+= increment)
 						{
