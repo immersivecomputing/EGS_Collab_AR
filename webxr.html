@@ -444,6 +444,8 @@
 					}
 				});
 
+				console.log(baseBoreholeObject.geometry.parameters.path.type);
+
 				const dataCsvloader = new THREE.FileLoader();
 				dataCsvloader.load('/EGS_Collab_AR/csvData/' + dataType + '_' + boreholeName + '.csv',
 					function ( data ) {
