@@ -470,9 +470,9 @@
 							if (newVal > valMax){ valMax = newVal; }
 							if (newVal < valMin && newVal > 0){ valMin = newVal; }
 
-							if (valueCsvData[i].depth <= baseBoreholeObject.boreholeDepth){
+							if (parseFloat(valueCsvData[i].depth) <= baseBoreholeObject.boreholeDepth){
 								maxDepthIndex = i;
-								maxDepth = valueCsvData[i].depth;
+								maxDepth = parseFloat(valueCsvData[i].depth);
 							}
 						}
 						
