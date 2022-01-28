@@ -486,8 +486,6 @@
 							boreholeTexturePos.push(baseBoreholeObject.geometry.parameters.path.getPointAt(i));
 						}
 
-						console.log(boreholeTexturePos);
-
 						let textureMaterial = new THREE.MeshLambertMaterial( {
 							side: THREE.DoubleSide,
 							color: 0xF5F5F5} );
@@ -496,8 +494,10 @@
 						let textureTubeGeometry = new THREE.TubeGeometry( textureSpline, 100, 0.51, 8, false );
 						let textureMeshSpline = new THREE.Mesh( textureTubeGeometry, textureMaterial );
 
-						lut.setMax( valMax );
-						lut.setMin( valMin );
+						//lut.setMax( valMax );
+						//lut.setMin( valMin );
+						lut.setMax( 10000 );
+						lut.setMin( 4000 );
 
 						updateAxisText('cmin', valMin);
 						updateAxisText('cmax', valMax);
