@@ -496,11 +496,12 @@
 
 						//lut.setMax( valMax );
 						//lut.setMin( valMin );
+						//updateAxisText('cmin', valMin);
+						//updateAxisText('cmax', valMax);
 						lut.setMax( 10000 );
 						lut.setMin( 4000 );
-
-						updateAxisText('cmin', valMin);
-						updateAxisText('cmax', valMax);
+						updateAxisText('cmin', 4000);
+						updateAxisText('cmax', 10000);
 
 						for(let i = 0; i < maxDepthIndex + 1; i++){
 						    const stride = i * 3;
