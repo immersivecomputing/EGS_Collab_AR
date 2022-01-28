@@ -463,7 +463,7 @@
 
 						for(let i = nminDepth; i <= nmaxDepth; i+= increment)
 						{
-							boreholeTexturePos.push(baseBoreholeObject.geometry.parameters.path.type.getPointAt(i));
+							boreholeTexturePos.push(baseBoreholeObject.geometry.parameters.path.getPointAt(i));
 						}
 
 						const textureMaterial = new THREE.MeshLambertMaterial( {
