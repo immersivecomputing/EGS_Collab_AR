@@ -249,15 +249,13 @@
 							updateAxisText('title',params.dataType + ' m/s');
 							alreadyLoaded = true;
 
-							if (dataType === 'P Velocity'){
-								dataSet = 'PVelocity';
+							if (params.dataType === 'P Velocity'){
 								lut.setMax( pmax );
 								lut.setMin( pmin );
 								updateAxisText('cmin', pmin);
 								updateAxisText('cmax', pmax);
 							}
-							else if (dataType === 'S Velocity'){
-								dataSet = 'SVelocity';
+							else if (params.dataType === 'S Velocity'){
 								lut.setMax( smax );
 								lut.setMin( smin );
 								updateAxisText('cmin', smin);
