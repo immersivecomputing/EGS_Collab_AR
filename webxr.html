@@ -52,6 +52,11 @@
 			
 			let realtimeObject;
 
+			let pmax = 8000;
+			let pmin = 6000;
+			let smax = 4000;
+			let smin = 2000;
+
 			let hitTestSource = null;
 			let hitTestSourceRequested = false;
 			let boreholesLoaded = false;
@@ -243,6 +248,21 @@
 							sprite.visible = value;
 							updateAxisText('title',params.dataType + ' m/s');
 							alreadyLoaded = true;
+
+							if (dataType === 'P Velocity'){
+								dataSet = 'PVelocity';
+								lut.setMax( pmax );
+								lut.setMin( pmin );
+								updateAxisText('cmin', pmin);
+								updateAxisText('cmax', pmax);
+							}
+							else if (dataType === 'S Velocity'){
+								dataSet = 'SVelocity';
+								lut.setMax( smax );
+								lut.setMin( smin );
+								updateAxisText('cmin', smin);
+								updateAxisText('cmax', smax);
+							}
 						}
 					});
 
@@ -481,17 +501,17 @@
 
 				if (dataType === 'P Velocity'){
 					dataSet = 'PVelocity';
-					lut.setMax( 8000 );
-					lut.setMin( 6000 );
-					updateAxisText('cmin', 6000);
-					updateAxisText('cmax', 8000);
+					lut.setMax( pmax );
+					lut.setMin( pmin );
+					updateAxisText('cmin', pmin);
+					updateAxisText('cmax', pmax);
 				}
 				else if (dataType === 'S Velocity'){
 					dataSet = 'SVelocity';
-					lut.setMax( 4000 );
-					lut.setMin( 2000 );
-					updateAxisText('cmin', 2000);
-					updateAxisText('cmax', 4000);
+					lut.setMax( smax );
+					lut.setMin( smin );
+					updateAxisText('cmin', smin);
+					updateAxisText('cmax', smax);
 				}
 
 				dataCsvloader.load('/EGS_Collab_AR/csvData/' + filePrefix + '_' + boreholeName + '.csv',
@@ -534,11 +554,6 @@
 						let textureSpline = new THREE.CatmullRomCurve3(boreholeTexturePos);
 						let textureTubeGeometry = new THREE.TubeGeometry( textureSpline, 100, 0.525, 8, false );
 						let textureMeshSpline = new THREE.Mesh( textureTubeGeometry, textureMaterial );
-
-						//lut.setMax( valMax );
-						//lut.setMin( valMin );
-						//updateAxisText('cmin', valMin);
-						//updateAxisText('cmax', valMax);
 						
 
 						for(let i = 0; i < maxDepthIndex + 1; i++){
