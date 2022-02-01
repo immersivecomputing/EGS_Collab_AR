@@ -481,9 +481,17 @@
 
 				if (dataType === 'P Velocity'){
 					dataSet = 'PVelocity';
+					lut.setMax( 8000 );
+					lut.setMin( 6000 );
+					updateAxisText('cmin', 6000);
+					updateAxisText('cmax', 8000);
 				}
 				else if (dataType === 'S Velocity'){
 					dataSet = 'SVelocity';
+					lut.setMax( 4000 );
+					lut.setMin( 2000 );
+					updateAxisText('cmin', 2000);
+					updateAxisText('cmax', 4000);
 				}
 
 				dataCsvloader.load('/EGS_Collab_AR/csvData/' + filePrefix + '_' + boreholeName + '.csv',
@@ -531,10 +539,7 @@
 						//lut.setMin( valMin );
 						//updateAxisText('cmin', valMin);
 						//updateAxisText('cmax', valMax);
-						lut.setMax( 10000 );
-						lut.setMin( 0 );
-						updateAxisText('cmin', 0);
-						updateAxisText('cmax', 10000);
+						
 
 						for(let i = 0; i < maxDepthIndex + 1; i++){
 						    const stride = i * 3;
