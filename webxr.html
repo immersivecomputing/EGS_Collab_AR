@@ -38,7 +38,7 @@
 			import { FontLoader } from './threejs/examples/jsm/loaders/FontLoader.js';
 
 			let container;
-			let camera, scene, renderer, loadedModel, orthoCamera, uiScene, dataGroup;
+			let camera, scene, renderer, loadedModel, orthoCamera, uiScene, dataGroup, currentLoadedData;
 			let controller, lut, rtTexture;
 			let meshSpline, raycaster, sphereInter, sprite, loadedLine;
 			const pointer = new THREE.Vector2();
@@ -240,47 +240,11 @@
 
 				const dataFolder = gui.addFolder('Data');
 				dataFolder.add( params, 'showData').name('Show Data').onChange(function (value){					
-					let alreadyLoaded = false;
-					
-					loadedModel.traverse( function ( child ) {
-						if(child.name == params.dataType){
-							child.visible = value;
-							sprite.visible = value;
-							updateAxisText('title',params.dataType + ' m/s');
-							alreadyLoaded = true;
-
-							if (params.dataType === 'P Velocity'){
-								lut.setMax( pmax );
-								lut.setMin( pmin );
-								updateAxisText('cmin', pmin);
-								updateAxisText('cmax', pmax);
-							}
-							else if (params.dataType === 'S Velocity'){
-								lut.setMax( smax );
-								lut.setMin( smin );
-								updateAxisText('cmin', smin);
-								updateAxisText('cmax', smax);
-							}
-						}
-					});
-
-					if (alreadyLoaded === false){
-						dataGroup = new THREE.Group();
-						dataGroup.name = params.dataType;
-						updateAxisText('title',params.dataType + ' m/s');
-
-						addTexture(params.dataType, 'E2-AMU');
-						addTexture(params.dataType, 'E2-AML');
-						addTexture(params.dataType, 'E2-DMU');
-						addTexture(params.dataType, 'E2-DML');
-						addTexture(params.dataType, 'E2-TC');
-						addTexture(params.dataType, 'E2-TU');
-						addTexture(params.dataType, 'E2-TL');
-						addTexture(params.dataType, 'E2-TN');
-						addTexture(params.dataType, 'E2-TS');
-					}
+					ToggleData(value, params.dataType);
 				});
-				dataFolder.add( params, 'dataType', [ 'P Velocity', 'S Velocity', 'Temp.'] ).name('Data Type:');
+				dataFolder.add( params, 'dataType', [ 'P Velocity', 'S Velocity', 'Temp.'] ).name('Data Type:').onChange(function (value){
+					ToggleData(params.showData, value);
+				});
 				
 				const realtimeFolder = gui.addFolder('Realtime Data');
 				realtimeFolder.add(params, 'toggleRealtime').name('Device current position');
@@ -348,6 +312,50 @@
 				});
 				render();
 			}
+
+			function ToggleData(showData, dataType){
+				let alreadyLoaded = false;
+					
+				loadedModel.traverse( function ( child ) {
+					if(child.name == dataType){
+						child.visible = showData;
+						sprite.visible = showData;
+						updateAxisText('title',dataType + ' m/s');
+						alreadyLoaded = true;
+
+						if (params.dataType === 'P Velocity'){
+							lut.setMax( pmax );
+							lut.setMin( pmin );
+							updateAxisText('cmin', pmin);
+							updateAxisText('cmax', pmax);
+						}
+						else if (params.dataType === 'S Velocity'){
+							lut.setMax( smax );
+							lut.setMin( smin );
+							updateAxisText('cmin', smin);
+							updateAxisText('cmax', smax);
+						}
+					}
+				});
+
+				if (alreadyLoaded === false){
+					dataGroup = new THREE.Group();
+					currentLoadedData = dataGroup;
+					dataGroup.name = dataType;
+					updateAxisText('title',dataType + ' m/s');
+
+					addTexture(params.dataType, 'E2-AMU');
+					addTexture(params.dataType, 'E2-AML');
+					addTexture(params.dataType, 'E2-DMU');
+					addTexture(params.dataType, 'E2-DML');
+					addTexture(params.dataType, 'E2-TC');
+					addTexture(params.dataType, 'E2-TU');
+					addTexture(params.dataType, 'E2-TL');
+					addTexture(params.dataType, 'E2-TN');
+					addTexture(params.dataType, 'E2-TS');
+				}
+			}
+
 
 			function ToggleBoreholesGyro(value, valueName) {
 
