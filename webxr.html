@@ -340,8 +340,10 @@
 
 				if (alreadyLoaded === false){
 					dataGroup = new THREE.Group();
-					if (currentLoadedData.name != dataType){
-						currentLoadedData.visible = false;
+					if (currentLoadedData != null)					
+						if (currentLoadedData.name != dataType){
+							currentLoadedData.visible = false;
+						}
 					}
 					currentLoadedData = dataGroup;
 					dataGroup.name = dataType;
