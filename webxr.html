@@ -340,6 +340,9 @@
 
 				if (alreadyLoaded === false){
 					dataGroup = new THREE.Group();
+					if (currentLoadedData.name != dataType){
+						currentLoadedData.visible = false;
+					}
 					currentLoadedData = dataGroup;
 					dataGroup.name = dataType;
 					updateAxisText('title',dataType + ' m/s');
