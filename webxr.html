@@ -500,7 +500,7 @@
 				});
 
 				let faultGeometry = new THREE.CircleGeometry(1, 16);
-				let faultMaterial = new THREE.MeshBasicMaterial({color: 0xffff00});
+				let faultMaterial = new THREE.MeshBasicMaterial({color: 0xffff00, side: 2});
 
 				const dataCsvloader = new THREE.FileLoader();
 				dataCsvloader.load(fileName,
@@ -508,11 +508,14 @@
 						csvData = csvParse(data);
 						for(let i = 1; i < csvData.length; i++){
 							let normDepth = csvData[i].depth / baseBoreholeObject.boreholeDepth;
-							let faultPos = baseBoreholeObject.geometry.parameters.path.getPointAt(normDepth);
 
-							let fault = new THREE.Mesh(faultGeometry, faultMaterial);
-							fault.position.set(faultPos.x, faultPos.y, faultPos.z);
-							faultGroup.add(fault);
+							if	(normDepth <= 1){
+								let faultPos = baseBoreholeObject.geometry.parameters.path.getPointAt(normDepth);
+
+								let fault = new THREE.Mesh(faultGeometry, faultMaterial);
+								fault.position.set(faultPos.x, faultPos.y, faultPos.z);
+								faultGroup.add(fault);
+							}
 						}
 					}
 				);
