@@ -152,7 +152,7 @@
 				viewSize = 2;
 				var aspectRatio = window.innerWidth / window.innerHeight;
 				originalAspect = window.innerWidth / window.innerHeight;
-    			orthoCamera = new THREE.OrthographicCamera(-aspectRatio * viewSize / 2, aspectRatio * viewSize / 2, viewSize / 2, -viewSize / 2, 1, 2);
+    			orthoCamera = new THREE.OrthographicCamera(-aspectRatio * viewSize / 2, aspectRatio * viewSize / 2, viewSize / 2, -viewSize / 2, 1, 20);
 				orthoCamera.position.set( 0.75, 0.5, 10 );
 				
 				const environment = new RoomEnvironment();
