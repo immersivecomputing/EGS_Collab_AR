@@ -89,6 +89,7 @@
 				textField: "E2-TC",
 				showData: false,
 				dataType: "P Velocity",
+				showFaults: false,
 				planeY: {
 
 					constant: -0.5,
@@ -256,12 +257,17 @@
 					render();
 				});
 
-				const dataFolder = gui.addFolder('Data');
-				dataFolder.add( params, 'showData').name('Show Data').onChange(function (value){					
+				const dataFolder = gui.addFolder('Logging');
+				dataFolder.add( params, 'showData').name('Show Log').onChange(function (value){					
 					ToggleData(value, params.dataType);
 				});
-				dataFolder.add( params, 'dataType', [ 'P Velocity', 'S Velocity', 'Temp.', 'Fluid Cond.'] ).name('Data Type:').onChange(function (value){
+				dataFolder.add( params, 'dataType', [ 'P Velocity', 'S Velocity', 'Temp.', 'Fluid Cond.'] ).name('Log Type:').onChange(function (value){
 					ToggleData(params.showData, value);
+				});
+
+				const faultFolder = gui.addFolder('Faults');
+				dataFolder.add( params, 'showFaults').name('Show Faults').onChange(function(value){
+
 				});
 				
 				const realtimeFolder = gui.addFolder('Realtime Data');
