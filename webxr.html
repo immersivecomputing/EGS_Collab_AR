@@ -337,7 +337,7 @@
 				loadedModel.traverse( function ( child ) {
 					if(child.name == dataType){
 
-						if (currentLoadedData.visible && showData){
+						if (currentLoadedData != null){
 							currentLoadedData.visible = false;
 							currentLoadedData = child;
 						}
