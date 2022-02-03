@@ -188,6 +188,17 @@
 				
 				const loader = new GLTFLoader().setPath( '/EGS_Collab_AR/GLTF/' );
 				loader.load('EGS_Collab.gltf', function ( gltf ){
+
+
+							gltf.traverse( function ( child ) {
+								if ( child instanceof THREE.Object3D  ) {
+									if(child.name== 'TunnelOnly'){
+										child.material.side = 2;
+									}
+								}
+							});
+
+							
 							loadedModel.add(gltf.scene);
 							loadedModel.scale.set(0.01,0.01,0.01)
 							scene.add(loadedModel);
