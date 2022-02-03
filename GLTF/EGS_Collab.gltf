@@ -311,15 +311,17 @@
     },
     {
       "pbrMetallicRoughness": {
+        "baseColorFactor": [
+          1.0,
+          1.0,
+          1.0,
+          0.0
+        ],
         "metallicFactor": 0.0,
         "roughnessFactor": 0.5
       },
-      "emissiveFactor": [
-        0.0,
-        0.0,
-        0.0
-      ],
-      "name": "Default-Material"
+      "alphaMode": "BLEND",
+      "name": "M_TunnelMaterial"
     },
     {
       "pbrMetallicRoughness": {
