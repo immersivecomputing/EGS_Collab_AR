@@ -267,7 +267,7 @@
 
 				const faultFolder = gui.addFolder('Faults');
 				faultFolder.add( params, 'showFaults').name('Show Faults').onChange(function(value){
-					ToggleFaults();
+					LoadFaults();
 				});
 				
 				const realtimeFolder = gui.addFolder('Realtime Data');
