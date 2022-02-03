@@ -38,6 +38,7 @@
 			import { FontLoader } from './threejs/examples/jsm/loaders/FontLoader.js';
 
 			let container;
+			let viewSize, originalAspect;
 			let camera, scene, renderer, loadedModel, orthoCamera, uiScene, dataGroup, currentLoadedData;
 			let controller, lut, rtTexture;
 			let meshSpline, raycaster, sphereInter, sprite, loadedLine;
@@ -147,7 +148,11 @@
 				scene.add(camera);
 
 
-				orthoCamera = new THREE.OrthographicCamera( - 1, 1, 1, - 1, 1, 20 );
+				//orthoCamera = new THREE.OrthographicCamera( - 1, 1, 1, - 1, 1, 20 );
+				viewSize = 2;
+				var aspectRatio = window.innerWidth / window.innerHeight;
+				originalAspect = window.innerWidth / window.innerHeight;
+    			orthoCamera = new THREE.OrthographicCamera(-aspectRatio * viewSize / 2, aspectRatio * viewSize / 2, viewSize / 2, -viewSize / 2, 1, 2);
 				orthoCamera.position.set( 0.75, 0.5, 10 );
 				
 				const environment = new RoomEnvironment();
@@ -705,12 +710,20 @@
 			}
 
 			function onWindowResize() {
+				
+				var aspect = window.innerWidth / window.innerHeight;
+				var change = originalAspect / aspect;
+				var newSize = viewSize * change;
+				orthocamera.left = -aspect * newSize / 2;
+				orthocamera.right = aspect * newSize  / 2;
+				orthocamera.top = newSize / 2;
+				orthocamera.bottom = -newSize / 2;
+				orthocamera.updateProjectionMatrix();
 
 				camera.aspect = window.innerWidth / window.innerHeight;
 				camera.updateProjectionMatrix();
 
 				renderer.setSize( window.innerWidth, window.innerHeight );
-
 				labelRenderer.setSize( window.innerWidth, window.innerHeight );
 			}
 			
