@@ -386,6 +386,7 @@
 					}
 					currentLoadedData = dataGroup;
 					currentLoadedData.visible = showData;
+					sprite.visible = showData;
 					dataGroup.name = dataType;
 					updateAxisText('title',dataType + ' m/s');
 					//need to handle this better for each catagory
@@ -641,7 +642,7 @@
 						textureMaterial.map = texture;
 						textureMaterial.needsUpdate = true;
 
-						sprite.visible = true;
+						
 						
 						dataGroup.add( textureMeshSpline );
 						loadedModel.add(dataGroup);
