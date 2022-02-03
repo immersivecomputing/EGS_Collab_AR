@@ -714,11 +714,11 @@
 				var aspect = window.innerWidth / window.innerHeight;
 				var change = originalAspect / aspect;
 				var newSize = viewSize * change;
-				orthocamera.left = -aspect * newSize / 2;
-				orthocamera.right = aspect * newSize  / 2;
-				orthocamera.top = newSize / 2;
-				orthocamera.bottom = -newSize / 2;
-				orthocamera.updateProjectionMatrix();
+				orthoCamera.left = -aspect * newSize / 2;
+				orthoCamera.right = aspect * newSize  / 2;
+				orthoCamera.top = newSize / 2;
+				orthoCamera.bottom = -newSize / 2;
+				orthoCamera.updateProjectionMatrix();
 
 				camera.aspect = window.innerWidth / window.innerHeight;
 				camera.updateProjectionMatrix();
