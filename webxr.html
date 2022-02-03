@@ -187,15 +187,15 @@
 				scene.add( grid );
 				
 				const loader = new GLTFLoader().setPath( '/EGS_Collab_AR/GLTF/' );
-				loader.load('EGS_Collab.gltf', function ( gltf ){
+				loader.load('EGS_Collab_mesh.gltf', function ( gltf ){
 							loadedModel.add(gltf.scene);
 							loadedModel.scale.set(0.01,0.01,0.01)
 							scene.add(loadedModel);
-							ToggleValue(false,'BoreholesOnly');
-							ToggleValue(false,'Electrodes');
-							ToggleValue(false,'Gyro_StartingPoints');
-							ToggleValue(false,'Gyro_XYZPoints');
-							ToggleValue(false,'Gyro_StrikeDipDepthPoints');
+							//ToggleValue(false,'BoreholesOnly');
+							//ToggleValue(false,'Electrodes');
+							//ToggleValue(false,'Gyro_StartingPoints');
+							//ToggleValue(false,'Gyro_XYZPoints');
+							//ToggleValue(false,'Gyro_StrikeDipDepthPoints');
 							render();
 						});
 				
