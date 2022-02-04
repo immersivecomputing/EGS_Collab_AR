@@ -100,15 +100,6 @@
 				toggleRealtime: false
 			};
 
-//			
-			const testParams = {
-				xRot: 0,
-				yRot: 0,
-				zRot: 0
-			};
-			let testModel;
-//
-
 			init();
 			animate();
 			
@@ -281,21 +272,6 @@
 				
 				const realtimeFolder = gui.addFolder('Realtime Data');
 				realtimeFolder.add(params, 'toggleRealtime').name('Device current position');
-
-//
-				const testFolder = gui.addFolder('Testing')
-				testFolder.add(testParams, 'xRot', 0, 360).onChange(function(value){ testModel.rotateX(-value * (Math.PI/180))});
-				testFolder.add(testParams, 'zRot', 0, 360).onChange(function(value){ testModel.rotateZ(-value * (Math.PI/180))});
-
-				let testGeometry = new THREE.CircleGeometry(2,16);
-				let testMaterial = new THREE.MeshBasicMaterial({color: 0xffff00, side: 2});
-				testModel = new THREE.Mesh(testGeometry, testMaterial);
-				testModel.rotation.x = -90 * (Math.PI/180);
-				testModel.rotateZ(-45 * (Math.PI/180));
-				testModel.rotateX(-45 * (Math.PI/180));
-				scene.add(testModel);
-//
-
 
 
 				const sphgeometry = new THREE.SphereGeometry( 2.5 );
@@ -539,6 +515,11 @@
 								let faultPos = baseBoreholeObject.geometry.parameters.path.getPointAt(normDepth);
 								let fault = new THREE.Mesh(faultGeometry, faultMaterial);
 								fault.position.set(faultPos.x, faultPos.y, faultPos.z);
+
+								fault.rotation.x = -90 * (Math.PI/180);
+								fault.rotateZ(-csvData[i].azimuth * (Math.PI/180));
+								fault.rotateX(-csvData[i].dip * (Math.PI/180));
+
 								faultGroup.add(fault);
 							}
 						}
