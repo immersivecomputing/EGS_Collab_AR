@@ -291,6 +291,8 @@
 				let testMaterial = new THREE.MeshBasicMaterial({color: 0xffff00, side: 2});
 				testModel = new THREE.Mesh(testGeometry, testMaterial);
 				testModel.rotation.x = -90 * (Math.PI/180);
+				testModel.rotateZ(-45 * (Math.PI/180));
+				testModel.rptateX(-45 * (Math.PI/180));
 				scene.add(testModel);
 //
 
