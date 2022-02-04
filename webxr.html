@@ -512,9 +512,9 @@
 						}
 					});
 
-					let faultMaterial1 = new THREE.MeshBasicMaterial({color: 0xFF1010, side: 2});
-					let faultMaterial2 = new THREE.MeshBasicMaterial({color: 0x971452, side: 2});
-					let faultMaterial3 = new THREE.MeshBasicMaterial({color: 0x24189C, side: 2});
+					let faultMaterial1 = new THREE.MeshLambertMaterial({color: 0xFF1010, side: 2});
+					let faultMaterial2 = new THREE.MeshLambertMaterial({color: 0x971452, side: 2});
+					let faultMaterial3 = new THREE.MeshLambertMaterial({color: 0x24189C, side: 2});
 
 					const dataCsvloader = new THREE.FileLoader();
 					dataCsvloader.load(fileName,
