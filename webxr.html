@@ -98,7 +98,16 @@
 
 				},
 				toggleRealtime: false
-				};
+			};
+
+//			
+			const testParams = {
+				xRot: 0,
+				yRot: 0,
+				zRot: 0
+			};
+			let testModel;
+//
 
 			init();
 			animate();
@@ -272,7 +281,21 @@
 				
 				const realtimeFolder = gui.addFolder('Realtime Data');
 				realtimeFolder.add(params, 'toggleRealtime').name('Device current position');
-				
+
+//
+				const testFolder = gui.addFolder('Testing')
+				testFolder.add(testParams, 'xRot', 0, 360).onChange(function(value){ transformTestObject(value, testParams.yRot, testParams.zRot)});
+				testFolder.add(testParams, 'yRot', 0, 360).onChange(function(value){ transformTestObject(testParams.xRot, value, testParams.zRot)});
+				testFolder.add(testParams, 'zRot', 0, 360).onChange(function(value){ transformTestObject(testParams.xRot, testParams.yRot, value)});
+
+				let testGeometry = new THREE.CircleGeometry(2,16);
+				let testMaterial = new THREE.MeshBasicMaterial({color: 0xffff00, side: 2});
+				testModel = new THREE.mesh(testGeometry, testMaterial);
+				scene.add(testModel);
+//
+
+
+
 				const sphgeometry = new THREE.SphereGeometry( 2.5 );
 				const sphmaterial = new THREE.MeshBasicMaterial( { color: 0xff0000 } );
 				sphereInter = new THREE.Mesh( sphgeometry, sphmaterial );
@@ -311,6 +334,12 @@
 				console.log(loadedModel);
 
 			}
+
+			//
+			function transformTestModel(x, y, z){
+				testModel.rotation.set(x, y, z);
+			}
+			//
 
 			function onDocumentMouseMove( event ) {
 				mouseX = ( event.clientX - windowHalfX );
@@ -511,7 +540,6 @@
 
 							if	(normDepth <= 1){
 								let faultPos = baseBoreholeObject.geometry.parameters.path.getPointAt(normDepth);
-
 								let fault = new THREE.Mesh(faultGeometry, faultMaterial);
 								fault.position.set(faultPos.x, faultPos.y, faultPos.z);
 								faultGroup.add(fault);
