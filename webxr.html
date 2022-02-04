@@ -267,7 +267,7 @@
 
 				const faultFolder = gui.addFolder('Faults');
 				faultFolder.add( params, 'showFaults').name('Show Faults').onChange(function(value){
-					LoadFaults();
+					ToggleFaults(value);
 				});
 				
 				const realtimeFolder = gui.addFolder('Realtime Data');
@@ -487,47 +487,60 @@
 				);
 			}
 			
-			function LoadFaults(){
-				let faultGroup = new THREE.Group();
-				faultGroup.name = 'faults';
+			function ToggleFaults(){
 
-				let fileName = '/EGS_Collab_AR/csvData/mso_FractureStress_E2-TC.csv';
-				let baseBoreholeObject;
-				let boreholeName = 'E2-TC';
-
+				let alreadyLoaded = false;
 				loadedModel.traverse( function ( child ) {
-					if(child.name == boreholeName){
-						baseBoreholeObject = child;
+					if(child.name == 'faults'){
+						alreadyLoaded = true;
+						child.visible = value;
 					}
 				});
 
-				let faultGeometry = new THREE.CircleGeometry(1, 16);
-				let faultMaterial = new THREE.MeshBasicMaterial({color: 0xffff00, side: 2});
 
-				const dataCsvloader = new THREE.FileLoader();
-				dataCsvloader.load(fileName,
-					function ( data ) {
-						csvData = csvParse(data);
-						for(let i = 1; i < csvData.length; i++){
-							let normDepth = csvData[i].depth / baseBoreholeObject.boreholeDepth;
 
-							if	(normDepth <= 1){
-								let faultPos = baseBoreholeObject.geometry.parameters.path.getPointAt(normDepth);
-								let fault = new THREE.Mesh(faultGeometry, faultMaterial);
-								fault.position.set(faultPos.x, faultPos.y, faultPos.z);
+				if (alreadyLoaded == false ){
+						
+					let faultGroup = new THREE.Group();
+					faultGroup.name = 'faults';
 
-								fault.rotation.x = -90 * (Math.PI/180);
-								fault.rotateZ(-csvData[i].azimuth * (Math.PI/180));
-								fault.rotateX(-csvData[i].dip * (Math.PI/180));
+					let fileName = '/EGS_Collab_AR/csvData/mso_FractureStress_E2-TC.csv';
+					let baseBoreholeObject;
+					let boreholeName = 'E2-TC';
 
-								faultGroup.add(fault);
+					loadedModel.traverse( function ( child ) {
+						if(child.name == boreholeName){
+							baseBoreholeObject = child;
+						}
+					});
+
+					let faultGeometry = new THREE.CircleGeometry(1, 16);
+					let faultMaterial = new THREE.MeshBasicMaterial({color: 0xffff00, side: 2});
+
+					const dataCsvloader = new THREE.FileLoader();
+					dataCsvloader.load(fileName,
+						function ( data ) {
+							csvData = csvParse(data);
+							for(let i = 1; i < csvData.length; i++){
+								let normDepth = csvData[i].depth / baseBoreholeObject.boreholeDepth;
+
+								if	(normDepth <= 1){
+									let faultPos = baseBoreholeObject.geometry.parameters.path.getPointAt(normDepth);
+									let fault = new THREE.Mesh(faultGeometry, faultMaterial);
+									fault.position.set(faultPos.x, faultPos.y, faultPos.z);
+
+									fault.rotation.x = -90 * (Math.PI/180);
+									fault.rotateZ(-csvData[i].azimuth * (Math.PI/180));
+									fault.rotateX(-csvData[i].dip * (Math.PI/180));
+
+									faultGroup.add(fault);
+								}
 							}
 						}
-					}
-				);
+					);
 
-				loadedModel.add(faultGroup);
-		
+					loadedModel.add(faultGroup);
+				}
 			}
 			
 			function loadModel( fileName ) {
