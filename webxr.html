@@ -284,13 +284,13 @@
 
 //
 				const testFolder = gui.addFolder('Testing')
-				testFolder.add(testParams, 'xRot', 0, 360).onChange(function(value){ testModel.rotateX(value)});
-				testFolder.add(testParams, 'yRot', 0, 360).onChange(function(value){ testModel.rotateY(value)});
-				testFolder.add(testParams, 'zRot', 0, 360).onChange(function(value){ testModel.rotateZ(value)});
+				testFolder.add(testParams, 'xRot', 0, 360).onChange(function(value){ testModel.rotateX(-value * (Math.PI/180))});
+				testFolder.add(testParams, 'zRot', 0, 360).onChange(function(value){ testModel.rotateZ(-value * (Math.PI/180))});
 
 				let testGeometry = new THREE.CircleGeometry(2,16);
 				let testMaterial = new THREE.MeshBasicMaterial({color: 0xffff00, side: 2});
 				testModel = new THREE.Mesh(testGeometry, testMaterial);
+				testModel.rotation.x = -90 * (Math.PI/180);
 				scene.add(testModel);
 //
 
