@@ -269,6 +269,9 @@
 				faultFolder.add( params, 'showFaults').name('Show Faults').onChange(function(value){
 					ToggleFaults(value);
 				});
+				faultFolder.add( params, 'minStress', 0.02, 0.27).name('Mean Stress Ratio').onChange(value){
+					FilterFaults(value);
+				}
 				
 				const realtimeFolder = gui.addFolder('Realtime Data');
 				realtimeFolder.add(params, 'toggleRealtime').name('Device current position');
@@ -487,6 +490,28 @@
 				);
 			}
 			
+
+			function FilterFaults(meanRatio){
+				let loadedFaults;
+				loadedModel.traverse( function ( child ) {
+					if(child.name == 'faults'){
+						loadedFaults = child;
+						return;	
+					}
+				});
+
+				loadedFaults.traverse( function (child){
+					if(child.type == 'CircleGeometry'){
+						if (child.meanRatio < meanRatio){
+							child.visible = false;
+						}else{
+							child.visible = true;
+						}
+					}
+				});
+			}
+
+
 			function ToggleFaults(showFaults){
 
 				let alreadyLoaded = false;
@@ -534,6 +559,7 @@
 									
 									if (fault != null){ 
 										fault.position.set(faultPos.x, faultPos.y, faultPos.z);
+										fault.meanRatio = csvData[i].mean_SN_ratio;
 
 										fault.rotation.x = -90 * (Math.PI/180);
 										fault.rotateZ(-csvData[i].azimuth * (Math.PI/180));
