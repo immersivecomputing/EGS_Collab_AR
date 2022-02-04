@@ -269,9 +269,9 @@
 				faultFolder.add( params, 'showFaults').name('Show Faults').onChange(function(value){
 					ToggleFaults(value);
 				});
-				faultFolder.add( params, 'minStress', 0.02, 0.27).name('Mean Stress Ratio').onChange(value){
+				faultFolder.add( params, 'minStress', 0.02, 0.27).name('Mean Stress Ratio').onChange(function(value){
 					FilterFaults(value);
-				}
+				});
 				
 				const realtimeFolder = gui.addFolder('Realtime Data');
 				realtimeFolder.add(params, 'toggleRealtime').name('Device current position');
