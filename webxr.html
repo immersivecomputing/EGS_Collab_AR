@@ -501,7 +501,7 @@
 				});
 
 				loadedFaults.traverse( function (child){
-					if(child.type == 'CircleGeometry'){
+					if(child.type == 'Mesh'){
 						if (child.meanRatio < meanRatio){
 							child.visible = false;
 						}else{
