@@ -513,7 +513,9 @@
 					});
 
 					let faultGeometry = new THREE.CircleGeometry(1, 16);
-					let faultMaterial = new THREE.MeshBasicMaterial({color: 0xffff00, side: 2});
+					let faultMaterial1 = new THREE.MeshBasicMaterial({color: 0xFF1010, side: 2});
+					let faultMaterial2 = new THREE.MeshBasicMaterial({color: 0x971452, side: 2});
+					let faultMaterial3 = new THREE.MeshBasicMaterial({color: 0x24189C, side: 2});
 
 					const dataCsvloader = new THREE.FileLoader();
 					dataCsvloader.load(fileName,
@@ -524,14 +526,20 @@
 
 								if	(normDepth <= 1){
 									let faultPos = baseBoreholeObject.geometry.parameters.path.getPointAt(normDepth);
-									let fault = new THREE.Mesh(faultGeometry, faultMaterial);
-									fault.position.set(faultPos.x, faultPos.y, faultPos.z);
+									let fault;
+									if (csvData[i].Fracture_Type == 1)      {fault = new THREE.Mesh(faultGeometry, faultMaterial1);}
+									else if (csvData[i].Fracture_Type == 2) {fault = new THREE.Mesh(faultGeometry, faultMaterial2);}
+									else if (csvData[i].Fracture_Type == 3) {fault = new THREE.Mesh(faultGeometry, faultMaterial3);}
+									
+									if (fault != null){ 
+										fault.position.set(faultPos.x, faultPos.y, faultPos.z);
 
-									fault.rotation.x = -90 * (Math.PI/180);
-									fault.rotateZ(-csvData[i].azimuth * (Math.PI/180));
-									fault.rotateX(-csvData[i].dip * (Math.PI/180));
+										fault.rotation.x = -90 * (Math.PI/180);
+										fault.rotateZ(-csvData[i].azimuth * (Math.PI/180));
+										fault.rotateX(-csvData[i].dip * (Math.PI/180));
 
-									faultGroup.add(fault);
+										faultGroup.add(fault);
+									}
 								}
 							}
 						}
