@@ -90,6 +90,7 @@
 				showData: false,
 				dataType: "P Velocity",
 				showFaults: false,
+				meanRatio:0.02,
 				planeY: {
 
 					constant: -0.5,
@@ -269,7 +270,7 @@
 				faultFolder.add( params, 'showFaults').name('Show Faults').onChange(function(value){
 					ToggleFaults(value);
 				});
-				faultFolder.add( params, 'minStress', 0.02, 0.27).name('Mean Stress Ratio').onChange(function(value){
+				faultFolder.add( params, 'meanRatio', 0.02, 0.27).name('Mean Stress Ratio').onChange(function(value){
 					FilterFaults(value);
 				});
 				
