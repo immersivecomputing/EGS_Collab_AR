@@ -512,7 +512,6 @@
 						}
 					});
 
-					let faultGeometry = new THREE.CircleGeometry(1, 16);
 					let faultMaterial1 = new THREE.MeshBasicMaterial({color: 0xFF1010, side: 2});
 					let faultMaterial2 = new THREE.MeshBasicMaterial({color: 0x971452, side: 2});
 					let faultMaterial3 = new THREE.MeshBasicMaterial({color: 0x24189C, side: 2});
@@ -525,6 +524,8 @@
 								let normDepth = csvData[i].depth / baseBoreholeObject.boreholeDepth;
 
 								if	(normDepth <= 1){
+									
+									let faultGeometry = new THREE.CircleGeometry(csvData[i].mean_SN_ratio * 10, 16);
 									let faultPos = baseBoreholeObject.geometry.parameters.path.getPointAt(normDepth);
 									let fault;
 									if (csvData[i].Fracture_Type == 1)      {fault = new THREE.Mesh(faultGeometry, faultMaterial1);}
