@@ -284,9 +284,9 @@
 
 //
 				const testFolder = gui.addFolder('Testing')
-				testFolder.add(testParams, 'xRot', 0, 360).onChange(function(value){ transformTestObject(value, testParams.yRot, testParams.zRot)});
-				testFolder.add(testParams, 'yRot', 0, 360).onChange(function(value){ transformTestObject(testParams.xRot, value, testParams.zRot)});
-				testFolder.add(testParams, 'zRot', 0, 360).onChange(function(value){ transformTestObject(testParams.xRot, testParams.yRot, value)});
+				testFolder.add(testParams, 'xRot', 0, 360).onChange(function(value){ transformTestObject(new THREE.Vector3(1,0,0), value)});
+				testFolder.add(testParams, 'yRot', 0, 360).onChange(function(value){ transformTestObject(new THREE.Vector3(0,1,0), value)});
+				testFolder.add(testParams, 'zRot', 0, 360).onChange(function(value){ transformTestObject(new THREE.Vector3(0,0,1), value)});
 
 				let testGeometry = new THREE.CircleGeometry(2,16);
 				let testMaterial = new THREE.MeshBasicMaterial({color: 0xffff00, side: 2});
@@ -336,10 +336,8 @@
 			}
 
 			//
-			function transformTestObject(x, y, z){
-				testModel.quaternion.setFromAxisAngle(new THREE.Vector3(1,0,0) , x * (Math.PI / 180));
-				testModel.quaternion.setFromAxisAngle(new THREE.Vector3(0,1,0) , y * (Math.PI / 180));
-				testModel.quaternion.setFromAxisAngle(new THREE.Vector3(0,0,1) , z * (Math.PI / 180));
+			function transformTestObject(axis, value){
+				testModel.quaternion.setFromAxisAngle(axis , value * (Math.PI / 180));
 			}
 			//
 
