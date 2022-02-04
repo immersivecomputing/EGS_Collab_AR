@@ -285,8 +285,8 @@
 //
 				const testFolder = gui.addFolder('Testing')
 				testFolder.add(testParams, 'xRot', 0, 360).onChange(function(value){ testModel.rotateX(value)});
-				testFolder.add(testParams, 'yRot', 0, 360).onChange(function(value){ testModel.rotateX(value)});
-				testFolder.add(testParams, 'zRot', 0, 360).onChange(function(value){ testModel.rotateX(value)});
+				testFolder.add(testParams, 'yRot', 0, 360).onChange(function(value){ testModel.rotateY(value)});
+				testFolder.add(testParams, 'zRot', 0, 360).onChange(function(value){ testModel.rotateZ(value)});
 
 				let testGeometry = new THREE.CircleGeometry(2,16);
 				let testMaterial = new THREE.MeshBasicMaterial({color: 0xffff00, side: 2});
