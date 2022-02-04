@@ -487,17 +487,15 @@
 				);
 			}
 			
-			function ToggleFaults(){
+			function ToggleFaults(showFaults){
 
 				let alreadyLoaded = false;
 				loadedModel.traverse( function ( child ) {
 					if(child.name == 'faults'){
 						alreadyLoaded = true;
-						child.visible = value;
+						child.visible = showFaults;
 					}
 				});
-
-
 
 				if (alreadyLoaded == false ){
 						
