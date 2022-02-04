@@ -290,7 +290,7 @@
 
 				let testGeometry = new THREE.CircleGeometry(2,16);
 				let testMaterial = new THREE.MeshBasicMaterial({color: 0xffff00, side: 2});
-				testModel = new THREE.mesh(testGeometry, testMaterial);
+				testModel = new THREE.Mesh(testGeometry, testMaterial);
 				scene.add(testModel);
 //
 
@@ -336,7 +336,7 @@
 			}
 
 			//
-			function transformTestModel(x, y, z){
+			function transformTestObject(x, y, z){
 				testModel.rotation.set(x, y, z);
 			}
 			//
