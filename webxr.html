@@ -217,7 +217,7 @@
 				});
 				
 				//try loading a vtk
-				LoadVTK('./vtkData/visit_ex_db.4.vtk', scene);
+				LoadVTK('./vtkData/visit_ex_db.4.vtk', scene, 0.01, true);
 
 
 				document.body.appendChild( ARButton.createButton( renderer, { requiredFeatures: [ 'hit-test' ] } ) );
