@@ -9,7 +9,7 @@ function LoadVTK(fileName, scene, redScale, convert){
         const material = new THREE.MeshLambertMaterial( { color: 0xffffff } );
         const mesh = new THREE.Mesh( geometry, material );
 
-        mesh.position.set(4047.435, -1047.088, -2779.125);
+        
 
         if(convert){
             mesh.scale.set(3.28084 * redScale, 3.28084 * redScale, 3.28084 * redScale);
@@ -18,6 +18,7 @@ function LoadVTK(fileName, scene, redScale, convert){
             mesh.scale.set(redScale, redScale, redScale);
         }
 
+        mesh.position.set(-4047.435, 1047.088, 2779.125);
         
         scene.add(mesh)
 
