@@ -36,6 +36,7 @@
 			import { LineGeometry } from './threejs/examples/jsm/lines/LineGeometry.js';
 			import { ControlPosition } from './threejs/examples/ControlPosition.js';
 			import { FontLoader } from './threejs/examples/jsm/loaders/FontLoader.js';
+			import { LoadVTK } from './LoadVTK.js';
 
 			let container;
 			let viewSize, originalAspect;
@@ -195,27 +196,29 @@
 				
 				const loader = new GLTFLoader().setPath( '/EGS_Collab_AR/GLTF/' );
 				loader.load('EGS_Collab.gltf', function ( gltf ){
-							loadedModel.add(gltf.scene);
-							loadedModel.scale.set(0.01,0.01,0.01)
+					loadedModel.add(gltf.scene);
+					loadedModel.scale.set(0.01,0.01,0.01)
 
-							loadedModel.traverse( function ( child ) {
-								if ( child instanceof THREE.Object3D  ) {
-									if(child.name== 'TunnelOnly'){
-										child.material.side = 2;
-									}
-								}
-							});
+					loadedModel.traverse( function ( child ) {
+						if ( child instanceof THREE.Object3D  ) {
+							if(child.name== 'TunnelOnly'){
+								child.material.side = 2;
+							}
+						}
+					});
 
-							scene.add(loadedModel);
-							ToggleValue(false,'BoreholesOnly');
-							ToggleValue(false,'Electrodes');
-							ToggleValue(false,'Gyro_StartingPoints');
-							ToggleValue(false,'Gyro_XYZPoints');
-							ToggleValue(false,'Gyro_StrikeDipDepthPoints');
-							render();
-						});
+					scene.add(loadedModel);
+					ToggleValue(false,'BoreholesOnly');
+					ToggleValue(false,'Electrodes');
+					ToggleValue(false,'Gyro_StartingPoints');
+					ToggleValue(false,'Gyro_XYZPoints');
+					ToggleValue(false,'Gyro_StrikeDipDepthPoints');
+					render();
+				});
 				
-				
+				//try loading a vtk
+				LoadVTK.LoadVTK('./vtkData/visit_ex_db.4.vtk');
+
 
 				document.body.appendChild( ARButton.createButton( renderer, { requiredFeatures: [ 'hit-test' ] } ) );
 
