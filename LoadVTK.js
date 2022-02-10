@@ -14,7 +14,7 @@ function LoadVTK(fileName, group, convert){
         }
 
         group.add(mesh)
-        mesh.position.set(4047.435, -1047.088, 2779.125);
+        mesh.position.set(4047.435, -1047.088, -2779.125);
         
         
 
