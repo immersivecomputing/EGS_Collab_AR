@@ -28,7 +28,7 @@ function LoadOBJ(fileName, group, convert){
         
         const material = new THREE.MeshLambertMaterial( { 
             color: 0xffffff,
-            opacity: 0.5,
+            opacity: 0.1,
             transparent: true,
             side: 2
         });
