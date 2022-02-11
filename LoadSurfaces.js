@@ -24,19 +24,24 @@ function LoadVTK(fileName, group, convert){
 
 function LoadOBJ(fileName, group, convert){
     const loader1 = new OBJLoader();
-    loader1.load(fileName, function (geometry){
+    loader1.load(fileName, function (object){
         
         const material = new THREE.MeshLambertMaterial( { color: 0xffffff } );
-        const mesh = new THREE.Mesh( geometry, material );
+
+        object.traverse(function(child) {
+            if (child instanceof THREE.Mesh) {
+                child.material = material;
+            }
+        });
 
         if(convert){
-            mesh.scale.set(3.28084, 3.28084, 3.28084);
+            object.scale.set(3.28084, 3.28084, 3.28084);
         }
 
-        mesh.position.set(-4047.435, -1047.088, -2779.125);
-        mesh.rotation.set(-90 * (Math.PI / 180), 0 ,0);
+        object.position.set(-4047.435, -1047.088, -2779.125);
+        object.rotation.set(-90 * (Math.PI / 180), 0 ,0);
 
-        group.add(mesh);
+        group.add(object);
 
     })
 }
