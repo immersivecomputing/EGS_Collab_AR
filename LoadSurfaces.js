@@ -26,10 +26,11 @@ function LoadOBJ(fileName, group, convert, renderOrder, surfColor){
     const loader1 = new OBJLoader();
     loader1.load(fileName, function (object){
         
-        const material = new THREE.MeshLambertMaterial( { 
+        const material = new THREE.MeshBasicMaterial( { 
             color: surfColor,
             opacity: 0.1,
             transparent: true,
+            wireframe: true,
             side: 2
         });
 
