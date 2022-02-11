@@ -25,8 +25,7 @@ function LoadVTK(fileName, group, convert){
 function LoadOBJ(fileName, group, convert){
     const loader1 = new OBJLoader();
     loader1.load(fileName, function (geometry){
-        geometry.computeVertexNormals();
-
+        
         const material = new THREE.MeshLambertMaterial( { color: 0xffffff } );
         const mesh = new THREE.Mesh( geometry, material );
 
