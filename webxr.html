@@ -217,10 +217,14 @@
 				});
 				
 				//try loading a obj
-				LoadOBJ('./objData/visit_ex_db_0000.obj', loadedModel, true);
-				LoadOBJ('./objData/visit_ex_db_0001.obj', loadedModel, true);
-				LoadOBJ('./objData/visit_ex_db_0002.obj', loadedModel, true);
-				LoadOBJ('./objData/visit_ex_db_0003.obj', loadedModel, true);
+				LoadOBJ('./objData/visit_ex_db_0000.obj', loadedModel, true, 7);
+				LoadOBJ('./objData/visit_ex_db_0001.obj', loadedModel, true, 6);
+				LoadOBJ('./objData/visit_ex_db_0002.obj', loadedModel, true, 5);
+				LoadOBJ('./objData/visit_ex_db_0003.obj', loadedModel, true, 4);
+				LoadOBJ('./objData/visit_ex_db_0004.obj', loadedModel, true, 3);
+				LoadOBJ('./objData/visit_ex_db_0005.obj', loadedModel, true, 2);
+				LoadOBJ('./objData/visit_ex_db_0006.obj', loadedModel, true, 1);
+				LoadOBJ('./objData/visit_ex_db_0007.obj', loadedModel, true, 0);
 				
 
 				document.body.appendChild( ARButton.createButton( renderer, { requiredFeatures: [ 'hit-test' ] } ) );

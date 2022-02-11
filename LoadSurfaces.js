@@ -22,7 +22,7 @@ function LoadVTK(fileName, group, convert){
     })
 }
 
-function LoadOBJ(fileName, group, convert){
+function LoadOBJ(fileName, group, convert, renderOrder){
     const loader1 = new OBJLoader();
     loader1.load(fileName, function (object){
         
@@ -45,6 +45,7 @@ function LoadOBJ(fileName, group, convert){
 
         object.position.set(-4047.435, -1047.088, -2779.125);
         object.rotation.set(-90 * (Math.PI / 180), 0 ,0);
+        object.renderOrder = renderOrder;
 
         group.add(object);
 
