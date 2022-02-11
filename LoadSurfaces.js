@@ -26,7 +26,12 @@ function LoadOBJ(fileName, group, convert){
     const loader1 = new OBJLoader();
     loader1.load(fileName, function (object){
         
-        const material = new THREE.MeshLambertMaterial( { color: 0xffffff } );
+        const material = new THREE.MeshLambertMaterial( { 
+            color: 0xffffff,
+            opacity: 0.5,
+            transparent: true,
+            side: 2
+        });
 
         object.traverse(function(child) {
             if (child instanceof THREE.Mesh) {
