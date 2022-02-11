@@ -10,13 +10,13 @@ function LoadVTK(fileName, group, convert){
         const mesh = new THREE.Mesh( geometry, material );
 
         if(convert){
-            mesh.scale.set(3.28084 * 0.01, 3.28084 * 0.01, 3.28084 * 0.01);
+            mesh.scale.set(3.28084, 3.28084, 3.28084);
         }
 
-        group.add(mesh)
-        mesh.position.set(4047.435, -1047.088, -2779.125);
+        mesh.position.set(-4047.435, -1047.088, -2779.125);
+        mesh.rotation.set(-90 * (Math.PI / 180), 0 ,0);
         
-        
+        return mesh;
 
     })
 }
