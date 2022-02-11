@@ -150,7 +150,6 @@
 				camera.position.set( 0, 7, 0 );
 				scene.add(camera);
 
-
 				//orthoCamera = new THREE.OrthographicCamera( - 1, 1, 1, - 1, 1, 20 );
 				viewSize = 2;
 				var aspectRatio = window.innerWidth / window.innerHeight;
@@ -160,7 +159,6 @@
 				
 				const environment = new RoomEnvironment();
 				const pmremGenerator = new THREE.PMREMGenerator( renderer );
-				
 				
 
 				sprite = new THREE.Sprite( new THREE.SpriteMaterial( {
@@ -216,15 +214,7 @@
 					render();
 				});
 				
-				//try loading a obj
-				LoadOBJ('./objData/visit_ex_db_0000.obj', loadedModel, true, 7, 0x0d0887);
-				LoadOBJ('./objData/visit_ex_db_0001.obj', loadedModel, true, 6, 0x5302a3);
-				LoadOBJ('./objData/visit_ex_db_0002.obj', loadedModel, true, 5, 0x8b0aa5);
-				LoadOBJ('./objData/visit_ex_db_0003.obj', loadedModel, true, 4, 0xb83289);
-				LoadOBJ('./objData/visit_ex_db_0004.obj', loadedModel, true, 3, 0xdb5c68);
-				LoadOBJ('./objData/visit_ex_db_0005.obj', loadedModel, true, 2, 0xf48849);
-				LoadOBJ('./objData/visit_ex_db_0006.obj', loadedModel, true, 1, 0xfebd2a);
-				LoadOBJ('./objData/visit_ex_db_0007.obj', loadedModel, true, 0, 0xF0F921);
+				
 				
 
 				document.body.appendChild( ARButton.createButton( renderer, { requiredFeatures: [ 'hit-test' ] } ) );
@@ -283,7 +273,10 @@
 				faultFolder.add( params, 'meanRatio', 0.02, 0.27).name('Mean Stress Ratio').onChange(function(value){
 					FilterFaults(value);
 				});
-				
+				const surfaceFolder = gui.addFolder('Surfaces');
+				surfaceFolder.add(params, 'showSurfaces').name('Show Surfaces').onChange(function(value){
+					ToggleSurfaces(value);
+				});
 				const realtimeFolder = gui.addFolder('Realtime Data');
 				realtimeFolder.add(params, 'toggleRealtime').name('Device current position');
 
@@ -425,6 +418,21 @@
 				}
 			}
 
+			function ToggleSurfaces(value){
+
+				let surfaceGroup = new THREE.Group();
+				surfaceGroup.name = 'surfaces';
+				scene.add(surfaceGroup);
+				//try loading a obj
+				LoadOBJ('./objData/visit_ex_db_0000.obj', surfaceGroup, true, 7, 0x0d0887);
+				// LoadOBJ('./objData/visit_ex_db_0001.obj', surfaceGroup, true, 6, 0x5302a3);
+				// LoadOBJ('./objData/visit_ex_db_0002.obj', surfaceGroup, true, 5, 0x8b0aa5);
+				// LoadOBJ('./objData/visit_ex_db_0003.obj', surfaceGroup, true, 4, 0xb83289);
+				// LoadOBJ('./objData/visit_ex_db_0004.obj', surfaceGroup, true, 3, 0xdb5c68);
+				// LoadOBJ('./objData/visit_ex_db_0005.obj', surfaceGroup, true, 2, 0xf48849);
+				// LoadOBJ('./objData/visit_ex_db_0006.obj', surfaceGroup, true, 1, 0xfebd2a);
+				// LoadOBJ('./objData/visit_ex_db_0007.obj', surfaceGroup, true, 0, 0xF0F921);
+			}
 
 			function ToggleBoreholesGyro(value, valueName) {
 
