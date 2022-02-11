@@ -420,19 +420,28 @@
 			}
 
 			function ToggleSurfaces(value){
+				let alreadyLoaded = false;
+				loadedModel.traverse( function ( child ) {
+					if(child.name == 'surfaces'){
+						alreadyLoaded = true;
+						child.visible = value;
+					}
+				});
 
-				let surfaceGroup = new THREE.Group();
-				surfaceGroup.name = 'surfaces';
-				loadedModel.add(surfaceGroup);
-				//try loading a obj
-				LoadOBJ('./objData/visit_ex_db_0000.obj', surfaceGroup, true, 7, 0x0d0887);
-				// LoadOBJ('./objData/visit_ex_db_0001.obj', surfaceGroup, true, 6, 0x5302a3);
-				// LoadOBJ('./objData/visit_ex_db_0002.obj', surfaceGroup, true, 5, 0x8b0aa5);
-				// LoadOBJ('./objData/visit_ex_db_0003.obj', surfaceGroup, true, 4, 0xb83289);
-				// LoadOBJ('./objData/visit_ex_db_0004.obj', surfaceGroup, true, 3, 0xdb5c68);
-				// LoadOBJ('./objData/visit_ex_db_0005.obj', surfaceGroup, true, 2, 0xf48849);
-				// LoadOBJ('./objData/visit_ex_db_0006.obj', surfaceGroup, true, 1, 0xfebd2a);
-				// LoadOBJ('./objData/visit_ex_db_0007.obj', surfaceGroup, true, 0, 0xF0F921);
+				if (alreadyLoaded === false){	
+					let surfaceGroup = new THREE.Group();
+					surfaceGroup.name = 'surfaces';
+					loadedModel.add(surfaceGroup);
+					//try loading a obj
+					LoadOBJ('./objData/visit_ex_db_0000.obj', surfaceGroup, true, 7, 0x0d0887);
+					LoadOBJ('./objData/visit_ex_db_0001.obj', surfaceGroup, true, 6, 0x5302a3);
+					LoadOBJ('./objData/visit_ex_db_0002.obj', surfaceGroup, true, 5, 0x8b0aa5);
+					LoadOBJ('./objData/visit_ex_db_0003.obj', surfaceGroup, true, 4, 0xb83289);
+					LoadOBJ('./objData/visit_ex_db_0004.obj', surfaceGroup, true, 3, 0xdb5c68);
+					LoadOBJ('./objData/visit_ex_db_0005.obj', surfaceGroup, true, 2, 0xf48849);
+					LoadOBJ('./objData/visit_ex_db_0006.obj', surfaceGroup, true, 1, 0xfebd2a);
+					LoadOBJ('./objData/visit_ex_db_0007.obj', surfaceGroup, true, 0, 0xF0F921);
+				}
 				
 			}
 
