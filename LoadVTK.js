@@ -15,8 +15,8 @@ function LoadVTK(fileName, group, convert){
 
         mesh.position.set(-4047.435, -1047.088, -2779.125);
         mesh.rotation.set(-90 * (Math.PI / 180), 0 ,0);
-        
-        return mesh;
+
+        group.add(mesh);
 
     })
 }

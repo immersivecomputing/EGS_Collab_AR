@@ -217,8 +217,8 @@
 				});
 				
 				//try loading a vtk
-				let newVTKGeometry = LoadVTK('./vtkData/visit_ex_db.4.vtk', loadedModel, true);
-				loadedModel.add(newVTKGeometry);
+				LoadVTK('./vtkData/visit_ex_db.4.vtk', loadedModel, true);
+				
 
 				document.body.appendChild( ARButton.createButton( renderer, { requiredFeatures: [ 'hit-test' ] } ) );
 
