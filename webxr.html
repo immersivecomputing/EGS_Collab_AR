@@ -36,7 +36,7 @@
 			import { LineGeometry } from './threejs/examples/jsm/lines/LineGeometry.js';
 			import { ControlPosition } from './threejs/examples/ControlPosition.js';
 			import { FontLoader } from './threejs/examples/jsm/loaders/FontLoader.js';
-			import { LoadVTK } from './LoadVTK.js';
+			import { LoadOBJ } from './LoadSurfaces.js';
 
 			let container;
 			let viewSize, originalAspect;
@@ -216,8 +216,8 @@
 					render();
 				});
 				
-				//try loading a vtk
-				//LoadVTK('./vtkData/visit_ex_db.4.vtk', loadedModel, true);
+				//try loading a obj
+				LoadOBJ('./vtkData/visit_ex_db.4.vtk', loadedModel, true);
 				
 
 				document.body.appendChild( ARButton.createButton( renderer, { requiredFeatures: [ 'hit-test' ] } ) );
