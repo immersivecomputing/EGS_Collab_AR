@@ -41,7 +41,7 @@
 			let container;
 			let viewSize, originalAspect;
 			let camera, scene, renderer, loadedModel, orthoCamera, uiScene, dataGroup, currentLoadedData;
-			let controller, lut, rtTexture;
+			let controller, lut, lut2, rtTexture;
 			let meshSpline, raycaster, sphereInter, sprite, loadedLine;
 			const pointer = new THREE.Vector2();
 			
@@ -172,6 +172,17 @@
 				createAxisText(0.05,0.25,0,0,0,0,'cmax', 'cmax');
 				createAxisText(-0.1,0,0,0,0,90,'title','title');
 				sprite.visible = false;
+
+
+				lut2 = new Lut();
+				lut2.setColorMap('plasma');
+				sprite2 = new THREE.Sprite( new THREE.SpriteMaterial( {
+					map: new THREE.CanvasTexture( lut2.createCanvas() )
+				} ) );
+				sprite2.scale.x = 0.0625;
+				sprite2.scale.y = 0.5;
+				uiScene.add( sprite2 );
+				sprite2.visible = false;
 
 
 				loadedModel = new THREE.Group();
@@ -425,6 +436,7 @@
 					if(child.name == 'surfaces'){
 						alreadyLoaded = true;
 						child.visible = value;
+						sprite2.visible = value;
 					}
 				});
 
@@ -441,6 +453,7 @@
 					LoadOBJ('./objData/visit_ex_db_0005.obj', surfaceGroup, true, 2, 0xf48849);
 					LoadOBJ('./objData/visit_ex_db_0006.obj', surfaceGroup, true, 1, 0xfebd2a);
 					LoadOBJ('./objData/visit_ex_db_0007.obj', surfaceGroup, true, 0, 0xF0F921);
+					sprite2.visible = value;
 				}
 				
 			}
