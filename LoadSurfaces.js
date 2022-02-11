@@ -37,6 +37,9 @@ function LoadOBJ(fileName, group, convert, renderOrder, surfColor){
         object.traverse(function(child) {
             if (child instanceof THREE.Mesh) {
                 child.material = material;
+                child.castShadow = false;
+                child.receiveShadow = false;
+				child.geometry.computeVertexNormals(true);
             }
         });
 
