@@ -49,7 +49,7 @@ function LoadOBJ(fileName, group, convert, renderOrder, surfColor){
         object.position.set(-4047.435, -1047.088, -2779.125);
         object.rotation.set(-90 * (Math.PI / 180), 0 ,0);
         object.renderOrder = renderOrder;
-        object.bulkConductivity = renderOrder;
+        object.bulkConductivity = 7-renderOrder;
 
         group.add(object);
 
