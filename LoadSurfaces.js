@@ -26,7 +26,7 @@ function LoadOBJ(fileName, group, convert, renderOrder, surfColor){
     const loader1 = new OBJLoader();
     loader1.load(fileName, function (object){
         
-        const material = new THREE.MeshBasicMaterial( { 
+        const material = new THREE.MeshPhongMaterial( { 
             color: surfColor,
             opacity: 0.1,
             transparent: true,
