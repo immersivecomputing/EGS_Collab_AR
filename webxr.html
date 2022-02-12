@@ -302,7 +302,7 @@
 				surfaceFolder.add(params, 'surfaceNum', 0, 7).name('Show Surface').onChange(function (value) {
 					if(surfaceGroup != null){		
 						surfaceGroup.traverse(function (child){
-							if (parseInt(child.name) > value) {
+							if (parseInt(child.bultConductivity) > value) {
 								child.visible = false;
 							} else {
 								child.visible = true;
