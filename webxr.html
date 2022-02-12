@@ -299,7 +299,7 @@
 				surfaceFolder.add(params, 'showSurfaces').name('Show Surfaces').onChange(function(value){
 					ToggleSurfaces(value);
 				});
-				surfaceFolder.add(params, 'num', 0, 7).name('Show Surface').onChange(function (value) {
+				surfaceFolder.add(params, 'surfaceNum', 0, 7).name('Show Surface').onChange(function (value) {
 					if(surfaceGroup != null){		
 						surfaceGroup.traverse(function (child){
 							if (parseInt(child.name) > value) {
