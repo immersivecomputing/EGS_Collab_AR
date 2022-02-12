@@ -42,7 +42,7 @@
 			let viewSize, originalAspect;
 			let camera, scene, renderer, loadedModel, orthoCamera, uiScene, dataGroup, currentLoadedData;
 			let controller, lut, lut2, rtTexture;
-			let meshSpline, raycaster, sphereInter, sprite, sprite2, loadedLine;
+			let meshSpline, raycaster, sphereInter, sprite, sprite2, loadedLine, surfaceGroup;
 			const pointer = new THREE.Vector2();
 			
 			let reticle;
@@ -93,6 +93,7 @@
 				showFaults: false,
 				meanRatio:0.02,
 				showSurfaces: false,
+				surfaceNum:0,
 				planeY: {
 
 					constant: -0.5,
@@ -186,7 +187,7 @@
 				createAxisText(0.05,-0.15625,0,0,0,0,'c1', '1', sprite2);
 				createAxisText(0.05,-0.09375,0,0,0,0,'c2', '2', sprite2);
 				createAxisText(0.05,-0.03125,0,0,0,0,'c3', '3', sprite2);
-				createAxisText(0.05,0.3125,0,0,0,0,'c4', '4', sprite2);
+				createAxisText(0.05,0.03125,0,0,0,0,'c4', '4', sprite2);
 				createAxisText(0.05,0.09375,0,0,0,0,'c5', '5', sprite2);
 				createAxisText(0.05,0.15625,0,0,0,0,'c6', '6', sprite2);
 				createAxisText(0.05,0.21875,0,0,0,0,'c7', '7', sprite2);
@@ -298,6 +299,18 @@
 				surfaceFolder.add(params, 'showSurfaces').name('Show Surfaces').onChange(function(value){
 					ToggleSurfaces(value);
 				});
+				surfaceFolder.add(params, 'num', 0, 7).name('Show Surface').onChange(function (value) {
+					if(surfaceGroup != null){		
+						surfaceGroup.traverse(function (child){
+							if (parseInt(child.name) > value) {
+								child.visible = false;
+							} else {
+								child.visible = true;
+							}
+						});
+					}
+				});
+
 				const realtimeFolder = gui.addFolder('Realtime Data');
 				realtimeFolder.add(params, 'toggleRealtime').name('Device current position');
 
@@ -450,7 +463,7 @@
 				});
 
 				if (alreadyLoaded === false){	
-					let surfaceGroup = new THREE.Group();
+					surfaceGroup = new THREE.Group();
 					surfaceGroup.name = 'surfaces';
 					loadedModel.add(surfaceGroup);
 					//try loading a obj
