@@ -299,10 +299,10 @@
 				surfaceFolder.add(params, 'showSurfaces').name('Show Surfaces').onChange(function(value){
 					ToggleSurfaces(value);
 				});
-				surfaceFolder.add(params, 'surfaceNum', 0, 7).name('Show Surface').onChange(function (value) {
+				surfaceFolder.add(params, 'surfaceNum', 0, 7).name('Show Surface g.t.').onChange(function (value) {
 					if(surfaceGroup != null){		
 						surfaceGroup.traverse(function (child){
-							if (parseInt(child.bulkConductivity) > value) {
+							if (parseInt(child.bulkConductivity) < value) {
 								child.visible = false;
 							} else {
 								child.visible = true;
