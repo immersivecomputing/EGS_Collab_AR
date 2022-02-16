@@ -60,8 +60,8 @@
 			let smin = 2000;
 			let tmin = 20;
 			let tmax = 30;
-			let fcmin = 500;
-			let fcmax = 1000;
+			let vpvsmin = 0;
+			let vpvsmax = 2;
 
 			let hitTestSource = null;
 			let hitTestSourceRequested = false;
@@ -286,7 +286,7 @@
 				dataFolder.add( params, 'showData').name('Show Log').onChange(function (value){					
 					ToggleData(value, params.dataType);
 				});
-				dataFolder.add( params, 'dataType', [ 'P Velocity', 'S Velocity', 'Temp.', 'Fluid Cond.'] ).name('Log Type:').onChange(function (value){
+				dataFolder.add( params, 'dataType', [ 'P Velocity', 'S Velocity', 'Vp/Vs', 'Temp.'] ).name('Log Type:').onChange(function (value){
 					ToggleData(params.showData, value);
 				});
 
@@ -427,12 +427,12 @@
 							updateAxisText('cmax', tmax);
 							updateAxisText('title',dataType + ' deg C');
 						}
-						else if (params.dataType === 'Fluid Cond.'){
-							lut.setMax( fcmax );
-							lut.setMin( fcmin );
-							updateAxisText('cmin', fcmin);
-							updateAxisText('cmax', fcmax);
-							updateAxisText('title',dataType + ' uS/cm');
+						else if (params.dataType === 'Vp/Vs'){
+							lut.setMax( vpvsmax );
+							lut.setMin( vpvsmin );
+							updateAxisText('cmin', vpvsmin);
+							updateAxisText('cmax', vpvsmax);
+							updateAxisText('title', dataType);
 						}
 					}
 				});
@@ -719,9 +719,9 @@
 				let filePrefix;
 				let dataSet;
 
-				if (dataType === 'P Velocity' || dataType === 'S Velocity'){
+				if (dataType === 'P Velocity' || dataType === 'S Velocity' || dataType === 'Vp/Vs' ){
 					filePrefix = 'fws';
-				}else if (dataType === 'Temp.' || dataType === 'Fluid Cond.'){
+				}else if (dataType === 'Temp.'){
 					filePrefix = 'ftc';
 				}
 
@@ -747,13 +747,14 @@
 					updateAxisText('cmax', tmax);
 					updateAxisText('title',dataType + ' deg C');
 				}
-				else if (params.dataType === 'Fluid Cond.'){
-					dataSet = 'FCond';
-					lut.setMax( fcmax );
-					lut.setMin( fcmin );
-					updateAxisText('cmin', fcmin);
-					updateAxisText('cmax', fcmax);
-					updateAxisText('title',dataType + ' uS/cm');
+				else if (params.dataType === 'Vp/Vs'){
+					dataSet1 = 'PVelocity';
+					dataSet2 = 'SVelocity';
+					lut.setMax( vpvsmax );
+					lut.setMin( vpvsmin );
+					updateAxisText('cmin', vpvsmin);
+					updateAxisText('cmax', vpvsmax);
+					updateAxisText('title',dataType);
 				}
 
 				dataCsvloader.load('/EGS_Collab_AR/csvData/' + filePrefix + '_' + boreholeName + '.csv',
@@ -800,8 +801,13 @@
 
 						for(let i = 0; i < maxDepthIndex + 1; i++){
 						    const stride = i * 3;
-							
-							var newVal = parseFloat(valueCsvData[i][dataSet]);
+							var newVal;
+
+							if (dataType === 'Vp/Vs'){
+								newVal = parseFloat(valueCsvData[i][dataSet1]) / parseFloat(valueCsvData[i][dataSet2]);
+							}else{
+								 newVal = parseFloat(valueCsvData[i][dataSet]);
+							}
 							
 							color = lut.getColor( newVal );
 							texData[stride] = Math.floor(color.r * 255);
