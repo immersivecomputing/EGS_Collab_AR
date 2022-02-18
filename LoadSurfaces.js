@@ -31,7 +31,7 @@ function LoadOBJ(fileName, group, convert, renderOrder, surfColor){
             opacity: 0.1,
             transparent: true,
             side: 2,
-            shading: THREE.SmoothShading
+            flatShading: true
         });
 
         object.traverse(function(child) {
