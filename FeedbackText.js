@@ -8,7 +8,7 @@ function ShowFeedbackText(text) {
 	feedback.style.left = 'calc(50% - 50px)';
 	feedback.style.width = '100px';
     feedback.textContent = text;
-    feedback.style.bottom = '20px';
+    feedback.style.top = '20px';
     feedback.style.padding = '12px 6px';
     feedback.style.background = 'rgba(0,0,0,0.1)';
     feedback.style.color = '#fff';
