@@ -274,12 +274,15 @@
 				const gui = new GUI();
 				const baseFolder = gui.addFolder( 'Base Objects' );
 				baseFolder.add(params, 'toggleTunnel').name('Tunnel').onChange( function (value){
+					document.body.appendChild( HideFeedbackText());
 					ToggleValue(value,'TunnelOnly');
 				});
 				baseFolder.add(params, 'toggleBoreholesGyro').name('Boreholes').onChange( function (value){
+					document.body.appendChild( HideFeedbackText());
 					ToggleBoreholesGyro(value,'BoreholesGyro');
 				});
 				baseFolder.add(params, 'toggleGrid').name('Grid').onChange( function (value){
+					document.body.appendChild( HideFeedbackText());
 					grid.visible = value;
 					render();
 				});
@@ -396,7 +399,7 @@
 			function ToggleData(showData, dataType){
 				document.body.appendChild( HideFeedbackText());
 
-				if (boreholesLoaded == false){
+				if (boreholesLoaded == false && showData == true){
 					document.body.appendChild( ShowFeedbackText('Boreholes must be loaded before displaying this dataset'));
 					return;
 				}
@@ -474,6 +477,9 @@
 			}
 
 			function ToggleSurfaces(value){
+
+				document.body.appendChild( HideFeedbackText());
+
 				let alreadyLoaded = false;
 				loadedModel.traverse( function ( child ) {
 					if(child.name == 'surfaces'){
@@ -598,6 +604,13 @@
 
 
 			function ToggleFaults(showFaults){
+				
+				document.body.appendChild( HideFeedbackText());
+
+				if (boreholesLoaded == false && showFaults == true){
+					document.body.appendChild( ShowFeedbackText('Boreholes must be loaded before displaying this dataset'));
+					return;
+				}
 
 				let alreadyLoaded = false;
 				loadedModel.traverse( function ( child ) {
