@@ -1,7 +1,7 @@
 const feedback = document.createElement( 'FeedbackText' );
 
 
-function ShowFeedBackText(text){
+function ShowFeedbackText(text){
     feedback.style.display = '';
 
 	feedback.style.cursor = 'pointer';
@@ -21,4 +21,4 @@ function ShowFeedBackText(text){
 	feedback.style.zIndex = '999';
 }
 
-export {ShowFeedBackText};
+export {ShowFeedbackText};
