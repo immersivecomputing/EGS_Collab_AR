@@ -151,7 +151,7 @@
 				
 				uiScene = new THREE.Scene();
 
-				camera = new THREE.PerspectiveCamera( 70, window.innerWidth / window.innerHeight, 0.01, 50 );
+				camera = new THREE.PerspectiveCamera( 70, window.innerWidth / window.innerHeight, 0.001, 50 );
 				camera.position.set( 0, 7, 0 );
 				scene.add(camera);
 
@@ -250,6 +250,7 @@
 					if ( reticle.visible ) {
 						
 						loadedModel.position.setFromMatrixPosition( reticle.matrix );
+						loadedModel.position.set(loadModel.position.x, loadedModel.position.y, loadedModel.position.z + 0.01);
 						loadedModel.scale.set(0.001,0.001,0.001);
 						render();
 					}
