@@ -1,7 +1,7 @@
-const feedback = document.createElement( 'FeedbackText' );
 
+function ShowFeedbackText(text, renderer, sessionInit = {} ) {
 
-function ShowFeedbackText(text){
+    const feedback = document.createElement( 'FeedbackText' );
     feedback.style.display = '';
 
 	feedback.style.cursor = 'pointer';
