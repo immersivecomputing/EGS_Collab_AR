@@ -25,6 +25,7 @@ function ShowFeedbackText(text) {
 
 function HideFeedbackText(){
     feedback.textContent = '';
+    return feedback;
 }
 
 export {ShowFeedbackText, HideFeedbackText};
