@@ -19,6 +19,8 @@ function ShowFeedbackText(text){
     feedback.style.opacity = '0.5';
     feedback.style.outline = 'none';
 	feedback.style.zIndex = '999';
+
+    return feedback;
 }
 
 export {ShowFeedbackText};
