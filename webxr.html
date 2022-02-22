@@ -37,6 +37,7 @@
 			import { ControlPosition } from './threejs/examples/ControlPosition.js';
 			import { FontLoader } from './threejs/examples/jsm/loaders/FontLoader.js';
 			import { LoadOBJ } from './LoadSurfaces.js';
+			import { ShowFeedbackText } from './FeedbackText.js';
 
 			let container;
 			let viewSize, originalAspect;
@@ -358,6 +359,8 @@
 				controls.update();
 				
 				GenerateRealtimeObject();
+
+				ShowFeedbackText('Try showing this text');
 
 				document.addEventListener( 'mousemove', onDocumentMouseMove );
 
