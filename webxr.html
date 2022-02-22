@@ -38,6 +38,7 @@
 			import { FontLoader } from './threejs/examples/jsm/loaders/FontLoader.js';
 			import { LoadOBJ } from './LoadSurfaces.js';
 			import { ShowFeedbackText } from './FeedbackText.js';
+			import { HideFeedbackText } from './FeedbackText.js';
 
 			let container;
 			let viewSize, originalAspect;
@@ -360,8 +361,6 @@
 				
 				GenerateRealtimeObject();
 
-				document.body.appendChild( ShowFeedbackText('Boreholes must be loaded before displaying this dataset'));
-
 				document.addEventListener( 'mousemove', onDocumentMouseMove );
 
 				console.log(loadedModel);
@@ -395,6 +394,14 @@
 			}
 
 			function ToggleData(showData, dataType){
+				document.body.appendChild( HideFeedbackText());
+
+				if (boreholesLoaded == false){
+					document.body.appendChild( ShowFeedbackText('Boreholes must be loaded before displaying this dataset'));
+					return;
+				}
+
+
 				let alreadyLoaded = false;
 					
 				loadedModel.traverse( function ( child ) {

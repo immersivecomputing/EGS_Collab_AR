@@ -1,16 +1,15 @@
+const feedback = document.createElement( 'FeedbackText' );
 
-function ShowFeedbackText(text) {
-
-    const feedback = document.createElement( 'FeedbackText' );
+function ShowFeedbackText(text) {    
     feedback.style.display = '';
 
 	feedback.style.cursor = 'pointer';
-	feedback.style.left = 'calc(50% - 50px)';
-	feedback.style.width = '100px';
+	feedback.style.left = 'calc(50% - 100px)';
+	feedback.style.width = '200px';
     feedback.textContent = text;
 
     feedback.style.position = 'absolute';
-    feedback.style.bottom = '20px';
+    feedback.style.bottom = '70px';
     feedback.style.padding = '12px 6px';
     feedback.style.background = 'rgba(0,0,0,0.1)';
     feedback.style.color = '#fff';
@@ -23,4 +22,9 @@ function ShowFeedbackText(text) {
     return feedback;
 }
 
-export {ShowFeedbackText};
+
+function HideFeedbackText(){
+    feedback.textContent = '';
+}
+
+export {ShowFeedbackText, HideFeedbackText};
