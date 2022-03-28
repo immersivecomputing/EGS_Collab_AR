@@ -3,15 +3,13 @@
 ## Interactive Model Viewer
 <a href="https://immersivecomputing.github.io/EGS_Collab_AR/webxr.html"><img src="https://immersivecomputing.github.io/EGS_Collab_AR/media/GoButton.png" width="150" height="50">
 
-[Interactive 3D viewer (Any platform)](https://immersivecomputing.github.io/EGS_Collab_AR/webxr.html)
-<br />To follow the AR link at the bottom of the visualization you will either need to be using Chrome on Android, or [Mozilla's WebXR Viewer app](https://apps.apple.com/us/app/webxr-viewer/id1295998056) on iOS.
-
 ![QR_Interactive](https://immersivecomputing.github.io/EGS_Collab_AR/media/QR_interactive.png)
-
+<br />To follow the AR link at the bottom of the visualization you will either need to be using Chrome on Android, or [Mozilla's WebXR Viewer app](https://apps.apple.com/us/app/webxr-viewer/id1295998056) on iOS.  
+  
 ### Documentation
 
 #### Introduction
-The interactive EGS Collab AR visualization is built on the ThreeJS library. Data is uploaded to this site using the same formatting currently used by EGS researchers, with the tool being able to interpret those formates and visualize them within a browser window. This makes the visualization incredibly accessible and able to be updated as quickly as new data becomes available.
+The interactive EGS Collab AR visualization is built on the [ThreeJS library](threejs.org). Data is uploaded to this site using the same formatting currently used by EGS researchers, with the tool being able to interpret those formates and visualize them within a browser window. This makes the visualization incredibly accessible and able to be updated as quickly as new data becomes available.
 
 The intention is for the tool to eventaully be able to ingest real-time data streams to provide up to the minute visualization of ongoing experiments. This will enable both onsite operations to make critical decisions, as well as enabling remote observers to view the data streams simultaneaously and potentially provide additional input.
 
