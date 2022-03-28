@@ -1,6 +1,8 @@
 # EGS Collab AR 
 
 ## Interactive Model Viewer
+<a href="https://immersivecomputing.github.io/EGS_Collab_AR/webxr.html"><img src="https://immersivecomputing.github.io/EGS_Collab_AR/media/GoButton.png" width="150" height="50">
+
 [Interactive 3D viewer (Any platform)](https://immersivecomputing.github.io/EGS_Collab_AR/webxr.html)
 <br />To follow the AR link at the bottom of the visualization you will either need to be using Chrome on Android, or [Mozilla's WebXR Viewer app](https://apps.apple.com/us/app/webxr-viewer/id1295998056) on iOS.
 
