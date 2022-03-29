@@ -13,7 +13,7 @@ The interactive EGS Collab AR visualization is built on the [ThreeJS library](th
 
 The intention is for the tool to eventaully be able to ingest real-time data streams to provide up to the minute visualization of ongoing experiments. This will enable both onsite operations to make critical decisions, as well as enabling remote observers to view the data streams simultaneaously and potentially provide additional input.
 
-<img src="https://immersivecomputing.github.io/EGS_Collab_AR/media/MicrosoftTeams-image (9).png" width="650" height="360">
+<img src="https://immersivecomputing.github.io/EGS_Collab_AR/media/MicrosoftTeams-image%20(9).png" width="650" height="360">
 
 #### Mouse controls
   Left mouse = Orbit
