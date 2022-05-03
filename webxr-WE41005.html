@@ -1,0 +1,1045 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>EGS Collab AR</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+		<link type="text/css" rel="stylesheet" href="./threejs/examples/main.css">
+		<style>
+		.label {
+				color: #FFF;
+				font-family: sans-serif;
+				padding: 2px;
+				background: rgba( 0, 0, 0, .6 );
+			}
+		</style>
+	</head>
+	<body>
+
+		<div id="info">
+			<a href="https://immersivecomputing.github.io/EGS_Collab_AR/" target="_blank" rel="noopener">EGS Collab</a> AR <br/>
+		</div>
+		<script type="module">
+
+			import * as THREE from './threejs/build/three.module.js';
+			import { ARButton } from './threejs/examples/jsm/webxr/ARButton.js';
+			import { GLTFLoader } from './threejs/examples/jsm/loaders/GLTFLoader.js';
+			import { OrbitControls } from './threejs/examples/jsm/controls/OrbitControls.js';
+			import { RoomEnvironment } from './threejs/examples/jsm/environments/RoomEnvironment.js';
+			import { GUI } from './threejs/examples/jsm/libs/dat.gui.module.js';
+			//import {csvParse} from "https://cdn.skypack.dev/d3-dsv@3";
+			import {csvParse} from "https://cdn.skypack.dev/-/d3-dsv@v3.0.1-u1xCRjaLJc0qqv1Z5ERe/dist=es2020,mode=imports/optimized/d3-dsv.js";
+			import { Lut } from './threejs/examples/jsm/math/Lut.js';
+			import { CSS2DRenderer, CSS2DObject } from './threejs/examples/jsm/renderers/CSS2DRenderer.js';
+			import { Line2 } from './threejs/examples/jsm/lines/Line2.js';
+			import { LineMaterial } from './threejs/examples/jsm/lines/LineMaterial.js';
+			import { LineGeometry } from './threejs/examples/jsm/lines/LineGeometry.js';
+			import { ControlPosition } from './threejs/examples/ControlPosition.js';
+			import { FontLoader } from './threejs/examples/jsm/loaders/FontLoader.js';
+			import { LoadOBJ } from './LoadSurfaces.js';
+			import { ShowFeedbackText } from './FeedbackText.js';
+			import { HideFeedbackText } from './FeedbackText.js';
+
+			let container;
+			let viewSize, originalAspect;
+			let camera, scene, renderer, loadedModel, orthoCamera, uiScene, dataGroup, currentLoadedData;
+			let controller, lut, lut2, rtTexture;
+			let meshSpline, raycaster, sphereInter, sprite, sprite2, loadedLine, surfaceGroup;
+			const pointer = new THREE.Vector2();
+			
+			let reticle;
+			let planes;
+			
+			let mouseX = 0, mouseY = 0;
+
+			let csvData, labelRenderer, labelDiv, valueLabel;
+			
+			let realtimeObject;
+
+			let pmax = 8000;
+			let pmin = 6000;
+			let smax = 4000;
+			let smin = 2000;
+			let tmin = 20;
+			let tmax = 30;
+			let vpvsmin = 1.25;
+			let vpvsmax = 2.5;
+
+			let hitTestSource = null;
+			let hitTestSourceRequested = false;
+			let boreholesLoaded = false;
+			
+			let boreholeSpline, tubeGeometry;
+			const material = new THREE.MeshLambertMaterial( {
+					side: THREE.DoubleSide,
+					color: 0xF5F5F5,
+					vertexColors: true} );
+			let materialModel;
+					
+			const windowHalfX = window.innerWidth / 2;
+			const windowHalfY = window.innerHeight / 2;
+			
+			const wireframeMaterial = new THREE.MeshBasicMaterial( { color: 0x000000, opacity: 0.3, wireframe: true, transparent: true } );
+
+			const params = {
+				toggleTunnel: true,
+				toggleGrid: false,
+                toggleBoreholesGyro: false,
+                toggleElectrodes: false,
+                toggleGyroStartPoints: false,
+                toggleGyroSrikeDipDepth: false,
+                toggleGyroXYZ: false,
+				textField: "E2-TC",
+				showData: false,
+				dataType: "P Velocity",
+				showFaults: false,
+				meanRatio:0.02,
+				showSurfaces: false,
+				surfaceNum: 0,
+				surfaceOpacity: 0.1,
+				planeY: {
+
+					constant: -0.5,
+					//negated: false,
+					//displayHelper: false
+
+				},
+				toggleRealtime: false
+			};
+
+			init();
+			animate();
+			
+			
+
+			function init() {
+
+				container = document.createElement( 'div' );
+				document.body.appendChild( container );
+
+				renderer = new THREE.WebGLRenderer( { antialias: true, alpha: true } );
+				renderer.setPixelRatio( window.devicePixelRatio );
+				renderer.setSize( window.innerWidth, window.innerHeight );
+				renderer.toneMapping = THREE.ACESFilmicToneMapping;
+				renderer.toneMappingExposure = 1;
+				renderer.outputEncoding = THREE.sRGBEncoding;
+				renderer.xr.enabled = true;
+				renderer.localClippingEnabled = true;
+				renderer.autoClear = false;
+				container.appendChild( renderer.domElement );
+
+				rtTexture = new THREE.WebGLRenderTarget( window.innerWidth, window.innerHeight, { minFilter: THREE.LinearFilter, magFilter: THREE.NearestFilter, format: THREE.RGBAFormat, type: THREE.FloatType } );
+				
+				
+				planes = [
+					new THREE.Plane( new THREE.Vector3( 0, - 1, 0 ), -0.5 )
+				];
+				
+				materialModel = new THREE.MeshLambertMaterial( {
+
+							color: 0xB6D7A8,
+							opacity: 0.25,
+							transparent: true,
+							side: THREE.DoubleSide,
+							clippingPlanes: planes,
+
+						} );
+				
+				lut = new Lut();
+				
+				scene = new THREE.Scene();
+				
+				uiScene = new THREE.Scene();
+
+				camera = new THREE.PerspectiveCamera( 70, window.innerWidth / window.innerHeight, 0.0001, 50 );
+				camera.position.set( 0, 7, 0 );
+				scene.add(camera);
+
+				//orthoCamera = new THREE.OrthographicCamera( - 1, 1, 1, - 1, 1, 20 );
+				viewSize = 2;
+				var aspectRatio = window.innerWidth / window.innerHeight;
+				originalAspect = window.innerWidth / window.innerHeight;
+    			orthoCamera = new THREE.OrthographicCamera(-aspectRatio * viewSize / 2, aspectRatio * viewSize / 2, viewSize / 2, -viewSize / 2, 1, 20);
+				orthoCamera.position.set( 0.95, 0.5, 10 );
+				
+				const environment = new RoomEnvironment();
+				const pmremGenerator = new THREE.PMREMGenerator( renderer );
+				
+
+				sprite = new THREE.Sprite( new THREE.SpriteMaterial( {
+					map: new THREE.CanvasTexture( lut.createCanvas() )
+				} ) );
+				sprite.scale.x = 0.0625;
+				sprite.scale.y = 0.5;
+				uiScene.add( sprite );
+				createAxisText(0.05,-0.25,0,0,0,0,'cmin', 'cmin', sprite);
+				createAxisText(0.05,0.25,0,0,0,0,'cmax', 'cmax', sprite);
+				createAxisText(-0.1,0,0,0,0,90,'title','title', sprite);
+				sprite.visible = false;
+
+
+				lut2 = new Lut();
+				lut2.setColorMap('plasma');
+				sprite2 = new THREE.Sprite( new THREE.SpriteMaterial( {
+					map: new THREE.CanvasTexture( lut2.createCanvas() )
+				} ) );
+				sprite2.position.y = 1.0;
+				sprite2.scale.x = 0.0625;
+				sprite2.scale.y = 0.5;
+				uiScene.add( sprite2 );
+				createAxisText(0.05,-0.21875 + 1,0,0,0,0,'c0', '0', sprite2);
+				createAxisText(0.05,-0.15625 + 1,0,0,0,0,'c1', '1', sprite2);
+				createAxisText(0.05,-0.09375 + 1,0,0,0,0,'c2', '2', sprite2);
+				createAxisText(0.05,-0.03125 + 1,0,0,0,0,'c3', '3', sprite2);
+				createAxisText(0.05,0.03125 + 1,0,0,0,0,'c4', '4', sprite2);
+				createAxisText(0.05,0.09375 + 1,0,0,0,0,'c5', '5', sprite2);
+				createAxisText(0.05,0.15625 + 1,0,0,0,0,'c6', '6', sprite2);
+				createAxisText(0.05,0.21875 + 1,0,0,0,0,'c7', '7', sprite2);
+				createAxisText(-0.1,1,0,0,0,90,'surftitle','Bulk Conductivity', sprite2);
+				sprite2.visible = false;
+
+
+				loadedModel = new THREE.Group();
+				//scene.background = new THREE.Color( 0xbbbbbb );
+				//scene.environment = pmremGenerator.fromScene( environment ).texture;
+				
+				scene.background = null;
+				scene.environment = null;
+				
+				const light = new THREE.HemisphereLight( 0xffffff, 0x080808, 1.5 );
+				light.position.set( -1.25, 1, 1.25 );
+				scene.add( light );
+				
+
+				const grid = new THREE.GridHelper( 10, 100, 0xffffff, 0xffffff );
+				grid.material.opacity = 0.5;
+				grid.material.depthWrite = false;
+				grid.material.transparent = true;
+				grid.visible = false;
+				scene.add( grid );
+				
+				const loader = new GLTFLoader().setPath( '/EGS_Collab_AR/GLTF/' );
+				loader.load('EGS_Collab.gltf', function ( gltf ){
+					loadedModel.add(gltf.scene);
+					loadedModel.scale.set(0.01,0.01,0.01)
+
+					loadedModel.traverse( function ( child ) {
+						if ( child instanceof THREE.Object3D  ) {
+							if(child.name== 'TunnelOnly'){
+								child.material.side = 2;
+							}
+						}
+					});
+
+					scene.add(loadedModel);
+					ToggleValue(false,'BoreholesOnly');
+					ToggleValue(false,'Electrodes');
+					ToggleValue(false,'Gyro_StartingPoints');
+					ToggleValue(false,'Gyro_XYZPoints');
+					ToggleValue(false,'Gyro_StrikeDipDepthPoints');
+					render();
+				});
+				
+				
+				
+
+				document.body.appendChild( ARButton.createButton( renderer, { requiredFeatures: [ 'hit-test' ] } ) );
+
+				function onSelect() {
+
+					if ( reticle.visible ) {
+						
+						loadedModel.position.setFromMatrixPosition( reticle.matrix );
+						loadedModel.position.set(loadModel.position.x, loadedModel.position.y, loadedModel.position.z + 0.01);
+						loadedModel.scale.set(0.0005,0.0005,0.0005);
+						render();
+					}
+				}
+				
+
+				controller = renderer.xr.getController( 0 );
+				controller.addEventListener( 'select', onSelect );
+				scene.add( controller );
+
+				reticle = new THREE.Mesh(
+					new THREE.RingGeometry( 0.15, 0.2, 32 ).rotateX( - Math.PI / 2 ),
+					new THREE.MeshBasicMaterial()
+				);
+				reticle.matrixAutoUpdate = false;
+				reticle.visible = false;
+				scene.add( reticle );
+
+
+				window.addEventListener( 'resize', onWindowResize );
+				
+				const gui = new GUI();
+				const baseFolder = gui.addFolder( 'Base Objects' );
+				baseFolder.add(params, 'toggleTunnel').name('Tunnel').onChange( function (value){
+					document.body.appendChild( HideFeedbackText());
+					ToggleValue(value,'TunnelOnly');
+				});
+				baseFolder.add(params, 'toggleBoreholesGyro').name('Boreholes').onChange( function (value){
+					document.body.appendChild( HideFeedbackText());
+					ToggleBoreholesGyro(value,'BoreholesGyro');
+				});
+				baseFolder.add(params, 'toggleGrid').name('Grid').onChange( function (value){
+					document.body.appendChild( HideFeedbackText());
+					grid.visible = value;
+					render();
+				});
+
+				const dataFolder = gui.addFolder('Logging');
+				dataFolder.add( params, 'showData').name('Show Log').onChange(function (value){					
+					ToggleData(value, params.dataType);
+				});
+				dataFolder.add( params, 'dataType', [ 'P Velocity', 'S Velocity', 'Vp/Vs', 'Temp.'] ).name('Log Type:').onChange(function (value){
+					ToggleData(params.showData, value);
+				});
+
+				const faultFolder = gui.addFolder('Faults');
+				faultFolder.add( params, 'showFaults').name('Show Faults').onChange(function(value){
+					ToggleFaults(value);
+				});
+				faultFolder.add( params, 'meanRatio', 0.02, 0.27).name('Mean Stress Ratio').onChange(function(value){
+					FilterFaults(value);
+				});
+				const surfaceFolder = gui.addFolder('Bulk Conductivity');
+				surfaceFolder.add(params, 'showSurfaces').name('Show Surfaces').onChange(function(value){
+					ToggleSurfaces(value);
+				});
+				surfaceFolder.add(params, 'surfaceNum', 0, 7).name('Conductivity g.t.').onChange(function (value) {
+					if(surfaceGroup != null){		
+						surfaceGroup.traverse(function (child){
+							if (parseInt(child.bulkConductivity) < value) {
+								child.visible = false;
+							} else {
+								child.visible = true;
+							}
+						});
+					}
+				});
+				surfaceFolder.add(params, 'surfaceOpacity', 0, 1).name('Opacity').onChange(function (value) {
+					if(surfaceGroup != null){	
+						surfaceGroup.traverse(function (child) {
+							if (child.isMesh) {
+								child.material.opacity = value;
+							}
+						});
+					}
+				});
+
+				const realtimeFolder = gui.addFolder('Realtime Data');
+				realtimeFolder.add(params, 'toggleRealtime').name('Device current position');
+
+
+				const sphgeometry = new THREE.SphereGeometry( 2.5 );
+				const sphmaterial = new THREE.MeshBasicMaterial( { color: 0xff0000 } );
+				sphereInter = new THREE.Mesh( sphgeometry, sphmaterial );
+				sphereInter.visible = false;
+				
+				loadedModel.add( sphereInter );
+				raycaster = new THREE.Raycaster();
+				document.addEventListener( 'pointermove', onPointerMove );
+				
+				labelDiv = document.createElement( 'div' );
+				labelDiv.className = 'label';
+				labelDiv.textContent = '-';
+				labelDiv.style.marginTop = '-1em';
+				valueLabel = new CSS2DObject( labelDiv );
+				valueLabel.position.set( 0, 1, 0 );
+				valueLabel.visible = false;
+				sphereInter.add( valueLabel );
+				
+				labelRenderer = new CSS2DRenderer();
+				labelRenderer.setSize( window.innerWidth, window.innerHeight );
+				labelRenderer.domElement.style.position = 'absolute';
+				labelRenderer.domElement.style.top = '0px';
+				document.body.appendChild( labelRenderer.domElement );
+				
+				const controls = new OrbitControls( camera, labelRenderer.domElement );
+				controls.addEventListener( 'change', render ); // use if there is no animation loop
+				controls.minDistance = 0.01;
+				controls.maxDistance = 1000;
+				controls.target.set( 0, 0, 0 );
+				controls.update();
+				
+				GenerateRealtimeObject();
+
+				document.addEventListener( 'mousemove', onDocumentMouseMove );
+
+				console.log(loadedModel);
+
+			}
+
+
+			function onDocumentMouseMove( event ) {
+				mouseX = ( event.clientX - windowHalfX );
+				mouseY = ( event.clientY - windowHalfY );
+			}
+
+			function GenerateRealtimeObject(){
+				const geometry = new THREE.BoxGeometry( 5, 5, 5 );
+				const material = new THREE.MeshBasicMaterial( {color: 0x44ACD6} );
+				realtimeObject = new THREE.Mesh( geometry, material );
+				realtimeObject.visible = false;
+				loadedModel.add( realtimeObject );
+			}
+
+			
+			function ToggleValue(value, valueName) {
+				loadedModel.traverse( function ( child ) {
+					if ( child instanceof THREE.Object3D  ) {
+						if(child.name== valueName){
+							child.visible = value;
+						}
+					}
+				});
+				render();
+			}
+
+			function ToggleData(showData, dataType){
+				document.body.appendChild( HideFeedbackText());
+
+				if (boreholesLoaded == false && showData == true){
+					document.body.appendChild( ShowFeedbackText('Boreholes must be loaded before displaying this dataset'));
+					return;
+				}
+
+
+				let alreadyLoaded = false;
+					
+				loadedModel.traverse( function ( child ) {
+					if(child.name == dataType){
+
+						if (currentLoadedData != null){
+							currentLoadedData.visible = false;
+							currentLoadedData = child;
+						}
+
+						child.visible = showData;
+						sprite.visible = showData;
+						alreadyLoaded = true;
+
+						if (params.dataType === 'P Velocity'){
+							lut.setMax( pmax );
+							lut.setMin( pmin );
+							updateAxisText('cmin', pmin);
+							updateAxisText('cmax', pmax);
+							updateAxisText('title',dataType + ' m/s');
+						}
+						else if (params.dataType === 'S Velocity'){
+							lut.setMax( smax );
+							lut.setMin( smin );
+							updateAxisText('cmin', smin);
+							updateAxisText('cmax', smax);
+							updateAxisText('title',dataType + ' m/s');
+						}
+						else if (params.dataType === 'Temp.'){
+							lut.setMax( tmax );
+							lut.setMin( tmin );
+							updateAxisText('cmin', tmin);
+							updateAxisText('cmax', tmax);
+							updateAxisText('title',dataType + ' deg C');
+						}
+						else if (params.dataType === 'Vp/Vs'){
+							lut.setMax( vpvsmax );
+							lut.setMin( vpvsmin );
+							updateAxisText('cmin', vpvsmin);
+							updateAxisText('cmax', vpvsmax);
+							updateAxisText('title', dataType);
+						}
+					}
+				});
+
+				if (alreadyLoaded === false){
+					dataGroup = new THREE.Group();
+					if (currentLoadedData != null){				
+						if (currentLoadedData.name != dataType){
+							currentLoadedData.visible = false;
+						}
+					}
+					currentLoadedData = dataGroup;
+					currentLoadedData.visible = showData;
+					sprite.visible = showData;
+					dataGroup.name = dataType;
+					updateAxisText('title',dataType + ' m/s');
+					//need to handle this better for each catagory
+
+					addTexture(params.dataType, 'E2-AMU');
+					addTexture(params.dataType, 'E2-AML');
+					addTexture(params.dataType, 'E2-DMU');
+					addTexture(params.dataType, 'E2-DML');
+					addTexture(params.dataType, 'E2-TC');
+					addTexture(params.dataType, 'E2-TU');
+					addTexture(params.dataType, 'E2-TL');
+					addTexture(params.dataType, 'E2-TN');
+					addTexture(params.dataType, 'E2-TS');
+				}
+			}
+
+			function ToggleSurfaces(value){
+
+				document.body.appendChild( HideFeedbackText());
+
+				let alreadyLoaded = false;
+				loadedModel.traverse( function ( child ) {
+					if(child.name == 'surfaces'){
+						alreadyLoaded = true;
+						child.visible = value;
+						sprite2.visible = value;
+					}
+				});
+
+				if (alreadyLoaded === false){	
+					surfaceGroup = new THREE.Group();
+					surfaceGroup.name = 'surfaces';
+					loadedModel.add(surfaceGroup);
+					//try loading a obj
+					LoadOBJ('./objData/visit_ex_db_0000.obj', surfaceGroup, true, 7, 0x0d0887);
+					LoadOBJ('./objData/visit_ex_db_0001.obj', surfaceGroup, true, 6, 0x5302a3);
+					LoadOBJ('./objData/visit_ex_db_0002.obj', surfaceGroup, true, 5, 0x8b0aa5);
+					LoadOBJ('./objData/visit_ex_db_0003.obj', surfaceGroup, true, 4, 0xb83289);
+					LoadOBJ('./objData/visit_ex_db_0004.obj', surfaceGroup, true, 3, 0xdb5c68);
+					LoadOBJ('./objData/visit_ex_db_0005.obj', surfaceGroup, true, 2, 0xf48849);
+					LoadOBJ('./objData/visit_ex_db_0006.obj', surfaceGroup, true, 1, 0xfebd2a);
+					LoadOBJ('./objData/visit_ex_db_0007.obj', surfaceGroup, true, 0, 0xF0F921);
+					sprite2.visible = value;
+				}
+				
+			}
+
+			function ToggleBoreholesGyro(value, valueName) {
+
+				if (value === true && !boreholesLoaded){
+					LoadGyroCSV('E2-TC');
+					LoadGyroCSV('E2-TU');
+					LoadGyroCSV('E2-TL');
+					LoadGyroCSV('E2-TN');
+					LoadGyroCSV('E2-TS');
+					LoadGyroCSV('E2-AMU');
+					LoadGyroCSV('E2-AML');
+					LoadGyroCSV('E2-DMU');
+					LoadGyroCSV('E2-DML');
+					boreholesLoaded = true;
+				}
+				else if (value === true && boreholesLoaded){
+					loadedModel.traverse( function ( child ){
+						if(child.name == 'E2-TC' || child.name == 'E2-TU' || child.name == 'E2-TL' || child.name == 'E2-TN' || child.name == 'E2-TS' || child.name == 'E2-AMU' || child.name == 'E2-AML' || child.name == 'E2-DMU' || child.name == 'E2-DML'){
+							child.visible = true;
+						}
+					});
+				}
+				else if (value === false){
+					loadedModel.traverse( function ( child ){
+						if(child.name == 'E2-TC' || child.name == 'E2-TU' || child.name == 'E2-TL' || child.name == 'E2-TN' || child.name == 'E2-TS' || child.name == 'E2-AMU' || child.name == 'E2-AML' || child.name == 'E2-DMU' || child.name == 'E2-DML'){
+							child.visible = false;
+						}
+					});
+				}
+				
+			}
+
+			function LoadGyroCSV(fileName) {
+				let baseNorthing, baseEasting, baseElev, boreholeDepth;
+				const csvloader = new THREE.FileLoader();
+				csvloader.load('/EGS_Collab_AR/csvData/Old_wellhead_coords.csv',
+					function(data){
+						csvData = csvParse(data);
+						for(let i = 0; i < csvData.length; i++){
+							if (csvData[i].WellID == fileName){
+								baseNorthing = -2779.125 - parseFloat(csvData[i].Northing_ft);
+								baseEasting = 4047.435 + parseFloat(csvData[i].Easting_ft);
+								baseElev = -1047.088 + parseFloat(csvData[i].Elevation_ft);
+							}
+						}
+						
+						const dataCsvloader = new THREE.FileLoader();
+						dataCsvloader.load('/EGS_Collab_AR/csvData/cs_' + fileName + '.csv',
+							function ( data ) {
+								csvData = csvParse(data);
+								let v3array = [];
+								for(let i = 1; i < csvData.length; i++){
+									if(parseFloat(csvData[i].Depth) >= parseFloat(csvData[i-1].Depth)){
+										if(parseFloat(csvData[i].Depth) == 0 && parseFloat(csvData[i-1].Depth) == 0)
+										{
+											continue;
+										}
+										else
+										{
+											let xpos = (parseFloat(csvData[i-1].Easting) * 3.28084) - baseEasting;
+											let ypos = (parseFloat(csvData[i-1].Elev) * 3.28084) + baseElev;
+											let zpos = (-parseFloat(csvData[i-1].Northing) * 3.28084) + baseNorthing;
+											v3array.push(new THREE.Vector3(xpos, ypos, zpos));
+											boreholeDepth = csvData[i].Depth;
+										}
+									}
+								}
+								boreholeSpline = new THREE.CatmullRomCurve3(v3array);
+								
+								addTube(boreholeSpline, fileName, boreholeDepth);
+							}
+						);
+					}
+				);
+			}
+			
+
+			function FilterFaults(meanRatio){
+				let loadedFaults;
+				loadedModel.traverse( function ( child ) {
+					if(child.name == 'faults'){
+						loadedFaults = child;	
+					}
+				});
+
+				loadedFaults.traverse( function (child){
+					if(child.type == 'Mesh'){
+						if (child.meanRatio < meanRatio){
+							child.visible = false;
+						}else{
+							child.visible = true;
+						}
+					}
+				});
+			}
+
+
+			function ToggleFaults(showFaults){
+				
+				document.body.appendChild( HideFeedbackText());
+
+				if (boreholesLoaded == false && showFaults == true){
+					document.body.appendChild( ShowFeedbackText('Boreholes must be loaded before displaying this dataset'));
+					return;
+				}
+
+				let alreadyLoaded = false;
+				loadedModel.traverse( function ( child ) {
+					if(child.name == 'faults'){
+						alreadyLoaded = true;
+						child.visible = showFaults;
+					}
+				});
+
+				if (alreadyLoaded == false ){
+						
+					let faultGroup = new THREE.Group();
+					faultGroup.name = 'faults';
+
+					let fileName = '/EGS_Collab_AR/csvData/mso_FractureStress_E2-TC.csv';
+					let baseBoreholeObject;
+					let boreholeName = 'E2-TC';
+
+					loadedModel.traverse( function ( child ) {
+						if(child.name == boreholeName){
+							baseBoreholeObject = child;
+						}
+					});
+
+					let faultMaterial1 = new THREE.MeshLambertMaterial({color: 0xFF1010, side: 2});
+					let faultMaterial2 = new THREE.MeshLambertMaterial({color: 0x971452, side: 2});
+					let faultMaterial3 = new THREE.MeshLambertMaterial({color: 0x24189C, side: 2});
+
+					const dataCsvloader = new THREE.FileLoader();
+					dataCsvloader.load(fileName,
+						function ( data ) {
+							csvData = csvParse(data);
+							for(let i = 1; i < csvData.length; i++){
+								let normDepth = csvData[i].depth / baseBoreholeObject.boreholeDepth;
+
+								if	(normDepth <= 1){
+									
+									let faultGeometry = new THREE.CircleGeometry(csvData[i].mean_SN_ratio * 10, 16);
+									let faultPos = baseBoreholeObject.geometry.parameters.path.getPointAt(normDepth);
+									let fault;
+									if (csvData[i].Fracture_Type == 1)      {fault = new THREE.Mesh(faultGeometry, faultMaterial1);}
+									else if (csvData[i].Fracture_Type == 2) {fault = new THREE.Mesh(faultGeometry, faultMaterial2);}
+									else if (csvData[i].Fracture_Type == 3) {fault = new THREE.Mesh(faultGeometry, faultMaterial3);}
+									
+									if (fault != null){ 
+										fault.position.set(faultPos.x, faultPos.y, faultPos.z);
+										fault.meanRatio = csvData[i].mean_SN_ratio;
+
+										fault.rotation.x = -90 * (Math.PI/180);
+										fault.rotateZ(-csvData[i].azimuth * (Math.PI/180));
+										fault.rotateX(-csvData[i].dip * (Math.PI/180));
+
+										faultGroup.add(fault);
+									}
+								}
+							}
+						}
+					);
+
+					loadedModel.add(faultGroup);
+				}
+			}
+			
+			function loadModel( fileName ) {
+
+				const loader = new THREE.BufferGeometryLoader();
+				loader.load( '/EGS_Collab_AR/BufferGeometry/' + fileName, function ( geometry ) {
+
+					geometry.computeVertexNormals();
+
+					const object = new THREE.Mesh( geometry, materialModel );
+					
+					loadedModel.add( object );
+
+				} );
+
+			}
+			
+			function addTube(inputtube, boreholeName, boreholeDepth) {
+
+				if ( meshSpline !== undefined ) {
+
+					scene.remove( meshSpline );
+					meshSpline.geometry.dispose();
+
+				}
+
+				const extrudePath = inputtube;
+
+				tubeGeometry = new THREE.TubeGeometry( extrudePath, 100, 0.5, 8, false );
+				addGeometry( tubeGeometry, boreholeName, boreholeDepth);
+			}
+			
+			function addGeometry( geometry, boreholeName, boreholeDepth) {
+
+				// 3D shape
+				// default color attribute
+				const colors = [];
+				for ( let i = 0, n = geometry.attributes.position.count; i < n; ++ i ) {
+					colors.push( 0.5, 0.5, 0.5 );
+				}
+				
+				geometry.setAttribute( 'color', new THREE.Float32BufferAttribute( colors, 3 ) );
+				
+				meshSpline = new THREE.Mesh( geometry, material );
+				meshSpline.name = boreholeName;
+				meshSpline.boreholeDepth = boreholeDepth;
+				
+				loadedModel.add( meshSpline );
+			}
+			
+			function addTexture(dataType, boreholeName){
+
+				lut.setColorMap( 'blackbody' );
+				
+				let color;
+				let baseBoreholeObject;
+
+				let valMin = 100000;
+				let valMax = -100000;
+				
+				loadedModel.traverse( function ( child ) {
+					if(child.name == boreholeName){
+						baseBoreholeObject = child;
+					}
+				});
+
+				let dataCsvloader = new THREE.FileLoader();
+				let filePrefix;
+				let dataSet, dataSet1, dataSet2;
+
+				if (dataType === 'P Velocity' || dataType === 'S Velocity' || dataType === 'Vp/Vs' ){
+					filePrefix = 'fws';
+				}else if (dataType === 'Temp.'){
+					filePrefix = 'ftc';
+				}
+
+				if (dataType === 'P Velocity'){
+					dataSet = 'PVelocity';
+					lut.setMax( pmax );
+					lut.setMin( pmin );
+					updateAxisText('cmin', pmin);
+					updateAxisText('cmax', pmax);
+				}
+				else if (dataType === 'S Velocity'){
+					dataSet = 'SVelocity';
+					lut.setMax( smax );
+					lut.setMin( smin );
+					updateAxisText('cmin', smin);
+					updateAxisText('cmax', smax);
+				}
+				else if (params.dataType === 'Temp.'){
+					dataSet = 'Temperature'
+					lut.setMax( tmax );
+					lut.setMin( tmin );
+					updateAxisText('cmin', tmin);
+					updateAxisText('cmax', tmax);
+					updateAxisText('title',dataType + ' deg C');
+				}
+				else if (params.dataType === 'Vp/Vs'){
+					dataSet1 = 'PVelocity';
+					dataSet2 = 'SVelocity';
+					lut.setMax( vpvsmax );
+					lut.setMin( vpvsmin );
+					updateAxisText('cmin', vpvsmin);
+					updateAxisText('cmax', vpvsmax);
+					updateAxisText('title',dataType);
+				}
+
+				dataCsvloader.load('/EGS_Collab_AR/csvData/' + filePrefix + '_' + boreholeName + '.csv',
+					function ( data ) {
+						let valueCsvData = csvParse(data);
+						let texData = new Uint8Array(3 * valueCsvData.length);
+
+						let lineColors = [];
+
+						let minDepth = valueCsvData[0].Depth;
+
+						let maxDepthIndex;
+						let maxDepth;
+
+						for(let i = 0; i < valueCsvData.length; i++){
+							var newVal = parseFloat(valueCsvData[i].PVelocity);
+							if (newVal > valMax){ valMax = newVal; }
+							if (newVal < valMin && newVal > 0){ valMin = newVal; }
+
+							if (parseFloat(valueCsvData[i].Depth) <= baseBoreholeObject.boreholeDepth){
+								maxDepthIndex = i;
+								maxDepth = parseFloat(valueCsvData[i].Depth);
+							}
+						}
+						
+						let nminDepth = minDepth / baseBoreholeObject.boreholeDepth;
+						let nmaxDepth = maxDepth / baseBoreholeObject.boreholeDepth
+						let increment = (nmaxDepth - nminDepth) / 10;
+						let boreholeTexturePos = [];
+						
+						for(let i = nminDepth; i <= (nmaxDepth + (increment * 0.5)); i+= increment)
+						{
+							boreholeTexturePos.push(baseBoreholeObject.geometry.parameters.path.getPointAt(i));
+						}
+
+						let textureMaterial = new THREE.MeshLambertMaterial( {
+							side: THREE.DoubleSide,
+							color: 0xF5F5F5} );
+						
+						let textureSpline = new THREE.CatmullRomCurve3(boreholeTexturePos);
+						let textureTubeGeometry = new THREE.TubeGeometry( textureSpline, 100, 0.525, 8, false );
+						let textureMeshSpline = new THREE.Mesh( textureTubeGeometry, textureMaterial );
+						
+
+						for(let i = 0; i < maxDepthIndex + 1; i++){
+						    const stride = i * 3;
+							var newVal;
+
+							if (dataType === 'Vp/Vs'){
+								newVal = parseFloat(valueCsvData[i][dataSet1]) / parseFloat(valueCsvData[i][dataSet2]);
+							}else{
+								 newVal = parseFloat(valueCsvData[i][dataSet]);
+							}
+							
+							color = lut.getColor( newVal );
+							texData[stride] = Math.floor(color.r * 255);
+							texData[stride + 1] = Math.floor(color.g * 255);
+							texData[stride + 2] = Math.floor(color.b * 255);
+						}
+						
+						let texture = new THREE.DataTexture( texData, maxDepthIndex + 1, 1, THREE.RGBFormat );
+						textureMaterial.map = texture;
+						textureMaterial.needsUpdate = true;
+
+						
+						
+						dataGroup.add( textureMeshSpline );
+						loadedModel.add(dataGroup);
+					}
+				)
+				
+				const map = sprite.material.map;
+				lut.updateCanvas( map.image );
+				map.needsUpdate = true;
+			}
+			
+			function createAxisText(x,y,z,rx,ry,rz, axisName, label, _sprite) {
+
+				const loader = new FontLoader();
+				loader.load('./threejs/examples/fonts/helvetiker_regular.typeface.json', function (response) {
+
+					var font = response;
+
+					var textGeo = new THREE.TextGeometry(label, {
+						size: 0.025,
+						height: 0.001,
+						curveSegments: 6,
+						font: font
+					});
+
+					var color = new THREE.Color();
+					color.setRGB(255, 250, 250);
+					var textMaterial = new THREE.MeshBasicMaterial({ color: color });
+					var axisLabel = new THREE.Mesh(textGeo, textMaterial);
+
+					axisLabel.position.x = x;
+					axisLabel.position.y = y;
+					axisLabel.position.z = -0.05;
+					axisLabel.rotation.x = rx * (Math.PI / 180);
+					axisLabel.rotation.y = ry * (Math.PI / 180);
+					axisLabel.rotation.z = rz * (Math.PI / 180);
+					axisLabel.name = axisName;
+
+					_sprite.attach(axisLabel);
+				});
+			}
+
+			function updateAxisText(axisName, newText){
+				const loader = new FontLoader();
+				loader.load('./threejs/examples/fonts/helvetiker_regular.typeface.json', function (response) {
+					var font = response;
+
+					if (typeof newText == 'string'){
+						var textGeo = new THREE.TextGeometry(newText, {
+							size: 0.025,
+							height: 0.001,
+							curveSegments: 6,
+							font: font
+						});
+					}else{
+						var textGeo = new THREE.TextGeometry(newText.toFixed(2), {
+							size: 0.025,
+							height: 0.001,
+							curveSegments: 6,
+							font: font
+						});
+					}
+
+					let labelObject = sprite.getObjectByName(axisName);
+					labelObject.geometry = textGeo;
+				});
+			}
+
+			function onWindowResize() {
+				
+				var aspect = window.innerWidth / window.innerHeight;
+				var change = originalAspect / aspect;
+				var newSize = viewSize * change;
+				orthoCamera.left = -aspect * newSize / 2;
+				orthoCamera.right = aspect * newSize  / 2;
+				orthoCamera.top = newSize / 2;
+				orthoCamera.bottom = -newSize / 2;
+				orthoCamera.updateProjectionMatrix();
+
+				camera.aspect = window.innerWidth / window.innerHeight;
+				camera.updateProjectionMatrix();
+
+				renderer.setSize( window.innerWidth, window.innerHeight );
+				labelRenderer.setSize( window.innerWidth, window.innerHeight );
+			}
+			
+			function onPointerMove( event ) {
+
+				pointer.x = ( event.clientX / window.innerWidth ) * 2 - 1;
+				pointer.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
+
+			}
+			
+			
+			//
+
+			function animate() {
+				renderer.setAnimationLoop( render );
+			}
+
+			function render( timestamp, frame ) {
+
+				raycaster.setFromCamera( pointer, camera );
+				//if (typeof meshSpline !== 'undefined') {
+				//	const intersects = raycaster.intersectObject( meshSpline );
+				if (typeof loadedLine !== 'undefined') {
+				  	const intersects = raycaster.intersectObject( loadedLine );
+			
+					if ( intersects.length > 0 ) {
+						
+						const read = new Float32Array( 4 );
+						renderer.readRenderTargetPixels( rtTexture, windowHalfX + mouseX, windowHalfY - mouseY, 1, 1, read );
+						console.log(read);
+
+						sphereInter.visible = true;
+						sphereInter.position.copy( loadedModel.worldToLocal(intersects[ 0 ].point) );
+
+						sphereInter.material.color = lut.getColor( sphereInter.position.x );
+						valueLabel.visible = true;
+						labelDiv.textContent = -sphereInter.position.x - 4047.435;
+
+					} else {
+
+						sphereInter.visible = false;
+						valueLabel.visible = false;
+					}
+				}
+
+
+				if ( frame ) {
+
+					const referenceSpace = renderer.xr.getReferenceSpace();
+					const session = renderer.xr.getSession();
+
+					if ( hitTestSourceRequested === false ) {
+
+						session.requestReferenceSpace( 'viewer' ).then( function ( referenceSpace ) {
+
+							session.requestHitTestSource( { space: referenceSpace } ).then( function ( source ) {
+
+								hitTestSource = source;
+
+							} );
+
+						} );
+
+						session.addEventListener( 'end', function () {
+
+							hitTestSourceRequested = false;
+							hitTestSource = null;
+
+						} );
+
+						hitTestSourceRequested = true;
+
+					}
+
+					if ( hitTestSource ) {
+
+						const hitTestResults = frame.getHitTestResults( hitTestSource );
+
+						if ( hitTestResults.length ) {
+
+							const hit = hitTestResults[ 0 ];
+
+							reticle.visible = true;
+							reticle.matrix.fromArray( hit.getPose( referenceSpace ).transform.matrix );
+
+						} else {
+
+							reticle.visible = false;
+
+						}
+
+					}
+
+				}
+				
+
+				
+				renderer.clear();
+				renderer.render( scene, camera );
+				labelRenderer.render( scene, camera );
+				renderer.render( uiScene, orthoCamera );
+
+				if	(params.toggleRealtime){
+					realtimeObject.visible = true;
+					ControlPosition(meshSpline, realtimeObject);
+				}else
+				{
+					realtimeObject.visible = false;
+				}
+				
+
+			}
+
+		</script>
+	</body>
+</html>
