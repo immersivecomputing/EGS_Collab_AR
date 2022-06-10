@@ -375,7 +375,7 @@
 				const material = new THREE.MeshBasicMaterial( {color: 0x00ff00} );
 				const geometry = new THREE.BoxGeometry( 0, 0, 0 );
 				const cube = new THREE.Mesh( geometry, material );
-				loadedModel.add(cube);
+				scene.add(cube);
 
 				var eastings = [];
     			var northings = [];
@@ -409,7 +409,7 @@
 						var meanNorthing = sumNorthings / (lines.length-1);
 
 						console.log(meanEasting);
-						loadModel.position.set(-meanEasting, -meanNorthing,0); 
+						loadedModel.position.set(-meanEasting, -meanNorthing,0); 
 						
 					}
 				);
