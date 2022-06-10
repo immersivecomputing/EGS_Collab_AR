@@ -936,31 +936,31 @@
 
 			function render( timestamp, frame ) {
 
-				raycaster.setFromCamera( pointer, camera );
-				//if (typeof meshSpline !== 'undefined') {
-				//	const intersects = raycaster.intersectObject( meshSpline );
-				if (typeof loadedLine !== 'undefined') {
-				  	const intersects = raycaster.intersectObject( loadedLine );
+				// raycaster.setFromCamera( pointer, camera );
+				// //if (typeof meshSpline !== 'undefined') {
+				// //	const intersects = raycaster.intersectObject( meshSpline );
+				// if (typeof loadedLine !== 'undefined') {
+				//   	const intersects = raycaster.intersectObject( loadedLine );
 			
-					if ( intersects.length > 0 ) {
+				// 	if ( intersects.length > 0 ) {
 						
-						const read = new Float32Array( 4 );
-						renderer.readRenderTargetPixels( rtTexture, windowHalfX + mouseX, windowHalfY - mouseY, 1, 1, read );
-						console.log(read);
+				// 		const read = new Float32Array( 4 );
+				// 		renderer.readRenderTargetPixels( rtTexture, windowHalfX + mouseX, windowHalfY - mouseY, 1, 1, read );
+				// 		console.log(read);
 
-						sphereInter.visible = true;
-						sphereInter.position.copy( loadedModel.worldToLocal(intersects[ 0 ].point) );
+				// 		sphereInter.visible = true;
+				// 		sphereInter.position.copy( loadedModel.worldToLocal(intersects[ 0 ].point) );
 
-						sphereInter.material.color = lut.getColor( sphereInter.position.x );
-						valueLabel.visible = true;
-						labelDiv.textContent = -sphereInter.position.x - 4047.435;
+				// 		sphereInter.material.color = lut.getColor( sphereInter.position.x );
+				// 		valueLabel.visible = true;
+				// 		labelDiv.textContent = -sphereInter.position.x - 4047.435;
 
-					} else {
+				// 	} else {
 
-						sphereInter.visible = false;
-						valueLabel.visible = false;
-					}
-				}
+				// 		sphereInter.visible = false;
+				// 		valueLabel.visible = false;
+				// 	}
+				// }
 
 
 				if ( frame ) {
