@@ -373,7 +373,7 @@
 			function LoadERTSensorLocation(loadedModel){
 				
 				const material = new THREE.MeshBasicMaterial( {color: 0x00ff00} );
-				// const geometry = new THREE.BoxGeometry( 0, 0, 0 );
+				const geometry = new THREE.BoxGeometry( 0, 0, 0 );
 				// const cube = new THREE.Mesh( geometry, material );
 				// scene.add(cube);
 
@@ -395,8 +395,8 @@
 							//elevations.push(tabs[3]);
 							
 							if(typeof tabs[1] !== 'undefined'){
-								const geometry = new THREE.BoxGeometry( tabs[1], tabs[2], tabs[3] );
 								const cube = new THREE.Mesh( geometry, material );
+								cube.position.set(tabs[1], tabs[2], tabs[3]);
 							    loadedModel.add( cube );
 							
 								sumEastings = sumEastings + parseFloat(tabs[1]);
