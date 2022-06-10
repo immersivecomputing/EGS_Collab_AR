@@ -374,7 +374,9 @@
 				const dataTextloader = new THREE.FileLoader();
 				dataTextloader.load('/EGS_Collab_AR/ERT_Data/electrodes.txt',
 					function ( data ) {
-						console.log(data);
+						var lines = data.split('\n');
+						
+						console.log(lines[0]);
 					}
 				);
 			}
