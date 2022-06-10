@@ -129,22 +129,7 @@
 				container.appendChild( renderer.domElement );
 
 				rtTexture = new THREE.WebGLRenderTarget( window.innerWidth, window.innerHeight, { minFilter: THREE.LinearFilter, magFilter: THREE.NearestFilter, format: THREE.RGBAFormat, type: THREE.FloatType } );
-				
-				
-				planes = [
-					new THREE.Plane( new THREE.Vector3( 0, - 1, 0 ), -0.5 )
-				];
-				
-				materialModel = new THREE.MeshLambertMaterial( {
-
-							color: 0xB6D7A8,
-							opacity: 0.25,
-							transparent: true,
-							side: THREE.DoubleSide,
-							clippingPlanes: planes,
-
-						} );
-				
+							
 				lut = new Lut();
 				
 				scene = new THREE.Scene();
@@ -215,33 +200,33 @@
 				grid.material.opacity = 0.5;
 				grid.material.depthWrite = false;
 				grid.material.transparent = true;
-				grid.visible = false;
+				grid.visible = true;
 				scene.add( grid );
 				
-				const loader = new GLTFLoader().setPath( '/EGS_Collab_AR/GLTF/' );
-				loader.load('EGS_Collab.gltf', function ( gltf ){
-					loadedModel.add(gltf.scene);
-					loadedModel.scale.set(0.01,0.01,0.01)
+				// const loader = new GLTFLoader().setPath( '/EGS_Collab_AR/GLTF/' );
+				// loader.load('EGS_Collab.gltf', function ( gltf ){
+				// 	loadedModel.add(gltf.scene);
+				// 	loadedModel.scale.set(0.01,0.01,0.01)
 
-					loadedModel.traverse( function ( child ) {
-						if ( child instanceof THREE.Object3D  ) {
-							if(child.name== 'TunnelOnly'){
-								child.material.side = 2;
-							}
-						}
-					});
+				// 	loadedModel.traverse( function ( child ) {
+				// 		if ( child instanceof THREE.Object3D  ) {
+				// 			if(child.name== 'TunnelOnly'){
+				// 				child.material.side = 2;
+				// 			}
+				// 		}
+				// 	});
 
-					scene.add(loadedModel);
-					ToggleValue(false,'BoreholesOnly');
-					ToggleValue(false,'Electrodes');
-					ToggleValue(false,'Gyro_StartingPoints');
-					ToggleValue(false,'Gyro_XYZPoints');
-					ToggleValue(false,'Gyro_StrikeDipDepthPoints');
-					render();
-				});
+				// 	scene.add(loadedModel);
+				// 	ToggleValue(false,'BoreholesOnly');
+				// 	ToggleValue(false,'Electrodes');
+				// 	ToggleValue(false,'Gyro_StartingPoints');
+				// 	ToggleValue(false,'Gyro_XYZPoints');
+				// 	ToggleValue(false,'Gyro_StrikeDipDepthPoints');
+				// 	render();
+				// });
 				
 				
-				
+				//XR Section
 
 				document.body.appendChild( ARButton.createButton( renderer, { requiredFeatures: [ 'hit-test' ] } ) );
 
@@ -269,92 +254,97 @@
 				reticle.visible = false;
 				scene.add( reticle );
 
+				//end XR Section
+
+
 
 				window.addEventListener( 'resize', onWindowResize );
 				
-				const gui = new GUI();
-				const baseFolder = gui.addFolder( 'Base Objects' );
-				baseFolder.add(params, 'toggleTunnel').name('Tunnel').onChange( function (value){
-					document.body.appendChild( HideFeedbackText());
-					ToggleValue(value,'TunnelOnly');
-				});
-				baseFolder.add(params, 'toggleBoreholesGyro').name('Boreholes').onChange( function (value){
-					document.body.appendChild( HideFeedbackText());
-					ToggleBoreholesGyro(value,'BoreholesGyro');
-				});
-				baseFolder.add(params, 'toggleGrid').name('Grid').onChange( function (value){
-					document.body.appendChild( HideFeedbackText());
-					grid.visible = value;
-					render();
-				});
+				// const gui = new GUI();
+				// const baseFolder = gui.addFolder( 'Base Objects' );
+				// baseFolder.add(params, 'toggleTunnel').name('Tunnel').onChange( function (value){
+				// 	document.body.appendChild( HideFeedbackText());
+				// 	ToggleValue(value,'TunnelOnly');
+				// });
+				// baseFolder.add(params, 'toggleBoreholesGyro').name('Boreholes').onChange( function (value){
+				// 	document.body.appendChild( HideFeedbackText());
+				// 	ToggleBoreholesGyro(value,'BoreholesGyro');
+				// });
+				// baseFolder.add(params, 'toggleGrid').name('Grid').onChange( function (value){
+				// 	document.body.appendChild( HideFeedbackText());
+				// 	grid.visible = value;
+				// 	render();
+				// });
 
-				const dataFolder = gui.addFolder('Logging');
-				dataFolder.add( params, 'showData').name('Show Log').onChange(function (value){					
-					ToggleData(value, params.dataType);
-				});
-				dataFolder.add( params, 'dataType', [ 'P Velocity', 'S Velocity', 'Vp/Vs', 'Temp.'] ).name('Log Type:').onChange(function (value){
-					ToggleData(params.showData, value);
-				});
+				// const dataFolder = gui.addFolder('Logging');
+				// dataFolder.add( params, 'showData').name('Show Log').onChange(function (value){					
+				// 	ToggleData(value, params.dataType);
+				// });
+				// dataFolder.add( params, 'dataType', [ 'P Velocity', 'S Velocity', 'Vp/Vs', 'Temp.'] ).name('Log Type:').onChange(function (value){
+				// 	ToggleData(params.showData, value);
+				// });
 
-				const faultFolder = gui.addFolder('Faults');
-				faultFolder.add( params, 'showFaults').name('Show Faults').onChange(function(value){
-					ToggleFaults(value);
-				});
-				faultFolder.add( params, 'meanRatio', 0.02, 0.27).name('Mean Stress Ratio').onChange(function(value){
-					FilterFaults(value);
-				});
-				const surfaceFolder = gui.addFolder('Bulk Conductivity');
-				surfaceFolder.add(params, 'showSurfaces').name('Show Surfaces').onChange(function(value){
-					ToggleSurfaces(value);
-				});
-				surfaceFolder.add(params, 'surfaceNum', 0, 7).name('Conductivity g.t.').onChange(function (value) {
-					if(surfaceGroup != null){		
-						surfaceGroup.traverse(function (child){
-							if (parseInt(child.bulkConductivity) < value) {
-								child.visible = false;
-							} else {
-								child.visible = true;
-							}
-						});
-					}
-				});
-				surfaceFolder.add(params, 'surfaceOpacity', 0, 1).name('Opacity').onChange(function (value) {
-					if(surfaceGroup != null){	
-						surfaceGroup.traverse(function (child) {
-							if (child.isMesh) {
-								child.material.opacity = value;
-							}
-						});
-					}
-				});
+				// const faultFolder = gui.addFolder('Faults');
+				// faultFolder.add( params, 'showFaults').name('Show Faults').onChange(function(value){
+				// 	ToggleFaults(value);
+				// });
+				// faultFolder.add( params, 'meanRatio', 0.02, 0.27).name('Mean Stress Ratio').onChange(function(value){
+				// 	FilterFaults(value);
+				// });
+				// const surfaceFolder = gui.addFolder('Bulk Conductivity');
+				// surfaceFolder.add(params, 'showSurfaces').name('Show Surfaces').onChange(function(value){
+				// 	ToggleSurfaces(value);
+				// });
+				// surfaceFolder.add(params, 'surfaceNum', 0, 7).name('Conductivity g.t.').onChange(function (value) {
+				// 	if(surfaceGroup != null){		
+				// 		surfaceGroup.traverse(function (child){
+				// 			if (parseInt(child.bulkConductivity) < value) {
+				// 				child.visible = false;
+				// 			} else {
+				// 				child.visible = true;
+				// 			}
+				// 		});
+				// 	}
+				// });
+				// surfaceFolder.add(params, 'surfaceOpacity', 0, 1).name('Opacity').onChange(function (value) {
+				// 	if(surfaceGroup != null){	
+				// 		surfaceGroup.traverse(function (child) {
+				// 			if (child.isMesh) {
+				// 				child.material.opacity = value;
+				// 			}
+				// 		});
+				// 	}
+				// });
 
-				const realtimeFolder = gui.addFolder('Realtime Data');
-				realtimeFolder.add(params, 'toggleRealtime').name('Device current position');
+				// const realtimeFolder = gui.addFolder('Realtime Data');
+				// realtimeFolder.add(params, 'toggleRealtime').name('Device current position');
 
 
-				const sphgeometry = new THREE.SphereGeometry( 2.5 );
-				const sphmaterial = new THREE.MeshBasicMaterial( { color: 0xff0000 } );
-				sphereInter = new THREE.Mesh( sphgeometry, sphmaterial );
-				sphereInter.visible = false;
+				//Tooltip option
+
+				// const sphgeometry = new THREE.SphereGeometry( 2.5 );
+				// const sphmaterial = new THREE.MeshBasicMaterial( { color: 0xff0000 } );
+				// sphereInter = new THREE.Mesh( sphgeometry, sphmaterial );
+				// sphereInter.visible = false;
 				
-				loadedModel.add( sphereInter );
-				raycaster = new THREE.Raycaster();
-				document.addEventListener( 'pointermove', onPointerMove );
+				// loadedModel.add( sphereInter );
+				// raycaster = new THREE.Raycaster();
+				// document.addEventListener( 'pointermove', onPointerMove );
 				
-				labelDiv = document.createElement( 'div' );
-				labelDiv.className = 'label';
-				labelDiv.textContent = '-';
-				labelDiv.style.marginTop = '-1em';
-				valueLabel = new CSS2DObject( labelDiv );
-				valueLabel.position.set( 0, 1, 0 );
-				valueLabel.visible = false;
-				sphereInter.add( valueLabel );
+				// labelDiv = document.createElement( 'div' );
+				// labelDiv.className = 'label';
+				// labelDiv.textContent = '-';
+				// labelDiv.style.marginTop = '-1em';
+				// valueLabel = new CSS2DObject( labelDiv );
+				// valueLabel.position.set( 0, 1, 0 );
+				// valueLabel.visible = false;
+				// sphereInter.add( valueLabel );
 				
-				labelRenderer = new CSS2DRenderer();
-				labelRenderer.setSize( window.innerWidth, window.innerHeight );
-				labelRenderer.domElement.style.position = 'absolute';
-				labelRenderer.domElement.style.top = '0px';
-				document.body.appendChild( labelRenderer.domElement );
+				// labelRenderer = new CSS2DRenderer();
+				// labelRenderer.setSize( window.innerWidth, window.innerHeight );
+				// labelRenderer.domElement.style.position = 'absolute';
+				// labelRenderer.domElement.style.top = '0px';
+				// document.body.appendChild( labelRenderer.domElement );
 				
 				const controls = new OrbitControls( camera, labelRenderer.domElement );
 				controls.addEventListener( 'change', render ); // use if there is no animation loop
@@ -363,7 +353,7 @@
 				controls.target.set( 0, 0, 0 );
 				controls.update();
 				
-				GenerateRealtimeObject();
+				// GenerateRealtimeObject();
 
 				document.addEventListener( 'mousemove', onDocumentMouseMove );
 
