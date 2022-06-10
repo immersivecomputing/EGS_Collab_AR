@@ -340,11 +340,11 @@
 				// valueLabel.visible = false;
 				// sphereInter.add( valueLabel );
 				
-				// labelRenderer = new CSS2DRenderer();
-				// labelRenderer.setSize( window.innerWidth, window.innerHeight );
-				// labelRenderer.domElement.style.position = 'absolute';
-				// labelRenderer.domElement.style.top = '0px';
-				// document.body.appendChild( labelRenderer.domElement );
+				labelRenderer = new CSS2DRenderer();
+				labelRenderer.setSize( window.innerWidth, window.innerHeight );
+				labelRenderer.domElement.style.position = 'absolute';
+				labelRenderer.domElement.style.top = '0px';
+				document.body.appendChild( labelRenderer.domElement );
 				
 				const controls = new OrbitControls( camera, labelRenderer.domElement );
 				controls.addEventListener( 'change', render ); // use if there is no animation loop
