@@ -397,9 +397,10 @@
 							//const geometry = new THREE.BoxGeometry( tabs[1], tabs[2], tabs[3] );
 							//const cube = new THREE.Mesh( geometry, material );
 							//loadedModel.add( cube );
-
-							sumEastings = sumEastings + parseFloat(tabs[1]);
-							sumNorthings = sumNorthings + parseFloat(tabs[2]);
+							if(tabs[1] != undefined){
+								sumEastings = sumEastings + parseFloat(tabs[1]);
+								sumNorthings = sumNorthings + parseFloat(tabs[2]);
+							}
 						});
 
 						console.log(sumEastings);
