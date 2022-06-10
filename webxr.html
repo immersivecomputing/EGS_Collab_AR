@@ -136,7 +136,7 @@
 				
 				uiScene = new THREE.Scene();
 
-				camera = new THREE.PerspectiveCamera( 70, window.innerWidth / window.innerHeight, 0.0001, 50 );
+				camera = new THREE.PerspectiveCamera( 70, window.innerWidth / window.innerHeight, 0.01, 500 );
 				camera.position.set( 0, 7, 0 );
 				scene.add(camera);
 
@@ -396,7 +396,7 @@
 							
 							if(typeof tabs[1] !== 'undefined'){
 								const cube = new THREE.Mesh( geometry, material );
-								cube.position.set(tabs[1], tabs[2], tabs[3]);
+								cube.position.set(tabs[1], tabs[3], tabs[2]);
 							    loadedModel.add( cube );
 							
 								sumEastings = sumEastings + parseFloat(tabs[1]);
@@ -409,7 +409,7 @@
 						var meanNorthing = sumNorthings / (lines.length-1);
 
 						
-						loadedModel.position.set(-meanEasting, -meanNorthing,0); 
+						loadedModel.position.set(-meanEasting, 0, -meanNorthing); 
 						
 					}
 				);
