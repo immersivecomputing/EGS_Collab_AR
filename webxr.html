@@ -226,6 +226,13 @@
 				// });
 				
 				
+				//Load ERT Location data
+				LoadERTSensorLocation(loadedModel);
+
+
+
+
+
 				//XR Section
 
 				document.body.appendChild( ARButton.createButton( renderer, { requiredFeatures: [ 'hit-test' ] } ) );
@@ -361,6 +368,16 @@
 
 			}
 
+
+			function LoadERTSensorLocation(loadedModel){
+						
+				const dataTextloader = new THREE.FileLoader();
+				dataCsvloader.load('/EGS_Collab_AR/ERT_Data/electrodes.txt',
+					function ( data ) {
+						console.log(data);
+					}
+				);
+			}
 
 			function onDocumentMouseMove( event ) {
 				mouseX = ( event.clientX - windowHalfX );
