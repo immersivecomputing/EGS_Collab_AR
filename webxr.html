@@ -228,6 +228,7 @@
 				
 				//Load ERT Location data
 				LoadERTSensorLocation(loadedModel);
+				scene.add(loadedModel);
 
 
 
@@ -370,9 +371,16 @@
 
 
 			function LoadERTSensorLocation(loadedModel){
+				
+				const material = new THREE.MeshBasicMaterial( {color: 0x00ff00} );
+				
 				var eastings = [];
     			var northings = [];
     			var elevations = [];
+
+				sumEastings = 0;
+				sumNorthings = 0;
+
 				const dataTextloader = new THREE.FileLoader();
 				dataTextloader.load('/EGS_Collab_AR/ERT_Data/electrodes.txt',
 					function ( data ) {
@@ -382,10 +390,20 @@
 							eastings.push(tabs[1]);
 							northings.push(tabs[2]);
 							elevations.push(tabs[3]);
+							
+							const geometry = new THREE.BoxGeometry( tabs[1], tabs[2], tabs[3] );
+							const cube = new THREE.Mesh( geometry, material );
+							loadedModel.add( cube );
+
+							sumEastings = sumEastings + tabs[1];
+							sumNorthings = sumNorthings + tabs[2];
 						});
 
+						var meanEasting = sumEastings / (lines.length-1);
+						var meanNorthing = sumNorthings / (lines.length-1);
+
+						loadModel.position.set(-meanEasting, -meanNorthing,0); 
 						
-						console.log(eastings);
 					}
 				);
 				
