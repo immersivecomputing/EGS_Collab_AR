@@ -370,15 +370,25 @@
 
 
 			function LoadERTSensorLocation(loadedModel){
-						
+				var eastings = [];
+    			var northings = [];
+    			var elevations = [];
 				const dataTextloader = new THREE.FileLoader();
 				dataTextloader.load('/EGS_Collab_AR/ERT_Data/electrodes.txt',
 					function ( data ) {
 						var lines = data.split('\n');
+						lines.map(function(item){
+      						var tabs = item.split('\t');
+							eastings.push(tabs[1]);
+							northings.push(tabs[2]);
+							elevations.push(tabs[3]);
+						});
+
 						
-						console.log(lines[0]);
+						console.log(eastings);
 					}
 				);
+				
 			}
 
 			function onDocumentMouseMove( event ) {
