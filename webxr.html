@@ -375,6 +375,7 @@
 				const material = new THREE.MeshBasicMaterial( {color: 0x00ff00} );
 				const geometry = new THREE.BoxGeometry( 0, 0, 0 );
 				const cube = new THREE.Mesh( geometry, material );
+				loadedModel.add(cube);
 
 				var eastings = [];
     			var northings = [];
@@ -389,16 +390,16 @@
 						var lines = data.split('\n');
 						lines.map(function(item){
       						var tabs = item.split('\t');
-							eastings.push(tabs[1]);
-							northings.push(tabs[2]);
-							elevations.push(tabs[3]);
+							//eastings.push(tabs[1]);
+							//northings.push(tabs[2]);
+							//elevations.push(tabs[3]);
 							
 							//const geometry = new THREE.BoxGeometry( tabs[1], tabs[2], tabs[3] );
 							//const cube = new THREE.Mesh( geometry, material );
-							loadedModel.add( cube );
+							//loadedModel.add( cube );
 
-							sumEastings = sumEastings + tabs[1];
-							sumNorthings = sumNorthings + tabs[2];
+							sumEastings = sumEastings + parseFloat(tabs[1]);
+							sumNorthings = sumNorthings + parseFloat(tabs[2]);
 						});
 
 						console.log(sumEastings);
