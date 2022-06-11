@@ -24,6 +24,7 @@
 			import * as THREE from './threejs/build/three.module.js';
 			import { ARButton } from './threejs/examples/jsm/webxr/ARButton.js';
 			import { GLTFLoader } from './threejs/examples/jsm/loaders/GLTFLoader.js';
+			import { VTKLoader } from './threejs/examples/jsm/loaders/VTKLoader.js';
 			import { OrbitControls } from './threejs/examples/jsm/controls/OrbitControls.js';
 			import { RoomEnvironment } from './threejs/examples/jsm/environments/RoomEnvironment.js';
 			import { GUI } from './threejs/examples/jsm/libs/dat.gui.module.js';
@@ -228,6 +229,9 @@
 				
 				//Load ERT Location data
 				LoadERTSensorLocation(loadedModel);
+
+				LoadVTK(loadedModel);
+
 				scene.add(loadedModel);
 
 
@@ -369,6 +373,18 @@
 
 			}
 
+			function LoadVTK(loadedModel){
+				const loader = new VTKLoader();
+				loader.load( 'EGS_Collab_AR/ERT_Data/SF_2022_06_09_12_30/SF_2022_06_09_12_30.0.vtk', function ( geometry ) {
+
+					geometry.computeVertexNormals();
+					geometry.center();
+
+					const material = new THREE.MeshLambertMaterial( { color: 0x0000ff } );
+					const mesh = new THREE.Mesh( geometry, material );
+					laodedModel.add( mesh );
+				});
+			}
 
 			function LoadERTSensorLocation(loadedModel){
 				
