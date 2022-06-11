@@ -378,11 +378,11 @@
 				loader.load( '/EGS_Collab_AR/ERT_Data/SF_2022_06_09_12_30/SF_2022_06_09_12_30.0.vtk', function ( geometry ) {
 
 					geometry.computeVertexNormals();
-					geometry.center();
+					//geometry.center();
 
 					const material = new THREE.MeshLambertMaterial( { color: 0x0000ff } );
 					const mesh = new THREE.Mesh( geometry, material );
-					scene.add( mesh );
+					loadedModel.add( mesh );
 				});
 			}
 
