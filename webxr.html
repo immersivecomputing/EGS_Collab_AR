@@ -410,7 +410,7 @@
 							
 							if(typeof tabs[1] !== 'undefined'){
 								const cube = new THREE.Mesh( geometry, material );
-								cube.position.set(tabs[1], tabs[3], tabs[2]);
+								cube.position.set(tabs[1], tabs[2], tabs[3]);
 							    loadedModel.add( cube );
 							
 								sumEastings = sumEastings + parseFloat(tabs[1]);
@@ -423,7 +423,7 @@
 						var meanNorthing = sumNorthings / (lines.length-1);
 
 						
-						loadedModel.position.set(-meanEasting, 0, -meanNorthing); 
+						loadedModel.position.set(-meanEasting, -meanNorthing, 0); 
 						
 					}
 				);
