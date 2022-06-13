@@ -140,7 +140,7 @@
 						dataArray[counter].vtkFiles = [];
 						counter++;
 					}else if(data.data.tree[i].type == "blob" && data.data.tree[i].path.includes("vtk")){
-						dataArray[counter].vtkFiles.push(data.data.tree[i].path);
+						dataArray[counter-1].vtkFiles.push(data.data.tree[i].path);
 					}
 				}
 
