@@ -138,7 +138,7 @@
 				uiScene = new THREE.Scene();
 
 				camera = new THREE.PerspectiveCamera( 70, window.innerWidth / window.innerHeight, 0.01, 500 );
-				camera.position.set( 0, 7, 0 );
+				camera.position.set( 0, 100, 0 );
 				scene.add(camera);
 
 				//orthoCamera = new THREE.OrthographicCamera( - 1, 1, 1, - 1, 1, 20 );
@@ -233,7 +233,7 @@
 				LoadVTK(loadedModel);
 
 
-				loadedModel.rotation.set(90,0,0);
+				loadedModel.rotation.set(-90,0,0);
 				
 
 				scene.add(loadedModel);
@@ -395,10 +395,6 @@
 				const material = new THREE.MeshBasicMaterial( {color: 0xdba91f} );
 				const geometry = new THREE.BoxGeometry( 0.5, 0.5, 0.5 );
 
-				var eastings = [];
-    			var northings = [];
-    			var elevations = [];
-
 				var sumEastings = 0;
 				var sumNorthings = 0;
 
@@ -408,9 +404,6 @@
 						var lines = data.split('\n');
 						lines.map(function(item){
       						var tabs = item.split('\t');
-							//eastings.push(tabs[1]);
-							//northings.push(tabs[2]);
-							//elevations.push(tabs[3]);
 							
 							if(typeof tabs[1] !== 'undefined'){
 								const cube = new THREE.Mesh( geometry, material );
