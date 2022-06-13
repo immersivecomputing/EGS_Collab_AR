@@ -131,8 +131,8 @@
 				var counter = 0;
 				for(let i=0; i=data.data.tree.length; i++){
 
-					//console.log(data.data.tree[i]);
-					console.log(data.data.tree[i].type);
+					var asset = data.data.tree[i]
+					console.log(asset.type);
 
 					if (data.data.tree[i].type == "tree"){
 						dataArray.push(data.data.tree[i].path);
