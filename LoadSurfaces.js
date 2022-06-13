@@ -30,7 +30,7 @@ function LoadVTK(loadedModel, VTKfilePath, renderOrder, surfColor){
         geometry.computeVertexNormals();
         const material = new THREE.MeshLambertMaterial( { 
             color: surfColor,
-            opacity: 0.1,
+            opacity: 0.5,
             transparent: true,
             side: 2
         });
