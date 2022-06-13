@@ -24,7 +24,6 @@
 			import * as THREE from './threejs/build/three.module.js';
 			import { ARButton } from './threejs/examples/jsm/webxr/ARButton.js';
 			import { GLTFLoader } from './threejs/examples/jsm/loaders/GLTFLoader.js';
-			import { VTKLoader } from './threejs/examples/jsm/loaders/VTKLoader.js';
 			import { OrbitControls } from './threejs/examples/jsm/controls/OrbitControls.js';
 			import { RoomEnvironment } from './threejs/examples/jsm/environments/RoomEnvironment.js';
 			import { GUI } from './threejs/examples/jsm/libs/dat.gui.module.js';
@@ -38,6 +37,7 @@
 			import { ControlPosition } from './threejs/examples/ControlPosition.js';
 			import { FontLoader } from './threejs/examples/jsm/loaders/FontLoader.js';
 			import { LoadOBJ } from './LoadSurfaces.js';
+			import { LoadVTK } from './LoadSurfaces.js';
 			import { ShowFeedbackText } from './FeedbackText.js';
 			import { HideFeedbackText } from './FeedbackText.js';
 
@@ -232,64 +232,11 @@
 				LoadERTSensorLocation(loadedModel);
 
 
-				// Mesh materials
-				objMaterial = new THREE.MeshPhongMaterial({
-						color: 'rgb(120,120,120)',
-						side: THREE.DoubleSide,
-						opacity: 0.1,
-						transparent: true
-					});
-
-					objMaterial0 = new THREE.MeshPhongMaterial({
-						color: 'rgb(68, 1, 84)',
-						side: THREE.DoubleSide,
-						opacity: 0.1,
-						transparent: true
-					});
-
-					objMaterial1 = new THREE.MeshPhongMaterial({
-						color: 'rgb(65, 68, 135)',
-						side: THREE.DoubleSide,
-						opacity: 0.1,
-						transparent: true
-					});
-
-					objMaterial2 = new THREE.MeshPhongMaterial({
-						color: 'rgb(42, 120, 142)',
-						side: THREE.DoubleSide,
-						opacity: 0.1,
-						transparent: true
-					});
-
-					objMaterial3 = new THREE.MeshPhongMaterial({
-						color: 'rgb(34, 168, 132)',
-						side: THREE.DoubleSide,
-						opacity: 0.1,
-						transparent: true
-					});
-
-					objMaterial4 = new THREE.MeshPhongMaterial({
-						color: 'rgb(122, 209, 81)',
-						side: THREE.DoubleSide,
-						opacity: 0.1,
-						transparent: true
-					});
-
-					objMaterial5 = new THREE.MeshPhongMaterial({
-						color: 'rgb(253, 231, 37)',
-						side: THREE.DoubleSide,
-						opacity: 0.1,
-						transparent: true
-					});
-					
-				//
-
-
-				LoadVTK(loadedModel, 'SF_2022_06_09_12_30/SF_2022_06_09_12_30.0.vtk', objMaterial0);
-				LoadVTK(loadedModel, 'SF_2022_06_09_12_30/SF_2022_06_09_12_30.1.vtk', objMaterial1);
-				LoadVTK(loadedModel, 'SF_2022_06_09_12_30/SF_2022_06_09_12_30.2.vtk', objMaterial2);
-				LoadVTK(loadedModel, 'SF_2022_06_09_12_30/SF_2022_06_09_12_30.3.vtk', objMaterial3);
-				LoadVTK(loadedModel, 'SF_2022_06_09_12_30/SF_2022_06_09_12_30.4.vtk', objMaterial4);
+				LoadVTK(loadedModel, 'SF_2022_06_09_12_30/SF_2022_06_09_12_30.0.vtk', 0, 0x0d0887);
+				LoadVTK(loadedModel, 'SF_2022_06_09_12_30/SF_2022_06_09_12_30.1.vtk', 1, 0x5302a3);
+				LoadVTK(loadedModel, 'SF_2022_06_09_12_30/SF_2022_06_09_12_30.2.vtk', 2, 0x8b0aa5);
+				LoadVTK(loadedModel, 'SF_2022_06_09_12_30/SF_2022_06_09_12_30.3.vtk', 3, 0xb83289);
+				LoadVTK(loadedModel, 'SF_2022_06_09_12_30/SF_2022_06_09_12_30.4.vtk', 4, 0xf48849);
 
 				loadedModel.rotation.set((Math.PI/180) * -90,0,0);
 				scene.add(loadedModel);
@@ -429,16 +376,7 @@
 
 			}
 
-			function LoadVTK(loadedModel, VTKfilePath, meshMaterial){
-				const loader = new VTKLoader();
-				loader.load( '/EGS_Collab_AR/ERT_Data/' + VTKfilePath, function ( geometry ) {
-
-					geometry.computeVertexNormals();
-					
-					const mesh = new THREE.Mesh( geometry, meshMaterial );
-					loadedModel.add( mesh );
-				});
-			}
+			
 
 			function LoadERTSensorLocation(loadedModel){
 				
