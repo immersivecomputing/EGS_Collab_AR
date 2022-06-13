@@ -130,13 +130,17 @@
 				
 				var counter = 0;
 				for(let i=0; i=data.data.tree.length; i++){
-					if (data.data.tree[i].type == "tree"){
-						dataArray.push(data.data.tree[i].path);
-						dataArray[counter].vtkFiles = [];
-						counter++;
-					}else if(data.data.tree[i].type == "blob" && data.data.tree[i].path.includes("vtk")){
-						dataArray[counter].vtkFiles.push(data.data.tree[i].path);
-					}
+
+					console.log(data.data.tree[0]);
+					console.log(data.data.tree[0].type);
+
+					// if (data.data.tree[i].type == "tree"){
+					// 	dataArray.push(data.data.tree[i].path);
+					// 	dataArray[counter].vtkFiles = [];
+					// 	counter++;
+					// }else if(data.data.tree[i].type == "blob" && data.data.tree[i].path.includes("vtk")){
+					// 	dataArray[counter].vtkFiles.push(data.data.tree[i].path);
+					// }
 				}
 
 				console.log(dataArray);
