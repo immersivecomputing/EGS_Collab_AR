@@ -230,18 +230,14 @@
 				//Load ERT Location data
 				LoadERTSensorLocation(loadedModel);
 
-				LoadVTK(loadedModel, "SF_2022_06_09_12_30/SF_2022_06_09_12_30.0.vtk");
-				LoadVTK(loadedModel, "SF_2022_06_09_12_30/SF_2022_06_09_12_30.1.vtk");
-				LoadVTK(loadedModel, "SF_2022_06_09_12_30/SF_2022_06_09_12_30.2.vtk");
-				LoadVTK(loadedModel, "SF_2022_06_09_12_30/SF_2022_06_09_12_30.3.vtk");
-				LoadVTK(loadedModel, "SF_2022_06_09_12_30/SF_2022_06_09_12_30.4.vtk");
+				LoadVTK(loadedModel, 'SF_2022_06_09_12_30/SF_2022_06_09_12_30.0.vtk');
+				LoadVTK(loadedModel, 'SF_2022_06_09_12_30/SF_2022_06_09_12_30.1.vtk');
+				LoadVTK(loadedModel, 'SF_2022_06_09_12_30/SF_2022_06_09_12_30.2.vtk');
+				LoadVTK(loadedModel, 'SF_2022_06_09_12_30/SF_2022_06_09_12_30.3.vtk');
+				LoadVTK(loadedModel, 'SF_2022_06_09_12_30/SF_2022_06_09_12_30.4.vtk');
 
 				loadedModel.rotation.set((Math.PI/180) * -90,0,0);
 				scene.add(loadedModel);
-
-
-
-
 
 				//XR Section
 
