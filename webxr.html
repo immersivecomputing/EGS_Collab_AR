@@ -234,6 +234,7 @@
 
 
 				loadedModel.rotation.set(90,0,0);
+				
 
 				scene.add(loadedModel);
 
@@ -426,7 +427,7 @@
 						var meanNorthing = sumNorthings / (lines.length-1);
 
 						
-						loadedModel.position.set(-meanEasting, -meanNorthing, 0); 
+						loadedModel.position.set(-meanEasting, 0, -meanNorthing); 
 						
 					}
 				);
