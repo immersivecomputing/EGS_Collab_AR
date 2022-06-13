@@ -211,35 +211,15 @@
 				grid.visible = true;
 				scene.add( grid );
 				
-				// const loader = new GLTFLoader().setPath( '/EGS_Collab_AR/GLTF/' );
-				// loader.load('EGS_Collab.gltf', function ( gltf ){
-				// 	loadedModel.add(gltf.scene);
-				// 	loadedModel.scale.set(0.01,0.01,0.01)
-
-				// 	loadedModel.traverse( function ( child ) {
-				// 		if ( child instanceof THREE.Object3D  ) {
-				// 			if(child.name== 'TunnelOnly'){
-				// 				child.material.side = 2;
-				// 			}
-				// 		}
-				// 	});
-
-				// 	scene.add(loadedModel);
-				// 	ToggleValue(false,'BoreholesOnly');
-				// 	ToggleValue(false,'Electrodes');
-				// 	ToggleValue(false,'Gyro_StartingPoints');
-				// 	ToggleValue(false,'Gyro_XYZPoints');
-				// 	ToggleValue(false,'Gyro_StrikeDipDepthPoints');
-				// 	render();
-				// });
-				
-				
 				//Load ERT Location data
 				LoadERTSensorLocation(loadedModel);
 
+				lut.setColorMap('rainbow');
+				lut.setMin(0);
+				lut.setMax(dataArray[0].vtkFiles.length);
 				
 				for(let i=0; i < dataArray[0].vtkFiles.length; i++){
-					LoadVTK(loadedModel, dataArray[0].vtkFiles[i], dataArray[0].vtkFiles.length - (i + 1), 0x0d0887);	
+					LoadVTK(loadedModel, dataArray[0].vtkFiles[i], dataArray[0].vtkFiles.length - (i + 1), lut.getColor(i));	
 				}
 
 				//LoadVTK(loadedModel, 'SF_2022_06_09_12_30/SF_2022_06_09_12_30.0.vtk', 4, 0x0d0887);
