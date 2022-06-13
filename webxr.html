@@ -43,7 +43,7 @@
 
 			let container;
 			let viewSize, originalAspect;
-			let camera, scene, renderer, loadedModel, orthoCamera, uiScene, dataGroup, currentLoadedData;
+			let camera, scene, renderer, loadedModel, orthoCamera, uiScene, dataGroup, currentLoadedData, geometryOffsetX, geometryOffsetY;
 			let controller, lut, lut2, rtTexture;
 			let meshSpline, raycaster, sphereInter, sprite, sprite2, loadedLine, surfaceGroup;
 			const pointer = new THREE.Vector2();
@@ -232,9 +232,8 @@
 
 				LoadVTK(loadedModel);
 
-
-				loadedModel.rotation.set(-90,0,0);
-				
+				loadedModel.rotation.set((Math.PI/180) * 90,0,0);
+				loadedModel.position.set(-geometryOffsetX, 0, -geometryOffsetY); 
 
 				scene.add(loadedModel);
 
@@ -416,11 +415,8 @@
 						});
 
 						
-						var meanEasting = sumEastings / (lines.length-1);
-						var meanNorthing = sumNorthings / (lines.length-1);
-
-						
-						loadedModel.position.set(-meanEasting, 0, -meanNorthing); 
+						geometryOffsetX = sumEastings / (lines.length-1);
+						geometryOffsetY = sumNorthings / (lines.length-1);
 						
 					}
 				);
