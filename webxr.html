@@ -110,22 +110,25 @@
 				toggleRealtime: false
 			};
 
-			
+
 			FetchData();
-			init();
-			animate();
+			
 			
 
 			async function FetchData(){
 				const octokit = new Octokit();
 
-				let data = await octokit.request('GET /repos/{owner}/{repo}/git/trees/{tree_sha}', {
+				let data = await octokit.request('GET /repos/{owner}/{repo}/git/trees/{tree_sha}?recursive=true', {
 					owner: 'immersivecomputing',
 					repo: 'EGS_Collab_AR',
 					tree_sha: '5044df10a275d5303e190ab1df0cc28ddd6fd5f2'
 				});
 
-				console.log(data);
+				console.log(data.tree);
+
+				init();
+				animate();
+
 			}
 			
 
