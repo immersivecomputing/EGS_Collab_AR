@@ -86,37 +86,11 @@
 			
 			const wireframeMaterial = new THREE.MeshBasicMaterial( { color: 0x000000, opacity: 0.3, wireframe: true, transparent: true } );
 
-			const params = {
-				toggleTunnel: true,
-				toggleGrid: false,
-                toggleBoreholesGyro: false,
-                toggleElectrodes: false,
-                toggleGyroStartPoints: false,
-                toggleGyroSrikeDipDepth: false,
-                toggleGyroXYZ: false,
-				textField: "E2-TC",
-				showData: false,
-				dataType: "P Velocity",
-				showFaults: false,
-				meanRatio:0.02,
-				showSurfaces: false,
-				surfaceNum: 0,
-				surfaceOpacity: 0.1,
-				planeY: {
-
-					constant: -0.5,
-					//negated: false,
-					//displayHelper: false
-
-				},
-				toggleRealtime: false
-			};
-
 
 			FetchData();
 			
 			
-
+			//First fetch all the data
 			async function FetchData(){
 				const octokit = new Octokit();
 
@@ -125,15 +99,9 @@
 					repo: 'EGS_Collab_AR',
 					tree_sha: '5044df10a275d5303e190ab1df0cc28ddd6fd5f2'
 				});
-
-				console.log(data.data.tree);
 				
 				var counter = 0;
 				for(let i=0; i < data.data.tree.length; i++){
-					
-					// var asset = data.data.tree[i]
-					// console.log(asset);
-					// console.log(asset.type);
 
 					if (data.data.tree[i].type == "tree"){
 						dataArray.push(data.data.tree[i]);
@@ -144,9 +112,7 @@
 					}
 				}
 
-				console.log(dataArray);
-
-
+				//Start loading using ThreeJS
 				init();
 				animate();
 
@@ -271,12 +237,16 @@
 				//Load ERT Location data
 				LoadERTSensorLocation(loadedModel);
 
+				
+				for(i=0; i < dataArray[0].vtkFiles.length; i++){
+					LoadVTK(loadedModel, dataArray[0].vtkFiles[i], dataArray[0].vtkFiles.length - (i + 1), 0x0d0887);	
+				}
 
-				LoadVTK(loadedModel, 'SF_2022_06_09_12_30/SF_2022_06_09_12_30.0.vtk', 4, 0x0d0887);
-				LoadVTK(loadedModel, 'SF_2022_06_09_12_30/SF_2022_06_09_12_30.1.vtk', 3, 0x5302a3);
-				LoadVTK(loadedModel, 'SF_2022_06_09_12_30/SF_2022_06_09_12_30.2.vtk', 2, 0x8b0aa5);
-				LoadVTK(loadedModel, 'SF_2022_06_09_12_30/SF_2022_06_09_12_30.3.vtk', 1, 0xb83289);
-				LoadVTK(loadedModel, 'SF_2022_06_09_12_30/SF_2022_06_09_12_30.4.vtk', 0, 0xf48849);
+				//LoadVTK(loadedModel, 'SF_2022_06_09_12_30/SF_2022_06_09_12_30.0.vtk', 4, 0x0d0887);
+				//LoadVTK(loadedModel, 'SF_2022_06_09_12_30/SF_2022_06_09_12_30.1.vtk', 3, 0x5302a3);
+				//LoadVTK(loadedModel, 'SF_2022_06_09_12_30/SF_2022_06_09_12_30.2.vtk', 2, 0x8b0aa5);
+				//LoadVTK(loadedModel, 'SF_2022_06_09_12_30/SF_2022_06_09_12_30.3.vtk', 1, 0xb83289);
+				//LoadVTK(loadedModel, 'SF_2022_06_09_12_30/SF_2022_06_09_12_30.4.vtk', 0, 0xf48849);
 
 				loadedModel.rotation.set((Math.PI/180) * -90,0,0);
 				scene.add(loadedModel);
