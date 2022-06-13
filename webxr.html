@@ -219,7 +219,7 @@
 				lut.setMax(dataArray[1].vtkFiles.length);
 				
 				for(let i=0; i < dataArray[1].vtkFiles.length; i++){
-					LoadVTK(loadedModel, dataArray[0].vtkFiles[i], dataArray[0].vtkFiles.length - (i + 1), lut.getColor(i));	
+					LoadVTK(loadedModel, dataArray[1].vtkFiles[i], dataArray[0].vtkFiles.length - (i + 1), lut.getColor(i));	
 				}
 
 				//Handle axis changes from Visit:
