@@ -17,7 +17,7 @@
 	<body>
 
 		<div id="info">
-			<a href="https://immersivecomputing.github.io/EGS_Collab_AR/" target="_blank" rel="noopener">EGS Collab</a> AR <br/>
+			<a href="https://immersivecomputing.github.io/EGS_Collab_AR/" target="_blank" rel="noopener">RealTime ERT</a> AR <br/>
 		</div>
 		<script type="module">
 
@@ -40,6 +40,7 @@
 			import { LoadVTK } from './LoadSurfaces.js';
 			import { ShowFeedbackText } from './FeedbackText.js';
 			import { HideFeedbackText } from './FeedbackText.js';
+			import { Octokit, App } from "https://cdn.skypack.dev/octokit";
 
 			let container;
 			let viewSize, originalAspect;
@@ -109,13 +110,28 @@
 				toggleRealtime: false
 			};
 
+			
+			FetchData();
 			init();
 			animate();
 			
+
+			async function FetchData(){
+				const octokit = new Octokit();
+
+				let data = await octokit.request('GET /repos/{owner}/{repo}/git/trees/{tree_sha}', {
+					owner: 'immersivecomputing',
+					repo: 'EGS_Collab_AR',
+					tree_sha: '5044df10a275d5303e190ab1df0cc28ddd6fd5f2'
+				});
+
+				console.log(data);
+			}
 			
 
 			function init() {
 
+				
 				container = document.createElement( 'div' );
 				document.body.appendChild( container );
 
