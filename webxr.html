@@ -338,7 +338,7 @@
 			function loadTimeFrame(e)
 			{
 				var target = (e.target) ? e.target : e.srcElement;
-				var scaledTargetValue = parseInt(target.value) * dataArray.length;
+				var scaledTargetValue = parseInt(target.value * dataArray.length);
 
 				if (scaledTargetValue != currentFrame){
 					console.log(scaledTargetValue));
