@@ -255,11 +255,9 @@
 
 				lut.setColorMap('rainbow');
 				lut.setMin(0);
-				lut.setMax(dataArray[1].vtkFiles.length);
 				
-				for(let i=0; i < dataArray[1].vtkFiles.length; i++){
-					LoadVTK(loadedModel, dataArray[1].vtkFiles[i], dataArray[0].vtkFiles.length - (i + 1), lut.getColor(i));	
-				}
+				//plot first time step
+				LoadVTKTimeStep(0);
 
 				//Handle axis changes from Visit:
 				loadedModel.rotation.set((Math.PI/180) * -90,0,0);
@@ -310,7 +308,6 @@
 				slider.addEventListener("input", loadTimeFrame);
 
 				//Tooltip option
-
 				// const sphgeometry = new THREE.SphereGeometry( 2.5 );
 				// const sphmaterial = new THREE.MeshBasicMaterial( { color: 0xff0000 } );
 				// sphereInter = new THREE.Mesh( sphgeometry, sphmaterial );
@@ -347,7 +344,14 @@
 			function loadTimeFrame(e)
 			{
 				var target = (e.target) ? e.target : e.srcElement;
-				console.log(target.value)
+				console.log(target.value.type);
+			}
+
+			function LoadVTKTimeStep(timeStepInt){
+				lut.setMax(dataArray[timeStepInt].vtkFiles.length);
+				for(let i=0; i < dataArray[timeStepInt].vtkFiles.length; i++){
+					LoadVTK(loadedModel, dataArray[timeStepInt].vtkFiles[i], dataArray[0].vtkFiles.length - (i + 1), lut.getColor(i));	
+				}
 			}
 
 
