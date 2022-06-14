@@ -154,7 +154,6 @@
 				//Start loading using ThreeJS
 				init();
 				animate();
-
 			}
 			
 
@@ -335,10 +334,16 @@
 				console.log(scene);
 			}
 
+			let currentFrame = 0;
 			function loadTimeFrame(e)
 			{
 				var target = (e.target) ? e.target : e.srcElement;
-				console.log(target.value);
+				var scaledTargetValue = parseInt(target.value) * dataArray.length;
+
+				if (scaledTargetValue != currentFrame){
+					console.log(scaledTargetValue));
+					currentFrame = scaledTargetValue;
+				}
 			}
 
 			function LoadVTKTimeStep(timeStepInt){
@@ -517,9 +522,7 @@
 
 			}
 			
-			
-			//
-
+			//Run the animation frames
 			function animate() {
 				renderer.setAnimationLoop( render );
 			}
@@ -552,58 +555,39 @@
 				// 	}
 				// }
 
-
+				//Handle any XR session needs
 				if ( frame ) {
 
 					const referenceSpace = renderer.xr.getReferenceSpace();
 					const session = renderer.xr.getSession();
 
 					if ( hitTestSourceRequested === false ) {
-
 						session.requestReferenceSpace( 'viewer' ).then( function ( referenceSpace ) {
-
 							session.requestHitTestSource( { space: referenceSpace } ).then( function ( source ) {
-
 								hitTestSource = source;
-
 							} );
-
 						} );
 
 						session.addEventListener( 'end', function () {
-
 							hitTestSourceRequested = false;
 							hitTestSource = null;
-
 						} );
-
 						hitTestSourceRequested = true;
-
 					}
 
 					if ( hitTestSource ) {
-
 						const hitTestResults = frame.getHitTestResults( hitTestSource );
-
 						if ( hitTestResults.length ) {
-
 							const hit = hitTestResults[ 0 ];
-
 							reticle.visible = true;
 							reticle.matrix.fromArray( hit.getPose( referenceSpace ).transform.matrix );
-
 						} else {
-
 							reticle.visible = false;
-
 						}
-
 					}
-
 				}
 				
-
-				
+				//Render the frame
 				renderer.clear();
 				renderer.render( scene, camera );
 				//labelRenderer.render( scene, camera );
