@@ -27,10 +27,9 @@
 			opacity: 0.7;
 			-webkit-transition: .2s;
 			transition: opacity .2s;
-			position: relative;
 			margin-left: 25%;
 			margin-right: auto;
-			margin-top: 20%;
+			bottom: 100px;
 		}
 
 		#slider:hover {
@@ -46,7 +45,7 @@
 			cursor: pointer;
 		}
 
-			#slider::-moz-range-thumb {
+		#slider::-moz-range-thumb {
 			width: 25px;
 			height: 25px;
 			background: #04AA6D;
@@ -298,7 +297,7 @@
 
 				window.addEventListener( 'resize', onWindowResize );
 
-
+				//add orbit controls first
 				const controls = new OrbitControls( camera, renderer.domElement );
 				controls.addEventListener( 'change', render ); // use if there is no animation loop
 				controls.minDistance = 0.01;
@@ -306,69 +305,9 @@
 				controls.target.set( 0, 0, 0 );
 				controls.update();
 
+				//Then add an overlay slider
 				var slider = document.getElementById("slider");
 				slider.addEventListener("input", loadTimeFrame);
-
-				
-				// const gui = new GUI();
-				// const baseFolder = gui.addFolder( 'Base Objects' );
-				// baseFolder.add(params, 'toggleTunnel').name('Tunnel').onChange( function (value){
-				// 	document.body.appendChild( HideFeedbackText());
-				// 	ToggleValue(value,'TunnelOnly');
-				// });
-				// baseFolder.add(params, 'toggleBoreholesGyro').name('Boreholes').onChange( function (value){
-				// 	document.body.appendChild( HideFeedbackText());
-				// 	ToggleBoreholesGyro(value,'BoreholesGyro');
-				// });
-				// baseFolder.add(params, 'toggleGrid').name('Grid').onChange( function (value){
-				// 	document.body.appendChild( HideFeedbackText());
-				// 	grid.visible = value;
-				// 	render();
-				// });
-
-				// const dataFolder = gui.addFolder('Logging');
-				// dataFolder.add( params, 'showData').name('Show Log').onChange(function (value){					
-				// 	ToggleData(value, params.dataType);
-				// });
-				// dataFolder.add( params, 'dataType', [ 'P Velocity', 'S Velocity', 'Vp/Vs', 'Temp.'] ).name('Log Type:').onChange(function (value){
-				// 	ToggleData(params.showData, value);
-				// });
-
-				// const faultFolder = gui.addFolder('Faults');
-				// faultFolder.add( params, 'showFaults').name('Show Faults').onChange(function(value){
-				// 	ToggleFaults(value);
-				// });
-				// faultFolder.add( params, 'meanRatio', 0.02, 0.27).name('Mean Stress Ratio').onChange(function(value){
-				// 	FilterFaults(value);
-				// });
-				// const surfaceFolder = gui.addFolder('Bulk Conductivity');
-				// surfaceFolder.add(params, 'showSurfaces').name('Show Surfaces').onChange(function(value){
-				// 	ToggleSurfaces(value);
-				// });
-				// surfaceFolder.add(params, 'surfaceNum', 0, 7).name('Conductivity g.t.').onChange(function (value) {
-				// 	if(surfaceGroup != null){		
-				// 		surfaceGroup.traverse(function (child){
-				// 			if (parseInt(child.bulkConductivity) < value) {
-				// 				child.visible = false;
-				// 			} else {
-				// 				child.visible = true;
-				// 			}
-				// 		});
-				// 	}
-				// });
-				// surfaceFolder.add(params, 'surfaceOpacity', 0, 1).name('Opacity').onChange(function (value) {
-				// 	if(surfaceGroup != null){	
-				// 		surfaceGroup.traverse(function (child) {
-				// 			if (child.isMesh) {
-				// 				child.material.opacity = value;
-				// 			}
-				// 		});
-				// 	}
-				// });
-
-				// const realtimeFolder = gui.addFolder('Realtime Data');
-				// realtimeFolder.add(params, 'toggleRealtime').name('Device current position');
-
 
 				//Tooltip option
 
@@ -570,7 +509,7 @@
 				camera.updateProjectionMatrix();
 
 				renderer.setSize( window.innerWidth, window.innerHeight );
-				labelRenderer.setSize( window.innerWidth, window.innerHeight );
+				//labelRenderer.setSize( window.innerWidth, window.innerHeight );
 			}
 			
 			function onPointerMove( event ) {
