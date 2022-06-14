@@ -231,6 +231,7 @@
 
 
 				loadedModel = new THREE.Group();
+				laodedModel.add(currentModelGroup);
 				//scene.background = new THREE.Color( 0xbbbbbb );
 				//scene.environment = pmremGenerator.fromScene( environment ).texture;
 				
@@ -335,21 +336,29 @@
 			}
 
 			let currentFrame = 0;
+			let currentModelGroup = new THREE.Group();
 			function loadTimeFrame(e)
 			{
 				var target = (e.target) ? e.target : e.srcElement;
-				var scaledTargetValue = parseInt(target.value * dataArray.length);
+				var scaledTargetValue = parseInt(target.value * (dataArray.length-1));   //This needs to change for better UI
 
 				if (scaledTargetValue != currentFrame){
 					console.log(scaledTargetValue);
 					currentFrame = scaledTargetValue;
+					LoadVTKTimeStep(currentFrame);
 				}
 			}
 
 			function LoadVTKTimeStep(timeStepInt){
+				currentModelGroup.traverse(function(child) {
+					if (child.isMesh){
+						child.dispose();
+					}
+				});
+
 				lut.setMax(dataArray[timeStepInt].vtkFiles.length);
 				for(let i=0; i < dataArray[timeStepInt].vtkFiles.length; i++){
-					LoadVTK(loadedModel, dataArray[timeStepInt].vtkFiles[i], dataArray[0].vtkFiles.length - (i + 1), lut.getColor(i));	
+					LoadVTK(currentModelGroup, dataArray[timeStepInt].vtkFiles[i], dataArray[0].vtkFiles.length - (i + 1), lut.getColor(i));	
 				}
 			}
 
