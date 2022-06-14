@@ -291,8 +291,6 @@
 				scene.add( reticle );
 				//end XR Section
 
-
-
 				window.addEventListener( 'resize', onWindowResize );
 
 				//add orbit controls first
@@ -331,20 +329,16 @@
 				// labelRenderer.domElement.style.position = 'absolute';
 				// labelRenderer.domElement.style.top = '0px';
 				// document.body.appendChild( labelRenderer.domElement );
-				
-				
 
 				document.addEventListener( 'mousemove', onDocumentMouseMove );
 
 				console.log(scene);
-
 			}
-
 
 			function loadTimeFrame(e)
 			{
 				var target = (e.target) ? e.target : e.srcElement;
-				console.log(target.value.type);
+				console.log(target.value);
 			}
 
 			function LoadVTKTimeStep(timeStepInt){
