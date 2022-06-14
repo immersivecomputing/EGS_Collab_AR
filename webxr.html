@@ -299,6 +299,13 @@
 				window.addEventListener( 'resize', onWindowResize );
 
 
+				const controls = new OrbitControls( camera, renderer.domElement );
+				controls.addEventListener( 'change', render ); // use if there is no animation loop
+				controls.minDistance = 0.01;
+				controls.maxDistance = 1000;
+				controls.target.set( 0, 0, 0 );
+				controls.update();
+
 				var slider = document.getElementById("slider");
 				slider.addEventListener("input", loadTimeFrame);
 
@@ -383,18 +390,13 @@
 				// valueLabel.visible = false;
 				// sphereInter.add( valueLabel );
 				
-				labelRenderer = new CSS2DRenderer();
-				labelRenderer.setSize( window.innerWidth, window.innerHeight );
-				labelRenderer.domElement.style.position = 'absolute';
-				labelRenderer.domElement.style.top = '0px';
-				document.body.appendChild( labelRenderer.domElement );
+				// labelRenderer = new CSS2DRenderer();
+				// labelRenderer.setSize( window.innerWidth, window.innerHeight );
+				// labelRenderer.domElement.style.position = 'absolute';
+				// labelRenderer.domElement.style.top = '0px';
+				// document.body.appendChild( labelRenderer.domElement );
 				
-				const controls = new OrbitControls( camera, renderer.domElement );
-				controls.addEventListener( 'change', render ); // use if there is no animation loop
-				controls.minDistance = 0.01;
-				controls.maxDistance = 1000;
-				controls.target.set( 0, 0, 0 );
-				controls.update();
+				
 
 				document.addEventListener( 'mousemove', onDocumentMouseMove );
 
