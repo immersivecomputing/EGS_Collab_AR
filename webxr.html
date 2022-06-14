@@ -83,7 +83,10 @@
 
 			let container;
 			let viewSize, originalAspect;
-			let camera, scene, renderer, loadedModel, orthoCamera, uiScene, dataGroup, currentLoadedData, geometryOffsetX, geometryOffsetY;
+			let camera, scene, renderer, loadedModel, currentModelGroup, orthoCamera, uiScene, dataGroup, currentLoadedData, geometryOffsetX, geometryOffsetY;
+				
+			let currentFrame = 0;
+
 			let objMaterial,objMaterial0,objMaterial1,objMaterial2,objMaterial3,objMaterial4,objMaterial5; 
 			let controller, lut, lut2, rtTexture;
 			let meshSpline, raycaster, sphereInter, sprite, sprite2, loadedLine, surfaceGroup;
@@ -231,7 +234,8 @@
 
 
 				loadedModel = new THREE.Group();
-				laodedModel.add(currentModelGroup);
+				currentModelGroup = new THREE.Group();
+				loadedModel.add(currentModelGroup);
 				//scene.background = new THREE.Color( 0xbbbbbb );
 				//scene.environment = pmremGenerator.fromScene( environment ).texture;
 				
@@ -335,8 +339,6 @@
 				console.log(scene);
 			}
 
-			let currentFrame = 0;
-			let currentModelGroup = new THREE.Group();
 			function loadTimeFrame(e)
 			{
 				var target = (e.target) ? e.target : e.srcElement;
