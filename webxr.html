@@ -7,11 +7,11 @@
 		<link type="text/css" rel="stylesheet" href="./threejs/examples/main.css">
 		<style>
 		.label {
-				color: #FFF;
-				font-family: sans-serif;
-				padding: 2px;
-				background: rgba( 0, 0, 0, .6 );
-			}
+			color: #FFF;
+			font-family: sans-serif;
+			padding: 2px;
+			background: rgba( 0, 0, 0, .6 );
+		}
 
 
 		#slidecontainer {
@@ -51,6 +51,46 @@
 			background: #04AA6D;
 			cursor: pointer;
 		}
+
+		.range-wrap{
+  			width: 500px;
+  			position: relative;
+		}
+
+		.range-value{
+			position: absolute;
+			top: -50%;
+		}
+			.range-value span{
+			width: 30px;
+			height: 24px;
+			line-height: 24px;
+			text-align: center;
+			background: #03a9f4;
+			color: #fff;
+			font-size: 12px;
+			display: block;
+			position: absolute;
+			left: 50%;
+			transform: translate(-50%, 0);
+			border-radius: 6px;
+		}
+			.range-value span:before{
+			content: "";
+			position: absolute;
+			width: 0;
+			height: 0;
+			border-top: 10px solid #03a9f4;
+			border-left: 5px solid transparent;
+			border-right: 5px solid transparent;
+			top: 100%;
+			left: 50%;
+			margin-left: -5px;
+			margin-top: -1px;
+		}
+
+
+
 		</style>
 	</head>
 	<body>
@@ -343,7 +383,7 @@
 			function loadTimeFrame(e)
 			{
 				var target = (e.target) ? e.target : e.srcElement;
-				var scaledTargetValue = parseInt(target.value * (dataArray.length));   //This needs to change for better UI
+				var scaledTargetValue = parseInt(target.value * (dataArray.length-1));   //This needs to change for better UI
 
 				if (scaledTargetValue != currentFrame){
 					console.log(scaledTargetValue);
@@ -610,7 +650,9 @@
 
 		</script>
 
-		<input type="range" min="0" max="1" value="0" step="0.01" id="slider" orient="vertical" style="position:absolute;">
-
+		<div class="range-wrap">
+			<div class="range-value" id="rangeV"></div>
+				<input type="range" min="0" max="1" value="0" step="0.01" id="slider" orient="vertical" style="position:absolute;">
+		</div>
 	</body>
 </html>
