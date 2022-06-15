@@ -93,7 +93,7 @@
 		input[type=range] {
 			-webkit-appearance: none;
 			margin: 20px 0;
-			width: 50%;
+			width: 100%;
 		}
 		input[type=range]:focus {
 			outline: none;
@@ -120,8 +120,8 @@
 			background: #03a9f4;
 		}
 		.range-wrap{
-			width: 500px;
-			position: relative;
+			width: 50%;
+			position: absolute;
 			margin-left: 25%;
 			margin-right: auto;
 			bottom: 100px;
@@ -251,6 +251,8 @@
 					tree_sha: '5044df10a275d5303e190ab1df0cc28ddd6fd5f2'
 				});
 				
+
+				console.log(data);
 				var counter = 0;
 				for(let i=0; i < data.data.tree.length; i++){
 
@@ -262,6 +264,7 @@
 						dataArray[counter-1].vtkFiles.push(data.data.tree[i].path);
 					}
 				}
+				console.log(dataArray);
 
 				//Start loading using ThreeJS
 				init();
