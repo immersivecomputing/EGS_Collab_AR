@@ -131,7 +131,7 @@
 			top: -50%;
 		}
 		.range-value span{
-			width: 30px;
+			width: 150px;
 			height: 24px;
 			line-height: 24px;
 			text-align: center;
@@ -461,8 +461,7 @@
 				var newValue = Number( (target.value - target.min) * 100 / (target.max - target.min) );
       			var newPosition = 10 - (newValue * 0.2);
 				rangeV.innerHTML = `<span>${dataArray[currentFrame].path}</span>`;
-    			rangeV.style.left = `calc(${newValue}% + (${newPosition}px))`;
-
+    			rangeV.style.left = `calc(${newValue}% + (${newPosition}px))`;	
 
 				if (scaledTargetValue != currentFrame){
 					console.log(scaledTargetValue);
