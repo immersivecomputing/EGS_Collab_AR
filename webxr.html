@@ -307,6 +307,7 @@
 
 				//Then add an overlay slider
 				var slider = document.getElementById("slider");
+				slider.step = 1/dataArray.length;
 				slider.addEventListener("input", loadTimeFrame);
 
 				//Tooltip option
