@@ -118,8 +118,6 @@
 
 			let hitTestSource = null;
 			let hitTestSourceRequested = false;
-			
-			//const material = new THREE.MeshLambertMaterial( { side: THREE.DoubleSide, color: 0xF5F5F5, vertexColors: true} );
 
 			FetchData();
 			
@@ -202,7 +200,7 @@
 				uiScene.add( sprite );
 				createAxisText(0.05,-0.25,0,0,0,0,'cmin', 'cmin', sprite);
 				createAxisText(0.05,0.25,0,0,0,0,'cmax', 'cmax', sprite);
-				createAxisText(-0.1,1,0,0,0,90,'title','Bulk Conductivity', sprite);
+				createAxisText(-0.1,-0.05,0,0,0,90,'title','Bulk Conductivity', sprite);
 
 				loadedModel = new THREE.Group();
 				currentModelGroup = new THREE.Group();
