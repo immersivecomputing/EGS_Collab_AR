@@ -94,72 +94,38 @@
 
 			import * as THREE from './threejs/build/three.module.js';
 			import { ARButton } from './threejs/examples/jsm/webxr/ARButton.js';
-			import { GLTFLoader } from './threejs/examples/jsm/loaders/GLTFLoader.js';
 			import { OrbitControls } from './threejs/examples/jsm/controls/OrbitControls.js';
 			import { RoomEnvironment } from './threejs/examples/jsm/environments/RoomEnvironment.js';
-			import { GUI } from './threejs/examples/jsm/libs/dat.gui.module.js';
-			//import {csvParse} from "https://cdn.skypack.dev/d3-dsv@3";
 			import {csvParse} from "https://cdn.skypack.dev/-/d3-dsv@v3.0.1-u1xCRjaLJc0qqv1Z5ERe/dist=es2020,mode=imports/optimized/d3-dsv.js";
 			import { Lut } from './threejs/examples/jsm/math/Lut.js';
-			import { CSS2DRenderer, CSS2DObject } from './threejs/examples/jsm/renderers/CSS2DRenderer.js';
-			import { Line2 } from './threejs/examples/jsm/lines/Line2.js';
-			import { LineMaterial } from './threejs/examples/jsm/lines/LineMaterial.js';
-			import { LineGeometry } from './threejs/examples/jsm/lines/LineGeometry.js';
-			import { ControlPosition } from './threejs/examples/ControlPosition.js';
 			import { FontLoader } from './threejs/examples/jsm/loaders/FontLoader.js';
 			import { LoadOBJ } from './LoadSurfaces.js';
 			import { LoadVTK } from './LoadSurfaces.js';
-			import { ShowFeedbackText } from './FeedbackText.js';
-			import { HideFeedbackText } from './FeedbackText.js';
 			import { Octokit, App } from "https://cdn.skypack.dev/octokit";
 
 			let container;
 			let viewSize, originalAspect;
-			let camera, scene, renderer, loadedModel, currentModelGroup, orthoCamera, uiScene, dataGroup, currentLoadedData, geometryOffsetX, geometryOffsetY;
+			let camera, scene, renderer, loadedModel, currentModelGroup, orthoCamera, uiScene, currentLoadedData, geometryOffsetX, geometryOffsetY;
 				
 			let currentFrame = 0;
 
-			let objMaterial,objMaterial0,objMaterial1,objMaterial2,objMaterial3,objMaterial4,objMaterial5; 
-			let controller, lut, lut2, rtTexture;
-			let meshSpline, raycaster, sphereInter, sprite, sprite2, loadedLine, surfaceGroup;
+			let controller, lut, sprite;
 			const pointer = new THREE.Vector2();
 			
 			let reticle;
-			let planes;
 
 			let dataArray = [];
-			
-			let mouseX = 0, mouseY = 0;
-
-			let csvData, labelRenderer, labelDiv, valueLabel;
-			
-			let realtimeObject;
-
-			let pmax = 8000;
-			let pmin = 6000;
-			let smax = 4000;
-			let smin = 2000;
-			let tmin = 20;
-			let tmax = 30;
-			let vpvsmin = 1.25;
-			let vpvsmax = 2.5;
 
 			let hitTestSource = null;
 			let hitTestSourceRequested = false;
-			let boreholesLoaded = false;
 			
-			let boreholeSpline, tubeGeometry;
-			let materialModel;
-					
-			const windowHalfX = window.innerWidth / 2;
-			const windowHalfY = window.innerHeight / 2;
-			
-			const material = new THREE.MeshLambertMaterial( { side: THREE.DoubleSide, color: 0xF5F5F5, vertexColors: true} );
-			const wireframeMaterial = new THREE.MeshBasicMaterial( { color: 0x000000, opacity: 0.3, wireframe: true, transparent: true } );
+			//const material = new THREE.MeshLambertMaterial( { side: THREE.DoubleSide, color: 0xF5F5F5, vertexColors: true} );
 
 			FetchData();
 			
 			//First fetch all the data
+			//This is currently coming in from a GitHub Repo so will need to be changed to the correct endpoint, the object indexing may also need to be changed 
+
 			async function FetchData(){
 				const octokit = new Octokit();
 
@@ -206,8 +172,6 @@
 				renderer.localClippingEnabled = true;
 				renderer.autoClear = false;
 				container.appendChild( renderer.domElement );
-
-				rtTexture = new THREE.WebGLRenderTarget( window.innerWidth, window.innerHeight, { minFilter: THREE.LinearFilter, magFilter: THREE.NearestFilter, format: THREE.RGBAFormat, type: THREE.FloatType } );
 							
 				lut = new Lut();
 				
@@ -238,28 +202,7 @@
 				uiScene.add( sprite );
 				createAxisText(0.05,-0.25,0,0,0,0,'cmin', 'cmin', sprite);
 				createAxisText(0.05,0.25,0,0,0,0,'cmax', 'cmax', sprite);
-				createAxisText(-0.1,0,0,0,0,90,'title','Bulk Conductivity', sprite);
-
-
-				// lut2 = new Lut();
-				// lut2.setColorMap('plasma');
-				// sprite2 = new THREE.Sprite( new THREE.SpriteMaterial( {
-				// 	map: new THREE.CanvasTexture( lut2.createCanvas() )
-				// } ) );
-				// sprite2.position.y = 1.0;
-				// sprite2.scale.x = 0.0625;
-				// sprite2.scale.y = 0.5;
-				// uiScene.add( sprite2 );
-				// createAxisText(0.05,-0.21875 + 1,0,0,0,0,'c0', '0', sprite2);
-				// createAxisText(0.05,-0.15625 + 1,0,0,0,0,'c1', '1', sprite2);
-				// createAxisText(0.05,-0.09375 + 1,0,0,0,0,'c2', '2', sprite2);
-				// createAxisText(0.05,-0.03125 + 1,0,0,0,0,'c3', '3', sprite2);
-				// createAxisText(0.05,0.03125 + 1,0,0,0,0,'c4', '4', sprite2);
-				// createAxisText(0.05,0.09375 + 1,0,0,0,0,'c5', '5', sprite2);
-				// createAxisText(0.05,0.15625 + 1,0,0,0,0,'c6', '6', sprite2);
-				// createAxisText(0.05,0.21875 + 1,0,0,0,0,'c7', '7', sprite2);
-				// createAxisText(-0.1,1,0,0,0,90,'surftitle','Bulk Conductivity', sprite2);
-				// sprite2.visible = false;
+				createAxisText(-0.1,1,0,0,0,90,'title','Bulk Conductivity', sprite);
 
 				loadedModel = new THREE.Group();
 				currentModelGroup = new THREE.Group();
@@ -336,8 +279,6 @@
 				slider.step = 1/(dataArray.length-1);
 				slider.addEventListener("input", loadTimeFrame);
 
-				document.addEventListener( 'mousemove', onDocumentMouseMove );
-
 				console.log(scene);
 			}
 
@@ -377,7 +318,6 @@
 				}
 			}
 
-
 			function LoadERTSensorLocation(loadedModel){
 				
 				const material = new THREE.MeshBasicMaterial( {color: 0xdba91f} );
@@ -402,67 +342,14 @@
 								sumNorthings = sumNorthings + parseFloat(tabs[2]);
 							}
 						});
-
 						
 						geometryOffsetX = sumEastings / (lines.length-1);
 						geometryOffsetY = sumNorthings / (lines.length-1);
 
-						loadedModel.position.set(-geometryOffsetX, 0, geometryOffsetY); 
-						
+						loadedModel.position.set(-geometryOffsetX, 0, geometryOffsetY); 		
 					}
-				);
-				
+				);	
 			}
-
-			function onDocumentMouseMove( event ) {
-				mouseX = ( event.clientX - windowHalfX );
-				mouseY = ( event.clientY - windowHalfY );
-			}
-
-			
-			// function ToggleValue(value, valueName) {
-			// 	loadedModel.traverse( function ( child ) {
-			// 		if ( child instanceof THREE.Object3D  ) {
-			// 			if(child.name== valueName){
-			// 				child.visible = value;
-			// 			}
-			// 		}
-			// 	});
-			// 	render();
-			// }
-
-			
-
-			// function ToggleSurfaces(value){
-
-			// 	document.body.appendChild( HideFeedbackText());
-
-			// 	let alreadyLoaded = false;
-			// 	loadedModel.traverse( function ( child ) {
-			// 		if(child.name == 'surfaces'){
-			// 			alreadyLoaded = true;
-			// 			child.visible = value;
-			// 			sprite2.visible = value;
-			// 		}
-			// 	});
-
-			// 	if (alreadyLoaded === false){	
-			// 		surfaceGroup = new THREE.Group();
-			// 		surfaceGroup.name = 'surfaces';
-			// 		loadedModel.add(surfaceGroup);
-			// 		//try loading a obj
-			// 		LoadOBJ('./objData/visit_ex_db_0000.obj', surfaceGroup, true, 7, 0x0d0887);
-			// 		LoadOBJ('./objData/visit_ex_db_0001.obj', surfaceGroup, true, 6, 0x5302a3);
-			// 		LoadOBJ('./objData/visit_ex_db_0002.obj', surfaceGroup, true, 5, 0x8b0aa5);
-			// 		LoadOBJ('./objData/visit_ex_db_0003.obj', surfaceGroup, true, 4, 0xb83289);
-			// 		LoadOBJ('./objData/visit_ex_db_0004.obj', surfaceGroup, true, 3, 0xdb5c68);
-			// 		LoadOBJ('./objData/visit_ex_db_0005.obj', surfaceGroup, true, 2, 0xf48849);
-			// 		LoadOBJ('./objData/visit_ex_db_0006.obj', surfaceGroup, true, 1, 0xfebd2a);
-			// 		LoadOBJ('./objData/visit_ex_db_0007.obj', surfaceGroup, true, 0, 0xF0F921);
-			// 		sprite2.visible = value;
-			// 	}
-				
-			// }
 			
 			function createAxisText(x,y,z,rx,ry,rz, axisName, label, _sprite) {
 
@@ -595,9 +482,6 @@
 <div class="range-wrap">
     <div class="range-value" id="rangeV"></div>
     <input id="range" type="range" min="0" max="1" value="0" step="0.01">
-  </div>
-		
-		
-		
+  	</div>
 	</body>
 </html>

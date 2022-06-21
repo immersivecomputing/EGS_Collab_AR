@@ -22,11 +22,7 @@ function LoadVTK(loadedModel, VTKfilePath, renderOrder, surfColor){
     });
 }
 
-
-
-
-
-
+//Included for flexibility
 function LoadOBJ(fileName, group, convert, renderOrder, surfColor){
     const loader1 = new OBJLoader();
     loader1.load(fileName, function (object){
