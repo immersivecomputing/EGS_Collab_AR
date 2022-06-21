@@ -118,7 +118,7 @@
 			import { LoadOBJ } from './LoadSurfaces.js';
 			import { LoadVTK } from './LoadSurfaces.js';
 			import { Octokit, App } from "https://cdn.skypack.dev/octokit"; //This is the only dependancy for the GitHub api, can be removed when new endpoint made
-
+			import { GUI } from '.threejs/examples/jsm/libs/dat.gui.module.js';
 			
 
 			let container;
@@ -336,6 +336,46 @@
 				var slider = document.getElementById("range");
 				slider.step = 1/(dataArray.length-1);
 				slider.addEventListener("input", loadTimeFrame);
+
+				//Basic GUI
+				var gui = new GUI();
+				var folder = gui.addFolder('Clipping');
+				folder.add(clipPlaneHelpers[0], 'visible').name('X-Display Helper').setValue(false);
+				folder.add(clipPlaneHelpers[1], 'visible').name('Y-Display Helper').setValue(false);
+				folder.add(clipPlaneHelpers[2], 'visible').name('Z-Display Helper').setValue(false);
+				folder.add(clipParams.planeX, 'constant').name('X-Position').min(-100).max(100).setValue(0).onChange(d => {
+					clipPlaneHelpers[0].position.x = d;
+					if (clipParams.planeX.negated) {
+						clipPlanes[0].constant = d;
+					} else {
+						clipPlanes[0].constant = -d;
+					}
+				});
+				folder.add(clipParams.planeY, 'constant').name('Y-Position').min(-100).max(100).setValue(0).onChange(d => {
+					clipPlaneHelpers[1].position.y = d;
+					if (clipParams.planeY.negated) {
+						clipPlanes[1].constant = -d;
+					} else {
+						clipPlanes[1].constant = d;
+					}
+				});
+				folder.add(clipParams.planeZ, 'constant').name('Z-Position').min(-100).max(100).setValue(0).onChange(d => {
+					clipPlaneHelpers[2].position.z = -d;
+					if (clipParams.planeY.negated) {
+						clipPlanes[2].constant = d;
+					} else {
+						clipPlanes[2].constant = -d;
+					}
+				});
+				folder.add(clipParams.planeX, 'negated').name('Invert X').onChange(() => {
+					clipPlanes[0].negate();
+				});
+				folder.add(clipParams.planeY, 'negated').name('Invert Y').onChange(() => {
+					clipPlanes[1].negate();
+				});
+				folder.add(clipParams.planeY, 'negated').name('Invert Z').onChange(() => {
+					clipPlanes[2].negate();
+				});
 
 				console.log(scene);
 			}
