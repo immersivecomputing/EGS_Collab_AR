@@ -356,7 +356,7 @@
 				});
 
 				var folder1 = gui.addFolder('Opacity');
-				folder4.add(objParams, 'opacity', 0, 1).name('Opacity').setValue(0.25).onChange(function (value) {
+				folder1.add(objParams, 'opacity', 0, 1).name('Opacity').setValue(0.25).onChange(function (value) {
 					currentModelGroup.traverse(function (child) {
 						if (child.isMesh) {
 							child.material.opacity = value;
