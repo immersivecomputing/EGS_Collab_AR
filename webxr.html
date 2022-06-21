@@ -123,7 +123,7 @@
 
 			let container;
 			let viewSize, originalAspect;
-			let camera, scene, renderer, loadedModel, currentModelGroup, orthoCamera, uiScene, currentLoadedData, geometryOffsetX, geometryOffsetY;
+			let camera, scene, renderer, loadedModel, currentModelGroup, orthoCamera, uiScene, geometryOffsetX, geometryOffsetY;
 			let currentFrame = 0;
 			let controller, lut, sprite;
 			const pointer = new THREE.Vector2();
@@ -265,20 +265,11 @@
 				clipPlaneGeom = [
 					new THREE.PlaneGeometry(100, 100),
 					new THREE.PlaneGeometry(100, 100)
-					//new THREE.PlaneGeometry(100, 100)
 				];
 				clipPlanes = [
 					new THREE.Plane(new THREE.Vector3(1, 0, 0), 0),
 					new THREE.Plane(new THREE.Vector3(0, -1, 0), 0)
-					//new THREE.Plane(new THREE.Vector3(0, 0, -1), 0)
 				];
-				// clipPlaneHelpers = [
-				// 	new THREE.Mesh(clipPlaneGeom[0], clipPlaneMaterial),
-				// 	new THREE.Mesh(clipPlaneGeom[1], clipPlaneMaterial),
-				// 	new THREE.Mesh(clipPlaneGeom[2], clipPlaneMaterial)
-				// ];
-				//clipPlaneHelpers[0].rotation.y = Math.PI / 2;
-				//clipPlaneHelpers[1].rotation.x = Math.PI / 2;
 
 				
 				//Load ERT Location data
@@ -341,24 +332,21 @@
 				var gui = new GUI();
 				var folder = gui.addFolder('Clipping');
 				folder.add(clipParams.planeX, 'constant').name('X-Position').min(-100).max(100).setValue(0).onChange(d => {
-					//clipPlaneHelpers[0].position.x = d;
 					if (clipParams.planeX.negated) {
 						clipPlanes[0].constant = d;
 					} else {
 						clipPlanes[0].constant = -d;
 					}
 				});
-				folder.add(clipParams.planeY, 'constant').name('Y-Position').min(-100).max(0).setValue(0).onChange(d => {
-					//clipPlaneHelpers[1].position.y = d;
+				folder.add(clipParams.planeX, 'constant').name('X-Rotation').min(0).max(180).setValue(0).onChange(d => {
+					clipPlanes[0].normal = new THREE.Vector3(Math.cos(Math.PI * d / 180), 0, Math.sin(Math.PI * d / 180));
+				});
+				folder.add(clipParams.planeY, 'constant').name('Y-Position').min(-50).max(0).setValue(0).onChange(d => {
 					if (clipParams.planeY.negated) {
 						clipPlanes[1].constant = -d;
 					} else {
 						clipPlanes[1].constant = d;
 					}
-				});
-				folder.add(clipParams.planeX, 'constant').name('X-Rotation').min(0).max(360).setValue(0).onChange(d => {
-					//clipPlaneHelpers[0].position.z = -d;
-					clipPlanes[0].normal = new THREE.Vector3(Math.cos(Math.PI * d / 180), 0, Math.sin(Math.PI * d / 180));
 				});
 				folder.add(clipParams.planeX, 'negated').name('Invert X').onChange(() => {
 					clipPlanes[0].negate();
@@ -366,10 +354,16 @@
 				folder.add(clipParams.planeY, 'negated').name('Invert Y').onChange(() => {
 					clipPlanes[1].negate();
 				});
-				// folder.add(clipParams.planeY, 'negated').name('Invert Z').onChange(() => {
-				// 	clipPlanes[2].negate();
-				// });
-				console.log(clipPlanes);
+
+				var folder1 = gui.addFolder('Opacity');
+				folder4.add(objParams, 'opacity', 0, 1).name('Opacity').setValue(0.25).onChange(function (value) {
+					currentModelGroup.traverse(function (child) {
+						if (child.isMesh) {
+							child.material.opacity = value;
+						}
+					});
+				});
+
 				console.log(scene);
 			}
 
