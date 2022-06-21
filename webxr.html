@@ -96,12 +96,11 @@
 			import { ARButton } from './threejs/examples/jsm/webxr/ARButton.js';
 			import { OrbitControls } from './threejs/examples/jsm/controls/OrbitControls.js';
 			import { RoomEnvironment } from './threejs/examples/jsm/environments/RoomEnvironment.js';
-			import {csvParse} from "https://cdn.skypack.dev/-/d3-dsv@v3.0.1-u1xCRjaLJc0qqv1Z5ERe/dist=es2020,mode=imports/optimized/d3-dsv.js";
 			import { Lut } from './threejs/examples/jsm/math/Lut.js';
 			import { FontLoader } from './threejs/examples/jsm/loaders/FontLoader.js';
 			import { LoadOBJ } from './LoadSurfaces.js';
 			import { LoadVTK } from './LoadSurfaces.js';
-			import { Octokit, App } from "https://cdn.skypack.dev/octokit";
+			import { Octokit, App } from "https://cdn.skypack.dev/octokit"; //This is the only dependancy for the GitHub api, can be removed when new endpoint made
 
 			let container;
 			let viewSize, originalAspect;
