@@ -1,5 +1,5 @@
-const pathPrefix = "./";
-//const pathPrefix = "./main/";
+let pathPrefix = "./";
+//let pathPrefix = "./main/";
 
 import { VTKLoader } from pathPrefix + 'threejs/examples/jsm/loaders/VTKLoader.js';
 import { OBJLoader } from pathPrefix + 'threejs/examples/jsm/loaders/OBJLoader.js';
