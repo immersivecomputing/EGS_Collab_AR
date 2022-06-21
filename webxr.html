@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>EGS Collab AR</title>
+		<title>Realtime ERT</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 		<link type="text/css" rel="stylesheet" href="./threejs/examples/main.css">
@@ -92,31 +92,56 @@
 		</div>
 		<script type="module">
 
-			import * as THREE from './threejs/build/three.module.js';
-			import { ARButton } from './threejs/examples/jsm/webxr/ARButton.js';
-			import { OrbitControls } from './threejs/examples/jsm/controls/OrbitControls.js';
-			import { RoomEnvironment } from './threejs/examples/jsm/environments/RoomEnvironment.js';
-			import { Lut } from './threejs/examples/jsm/math/Lut.js';
-			import { FontLoader } from './threejs/examples/jsm/loaders/FontLoader.js';
-			import { LoadOBJ } from './LoadSurfaces.js';
-			import { LoadVTK } from './LoadSurfaces.js';
+
+			const pathPrefix = './';
+			//const pathPrefix = './main/';
+
+			import * as THREE from pathPrefix + 'threejs/build/three.module.js';
+			import { ARButton } from pathPrefix + 'threejs/examples/jsm/webxr/ARButton.js';
+			import { OrbitControls } from pathPrefix + 'threejs/examples/jsm/controls/OrbitControls.js';
+			import { RoomEnvironment } from pathPrefix + 'threejs/examples/jsm/environments/RoomEnvironment.js';
+			import { Lut } from pathPrefix + 'threejs/examples/jsm/math/Lut.js';
+			import { FontLoader } from pathPrefix + 'threejs/examples/jsm/loaders/FontLoader.js';
+			import { LoadOBJ } from pathPrefix + 'LoadSurfaces.js';
+			import { LoadVTK } from pathPrefix + 'LoadSurfaces.js';
 			import { Octokit, App } from "https://cdn.skypack.dev/octokit"; //This is the only dependancy for the GitHub api, can be removed when new endpoint made
+
+			
 
 			let container;
 			let viewSize, originalAspect;
 			let camera, scene, renderer, loadedModel, currentModelGroup, orthoCamera, uiScene, currentLoadedData, geometryOffsetX, geometryOffsetY;
-				
 			let currentFrame = 0;
-
 			let controller, lut, sprite;
 			const pointer = new THREE.Vector2();
-			
 			let reticle;
-
 			let dataArray = [];
-
 			let hitTestSource = null;
 			let hitTestSourceRequested = false;
+
+			const clipPlaneMaterial = new THREE.MeshBasicMaterial({
+				color: 'rgb(100,100,100)',
+				side: THREE.DoubleSide
+			});
+
+			let clipPlanes, clipPlaneObjects, clipPlaneHelpers, clipObject, clipPlaneGeom;
+			const clipParams = {
+				planeX: {
+					constant: 0,
+					negated: false,
+					displayHelper: false
+				},
+				planeY: {
+					constant: 0,
+					negated: false,
+					displayHelper: false
+				},
+				planeZ: {
+					constant: 0,
+					negated: false,
+					displayHelper: false
+				}
+			};
 
 			FetchData();
 			
@@ -180,7 +205,6 @@
 				camera.position.set( 0, 100, 0 );
 				scene.add(camera);
 
-				//orthoCamera = new THREE.OrthographicCamera( - 1, 1, 1, - 1, 1, 20 );
 				viewSize = 2;
 				var aspectRatio = window.innerWidth / window.innerHeight;
 				originalAspect = window.innerWidth / window.innerHeight;
@@ -219,6 +243,30 @@
 				grid.material.transparent = true;
 				grid.visible = true;
 				scene.add( grid );
+
+				//clip planes
+				clipPlaneObjects = [];
+				clipObject = new THREE.Group();
+				clipObject.rotation.x = -Math.PI / 2;
+				scene.add(clipObject);
+				clipPlaneGeom = [
+					new THREE.PlaneGeometry(100, 100),
+					new THREE.PlaneGeometry(100, 100),
+					new THREE.PlaneGeometry(100, 100)
+				];
+				clipPlanes = [
+					new THREE.Plane(new THREE.Vector3(1, 0, 0), 0),
+					new THREE.Plane(new THREE.Vector3(0, -1, 0), 0),
+					new THREE.Plane(new THREE.Vector3(0, 0, -1), 0)
+				];
+				clipPlaneHelpers = [
+					new THREE.Mesh(clipPlaneGeom[0], clipPlaneMaterial),
+					new THREE.Mesh(clipPlaneGeom[1], clipPlaneMaterial),
+					new THREE.Mesh(clipPlaneGeom[2], clipPlaneMaterial)
+				];
+				clipPlaneHelpers[0].rotation.y = Math.PI / 2;
+				clipPlaneHelpers[1].rotation.x = Math.PI / 2;
+
 				
 				//Load ERT Location data
 				LoadERTSensorLocation(loadedModel);
@@ -311,7 +359,7 @@
 				updateAxisText('cmax', dataArray[timeStepInt].vtkFiles.length);
 
 				for(let i=0; i < dataArray[timeStepInt].vtkFiles.length; i++){
-					LoadVTK(currentModelGroup, dataArray[timeStepInt].vtkFiles[i], dataArray[0].vtkFiles.length - (i + 1), lut.getColor(i));	
+					LoadVTK(currentModelGroup, dataArray[timeStepInt].vtkFiles[i], dataArray[0].vtkFiles.length - (i + 1), lut.getColor(i), clipPlanes);	
 				}
 			}
 
@@ -324,7 +372,7 @@
 				var sumNorthings = 0;
 
 				const dataTextloader = new THREE.FileLoader();
-				dataTextloader.load('/EGS_Collab_AR/ERT_Data/electrodes.txt',
+				dataTextloader.load(pathPrefix + 'EGS_Collab_AR/ERT_Data/electrodes.txt',
 					function ( data ) {
 						var lines = data.split('\n');
 						lines.map(function(item){
@@ -351,7 +399,7 @@
 			function createAxisText(x,y,z,rx,ry,rz, axisName, label, _sprite) {
 
 				const loader = new FontLoader();
-				loader.load('./threejs/examples/fonts/helvetiker_regular.typeface.json', function (response) {
+				loader.load(pathPrefix + 'threejs/examples/fonts/helvetiker_regular.typeface.json', function (response) {
 
 					var font = response;
 
@@ -381,7 +429,7 @@
 
 			function updateAxisText(axisName, newText){
 				const loader = new FontLoader();
-				loader.load('./threejs/examples/fonts/helvetiker_regular.typeface.json', function (response) {
+				loader.load(pathPrefix + 'threejs/examples/fonts/helvetiker_regular.typeface.json', function (response) {
 					var font = response;
 
 					if (typeof newText == 'string'){

@@ -1,10 +1,13 @@
-import { VTKLoader } from './threejs/examples/jsm/loaders/VTKLoader.js';
-import { OBJLoader } from './threejs/examples/jsm/loaders/OBJLoader.js';
-import * as THREE from './threejs/build/three.module.js';
+const pathPrefix = "./";
+//const pathPrefix = "./main/";
+
+import { VTKLoader } from pathPrefix + 'threejs/examples/jsm/loaders/VTKLoader.js';
+import { OBJLoader } from pathPrefix + 'threejs/examples/jsm/loaders/OBJLoader.js';
+import * as THREE from pathPrefix + 'threejs/build/three.module.js';
 
 
 
-function LoadVTK(loadedModel, VTKfilePath, renderOrder, surfColor){
+function LoadVTK(loadedModel, VTKfilePath, renderOrder, surfColor, clipPlanes){
     const loader = new VTKLoader();
     loader.load( '/EGS_Collab_AR/ERT_Data/' + VTKfilePath, function ( geometry ) {
 
@@ -13,6 +16,8 @@ function LoadVTK(loadedModel, VTKfilePath, renderOrder, surfColor){
             color: surfColor,
             opacity: 0.25,
             transparent: true,
+            clippingPlanes: clipPlanes,
+		    clipShadows: true,
             side: 2
         });
 
