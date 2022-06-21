@@ -356,7 +356,7 @@
 						clipPlanes[1].constant = d;
 					}
 				});
-				folder.add(clipParams.planeX, 'normal').name('X-Rotation').min(0).max(360).setValue(0).onChange(d => {
+				folder.add(clipParams.planeX, 'constant').name('X-Rotation').min(0).max(360).setValue(0).onChange(d => {
 					//clipPlaneHelpers[0].position.z = -d;
 					clipPlanes[0].normal = new THREE.Vector3(Math.cos(Math.PI * d / 180), 0, Math.sin(Math.PI * d / 180));
 				});
