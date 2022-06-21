@@ -131,6 +131,9 @@
 			let dataArray = [];
 			let hitTestSource = null;
 			let hitTestSourceRequested = false;
+			const loadedModelParams = {
+				opacity: 0.1
+			};
 
 			const clipPlaneMaterial = new THREE.MeshBasicMaterial({
 				color: 'rgb(100,100,100)',
@@ -356,7 +359,7 @@
 				});
 
 				var folder1 = gui.addFolder('Opacity');
-				folder1.add(objParams, 'opacity', 0, 1).name('Opacity').setValue(0.25).onChange(function (value) {
+				folder1.add(loadedModelParams, 'opacity', 0, 1).name('Opacity').setValue(0.25).onChange(function (value) {
 					currentModelGroup.traverse(function (child) {
 						if (child.isMesh) {
 							child.material.opacity = value;
