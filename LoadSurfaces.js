@@ -1,15 +1,19 @@
 let pathPrefix = "./";
 //let pathPrefix = "./main/";
-
-import { VTKLoader } from pathPrefix + 'threejs/examples/jsm/loaders/VTKLoader.js';
-import { OBJLoader } from pathPrefix + 'threejs/examples/jsm/loaders/OBJLoader.js';
-import * as THREE from pathPrefix + 'threejs/build/three.module.js';
+async () => {
+    const { VTKLoader } = await import(pathPrefix + 'threejs/examples/jsm/loaders/VTKLoader.js');
+    const { OBJLoader } = await import(pathPrefix + 'threejs/examples/jsm/loaders/OBJLoader.js');
+    const { THREE } = await import(pathPrefix + 'threejs/build/three.module.js');
+}
+// import { VTKLoader } from pathPrefix + 'threejs/examples/jsm/loaders/VTKLoader.js';
+// import { OBJLoader } from pathPrefix + 'threejs/examples/jsm/loaders/OBJLoader.js';
+// import * as THREE from pathPrefix + 'threejs/build/three.module.js';
 
 
 
 function LoadVTK(loadedModel, VTKfilePath, renderOrder, surfColor, clipPlanes){
     const loader = new VTKLoader();
-    loader.load( '/EGS_Collab_AR/ERT_Data/' + VTKfilePath, function ( geometry ) {
+    loader.load( pathPrefix + 'EGS_Collab_AR/ERT_Data/' + VTKfilePath, function ( geometry ) {
 
         geometry.computeVertexNormals();
         const material = new THREE.MeshLambertMaterial( { 
