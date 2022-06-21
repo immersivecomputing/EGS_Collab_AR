@@ -96,27 +96,27 @@
 			let pathPrefix = './';
 			//let pathPrefix = './main/';
 
-			async () => {
-				const { THREE } = await import(pathPrefix + 'threejs/build/three.module.js');
-				const { ARButton } = await import(pathPrefix + 'threejs/examples/jsm/webxr/ARButton.js');
-				const { OrbitControls } = await import(pathPrefix + 'threejs/examples/jsm/controls/OrbitControls.js');
-				const { RoomEnvironment } = await import(pathPrefix + 'threejs/examples/jsm/environments/RoomEnvironment.js');
-				const { Lut } = await import(pathPrefix + 'threejs/examples/jsm/math/Lut.js');
-				const { FontLoader } = await import(pathPrefix + 'threejs/examples/jsm/loaders/FontLoader.js');
-				const { LoadOBJ } = await import(pathPrefix + 'LoadSurfaces.js');
-				const { LoadVTK } = await import(pathPrefix + 'LoadSurfaces.js');
-			}
+			// async () => {
+			// 	const { THREE } = await import(pathPrefix + 'threejs/build/three.module.js');
+			// 	const { ARButton } = await import(pathPrefix + 'threejs/examples/jsm/webxr/ARButton.js');
+			// 	const { OrbitControls } = await import(pathPrefix + 'threejs/examples/jsm/controls/OrbitControls.js');
+			// 	const { RoomEnvironment } = await import(pathPrefix + 'threejs/examples/jsm/environments/RoomEnvironment.js');
+			// 	const { Lut } = await import(pathPrefix + 'threejs/examples/jsm/math/Lut.js');
+			// 	const { FontLoader } = await import(pathPrefix + 'threejs/examples/jsm/loaders/FontLoader.js');
+			// 	const { LoadOBJ } = await import(pathPrefix + 'LoadSurfaces.js');
+			// 	const { LoadVTK } = await import(pathPrefix + 'LoadSurfaces.js');
+			// }
 
 
 
-			// import * as THREE from pathPrefix + 'threejs/build/three.module.js';
-			// import { ARButton } from pathPrefix + 'threejs/examples/jsm/webxr/ARButton.js';
-			// import { OrbitControls } from pathPrefix + 'threejs/examples/jsm/controls/OrbitControls.js';
-			// import { RoomEnvironment } from pathPrefix + 'threejs/examples/jsm/environments/RoomEnvironment.js';
-			// import { Lut } from pathPrefix + 'threejs/examples/jsm/math/Lut.js';
-			// import { FontLoader } from pathPrefix + 'threejs/examples/jsm/loaders/FontLoader.js';
-			// import { LoadOBJ } from pathPrefix + 'LoadSurfaces.js';
-			// import { LoadVTK } from pathPrefix + 'LoadSurfaces.js';
+			import * as THREE from './threejs/build/three.module.js';
+			import { ARButton } from './threejs/examples/jsm/webxr/ARButton.js';
+			import { OrbitControls } from './threejs/examples/jsm/controls/OrbitControls.js';
+			import { RoomEnvironment } from './threejs/examples/jsm/environments/RoomEnvironment.js';
+			import { Lut } from './threejs/examples/jsm/math/Lut.js';
+			import { FontLoader } from './threejs/examples/jsm/loaders/FontLoader.js';
+			import { LoadOBJ } from './LoadSurfaces.js';
+			import { LoadVTK } from './LoadSurfaces.js';
 			import { Octokit, App } from "https://cdn.skypack.dev/octokit"; //This is the only dependancy for the GitHub api, can be removed when new endpoint made
 
 			
