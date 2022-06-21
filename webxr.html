@@ -239,29 +239,28 @@
 				createAxisText(0.05,-0.25,0,0,0,0,'cmin', 'cmin', sprite);
 				createAxisText(0.05,0.25,0,0,0,0,'cmax', 'cmax', sprite);
 				createAxisText(-0.1,0,0,0,0,90,'title','title', sprite);
-				sprite.visible = false;
+				//sprite.visible = false;
 
 
-				lut2 = new Lut();
-				lut2.setColorMap('plasma');
-				sprite2 = new THREE.Sprite( new THREE.SpriteMaterial( {
-					map: new THREE.CanvasTexture( lut2.createCanvas() )
-				} ) );
-				sprite2.position.y = 1.0;
-				sprite2.scale.x = 0.0625;
-				sprite2.scale.y = 0.5;
-				uiScene.add( sprite2 );
-				createAxisText(0.05,-0.21875 + 1,0,0,0,0,'c0', '0', sprite2);
-				createAxisText(0.05,-0.15625 + 1,0,0,0,0,'c1', '1', sprite2);
-				createAxisText(0.05,-0.09375 + 1,0,0,0,0,'c2', '2', sprite2);
-				createAxisText(0.05,-0.03125 + 1,0,0,0,0,'c3', '3', sprite2);
-				createAxisText(0.05,0.03125 + 1,0,0,0,0,'c4', '4', sprite2);
-				createAxisText(0.05,0.09375 + 1,0,0,0,0,'c5', '5', sprite2);
-				createAxisText(0.05,0.15625 + 1,0,0,0,0,'c6', '6', sprite2);
-				createAxisText(0.05,0.21875 + 1,0,0,0,0,'c7', '7', sprite2);
-				createAxisText(-0.1,1,0,0,0,90,'surftitle','Bulk Conductivity', sprite2);
-				sprite2.visible = false;
-
+				// lut2 = new Lut();
+				// lut2.setColorMap('plasma');
+				// sprite2 = new THREE.Sprite( new THREE.SpriteMaterial( {
+				// 	map: new THREE.CanvasTexture( lut2.createCanvas() )
+				// } ) );
+				// sprite2.position.y = 1.0;
+				// sprite2.scale.x = 0.0625;
+				// sprite2.scale.y = 0.5;
+				// uiScene.add( sprite2 );
+				// createAxisText(0.05,-0.21875 + 1,0,0,0,0,'c0', '0', sprite2);
+				// createAxisText(0.05,-0.15625 + 1,0,0,0,0,'c1', '1', sprite2);
+				// createAxisText(0.05,-0.09375 + 1,0,0,0,0,'c2', '2', sprite2);
+				// createAxisText(0.05,-0.03125 + 1,0,0,0,0,'c3', '3', sprite2);
+				// createAxisText(0.05,0.03125 + 1,0,0,0,0,'c4', '4', sprite2);
+				// createAxisText(0.05,0.09375 + 1,0,0,0,0,'c5', '5', sprite2);
+				// createAxisText(0.05,0.15625 + 1,0,0,0,0,'c6', '6', sprite2);
+				// createAxisText(0.05,0.21875 + 1,0,0,0,0,'c7', '7', sprite2);
+				// createAxisText(-0.1,1,0,0,0,90,'surftitle','Bulk Conductivity', sprite2);
+				// sprite2.visible = false;
 
 				loadedModel = new THREE.Group();
 				currentModelGroup = new THREE.Group();
@@ -346,7 +345,7 @@
 			function loadTimeFrame(e)
 			{
 				var target = (e.target) ? e.target : e.srcElement;
-				var scaledTargetValue = parseInt(target.value * (dataArray.length-1));   //This needs to change for better UI
+				var scaledTargetValue = parseInt(target.value * (dataArray.length-1)); 
 				var rangeV = document.getElementById('rangeV');
 
 				var newValue = Number( (target.value - target.min) * 100 / (target.max - target.min) );
@@ -362,6 +361,7 @@
 			}
 
 			function LoadVTKTimeStep(timeStepInt){
+				
 				for( var i = currentModelGroup.children.length - 1; i >= 0; i--) { 
      				var obj = currentModelGroup.children[i];
 					obj.geometry.dispose();
