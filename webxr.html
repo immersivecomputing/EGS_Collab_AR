@@ -13,83 +13,6 @@
 			background: rgba( 0, 0, 0, .6 );
 		}
 
-
-		/* #slidecontainer {
-			width: 100%;	
-		}
-
-		#slider {
-			-webkit-appearance: none;
-			width: 50%;
-			height: 25px;
-			background: #d3d3d3;
-			outline: none;
-			opacity: 0.7;
-			-webkit-transition: .2s;
-			transition: opacity .2s;
-			margin-left: 25%;
-			margin-right: auto;
-			bottom: 100px;
-		}
-
-		#slider:hover {
-			opacity: 1;
-		}
-
-		#slider::-webkit-slider-thumb {
-			-webkit-appearance: none;
-			appearance: none;
-			width: 25px;
-			height: 25px;
-			background: #04AA6D;
-			cursor: pointer;
-		}
-
-		#slider::-moz-range-thumb {
-			width: 25px;
-			height: 25px;
-			background: #04AA6D;
-			cursor: pointer;
-		}
-
-		.range-wrap{
-  			width: 500px;
-  			position: relative;
-		}
-
-		.range-value{
-			position: absolute;
-			top: -50%;
-		}
-			.range-value span{
-			width: 30px;
-			height: 24px;
-			line-height: 24px;
-			text-align: center;
-			background: #03a9f4;
-			color: #fff;
-			font-size: 12px;
-			display: block;
-			position: absolute;
-			left: 50%;
-			transform: translate(-50%, 0);
-			border-radius: 6px;
-		}
-			.range-value span:before{
-			content: "";
-			position: absolute;
-			width: 0;
-			height: 0;
-			border-top: 10px solid #03a9f4;
-			border-left: 5px solid transparent;
-			border-right: 5px solid transparent;
-			top: 100%;
-			left: 50%;
-			margin-left: -5px;
-			margin-top: -1px;
-		} */
-
-
 		input[type=range] {
 			-webkit-appearance: none;
 			margin: 20px 0;
@@ -226,20 +149,15 @@
 			let boreholesLoaded = false;
 			
 			let boreholeSpline, tubeGeometry;
-			const material = new THREE.MeshLambertMaterial( {
-					side: THREE.DoubleSide,
-					color: 0xF5F5F5,
-					vertexColors: true} );
 			let materialModel;
 					
 			const windowHalfX = window.innerWidth / 2;
 			const windowHalfY = window.innerHeight / 2;
 			
+			const material = new THREE.MeshLambertMaterial( { side: THREE.DoubleSide, color: 0xF5F5F5, vertexColors: true} );
 			const wireframeMaterial = new THREE.MeshBasicMaterial( { color: 0x000000, opacity: 0.3, wireframe: true, transparent: true } );
 
-
 			FetchData();
-			
 			
 			//First fetch all the data
 			async function FetchData(){
@@ -348,8 +266,6 @@
 				loadedModel = new THREE.Group();
 				currentModelGroup = new THREE.Group();
 				loadedModel.add(currentModelGroup);
-				//scene.background = new THREE.Color( 0xbbbbbb );
-				//scene.environment = pmremGenerator.fromScene( environment ).texture;
 				
 				scene.background = null;
 				scene.environment = null;
@@ -419,33 +335,8 @@
 
 				//Then add an overlay slider
 				var slider = document.getElementById("range");
-				slider.step = 1/dataArray.length;
+				slider.step = 1/(dataArray.length-1);
 				slider.addEventListener("input", loadTimeFrame);
-
-				//Tooltip option
-				// const sphgeometry = new THREE.SphereGeometry( 2.5 );
-				// const sphmaterial = new THREE.MeshBasicMaterial( { color: 0xff0000 } );
-				// sphereInter = new THREE.Mesh( sphgeometry, sphmaterial );
-				// sphereInter.visible = false;
-				
-				// loadedModel.add( sphereInter );
-				// raycaster = new THREE.Raycaster();
-				// document.addEventListener( 'pointermove', onPointerMove );
-				
-				// labelDiv = document.createElement( 'div' );
-				// labelDiv.className = 'label';
-				// labelDiv.textContent = '-';
-				// labelDiv.style.marginTop = '-1em';
-				// valueLabel = new CSS2DObject( labelDiv );
-				// valueLabel.position.set( 0, 1, 0 );
-				// valueLabel.visible = false;
-				// sphereInter.add( valueLabel );
-				
-				// labelRenderer = new CSS2DRenderer();
-				// labelRenderer.setSize( window.innerWidth, window.innerHeight );
-				// labelRenderer.domElement.style.position = 'absolute';
-				// labelRenderer.domElement.style.top = '0px';
-				// document.body.appendChild( labelRenderer.domElement );
 
 				document.addEventListener( 'mousemove', onDocumentMouseMove );
 
@@ -643,7 +534,6 @@
 				camera.updateProjectionMatrix();
 
 				renderer.setSize( window.innerWidth, window.innerHeight );
-				//labelRenderer.setSize( window.innerWidth, window.innerHeight );
 			}
 			
 			function onPointerMove( event ) {
@@ -659,33 +549,6 @@
 			}
 
 			function render( timestamp, frame ) {
-
-				// raycaster.setFromCamera( pointer, camera );
-				// //if (typeof meshSpline !== 'undefined') {
-				// //	const intersects = raycaster.intersectObject( meshSpline );
-				// if (typeof loadedLine !== 'undefined') {
-				//   	const intersects = raycaster.intersectObject( loadedLine );
-			
-				// 	if ( intersects.length > 0 ) {
-						
-				// 		const read = new Float32Array( 4 );
-				// 		renderer.readRenderTargetPixels( rtTexture, windowHalfX + mouseX, windowHalfY - mouseY, 1, 1, read );
-				// 		console.log(read);
-
-				// 		sphereInter.visible = true;
-				// 		sphereInter.position.copy( loadedModel.worldToLocal(intersects[ 0 ].point) );
-
-				// 		sphereInter.material.color = lut.getColor( sphereInter.position.x );
-				// 		valueLabel.visible = true;
-				// 		labelDiv.textContent = -sphereInter.position.x - 4047.435;
-
-				// 	} else {
-
-				// 		sphereInter.visible = false;
-				// 		valueLabel.visible = false;
-				// 	}
-				// }
-
 				//Handle any XR session needs
 				if ( frame ) {
 
@@ -721,9 +584,7 @@
 				//Render the frame
 				renderer.clear();
 				renderer.render( scene, camera );
-				//labelRenderer.render( scene, camera );
 				renderer.render( uiScene, orthoCamera );
-
 			}
 
 		</script>
