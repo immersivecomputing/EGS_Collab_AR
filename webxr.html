@@ -272,11 +272,11 @@
 					new THREE.Plane(new THREE.Vector3(0, -1, 0), 0),
 					new THREE.Plane(new THREE.Vector3(0, 0, -1), 0)
 				];
-				clipPlaneHelpers = [
-					new THREE.Mesh(clipPlaneGeom[0], clipPlaneMaterial),
-					new THREE.Mesh(clipPlaneGeom[1], clipPlaneMaterial),
-					new THREE.Mesh(clipPlaneGeom[2], clipPlaneMaterial)
-				];
+				// clipPlaneHelpers = [
+				// 	new THREE.Mesh(clipPlaneGeom[0], clipPlaneMaterial),
+				// 	new THREE.Mesh(clipPlaneGeom[1], clipPlaneMaterial),
+				// 	new THREE.Mesh(clipPlaneGeom[2], clipPlaneMaterial)
+				// ];
 				clipPlaneHelpers[0].rotation.y = Math.PI / 2;
 				clipPlaneHelpers[1].rotation.x = Math.PI / 2;
 
@@ -340,32 +340,25 @@
 				//Basic GUI
 				var gui = new GUI();
 				var folder = gui.addFolder('Clipping');
-				folder.add(clipPlaneHelpers[0], 'visible').name('X-Display Helper').setValue(false);
-				folder.add(clipPlaneHelpers[1], 'visible').name('Y-Display Helper').setValue(false);
-				folder.add(clipPlaneHelpers[2], 'visible').name('Z-Display Helper').setValue(false);
 				folder.add(clipParams.planeX, 'constant').name('X-Position').min(-100).max(100).setValue(0).onChange(d => {
-					clipPlaneHelpers[0].position.x = d;
+					//clipPlaneHelpers[0].position.x = d;
 					if (clipParams.planeX.negated) {
 						clipPlanes[0].constant = d;
 					} else {
 						clipPlanes[0].constant = -d;
 					}
 				});
-				folder.add(clipParams.planeY, 'constant').name('Y-Position').min(-100).max(100).setValue(0).onChange(d => {
-					clipPlaneHelpers[1].position.y = d;
+				folder.add(clipParams.planeY, 'constant').name('Y-Position').min(-100).max(0).setValue(0).onChange(d => {
+					//clipPlaneHelpers[1].position.y = d;
 					if (clipParams.planeY.negated) {
 						clipPlanes[1].constant = -d;
 					} else {
 						clipPlanes[1].constant = d;
 					}
 				});
-				folder.add(clipParams.planeZ, 'constant').name('Z-Position').min(-100).max(100).setValue(0).onChange(d => {
-					clipPlaneHelpers[2].position.z = -d;
-					if (clipParams.planeY.negated) {
-						clipPlanes[2].constant = d;
-					} else {
-						clipPlanes[2].constant = -d;
-					}
+				folder.add(clipParams.planeZ, 'constant').name('Z-Position').min(0).max(360).setValue(0).onChange(d => {
+					//clipPlaneHelpers[0].position.z = -d;
+					clipPlanes[0].normal = new THREE.Vector3(Math.cos(Math.PI * d / 180), 0, Math.sin(Math.PI * d / 180));
 				});
 				folder.add(clipParams.planeX, 'negated').name('Invert X').onChange(() => {
 					clipPlanes[0].negate();
