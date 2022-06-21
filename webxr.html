@@ -351,7 +351,7 @@
 
 				var newValue = Number( (target.value - target.min) * 100 / (target.max - target.min) );
       			var newPosition = 10 - (newValue * 0.2);
-				rangeV.innerHTML = `<span>${dataArray[currentFrame].path}</span>`;
+				rangeV.innerHTML = `<span>${dataArray[scaledTargetValue].path}</span>`;
     			rangeV.style.left = `calc(${newValue}% + (${newPosition}px))`;	
 
 				if (scaledTargetValue != currentFrame){
