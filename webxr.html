@@ -238,8 +238,7 @@
 				uiScene.add( sprite );
 				createAxisText(0.05,-0.25,0,0,0,0,'cmin', 'cmin', sprite);
 				createAxisText(0.05,0.25,0,0,0,0,'cmax', 'cmax', sprite);
-				createAxisText(-0.1,0,0,0,0,90,'title','title', sprite);
-				//sprite.visible = false;
+				createAxisText(-0.1,0,0,0,0,90,'title','Bulk Conductivity', sprite);
 
 
 				// lut2 = new Lut();
@@ -354,7 +353,6 @@
     			rangeV.style.left = `calc(${newValue}% + (${newPosition}px))`;	
 
 				if (scaledTargetValue != currentFrame){
-					console.log(scaledTargetValue);
 					currentFrame = scaledTargetValue;
 					LoadVTKTimeStep(currentFrame);
 				}
@@ -370,6 +368,10 @@
 				}
 
 				lut.setMax(dataArray[timeStepInt].vtkFiles.length);
+				
+				//These are dummy values for now
+				updateAxisText('cmin', 1);
+				updateAxisText('cmax', vtkFiles.length);
 				for(let i=0; i < dataArray[timeStepInt].vtkFiles.length; i++){
 					LoadVTK(currentModelGroup, dataArray[timeStepInt].vtkFiles[i], dataArray[0].vtkFiles.length - (i + 1), lut.getColor(i));	
 				}
@@ -418,49 +420,49 @@
 			}
 
 			
-			function ToggleValue(value, valueName) {
-				loadedModel.traverse( function ( child ) {
-					if ( child instanceof THREE.Object3D  ) {
-						if(child.name== valueName){
-							child.visible = value;
-						}
-					}
-				});
-				render();
-			}
+			// function ToggleValue(value, valueName) {
+			// 	loadedModel.traverse( function ( child ) {
+			// 		if ( child instanceof THREE.Object3D  ) {
+			// 			if(child.name== valueName){
+			// 				child.visible = value;
+			// 			}
+			// 		}
+			// 	});
+			// 	render();
+			// }
 
 			
 
-			function ToggleSurfaces(value){
+			// function ToggleSurfaces(value){
 
-				document.body.appendChild( HideFeedbackText());
+			// 	document.body.appendChild( HideFeedbackText());
 
-				let alreadyLoaded = false;
-				loadedModel.traverse( function ( child ) {
-					if(child.name == 'surfaces'){
-						alreadyLoaded = true;
-						child.visible = value;
-						sprite2.visible = value;
-					}
-				});
+			// 	let alreadyLoaded = false;
+			// 	loadedModel.traverse( function ( child ) {
+			// 		if(child.name == 'surfaces'){
+			// 			alreadyLoaded = true;
+			// 			child.visible = value;
+			// 			sprite2.visible = value;
+			// 		}
+			// 	});
 
-				if (alreadyLoaded === false){	
-					surfaceGroup = new THREE.Group();
-					surfaceGroup.name = 'surfaces';
-					loadedModel.add(surfaceGroup);
-					//try loading a obj
-					LoadOBJ('./objData/visit_ex_db_0000.obj', surfaceGroup, true, 7, 0x0d0887);
-					LoadOBJ('./objData/visit_ex_db_0001.obj', surfaceGroup, true, 6, 0x5302a3);
-					LoadOBJ('./objData/visit_ex_db_0002.obj', surfaceGroup, true, 5, 0x8b0aa5);
-					LoadOBJ('./objData/visit_ex_db_0003.obj', surfaceGroup, true, 4, 0xb83289);
-					LoadOBJ('./objData/visit_ex_db_0004.obj', surfaceGroup, true, 3, 0xdb5c68);
-					LoadOBJ('./objData/visit_ex_db_0005.obj', surfaceGroup, true, 2, 0xf48849);
-					LoadOBJ('./objData/visit_ex_db_0006.obj', surfaceGroup, true, 1, 0xfebd2a);
-					LoadOBJ('./objData/visit_ex_db_0007.obj', surfaceGroup, true, 0, 0xF0F921);
-					sprite2.visible = value;
-				}
+			// 	if (alreadyLoaded === false){	
+			// 		surfaceGroup = new THREE.Group();
+			// 		surfaceGroup.name = 'surfaces';
+			// 		loadedModel.add(surfaceGroup);
+			// 		//try loading a obj
+			// 		LoadOBJ('./objData/visit_ex_db_0000.obj', surfaceGroup, true, 7, 0x0d0887);
+			// 		LoadOBJ('./objData/visit_ex_db_0001.obj', surfaceGroup, true, 6, 0x5302a3);
+			// 		LoadOBJ('./objData/visit_ex_db_0002.obj', surfaceGroup, true, 5, 0x8b0aa5);
+			// 		LoadOBJ('./objData/visit_ex_db_0003.obj', surfaceGroup, true, 4, 0xb83289);
+			// 		LoadOBJ('./objData/visit_ex_db_0004.obj', surfaceGroup, true, 3, 0xdb5c68);
+			// 		LoadOBJ('./objData/visit_ex_db_0005.obj', surfaceGroup, true, 2, 0xf48849);
+			// 		LoadOBJ('./objData/visit_ex_db_0006.obj', surfaceGroup, true, 1, 0xfebd2a);
+			// 		LoadOBJ('./objData/visit_ex_db_0007.obj', surfaceGroup, true, 0, 0xF0F921);
+			// 		sprite2.visible = value;
+			// 	}
 				
-			}
+			// }
 			
 			function createAxisText(x,y,z,rx,ry,rz, axisName, label, _sprite) {
 
