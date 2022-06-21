@@ -367,11 +367,11 @@
      				currentModelGroup.remove(obj); 
 				}
 
-				lut.setMax(dataArray[timeStepInt].vtkFiles.length);
-				
+				lut.setMax(dataArray[timeStepInt].vtkFiles.length-1);
 				//These are dummy values for now
 				updateAxisText('cmin', 1);
-				updateAxisText('cmax', vtkFiles.length);
+				updateAxisText('cmax', dataArray[timeStepInt].vtkFiles.length);
+
 				for(let i=0; i < dataArray[timeStepInt].vtkFiles.length; i++){
 					LoadVTK(currentModelGroup, dataArray[timeStepInt].vtkFiles[i], dataArray[0].vtkFiles.length - (i + 1), lut.getColor(i));	
 				}
