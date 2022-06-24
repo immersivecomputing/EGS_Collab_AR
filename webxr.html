@@ -318,8 +318,8 @@
 
 			//Then add an overlay slider
 			var slider = document.getElementById("range");
-			//slider.step = 1 / (dataArray.length - 1);
-			slider.step = 1 / (200 - 1);
+			slider.step = 1 / (dataArray.length);
+			//slider.step = 1 / (200 - 1);
 			slider.addEventListener("input", loadTimeFrame);
 
 			//Basic GUI
@@ -365,8 +365,8 @@
 		function loadTimeFrame(e) {
 			var target = (e.target) ? e.target : e.srcElement;
 			console.log(target.value);
-			//var scaledTargetValue = Math.round(target.value * (dataArray.length - 1));
-			var scaledTargetValue = Math.round(target.value * (200 - 1));
+			var scaledTargetValue = Math.round(target.value * (dataArray.length));
+			//var scaledTargetValue = Math.round(target.value * (200 - 1));
 			var rangeV = document.getElementById('rangeV');
 
 			var newValue = Number((target.value - target.min) * 100 / (target.max - target.min));
