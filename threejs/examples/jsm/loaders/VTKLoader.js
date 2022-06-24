@@ -408,6 +408,8 @@ class VTKLoader extends Loader {
 
 					}
 
+					console.log(dataView.getFloat32( pointIndex, false ));
+
 					// increment our next pointer
 					state.next = state.next + count + 1;
 
