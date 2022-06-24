@@ -363,17 +363,20 @@
 
 		function loadTimeFrame(e) {
 			var target = (e.target) ? e.target : e.srcElement;
+			console.log(dataArray.length);
+			console.log(target.value);
+			console.log(target.value * (dataArray.length - 1));
 			var scaledTargetValue = parseInt(target.value * (dataArray.length - 1));
+			console.log(scaledTargetValue);
 			var rangeV = document.getElementById('rangeV');
 
 			var newValue = Number((target.value - target.min) * 100 / (target.max - target.min));
 			var newPosition = 10 - (newValue * 0.2);
 			rangeV.innerHTML = `<span>${dataArray[scaledTargetValue].name}</span>`;
 			rangeV.style.left = `calc(${newValue}% + (${newPosition}px))`;
-			console.log(scaledTargetValue);
+			
 			if (scaledTargetValue != currentFrame) {
 				currentFrame = scaledTargetValue;
-				console.log(currentFrame);
 				LoadVTKTimeStep(currentFrame);
 			}
 		}
