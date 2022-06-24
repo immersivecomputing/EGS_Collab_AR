@@ -302,9 +302,9 @@ class VTKLoader extends Loader {
 			geometry.setIndex( indices );
 			geometry.setAttribute( 'position', new Float32BufferAttribute( positions, 3 ) );
 
-			if (surface_value !== -1000){
+			//if (surface_value !== -1000){
 				geometry.surface_value = surface_value;
-			}
+			//}
 
 			if ( normals.length === positions.length ) {
 
