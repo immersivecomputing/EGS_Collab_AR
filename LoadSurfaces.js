@@ -17,6 +17,7 @@ function LoadVTK(loadedModel, VTKfilePath, renderOrder, surfColor, clipPlanes){
     const loader = new VTKLoader();
     loader.load( /*pathPrefix + */ './ERT_Data/' + VTKfilePath, function ( geometry ) {
 
+        console.log(geometry);
         geometry.computeVertexNormals();
         const material = new THREE.MeshLambertMaterial( { 
             color: surfColor,

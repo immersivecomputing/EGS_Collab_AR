@@ -67,6 +67,8 @@ class VTKLoader extends Loader {
 			// normal vector, one per vertex
 			var normals = [];
 
+			var surface_value = -1000;
+
 			var result;
 
 			// pattern for detecting the end of a number sequence
@@ -235,8 +237,9 @@ class VTKLoader extends Loader {
 						while ( ( result = pat3Floats.exec( line ) ) !== null ) {
 
 							if ( patWord.exec( line ) !== null ) break;
-
-							console.log(result[1]);
+								if (surface_value === -1000){
+									surface_value = result[1];
+								}
 
 						}
 					}
@@ -298,6 +301,10 @@ class VTKLoader extends Loader {
 			var geometry = new BufferGeometry();
 			geometry.setIndex( indices );
 			geometry.setAttribute( 'position', new Float32BufferAttribute( positions, 3 ) );
+
+			if (surface_value !== -1000){
+				geometry.surface_value = surface_value;
+			}
 
 			if ( normals.length === positions.length ) {
 
