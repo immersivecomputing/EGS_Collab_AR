@@ -173,7 +173,8 @@
 
 		async function FetchData() {
 
-			const vtkFileIndex = await fetch("/main/EGS_Collab_AR/ERT_Data/vtkFileIndex.json").then(r=>r.json());
+			//const vtkFileIndex = await fetch("/main/EGS_Collab_AR/ERT_Data/vtkFileIndex.json").then(r=>r.json());
+			const vtkFileIndex = await fetch("./main/vtkFileIndex.json").then(r=>r.json());
             dataArray = vtkFileIndex;
             console.log({vtkFileIndex, dataArray});
 
