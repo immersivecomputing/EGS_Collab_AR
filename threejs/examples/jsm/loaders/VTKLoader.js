@@ -229,6 +229,16 @@ class VTKLoader extends Loader {
 
 						}
 
+					}else{
+						
+
+						while ( ( result = pat3Floats.exec( line ) ) !== null ) {
+
+							if ( patWord.exec( line ) !== null ) break;
+
+							console.log(result[1]);
+
+						}
 					}
 
 				}
