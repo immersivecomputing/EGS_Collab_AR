@@ -229,8 +229,8 @@
 			sprite.scale.x = 0.0625;
 			sprite.scale.y = 0.5;
 			uiScene.add(sprite);
-			createAxisText(0.05, -0.25, 0, 0, 0, 0, 'cmin', minColorValue, sprite);
-			createAxisText(0.05, 0.25, 0, 0, 0, 0, 'cmax', maxColorValue, sprite);
+			createAxisText(0.05, -0.25, 0, 0, 0, 0, 'cmin', minColorValue.toString(), sprite);
+			createAxisText(0.05, 0.25, 0, 0, 0, 0, 'cmax', maxColorValue.toString(), sprite);
 			createAxisText(-0.1, -0.05, 0, 0, 0, 90, 'title', 'Bulk Conductivity', sprite);
 
 			loadedModel = new THREE.Group();
