@@ -134,6 +134,8 @@
 		let camera, scene, renderer, loadedModel, currentModelGroup, orthoCamera, uiScene, geometryOffsetX, geometryOffsetY, geometryOffsetZ;
 		let currentFrame = 0;
 		let controller, lut, sprite;
+		let minColorValue = 0;
+		let maxColorValue = 1.0;
 		const pointer = new THREE.Vector2();
 		let reticle;
 		let dataArray = [];
@@ -227,8 +229,8 @@
 			sprite.scale.x = 0.0625;
 			sprite.scale.y = 0.5;
 			uiScene.add(sprite);
-			createAxisText(0.05, -0.25, 0, 0, 0, 0, 'cmin', 'cmin', sprite);
-			createAxisText(0.05, 0.25, 0, 0, 0, 0, 'cmax', 'cmax', sprite);
+			createAxisText(0.05, -0.25, 0, 0, 0, 0, 'cmin', minColorValue, sprite);
+			createAxisText(0.05, 0.25, 0, 0, 0, 0, 'cmax', maxColorValue, sprite);
 			createAxisText(-0.1, -0.05, 0, 0, 0, 90, 'title', 'Bulk Conductivity', sprite);
 
 			loadedModel = new THREE.Group();
@@ -269,8 +271,8 @@
 			LoadERTSensorLocation(loadedModel);
 
 			lut.setColorMap('rainbow');
-			lut.setMin(0);
-			lut.setMax(1.0);
+			lut.setMin(minColorValue);
+			lut.setMax(maxColorValue);
 
 			//plot first time step
 			LoadVTKTimeStep(0);
@@ -392,11 +394,11 @@
 			}
 
 			//These are dummy values for now
-			updateAxisText('cmin', 1);
-			updateAxisText('cmax', dataArray[timeStepInt].vtkFiles.length);
+			//updateAxisText('cmin', 1);
+			//updateAxisText('cmax', dataArray[timeStepInt].vtkFiles.length);
 
 			for (let i = 0; i < dataArray[timeStepInt].vtkFiles.length; i++) {
-				LoadVTK(currentModelGroup, dataArray[timeStepInt].vtkFiles[i], dataArray[0].vtkFiles.length - (i + 1), 0, 1.0, clipPlanes);
+				LoadVTK(currentModelGroup, dataArray[timeStepInt].vtkFiles[i], dataArray[0].vtkFiles.length - (i + 1), minColorValue, maxColorValue, clipPlanes);
 			}
 		}
 

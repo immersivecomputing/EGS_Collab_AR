@@ -13,10 +13,10 @@ import * as THREE from './threejs/build/three.module.js';
 import { Lut } from './threejs/examples/jsm/math/Lut.js';
 
 var lut = new Lut();
+lut.setColorMap('rainbow');
 
 function LoadVTK(loadedModel, VTKfilePath, renderOrder, minColor, maxColor, clipPlanes){
 
-    lut.setColorMap('rainbow');
     lut.setMin(minColor);
     lut.setMax(maxColor);
 
