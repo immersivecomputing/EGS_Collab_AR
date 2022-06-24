@@ -151,7 +151,7 @@
 		let clipPlanes, clipPlaneObjects, clipPlaneHelpers, clipObject, clipPlaneGeom;
 		const clipParams = {
 			planeX: {
-				constant: 0,
+				constant: -100,
 				negated: false,
 				displayHelper: false
 			},
@@ -170,139 +170,12 @@
 		FetchData();
 
 		//First fetch all the data
-		//This is currently coming in from a GitHub Repo so will need to be changed to the correct endpoint, the object indexing may also need to be changed 
 
 		async function FetchData() {
-			const octokit = new Octokit();
 
-			// let data = await octokit.request('GET /repos/{owner}/{repo}/git/trees/{tree_sha}?recursive=true', {
-			// 	owner: 'immersivecomputing',
-			// 	repo: 'EGS_Collab_AR',
-			// 	tree_sha: '5044df10a275d5303e190ab1df0cc28ddd6fd5f2'
-			// });
-
-			// const dataArray = [
-			// 	[
-			// 		"SF_2022_06_09_12_30/SF_2022_06_09_12_30.0.vtk",
-			// 		"SF_2022_06_09_12_30/SF_2022_06_09_12_30.1.vtk",
-			// 		"SF_2022_06_09_12_30/SF_2022_06_09_12_30.2.vtk",
-			// 		"SF_2022_06_09_12_30/SF_2022_06_09_12_30.3.vtk",
-			// 		"SF_2022_06_09_12_30/SF_2022_06_09_12_30.4.vtk"
-			// 	],
-			// 	[
-			// 		"SF_2022_06_09_13_00/SF_2022_06_09_13_00.0.vtk",
-			// 		"SF_2022_06_09_13_00/SF_2022_06_09_13_00.1.vtk",
-			// 		"SF_2022_06_09_13_00/SF_2022_06_09_13_00.2.vtk",
-			// 		"SF_2022_06_09_13_00/SF_2022_06_09_13_00.3.vtk",
-			// 		"SF_2022_06_09_13_00/SF_2022_06_09_13_00.4.vtk",
-			// 		"SF_2022_06_09_13_00/SF_2022_06_09_13_00.5.vtk",
-			// 		"SF_2022_06_09_13_00/SF_2022_06_09_13_00.6.vtk"
-			// 	],
-			// 	[
-			// 		"SF_2022_06_09_13_30/SF_2022_06_09_13_30.0.vtk",
-			// 		"SF_2022_06_09_13_30/SF_2022_06_09_13_30.1.vtk",
-			// 		"SF_2022_06_09_13_30/SF_2022_06_09_13_30.2.vtk",
-			// 		"SF_2022_06_09_13_30/SF_2022_06_09_13_30.3.vtk",
-			// 		"SF_2022_06_09_13_30/SF_2022_06_09_13_30.4.vtk",
-			// 		"SF_2022_06_09_13_30/SF_2022_06_09_13_30.5.vtk",
-			// 		"SF_2022_06_09_13_30/SF_2022_06_09_13_30.6.vtk"
-			// 	],
-			// 	[
-			// 		"SF_2022_06_09_14_00/SF_2022_06_09_14_00.0.vtk",
-			// 		"SF_2022_06_09_14_00/SF_2022_06_09_14_00.1.vtk",
-			// 		"SF_2022_06_09_14_00/SF_2022_06_09_14_00.2.vtk",
-			// 		"SF_2022_06_09_14_00/SF_2022_06_09_14_00.3.vtk",
-			// 		"SF_2022_06_09_14_00/SF_2022_06_09_14_00.4.vtk",
-			// 		"SF_2022_06_09_14_00/SF_2022_06_09_14_00.5.vtk",
-			// 		"SF_2022_06_09_14_00/SF_2022_06_09_14_00.6.vtk"
-			// 	],
-			// 	[
-			// 		"SF_2022_06_09_14_30/SF_2022_06_09_14_30.0.vtk",
-			// 		"SF_2022_06_09_14_30/SF_2022_06_09_14_30.1.vtk",
-			// 		"SF_2022_06_09_14_30/SF_2022_06_09_14_30.2.vtk",
-			// 		"SF_2022_06_09_14_30/SF_2022_06_09_14_30.3.vtk",
-			// 		"SF_2022_06_09_14_30/SF_2022_06_09_14_30.4.vtk",
-			// 		"SF_2022_06_09_14_30/SF_2022_06_09_14_30.5.vtk",
-			// 		"SF_2022_06_09_14_30/SF_2022_06_09_14_30.6.vtk"
-			// 	],
-			// 	[
-			// 		"SF_2022_06_09_15_00/SF_2022_06_09_15_00.0.vtk",
-			// 		"SF_2022_06_09_15_00/SF_2022_06_09_15_00.1.vtk",
-			// 		"SF_2022_06_09_15_00/SF_2022_06_09_15_00.2.vtk",
-			// 		"SF_2022_06_09_15_00/SF_2022_06_09_15_00.3.vtk",
-			// 		"SF_2022_06_09_15_00/SF_2022_06_09_15_00.4.vtk",
-			// 		"SF_2022_06_09_15_00/SF_2022_06_09_15_00.5.vtk",
-			// 		"SF_2022_06_09_15_00/SF_2022_06_09_15_00.6.vtk"
-			// 	]
-			// ]
-			// dataArray = [				
-			// 	{
-			// 		vtkFiles:[
-			// 			"SF_2022_06_23_13_01/SF_2022_06_23_13_01.0.vtk",
-			// 			"SF_2022_06_23_13_01/SF_2022_06_23_13_01.1.vtk",
-			// 			"SF_2022_06_23_13_01/SF_2022_06_23_13_01.2.vtk",
-			// 			"SF_2022_06_23_13_01/SF_2022_06_23_13_01.3.vtk",
-			// 			"SF_2022_06_23_13_01/SF_2022_06_23_13_01.4.vtk",
-			// 			"SF_2022_06_23_13_01/SF_2022_06_23_13_01.5.vtk",
-			// 			"SF_2022_06_23_13_01/SF_2022_06_23_13_01.0.vtk",
-			// 		],
-			// 		name:"SF_2022_06_23_13_01",
-			// 	},
-			// 	{
-			// 		vtkFiles:[
-			// 			"SF_2022_06_23_13_01/SF_2022_06_23_13_01.0.vtk",
-			// 			"SF_2022_06_23_13_01/SF_2022_06_23_13_01.1.vtk",
-			// 			"SF_2022_06_23_13_01/SF_2022_06_23_13_01.2.vtk",
-			// 			"SF_2022_06_23_13_01/SF_2022_06_23_13_01.3.vtk",
-			// 			"SF_2022_06_23_13_01/SF_2022_06_23_13_01.4.vtk",
-			// 			"SF_2022_06_23_13_01/SF_2022_06_23_13_01.5.vtk",
-			// 			"SF_2022_06_23_13_01/SF_2022_06_23_13_01.0.vtk",
-			// 		],
-			// 		name:"SF_2022_06_23_13_01",
-			// 	},
-			// 	{
-			// 		vtkFiles:[
-			// 			"SF_2022_06_23_13_01/SF_2022_06_23_13_01.0.vtk",
-			// 			"SF_2022_06_23_13_01/SF_2022_06_23_13_01.1.vtk",
-			// 			"SF_2022_06_23_13_01/SF_2022_06_23_13_01.2.vtk",
-			// 			"SF_2022_06_23_13_01/SF_2022_06_23_13_01.3.vtk",
-			// 			"SF_2022_06_23_13_01/SF_2022_06_23_13_01.4.vtk",
-			// 			"SF_2022_06_23_13_01/SF_2022_06_23_13_01.5.vtk",
-			// 			"SF_2022_06_23_13_01/SF_2022_06_23_13_01.0.vtk",
-			// 		],
-			// 		name:"SF_2022_06_23_13_01",
-			// 	},
-			// 	{
-			// 		vtkFiles:[
-			// 			"SF_2022_06_23_13_01/SF_2022_06_23_13_01.0.vtk",
-			// 			"SF_2022_06_23_13_01/SF_2022_06_23_13_01.1.vtk",
-			// 			"SF_2022_06_23_13_01/SF_2022_06_23_13_01.2.vtk",
-			// 			"SF_2022_06_23_13_01/SF_2022_06_23_13_01.3.vtk",
-			// 			"SF_2022_06_23_13_01/SF_2022_06_23_13_01.4.vtk",
-			// 			"SF_2022_06_23_13_01/SF_2022_06_23_13_01.5.vtk",
-			// 			"SF_2022_06_23_13_01/SF_2022_06_23_13_01.0.vtk",
-			// 		],
-			// 		name:"SF_2022_06_23_13_01",
-			// 	},
-			// ]
-
-
-			dataArray = await fetch("/main/vtkFileIndex.json").then(r=>r.json());
-            console.log({dataArray});
-
-			// console.log(data);
-			// var counter = 0;
-			// for (let i = 0; i < data.data.tree.length; i++) {
-
-			// 	if (data.data.tree[i].type == "tree") {
-			// 		dataArray.push(data.data.tree[i]);
-			// 		dataArray[counter].vtkFiles = [];
-			// 		counter++;
-			// 	} else if (data.data.tree[i].type == "blob" && data.data.tree[i].path.includes("vtk")) {
-			// 		dataArray[counter - 1].vtkFiles.push(data.data.tree[i].path);
-			// 	}
-			// }
-			// console.log(dataArray);
+			const vtkFileIndex = await fetch("/main/EGS_Collab_AR/ERT_Data/vtkFileIndex.json").then(r=>r.json());
+            dataArray = vtkFileIndex;
+            console.log({vtkFileIndex, dataArray});
 
 			//Start loading using ThreeJS
 			init();
@@ -386,7 +259,7 @@
 				new THREE.PlaneGeometry(100, 100)
 			];
 			clipPlanes = [
-				new THREE.Plane(new THREE.Vector3(1, 0, 0), 0),
+				new THREE.Plane(new THREE.Vector3(1, 0, 0), 100),
 				new THREE.Plane(new THREE.Vector3(0, -1, 0), 0)
 			];
 
@@ -451,6 +324,7 @@
 			var gui = new GUI();
 			var folder = gui.addFolder('Clipping');
 			folder.add(clipParams.planeX, 'constant').name('X-Position').min(-100).max(100).setValue(-100).onChange(d => {
+                console.log({d});
 				if (clipParams.planeX.negated) {
 					clipPlanes[0].constant = d;
 				} else {
@@ -467,7 +341,7 @@
 					clipPlanes[1].constant = d;
 				}
 			});
-			// folder.add(clipParams.planeX, 'negated').name('Invert X').onChange(() => {
+			// folder.add(clipParams.planeX, 'negated').name('Invert X').onChange(() => {   //Turning this off for now and changing the rotation to 360 degrees
 			// 	clipPlanes[0].negate();
 			// });
 			folder.add(clipParams.planeY, 'negated').name('Invert Y').onChange(() => {
@@ -498,6 +372,7 @@
 
 			if (scaledTargetValue != currentFrame) {
 				currentFrame = scaledTargetValue;
+				console.log(currentFrame);
 				LoadVTKTimeStep(currentFrame);
 			}
 		}
