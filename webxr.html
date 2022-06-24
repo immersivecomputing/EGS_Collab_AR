@@ -363,6 +363,7 @@
 
 		function loadTimeFrame(e) {
 			var target = (e.target) ? e.target : e.srcElement;
+			console.log(target.value);
 			var scaledTargetValue = Math.round(target.value * (dataArray.length - 1));
 			var rangeV = document.getElementById('rangeV');
 
