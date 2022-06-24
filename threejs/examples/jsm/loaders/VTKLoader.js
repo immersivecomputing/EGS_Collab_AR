@@ -229,7 +229,7 @@ class VTKLoader extends Loader {
 
 						}
 
-					}else{
+					}else if (inPointDataSection) {
 						
 
 						while ( ( result = pat3Floats.exec( line ) ) !== null ) {
