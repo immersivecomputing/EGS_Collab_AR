@@ -370,7 +370,7 @@
 			var newPosition = 10 - (newValue * 0.2);
 			rangeV.innerHTML = `<span>${dataArray[scaledTargetValue].name}</span>`;
 			rangeV.style.left = `calc(${newValue}% + (${newPosition}px))`;
-
+			console.log(scaledTargetValue);
 			if (scaledTargetValue != currentFrame) {
 				currentFrame = scaledTargetValue;
 				console.log(currentFrame);
