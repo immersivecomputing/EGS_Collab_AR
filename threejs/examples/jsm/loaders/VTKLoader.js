@@ -511,13 +511,14 @@ class VTKLoader extends Loader {
 					normals = new Float32Array( numberOfPoints * 3 );
 					pointIndex = state.next;
 					for ( i = 0; i < numberOfPoints; i ++ ) {
-
 						normals[ 3 * i ] = dataView.getFloat32( pointIndex, false );
 						normals[ 3 * i + 1 ] = dataView.getFloat32( pointIndex + 4, false );
 						normals[ 3 * i + 2 ] = dataView.getFloat32( pointIndex + 8, false );
 						pointIndex += 12;
 
 					}
+
+					console.log(dataView.getFloat32( 0, false ));
 
 					// Increment past our data
 					state.next = state.next + count;
