@@ -13,14 +13,13 @@ import * as THREE from './threejs/build/three.module.js';
 
 
 
-function LoadVTK(loadedModel, VTKfilePath, renderOrder, surfColor, clipPlanes){
+function LoadVTK(loadedModel, VTKfilePath, renderOrder, lut, clipPlanes){
     const loader = new VTKLoader();
     loader.load( /*pathPrefix + */ './ERT_Data/' + VTKfilePath, function ( geometry ) {
 
-        console.log(geometry);
         geometry.computeVertexNormals();
         const material = new THREE.MeshLambertMaterial( { 
-            color: surfColor,
+            color: lut.getColor(geometry.surface_value),
             opacity: 0.25,
             transparent: true,
             clippingPlanes: clipPlanes,

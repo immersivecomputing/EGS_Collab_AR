@@ -270,6 +270,7 @@
 
 			lut.setColorMap('rainbow');
 			lut.setMin(0);
+			lut.setMax(1.0);
 
 			//plot first time step
 			LoadVTKTimeStep(0);
@@ -390,7 +391,7 @@
 				currentModelGroup.remove(obj);
 			}
 
-			lut.setMax(dataArray[timeStepInt].vtkFiles.length - 1);
+			//lut.setMax(dataArray[timeStepInt].vtkFiles.length - 1);
 			//These are dummy values for now
 			updateAxisText('cmin', 1);
 			updateAxisText('cmax', dataArray[timeStepInt].vtkFiles.length);
