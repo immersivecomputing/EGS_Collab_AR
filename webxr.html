@@ -366,7 +366,7 @@
 			console.log(dataArray.length);
 			console.log(target.value);
 			console.log(target.value * (dataArray.length - 1));
-			var scaledTargetValue = parseInt(target.value * (dataArray.length - 1));
+			var scaledTargetValue = Math.round((target.value * (dataArray.length - 1)));
 			console.log(scaledTargetValue);
 			var rangeV = document.getElementById('rangeV');
 
