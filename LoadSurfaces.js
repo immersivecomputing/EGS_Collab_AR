@@ -10,10 +10,16 @@ let pathPrefix = "./";
 import { VTKLoader } from './threejs/examples/jsm/loaders/VTKLoader.js';
 import { OBJLoader } from './threejs/examples/jsm/loaders/OBJLoader.js';
 import * as THREE from './threejs/build/three.module.js';
+import { Lut } from './threejs/examples/jsm/math/Lut.js';
 
+var lut = new Lut();
 
+function LoadVTK(loadedModel, VTKfilePath, renderOrder, minColor, maxColor, clipPlanes){
 
-function LoadVTK(loadedModel, VTKfilePath, renderOrder, lut, clipPlanes){
+    lut.setColorMap('rainbow');
+    lut.setMin(minColor);
+    lut.setMax(maxColor);
+
     const loader = new VTKLoader();
     loader.load( /*pathPrefix + */ './ERT_Data/' + VTKfilePath, function ( geometry ) {
 
