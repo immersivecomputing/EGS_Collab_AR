@@ -102,7 +102,7 @@
 
 
 		let pathPrefix = './';
-		//let pathPrefix = './main/';
+		// let pathPrefix = './main/';
 
 		// async () => {
 		// 	const { THREE } = await import(pathPrefix + 'threejs/build/three.module.js');
@@ -131,7 +131,7 @@
 
 		let container;
 		let viewSize, originalAspect;
-		let camera, scene, renderer, loadedModel, currentModelGroup, orthoCamera, uiScene, geometryOffsetX, geometryOffsetY;
+		let camera, scene, renderer, loadedModel, currentModelGroup, orthoCamera, uiScene, geometryOffsetX, geometryOffsetY, geometryOffsetZ;
 		let currentFrame = 0;
 		let controller, lut, sprite;
 		const pointer = new THREE.Vector2();
@@ -175,11 +175,11 @@
 		async function FetchData() {
 			const octokit = new Octokit();
 
-			let data = await octokit.request('GET /repos/{owner}/{repo}/git/trees/{tree_sha}?recursive=true', {
-				owner: 'immersivecomputing',
-				repo: 'EGS_Collab_AR',
-				tree_sha: '5044df10a275d5303e190ab1df0cc28ddd6fd5f2'
-			});
+			// let data = await octokit.request('GET /repos/{owner}/{repo}/git/trees/{tree_sha}?recursive=true', {
+			// 	owner: 'immersivecomputing',
+			// 	repo: 'EGS_Collab_AR',
+			// 	tree_sha: '5044df10a275d5303e190ab1df0cc28ddd6fd5f2'
+			// });
 
 			// const dataArray = [
 			// 	[
@@ -235,19 +235,60 @@
 			// 		"SF_2022_06_09_15_00/SF_2022_06_09_15_00.6.vtk"
 			// 	]
 			// ]
-			const dataArray = [
-				
-				[
-				"SF_2022_06_23_13_01/SF_2022_06_23_13_01.0.vtk",
-				"SF_2022_06_23_13_01/SF_2022_06_23_13_01.1.vtk",
-				"SF_2022_06_23_13_01/SF_2022_06_23_13_01.2.vtk",
-				"SF_2022_06_23_13_01/SF_2022_06_23_13_01.3.vtk",
-				"SF_2022_06_23_13_01/SF_2022_06_23_13_01.4.vtk",
-				"SF_2022_06_23_13_01/SF_2022_06_23_13_01.5.vtk",
-				"SF_2022_06_23_13_01/SF_2022_06_23_13_01.0.vtk",
-				]
-			]
+			// dataArray = [				
+			// 	{
+			// 		vtkFiles:[
+			// 			"SF_2022_06_23_13_01/SF_2022_06_23_13_01.0.vtk",
+			// 			"SF_2022_06_23_13_01/SF_2022_06_23_13_01.1.vtk",
+			// 			"SF_2022_06_23_13_01/SF_2022_06_23_13_01.2.vtk",
+			// 			"SF_2022_06_23_13_01/SF_2022_06_23_13_01.3.vtk",
+			// 			"SF_2022_06_23_13_01/SF_2022_06_23_13_01.4.vtk",
+			// 			"SF_2022_06_23_13_01/SF_2022_06_23_13_01.5.vtk",
+			// 			"SF_2022_06_23_13_01/SF_2022_06_23_13_01.0.vtk",
+			// 		],
+			// 		name:"SF_2022_06_23_13_01",
+			// 	},
+			// 	{
+			// 		vtkFiles:[
+			// 			"SF_2022_06_23_13_01/SF_2022_06_23_13_01.0.vtk",
+			// 			"SF_2022_06_23_13_01/SF_2022_06_23_13_01.1.vtk",
+			// 			"SF_2022_06_23_13_01/SF_2022_06_23_13_01.2.vtk",
+			// 			"SF_2022_06_23_13_01/SF_2022_06_23_13_01.3.vtk",
+			// 			"SF_2022_06_23_13_01/SF_2022_06_23_13_01.4.vtk",
+			// 			"SF_2022_06_23_13_01/SF_2022_06_23_13_01.5.vtk",
+			// 			"SF_2022_06_23_13_01/SF_2022_06_23_13_01.0.vtk",
+			// 		],
+			// 		name:"SF_2022_06_23_13_01",
+			// 	},
+			// 	{
+			// 		vtkFiles:[
+			// 			"SF_2022_06_23_13_01/SF_2022_06_23_13_01.0.vtk",
+			// 			"SF_2022_06_23_13_01/SF_2022_06_23_13_01.1.vtk",
+			// 			"SF_2022_06_23_13_01/SF_2022_06_23_13_01.2.vtk",
+			// 			"SF_2022_06_23_13_01/SF_2022_06_23_13_01.3.vtk",
+			// 			"SF_2022_06_23_13_01/SF_2022_06_23_13_01.4.vtk",
+			// 			"SF_2022_06_23_13_01/SF_2022_06_23_13_01.5.vtk",
+			// 			"SF_2022_06_23_13_01/SF_2022_06_23_13_01.0.vtk",
+			// 		],
+			// 		name:"SF_2022_06_23_13_01",
+			// 	},
+			// 	{
+			// 		vtkFiles:[
+			// 			"SF_2022_06_23_13_01/SF_2022_06_23_13_01.0.vtk",
+			// 			"SF_2022_06_23_13_01/SF_2022_06_23_13_01.1.vtk",
+			// 			"SF_2022_06_23_13_01/SF_2022_06_23_13_01.2.vtk",
+			// 			"SF_2022_06_23_13_01/SF_2022_06_23_13_01.3.vtk",
+			// 			"SF_2022_06_23_13_01/SF_2022_06_23_13_01.4.vtk",
+			// 			"SF_2022_06_23_13_01/SF_2022_06_23_13_01.5.vtk",
+			// 			"SF_2022_06_23_13_01/SF_2022_06_23_13_01.0.vtk",
+			// 		],
+			// 		name:"SF_2022_06_23_13_01",
+			// 	},
+			// ]
 
+
+			dataArray = await fetch("/main/vtkFileIndex.json").then(r=>r.json());
+            console.log({dataArray});
 
 			// console.log(data);
 			// var counter = 0;
@@ -409,14 +450,14 @@
 			//Basic GUI
 			var gui = new GUI();
 			var folder = gui.addFolder('Clipping');
-			folder.add(clipParams.planeX, 'constant').name('X-Position').min(-100).max(100).setValue(0).onChange(d => {
+			folder.add(clipParams.planeX, 'constant').name('X-Position').min(-100).max(100).setValue(-100).onChange(d => {
 				if (clipParams.planeX.negated) {
 					clipPlanes[0].constant = d;
 				} else {
 					clipPlanes[0].constant = -d;
 				}
 			});
-			folder.add(clipParams.planeX, 'constant').name('X-Rotation').min(0).max(180).setValue(0).onChange(d => {
+			folder.add(clipParams.planeX, 'constant').name('X-Rotation').min(0).max(360).setValue(0).onChange(d => {
 				clipPlanes[0].normal = new THREE.Vector3(Math.cos(Math.PI * d / 180), 0, Math.sin(Math.PI * d / 180));
 			});
 			folder.add(clipParams.planeY, 'constant').name('Y-Position').min(-50).max(0).setValue(0).onChange(d => {
@@ -426,9 +467,9 @@
 					clipPlanes[1].constant = d;
 				}
 			});
-			folder.add(clipParams.planeX, 'negated').name('Invert X').onChange(() => {
-				clipPlanes[0].negate();
-			});
+			// folder.add(clipParams.planeX, 'negated').name('Invert X').onChange(() => {
+			// 	clipPlanes[0].negate();
+			// });
 			folder.add(clipParams.planeY, 'negated').name('Invert Y').onChange(() => {
 				clipPlanes[1].negate();
 			});
@@ -452,7 +493,7 @@
 
 			var newValue = Number((target.value - target.min) * 100 / (target.max - target.min));
 			var newPosition = 10 - (newValue * 0.2);
-			rangeV.innerHTML = `<span>${dataArray[scaledTargetValue].path}</span>`;
+			rangeV.innerHTML = `<span>${dataArray[scaledTargetValue].name}</span>`;
 			rangeV.style.left = `calc(${newValue}% + (${newPosition}px))`;
 
 			if (scaledTargetValue != currentFrame) {
@@ -463,6 +504,7 @@
 
 		function LoadVTKTimeStep(timeStepInt) {
 
+
 			for (var i = currentModelGroup.children.length - 1; i >= 0; i--) {
 				var obj = currentModelGroup.children[i];
 				obj.geometry.dispose();
@@ -470,13 +512,13 @@
 				currentModelGroup.remove(obj);
 			}
 
-			lut.setMax(dataArray[timeStepInt].length - 1);
+			lut.setMax(dataArray[timeStepInt].vtkFiles.length - 1);
 			//These are dummy values for now
 			updateAxisText('cmin', 1);
-			updateAxisText('cmax', dataArray[timeStepInt].length);
+			updateAxisText('cmax', dataArray[timeStepInt].vtkFiles.length);
 
-			for (let i = 0; i < dataArray[timeStepInt].length; i++) {
-				LoadVTK(currentModelGroup, dataArray[timeStepInt][i], dataArray[0].length - (i + 1), lut.getColor(i), clipPlanes);
+			for (let i = 0; i < dataArray[timeStepInt].vtkFiles.length; i++) {
+				LoadVTK(currentModelGroup, dataArray[timeStepInt].vtkFiles[i], dataArray[0].vtkFiles.length - (i + 1), lut.getColor(i), clipPlanes);
 			}
 		}
 
@@ -487,9 +529,10 @@
 
 			var sumEastings = 0;
 			var sumNorthings = 0;
+			var sumElevations = 0;
 
 			const dataTextloader = new THREE.FileLoader();
-			dataTextloader.load(pathPrefix + 'ERT_Data/electrodes.txt',
+			dataTextloader.load(/*pathPrefix + */ '/main/EGS_Collab_AR/ERT_Data/electrodes.txt',
 				function (data) {
 					var lines = data.split('\n');
 					lines.map(function (item) {
@@ -502,13 +545,15 @@
 
 							sumEastings = sumEastings + parseFloat(tabs[1]);
 							sumNorthings = sumNorthings + parseFloat(tabs[2]);
+							sumElevations = sumElevations + parseFloat(tabs[3]);
 						}
 					});
 
 					geometryOffsetX = sumEastings / (lines.length - 1);
 					geometryOffsetY = sumNorthings / (lines.length - 1);
+					geometryOffsetZ = sumElevations / (lines.length - 1);
 
-					loadedModel.position.set(-geometryOffsetX, 0, geometryOffsetY);
+					loadedModel.position.set(-geometryOffsetX, -geometryOffsetZ, geometryOffsetY);
 				}
 			);
 		}
