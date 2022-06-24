@@ -142,7 +142,7 @@
 		let hitTestSource = null;
 		let hitTestSourceRequested = false;
 		const loadedModelParams = {
-			opacity: 0.1
+			opacity: 0.25
 		};
 
 		const clipPlaneMaterial = new THREE.MeshBasicMaterial({
@@ -398,7 +398,7 @@
 			//updateAxisText('cmax', dataArray[timeStepInt].vtkFiles.length);
 
 			for (let i = 0; i < dataArray[timeStepInt].vtkFiles.length; i++) {
-				LoadVTK(currentModelGroup, dataArray[timeStepInt].vtkFiles[i], dataArray[0].vtkFiles.length - (i + 1), minColorValue, maxColorValue, clipPlanes);
+				LoadVTK(currentModelGroup, dataArray[timeStepInt].vtkFiles[i], dataArray[0].vtkFiles.length - (i + 1), minColorValue, maxColorValue, loadedModelParams.opacity, clipPlanes);
 			}
 		}
 

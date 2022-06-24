@@ -15,7 +15,7 @@ import { Lut } from './threejs/examples/jsm/math/Lut.js';
 var lut = new Lut();
 lut.setColorMap('rainbow');
 
-function LoadVTK(loadedModel, VTKfilePath, renderOrder, minColor, maxColor, clipPlanes){
+function LoadVTK(loadedModel, VTKfilePath, renderOrder, minColor, maxColor, opacity, clipPlanes){
 
     lut.setMin(minColor);
     lut.setMax(maxColor);
@@ -26,7 +26,7 @@ function LoadVTK(loadedModel, VTKfilePath, renderOrder, minColor, maxColor, clip
         geometry.computeVertexNormals();
         const material = new THREE.MeshLambertMaterial( { 
             color: lut.getColor(geometry.surface_value),
-            opacity: 0.25,
+            opacity: opacity,
             transparent: true,
             clippingPlanes: clipPlanes,
 		    clipShadows: true,
