@@ -15,9 +15,7 @@ import * as THREE from './threejs/build/three.module.js';
 
 function LoadVTK(loadedModel, VTKfilePath, renderOrder, surfColor, clipPlanes){
     const loader = new VTKLoader();
-    console.log(VTKfilePath);
-    console.log('/EGS_Collab_AR/ERT_Data/' + VTKfilePath);
-    loader.load( /*pathPrefix + */ '/main/EGS_Collab_AR/ERT_Data/' + VTKfilePath, function ( geometry ) {
+    loader.load( /*pathPrefix + */ './EGS_Collab_AR/ERT_Data/' + VTKfilePath, function ( geometry ) {
 
         geometry.computeVertexNormals();
         const material = new THREE.MeshLambertMaterial( { 
