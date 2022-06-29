@@ -323,7 +323,8 @@
 			var slider = document.getElementById("range");
 			slider.step = 1 / (dataArray.length);
 			//slider.step = 1 / (200 - 1);
-			slider.addEventListener("input", loadTimeFrame);
+			console.log(slider);
+			slider.addEventListener("slideStop", loadTimeFrame);
 
 			//Basic GUI
 			var gui = new GUI();
